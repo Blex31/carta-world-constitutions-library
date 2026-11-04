@@ -1,0 +1,4 @@
+project_id = "mvcirldxcuvcuqvlmqxv"
+
+[functions.carta-api]
+verify_jwt = false
