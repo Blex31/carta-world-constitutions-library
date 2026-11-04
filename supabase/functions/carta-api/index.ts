@@ -13,7 +13,7 @@ const SITE = (Deno.env.get("CARTA_SITE_URL") ?? "").replace(/\/+$/, "");
 const MODEL = Deno.env.get("CARTA_AI_MODEL") ?? "gpt-4.1-mini";
 const ORIGINS = new Set((Deno.env.get("CARTA_ALLOWED_ORIGINS") ?? "http://localhost:5173,http://127.0.0.1:5173")
   .split(",").map(x => x.trim()).filter(Boolean));
-const LICENSES = ["approved","public_domain_verified","open_license","permission_granted"];
+const LICENSES = ["approved","public_domain_verified","open_license","permission_granted","official_text_exclusion"];
 const enc = new TextEncoder();
 
 function headers(origin:string|null) {
@@ -425,14 +425,23 @@ Deno.serve(async(req:Request)=>{
         const meta={...(cur.data.metadata??{})};
         if(b.rightsEvidenceUrl)meta.rightsEvidenceUrl=str(b.rightsEvidenceUrl,2000);
         if(b.rightsNotes)meta.rightsNotes=str(b.rightsNotes,3000);
-        if(b.rightsEvidenceUrl||b.rightsNotes)meta.rightsReviewedAt=new Date().toISOString();
+        if(typeof b.rightsReviewStatus==="string") {
+          if(!["pending","legal_opinion_on_file","publisher_permission_on_file"].includes(b.rightsReviewStatus))
+            return fail("Invalid rights review status.",422,"INVALID_RIGHTS_REVIEW_STATUS",origin);
+          meta.rightsReviewStatus=b.rightsReviewStatus;
+        }
+        if(b.rightsEvidenceUrl||b.rightsNotes||b.rightsReviewStatus)meta.rightsReviewedAt=new Date().toISOString();
         if(typeof b.allowFeedSnippets==="boolean")meta.allowFeedSnippets=b.allowFeedSnippets;
         if(Array.isArray(b.allowedHosts))meta.allowedHosts=b.allowedHosts.map((h:string)=>String(h).toLowerCase().trim()).filter((h:string)=>/^[a-z0-9.-]+$/.test(h)).slice(0,20);
         const license=typeof b.licenseStatus==="string"?b.licenseStatus:cur.data.license_status;
         const commercial=typeof b.commercialUseAllowed==="boolean"?b.commercialUseAllowed:cur.data.commercial_use_allowed;
         const active=typeof b.isActive==="boolean"?b.isActive:cur.data.is_active;
-        if(commercial&&(!LICENSES.includes(license)||!meta.rightsEvidenceUrl))return fail("Commercial reuse requires a recognised licence and a rights-evidence URL.",422,"RIGHTS_EVIDENCE_REQUIRED",origin);
-        if(active&&(!commercial||!cur.data.is_official||!meta.rightsEvidenceUrl))return fail("A source can only be activated after official status and reuse rights are documented.",422,"SOURCE_NOT_CLEARED",origin);
+        if(license==="official_text_exclusion"&&meta.rightsReviewStatus!=="legal_opinion_on_file")
+          return fail("Official-text exclusion requires a documented legal opinion covering CARTA's intended uses.",422,"LEGAL_OPINION_REQUIRED",origin);
+        if(commercial&&(!LICENSES.includes(license)||!meta.rightsEvidenceUrl||(meta.rightsNotes||"").trim().length<20))
+          return fail("Commercial reuse requires a recognised rights basis, HTTPS evidence and substantive rights notes.",422,"RIGHTS_EVIDENCE_REQUIRED",origin);
+        if(active&&(!commercial||!cur.data.is_official||!meta.rightsEvidenceUrl))
+          return fail("A source can only be activated after official status and reuse rights are documented.",422,"SOURCE_NOT_CLEARED",origin);
         const r=await db.from("legal_sources").update({license_status:license,commercial_use_allowed:commercial,is_active:active,metadata:meta,updated_at:new Date().toISOString()}).eq("id",sid).select("*").single();
         if(r.error)throw r.error;return json({source:r.data},200,origin);
       }
