@@ -88,8 +88,8 @@ try {
     if (!validLicense.has(row.license_status) || row.commercial_use_allowed !== true) {
       throw new Error(`${doc.sourceSlug} is not cleared for commercial reuse. Update its source record only after a legal rights review.`);
     }
-    if (!row.metadata?.rightsEvidenceUrl || (row.metadata?.rightsNotes || '').trim().length < 20) {
-      throw new Error(`${doc.sourceSlug} is missing its source-level rights evidence record.`);
+    if (!/^https:\/\//.test(row.metadata?.rightsEvidenceUrl || '') || (row.metadata?.rightsNotes || '').trim().length < 20) {
+      throw new Error(`${doc.sourceSlug} is missing its HTTPS source-level rights evidence record and substantive rights notes.`);
     }
     if (row.license_status === 'official_text_exclusion' &&
         (row.metadata?.rightsReviewStatus !== 'legal_opinion_on_file' || doc.rightsReviewStatus !== 'legal_opinion_on_file')) {
