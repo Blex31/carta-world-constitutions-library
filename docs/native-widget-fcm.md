@@ -1,25 +1,61 @@
-# Future native Android/iOS features
+# CARTA native mobile requirements — Android and iOS
 
-The current repository ships a React/Vite web/PWA application. A native Android/iOS release is a separate deliverable; this document records the architecture for adding it without introducing a second source of truth.
+**Status:** committed product requirement; implementation is a separate Flutter deliverable.  
+**Backend:** existing Supabase project and `carta-api` Edge Function.
 
-## Shared backend
+## Product decision
 
-Use the same Neon Postgres corpus, Neon Auth identity and CARTA Neon Function API. A future Flutter app should call the API with the short-lived bearer JWT obtained from Neon Auth. It must not connect directly to Postgres or contain server credentials. Keep the same document/version/licence and chat citation rules across web and mobile.
+CARTA must serve web, Android and iOS users. The current React/Vite codebase is the web client; it is not itself an Android or iOS application. Build the native clients in Flutter/Dart and connect them to the same backend and legal corpus. Do not fork the legal-data model.
 
-## Offline reading
+## Shared backend contract
 
-A native client can download only documents that the API marks verified and legally reusable. Store the document ID, content hash, version label, effective dates, source URL and retrieved timestamp with the cached text. When a new version supersedes a cached document, mark the offline copy as stale and prompt for an update rather than silently replacing it. Sync bookmarks/notes using the authenticated library endpoints.
+- Supabase Auth for sign-up, sign-in, token refresh and sign-out.
+- CARTA Edge Function for library, documents, search, feeds, personal library, legal chat and billing status.
+- User-scoped actions must be authorised by the current bearer token and enforced by RLS.
+- No database password, service-role key, OpenAI key or Stripe secret in the app binary.
+- Legal content, version state, source provenance, rights status and citations must match web.
 
-## Daily notifications
+## Native screens and behaviour
 
-Daily reminders should respect the user's stored timezone and `daily_digest_enabled` preference. The Neon Function Trigger polls feeds hourly with per-source rate limits. CARTA rotates the visible daily item after 06:00 in each reader’s local timezone. Push delivery is a separate notification job and is not yet deployed; it should only send after user opt-in. A mobile client may use Firebase Cloud Messaging for Android and APNs/FCM for iOS; store device tokens against the authenticated user, allow revocation, and never send legal advice in notification previews.
+1. Welcome, registration, login and account recovery.
+2. Country/jurisdiction catalogue and coverage states.
+3. Document library and constitutional document reader with chapters, articles, source and version information.
+4. Search results linked to exact provisions and official sources.
+5. Legal assistant with source citations, document version labels and explicit no-source refusal.
+6. Daily legal updates with publisher and publication date.
+7. Personal library: bookmarks, highlights, notes and saved documents.
+8. Downloads/offline library with stale-version warnings.
+9. Account/profile/preferences, timezone, language and notification controls.
+10. CARTA Plus membership and restore-purchases flow, using a store-compliant mobile payment implementation.
+
+## Offline legal reading
+
+Only cache documents whose exact rights record permits offline/device copies and whose version is approved for publication. Each offline object must retain document ID, version label, effective dates, source URL, SHA-256 content hash and downloaded timestamp. Verify the hash at download and re-check version status when connectivity returns.
+
+If a newer version supersedes the cached copy, mark it stale and prompt for an update. Do not silently overwrite or present an old offline version as current. User notes/bookmarks may be queued locally and synced when authenticated.
+
+## Notifications
+
+Use FCM for Android and APNs-backed FCM for iOS. Require user opt-in, allow revocation, store device tokens against the authenticated user, respect timezone and daily-digest settings, and keep notification copy to a neutral title/source/date. Do not include legal advice or private chat content.
 
 ## Home-screen widgets
 
-- Android: implement an AppWidgetProvider with a small cache of the latest verified daily item and a deep link into the relevant CARTA document.
-- iOS: implement WidgetKit with an App Group-backed read-only snapshot and a deep link into the app.
-- Both widgets must show the source/publisher and publication date where available. A notification/widget item is an update summary, not the full legal text or legal advice.
+- Android: native AppWidget implementation showing a short verified daily item and deep link.
+- iOS: WidgetKit extension backed by an App Group snapshot.
+- Refresh from minimal public data; preserve source and date; deep-link into the correct document/article.
+- Widget content must never imply that an old cached version is current.
 
-## Release requirements
+## Billing and store review
 
-Build from the shared Neon API, validate purchase entitlements with the platform store, test offline version invalidation, timezone handling, notification opt-out and widget refresh. The current ZIP does not contain Flutter/Dart projects, native widgets, FCM registration or app-store binaries.
+The current Stripe endpoints support the web subscription flow only. Before enabling the mobile paywall, review the then-current Apple and Google policies for digital subscriptions, implement the appropriate in-app purchase or permitted alternative flow, verify receipts server-side and map entitlements to the same CARTA user account. Test restore purchases, cancellation, renewals, refunds and account switching.
+
+## Mobile acceptance criteria
+
+- The same account and library appear on web and mobile.
+- A bookmark created on one client synchronises to the other.
+- A licensed document can be downloaded, read offline and clearly marked stale when superseded.
+- Search and AI citations open the correct document version and provision.
+- No legal answer is generated without qualifying source chunks.
+- Push notification opt-in/opt-out and timezone handling work.
+- Text scaling, screen readers, low-bandwidth use and session expiry are tested.
+- Android and iOS release builds pass device QA and store submission checks.
