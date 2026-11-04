@@ -1,44 +1,75 @@
 # CARTA system architecture
 
-## Application boundary
+## Product targets
 
-CARTA is a React/Vite single-page application. It does not depend on Floot or Supabase. The frontend uses `@neondatabase/auth` with the Better Auth React adapter, obtains short-lived access tokens and calls the CARTA Neon Function directly. No database credentials are shipped to the browser.
+CARTA is a shared legal-content platform with two clients:
 
-## Neon services
+- **Web:** current React + Vite single-page application.
+- **Native mobile:** Flutter applications for Android and iOS. Mobile is a committed product target, not a separate data product.
 
-- **Lakebase Postgres:** jurisdiction catalogue, source registry, legal documents and versions, provisions, full-text chunks, feed items, personal library, chat history and subscription records.
-- **Managed Neon Auth:** user identity and session. The API verifies JWTs against `NEON_AUTH_JWKS_URL` and `NEON_AUTH_BASE_URL`; `sub` is the account owner key.
-- **Neon Function:** Hono REST API, scoped user data, legal-document search, citation-grounded streaming Q&A, Stripe endpoints, feed ingestion and source-administration routes.
-- **Function Trigger:** hourly feed polling; each publisher is polled no more often than its registered `poll_interval_minutes`. The client rotates its daily card after 06:00 in the device’s local timezone. Push notifications at each user’s local 06:00 are a separate mobile notification service and are not active in this build.
-- **AI Gateway:** optional branch-scoped model routing. It requires a paid Neon plan; a server-side OpenAI-compatible provider key is an alternative.
+Both clients use the same live Supabase project, authentication identities, API, legal corpus, version history, citations and user library. Do not create a second mobile database or duplicate legal documents.
 
-Neon Functions are backend primitives, not frontend hosting. Host the Vite build on a static app host and configure `VITE_CARTA_API_URL` with the Function invocation URL.
+## Backend
 
-## Corpus provenance and legal-document lifecycle
+- **Supabase Postgres:** jurisdictions, official-source registry, legal documents and versions, sections/provisions, searchable chunks, feed items, personal library, chat history and subscription records.
+- **Supabase Auth:** identity, session and JWT.
+- **Supabase Edge Function `carta-api`:** public catalogue/search/read routes, authenticated user-library and chat routes, publisher administration, ingestion and billing adapters.
+- **RLS:** isolates user-specific bookmarks, notes, highlights, downloads, profiles and conversations.
+- **Supabase Vault / server secrets:** service-role and third-party provider credentials remain server-side.
+- **pg_cron + pg_net:** scheduled publisher-feed checks after sources are rights-cleared and activated.
 
-A jurisdiction record is a catalogue entry, not a full constitutional text. Legal sources track publisher, official status, source URL/feed/API, authority rank and reuse rights. Documents track jurisdiction, document type, version, adoption/publication/effective dates, current/superseded status, official URL, content checksum, licence and editorial verification. Document sections preserve the article/section hierarchy. Search chunks are linked back to their exact source document and provision.
+Neither web nor mobile clients may contain a service-role key, database password, OpenAI key or Stripe secret. Clients authenticate with Supabase Auth and call the CARTA API with a publishable API key plus the current user bearer token where required. Never let a body-supplied user ID determine ownership.
 
-Publication and assistant retrieval both require a `verified` document, an approved/public-domain/open/permission-granted licence and `commercial_use_allowed = true`. The import tool also requires the source publisher to be official and commercially cleared. A later amendment is imported as a new version; the previous current version is marked superseded. No source is assumed reusable because it is publicly viewable.
+## Canonical legal corpus and provenance
 
-## Current feed
+Jurisdictions are catalogue records, not proof of document coverage. Legal sources record the publisher, source URL/feed, official status, authority rank and licence/rights evidence. Documents record the jurisdiction, type, version, official URL, source reference, adopted/published/effective dates, current/superseded status, checksum, language and reuse licence. Sections preserve the chapter/article hierarchy; chunks link search and AI retrieval to an exact document and provision.
 
-The scheduled ingestion process reads only active official feeds when their publisher-specific polling interval is due. It verifies that each item link remains on the publisher's domain, deduplicates by source + external ID/canonical URL and stores metadata. It does not copy RSS article snippets or page bodies unless reuse permission is cleared. The daily feed is sourced from `feed_items` and displays canonical publisher links.
+Both publication and legal-assistant retrieval require a verified current document and a rights record permitting the relevant use, including commercial redistribution and AI retrieval. Mobile offline copies additionally require explicit offline/device-copy rights. A public link or downloadable government PDF is not sufficient by itself.
 
-## User data isolation
+Amendments are new versions with clear effective dates and relationships to prior texts. Keep historical versions for traceability but do not present them as current. Preserve the exact language/edition and distinguish authoritative text from translations, editorial annotations and plain-language summaries.
 
-The Function obtains user identity only from a validated bearer JWT. A body-supplied user ID is never trusted. Bookmark, highlight, note, download, chat-conversation and billing queries filter by the verified JWT subject. Conversation IDs are checked against the owner before history is read or appended.
+## Legal research assistant
 
-## AI answer flow
+1. Validate the authenticated user's JWT and enforce request limits.
+2. Search only approved current/effective legal chunks.
+3. Restrict retrieval to official and rights-cleared sources.
+4. pass retrieved passages, version labels, provision references and official URLs to the model.
+5. Validate that model citations point to the retrieved source set; persist the answer and source references.
+6. Refuse to answer when the corpus lacks an appropriate passage.
 
-1. Verify JWT and check the per-user request limit.
-2. Identify a likely jurisdiction and search `document_chunks` using PostgreSQL full-text search.
-3. Restrict retrieval to official sources and current, effective, verified, commercially reusable legal material.
-4. Pass the retrieved excerpts, version metadata and canonical official URLs to the model.
-5. Buffer the model draft, validate that every citation label belongs to the retrieved source set, then release the validated answer in small stream events; persist the conversation and exact chunk citation references.
-6. Return no answer when no qualifying primary-source passage is found.
+The assistant must not invent law, amendments, court decisions, citations or effective dates; must distinguish bills from enacted laws; and must state when a source is outdated, contested or missing. CARTA provides legal information, not individual legal advice.
 
-The model must not infer current law from memory, invent a holding/citation/date, treat a bill as enacted law, or follow instructions embedded in source documents. The product explains that it provides legal information, not advice.
+## Web client
 
-## Deployment
+The React/Vite app is the current web client. It reads public library metadata through the CARTA API and uses Supabase Auth for sign-in. Browser local storage may be used for limited device preferences and migration, but the authenticated Supabase library is the sync source of truth.
 
-See the root README and `docs/release-checklist.md`. Apply migrations in numeric order, enable Neon Auth, deploy the Function and daily trigger, configure CORS origins and secrets, publish the Vite bundle on an app host and verify auth isolation before launch.
+## Native Android/iOS clients
+
+The native app is Flutter/Dart and uses:
+- Supabase Flutter Auth for account sessions;
+- a typed API client for `carta-api`;
+- repositories/models shared conceptually with the web API contract;
+- local relational storage for permitted offline texts and user actions;
+- secure device storage for session-sensitive material.
+
+Required native screens: onboarding/auth, jurisdiction catalogue, document reader, full-text search, legal assistant, daily updates, personal library, downloads/offline, profile/preferences and subscription status.
+
+The API remains the sole source of legal currentness and rights eligibility. When offline, show the cached version and its retrieved timestamp; if a newer version is known, clearly mark the cached copy stale. Never silently replace a document whose legal version changed.
+
+## Push notifications and widgets
+
+Push notifications require explicit opt-in, revocable device tokens, per-user timezone and daily-digest preferences. Use Firebase Cloud Messaging for delivery, with APNs configuration for iOS. Widgets are native surfaces: Android AppWidget and iOS WidgetKit, updated from a minimal snapshot of the latest verified daily item. Show its publisher and date; do not display legal advice in notifications or widgets.
+
+## Billing
+
+Stripe checkout and webhook routes are a web integration and require configured secrets, Price IDs and a production site URL. The Flutter app must first be checked against current Apple App Store and Google Play rules for digital subscriptions. Use a provider-compliant mobile purchase flow and map verified purchases to the same backend entitlement for the signed-in user. Do not assume a web Stripe Checkout URL is acceptable inside either app store build.
+
+## Current corpus gate
+
+The live database currently contains eight EAC jurisdictions and eight inactive source candidates, but zero verified legal documents and zero searchable chunks. No legal text should be presented as a verified corpus until publisher rights, current version and authoritative language have been reviewed.
+
+See:
+- [Phase 3 legal library and mobile plan](phase-3-legal-library-and-mobile.md)
+- [Supabase deployment and production handoff](supabase-deployment.md)
+- [EAC source review queue](eac-first-batch.md)
+- [Native mobile requirements](native-widget-fcm.md)
