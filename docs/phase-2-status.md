@@ -47,3 +47,22 @@ Project ref: `mvcirldxcuvcuqvlmqxv`
 Region: `ap-south-1` (Mumbai)  
 Edge Function: `carta-api`  
 API: `https://mvcirldxcuvcuqvlmqxv.supabase.co/functions/v1/carta-api`
+
+
+## Verified checks (November 5, 2026)
+
+- Supabase Edge Function deployment: version 8, active.
+- Live HTTP smoke tests via Supabase `pg_net`: function health **200**, public library catalogue **200**, Vault-token scheduled ingestion **200**.
+- Health response: server-side service-role key is available. AI and Stripe configuration booleans are false; these providers are not yet enabled.
+- Scheduled ingestion completed with zero eligible sources, zero records seen, zero added and zero skipped. This is expected while all source candidates are inactive and rights-review-required.
+- GitHub Actions `CARTA CI`: successful run `41921618341`. Node 22 dependency install, tests, static metadata coverage audit, JavaScript syntax check, TypeScript typecheck and Vite production build all passed.
+- Frontend hosting is not configured. A build artifact exists as a successful CI job output, but there is no production domain yet.
+
+## Remaining launch gates
+
+1. Configure OpenAI server secret and test legal Q&A only after verified legal passages exist.
+2. Configure Stripe secret, webhook secret, monthly/yearly Price IDs and production site URL; test in Stripe test mode before live mode.
+3. Obtain written/public-domain/open-licence evidence for each publisher/document before activating ingestion or serving text. The eight EAC catalogue rows are still metadata-only.
+4. Configure production Supabase Auth Site URL, redirect allow-list, email sender/SMTP and password reset/confirmation flows.
+5. Deploy the frontend to a production host; set exact CORS allowed origins and run browser E2E tests against the deployed URL.
+6. Run restore drill, rate-limit abuse test, source-feed hostile-content test and Stripe webhook retry/reconciliation test.

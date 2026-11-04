@@ -47,7 +47,11 @@ async function userFor(req:Request,db:SupabaseClient) {
   return error?null:data.user;
 }
 function admin(u:any){return u?.app_metadata?.role==="admin";}
-function route(p:string){return p.replace(/^\/functions\/v1\/carta-api/,"")||"/";}
+function route(p:string){
+  p=p.replace(/^\/functions\/v1\/carta-api(?=\/|$)/,"");
+  p=p.replace(/^\/carta-api(?=\/|$)/,"");
+  return p||"/";
+}
 function str(v:unknown,n=1000){return typeof v==="string"?v.trim().slice(0,n):"";}
 function escapeHtml(v:string){return v.replace(/<script[\s\S]*?<\/script>/gi," ").replace(/<style[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," ").replace(/&nbsp;/gi," ").replace(/&amp;/gi,"&").replace(/&lt;/gi,"<").replace(/&gt;/gi,">").replace(/&quot;/gi,'"').replace(/&#39;/gi,"'").replace(/\s+/g," ").trim();}
 function responseText(r:any){if(typeof r.output_text==="string")return r.output_text;return (r.output??[]).flatMap((x:any)=>x.content??[]).filter((x:any)=>x.type==="output_text").map((x:any)=>x.text??"").join("\n").trim();}
@@ -179,7 +183,7 @@ Deno.serve(async(req:Request)=>{
     }catch(e){console.error("Stripe webhook sync failed",e);return fail("Payment synchronisation failed; Stripe can safely retry this event.",500,"WEBHOOK_SYNC_ERROR",origin);}
   }
 
-  if(path==="/health"&&req.method==="GET")return json({ok:true,service:"carta-api",backend:"supabase",at:new Date().toISOString(),
+  if((path==="/"||path==="/health")&&req.method==="GET")return json({ok:true,service:"carta-api",backend:"supabase",at:new Date().toISOString(),
     readiness:{serviceRole:!!SERVICE,openai:!!OPENAI,stripe:!!STRIPE,stripeWebhook:!!STRIPE_WEBHOOK,monthlyPrice:!!MONTHLY_PRICE,yearlyPrice:!!YEARLY_PRICE,siteUrl:!!SITE}},200,origin);
 
   if(path==="/api/admin/ingest"&&req.method==="POST"){
