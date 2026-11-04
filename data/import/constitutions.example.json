@@ -1,0 +1,29 @@
+{
+  "documents": [
+    {
+      "jurisdictionIso": "KE",
+      "sourceSlug": "kenya-law",
+      "docType": "constitution",
+      "title": "",
+      "shortTitle": "",
+      "documentNumber": "",
+      "languageCode": "en",
+      "officialUrl": "",
+      "sourceReference": "",
+      "adoptedAt": null,
+      "publishedAt": null,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "versionLabel": "",
+      "isCurrent": false,
+      "documentStatus": "draft",
+      "licenseStatus": "review_required",
+      "commercialUseAllowed": false,
+      "attributionText": "",
+      "fullText": "",
+      "sections": [],
+      "rightsEvidenceUrl": "",
+      "rightsNotes": ""
+    }
+  ]
+}

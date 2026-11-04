@@ -1,0 +1,56 @@
+-- Remove initial broad admin/public policies before installing the narrower policy set.
+drop policy if exists "Admins manage jurisdictions" on public.jurisdictions;
+drop policy if exists "Admins manage source registry" on public.legal_sources;
+drop policy if exists "Public can read official source metadata" on public.legal_sources;
+drop policy if exists "Admins manage legal documents" on public.legal_documents;
+drop policy if exists "Public can read reusable verified legal documents" on public.legal_documents;
+drop policy if exists "Admins manage sections" on public.document_sections;
+drop policy if exists "Public can read reusable verified sections" on public.document_sections;
+drop policy if exists "Admins manage chunks" on public.document_chunks;
+drop policy if exists "Public can read reusable verified chunks" on public.document_chunks;
+drop policy if exists "Admins manage feed" on public.feed_items;
+drop policy if exists "Public can read verified official feed metadata" on public.feed_items;
+
+-- Harden administrator management: role claims are read from trusted app_metadata.
+create policy "Admins insert jurisdictions" on public.jurisdictions for insert to authenticated with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins update jurisdictions" on public.jurisdictions for update to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin') with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins delete jurisdictions" on public.jurisdictions for delete to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Read official sources or admin registry" on public.legal_sources for select to anon,authenticated using (is_official=true or (((select auth.jwt())->'app_metadata'->>'role')='admin'));
+create policy "Admins insert source registry" on public.legal_sources for insert to authenticated with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins update source registry" on public.legal_sources for update to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin') with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins delete source registry" on public.legal_sources for delete to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Read reusable legal documents or admin" on public.legal_documents for select to anon,authenticated using ((document_status='verified' and license_status in ('approved','public_domain_verified','open_license','permission_granted') and commercial_use_allowed=true) or (((select auth.jwt())->'app_metadata'->>'role')='admin'));
+create policy "Admins insert legal documents" on public.legal_documents for insert to authenticated with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins update legal documents" on public.legal_documents for update to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin') with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins delete legal documents" on public.legal_documents for delete to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Read reusable sections or admin" on public.document_sections for select to anon,authenticated using (exists(select 1 from public.legal_documents d where d.id=document_id and ((d.document_status='verified' and d.license_status in ('approved','public_domain_verified','open_license','permission_granted') and d.commercial_use_allowed=true) or (((select auth.jwt())->'app_metadata'->>'role')='admin'))));
+create policy "Admins insert sections" on public.document_sections for insert to authenticated with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins update sections" on public.document_sections for update to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin') with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins delete sections" on public.document_sections for delete to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Read reusable chunks or admin" on public.document_chunks for select to anon,authenticated using (exists(select 1 from public.legal_documents d where d.id=document_id and ((d.document_status='verified' and d.license_status in ('approved','public_domain_verified','open_license','permission_granted') and d.commercial_use_allowed=true) or (((select auth.jwt())->'app_metadata'->>'role')='admin'))));
+create policy "Admins insert chunks" on public.document_chunks for insert to authenticated with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins update chunks" on public.document_chunks for update to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin') with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins delete chunks" on public.document_chunks for delete to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Read verified official feed or admin" on public.feed_items for select to anon,authenticated using ((verification_status in ('source_verified','editor_review') and exists(select 1 from public.legal_sources s where s.id=source_id and s.is_official=true)) or (((select auth.jwt())->'app_metadata'->>'role')='admin'));
+create policy "Admins insert feed" on public.feed_items for insert to authenticated with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins update feed" on public.feed_items for update to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin') with check (((select auth.jwt())->'app_metadata'->>'role')='admin');
+create policy "Admins delete feed" on public.feed_items for delete to authenticated using (((select auth.jwt())->'app_metadata'->>'role')='admin');
+
+create index if not exists chat_conversations_jurisdiction_iso_idx on public.chat_conversations(jurisdiction_iso);
+create index if not exists chat_message_sources_chunk_id_idx on public.chat_message_sources(chunk_id);
+create index if not exists chat_message_sources_document_id_idx on public.chat_message_sources(document_id);
+create index if not exists document_chunks_section_id_idx on public.document_chunks(section_id);
+create index if not exists document_sections_parent_section_id_idx on public.document_sections(parent_section_id);
+create index if not exists feed_items_document_id_idx on public.feed_items(document_id);
+create index if not exists ingestion_runs_source_id_idx on public.ingestion_runs(source_id);
+create index if not exists legal_documents_replaces_document_id_idx on public.legal_documents(replaces_document_id);
+create index if not exists legal_documents_source_id_idx on public.legal_documents(source_id);
+create index if not exists legal_sources_jurisdiction_iso_idx on public.legal_sources(jurisdiction_iso);
+create index if not exists user_bookmarks_document_id_idx on public.user_bookmarks(document_id);
+create index if not exists user_bookmarks_section_id_idx on public.user_bookmarks(section_id);
+create index if not exists user_highlights_document_id_idx on public.user_highlights(document_id);
+create index if not exists user_highlights_section_id_idx on public.user_highlights(section_id);
+create index if not exists user_notes_document_id_idx on public.user_notes(document_id);
+create index if not exists user_notes_section_id_idx on public.user_notes(section_id);
+create index if not exists user_profiles_preferred_jurisdiction_iso_idx on public.user_profiles(preferred_jurisdiction_iso);
+create index if not exists user_saved_documents_document_id_idx on public.user_saved_documents(document_id);

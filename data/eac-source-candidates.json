@@ -1,0 +1,110 @@
+{
+  "catalogue": "East African Community Partner States constitutional source candidates",
+  "checkedAt": "2026-11-04",
+  "coverageBasis": {
+    "publisher": "East African Community Secretariat",
+    "url": "https://www.eac.int/overview-of-eac",
+    "partnerStateCount": 8
+  },
+  "policy": {
+    "publicationStatus": "metadata_only",
+    "commercialUseAllowed": false,
+    "licenseStatus": "review_required",
+    "note": "Official-source discovery only. Do not import, index for AI retrieval, redistribute, or label a text verified-current until the exact version, amendments, authoritative language and commercial/AI rights have been checked."
+  },
+  "jurisdictions": [
+    {
+      "isoCode": "BI",
+      "country": "Burundi",
+      "publisher": "Presidency of the Republic of Burundi",
+      "officialSourceUrl": "https://presidence.gov.bi/2018/07/6271-2/",
+      "secondOfficialSourceUrl": "https://courconstitutionnelle.gov.bi/",
+      "candidateText": "Constitution de la République du Burundi, promulgated 7 June 2018",
+      "versionStatus": "2018 official text located; subsequent amendment/consolidation status requires verification",
+      "rightsStatus": "review_required",
+      "notes": "The Constitutional Court website also lists the Constitution under fundamental texts. Check the Official Gazette and later amendment notices; rights for commercial reproduction and AI retrieval have not been established."
+    },
+    {
+      "isoCode": "CD",
+      "country": "Democratic Republic of the Congo",
+      "publisher": "Cour de Cassation, Democratic Republic of the Congo",
+      "officialSourceUrl": "https://cassation.cd/textes-legaux/constitution-rdc",
+      "candidateText": "Constitution of 18 February 2006, modified by Law No. 11/002 of 20 January 2011",
+      "versionStatus": "Official court-hosted consolidated reference located; later amendment and Gazette history still require verification",
+      "rightsStatus": "review_required",
+      "notes": "The Court of Cassation page identifies the 2011 revision. Confirm against the official Journal Officiel and any later constitutional amendments before marking current."
+    },
+    {
+      "isoCode": "KE",
+      "country": "Kenya",
+      "publisher": "National Council for Law Reporting / Kenya Law",
+      "officialSourceUrl": "https://new.kenyalaw.org/legislation/",
+      "secondOfficialSourceUrl": "https://presidentiallibrary.go.ke/documents/constitution-kenya-2010",
+      "rightsEvidenceUrl": "https://kenyalaw.org/terms-of-use/",
+      "candidateText": "Constitution of Kenya, 2010",
+      "versionStatus": "Current publisher route located; confirm current consolidation and amendment cut-off in the source record",
+      "rightsStatus": "restricted_pending_written_licence",
+      "notes": "Kenya Law's current terms prohibit automated bulk extraction, commercial redistribution and AI/ML training without an explicit NCLR licensing agreement. The Presidential Library describes its archival 2010 copy as public domain, but that archival original is not a substitute for a verified current consolidated text. No full-text import or AI retrieval from Kenya Law until NCLR permissions are secured."
+    },
+    {
+      "isoCode": "RW",
+      "country": "Rwanda",
+      "publisher": "Ministry of Justice / Official Gazette of the Republic of Rwanda",
+      "officialSourceUrl": "https://www.minijust.gov.rw/fileadmin/user_upload/Minijust/Publications/Laws/Constitution.pdf",
+      "secondOfficialSourceUrl": "https://www.parliament.gov.rw/fileadmin/user_upload/The_Constitution_of_the_Republic_of_Rwanda.pdf",
+      "candidateText": "Constitution of the Republic of Rwanda, revised in 2015 and amended in 2023; Official Gazette special issue of 4 August 2023",
+      "versionStatus": "Official Gazette text located; confirm any later constitutional amendments and official language hierarchy",
+      "rightsStatus": "review_required",
+      "notes": "The Ministry of Justice and Parliament both publish the 2023 Official Gazette text. No commercial reuse or AI processing licence has yet been established."
+    },
+    {
+      "isoCode": "SO",
+      "country": "Somalia",
+      "publisher": "Ministry of Interior, Federal Affairs & Reconciliation; Office of the President; Office of the Prime Minister",
+      "officialSourceUrl": "https://moifar.gov.so/en/page/federal-constitution",
+      "versionCrossCheckUrls": [
+        "https://villasomalia.gov.so/constitution-2/",
+        "https://opm.gov.so/en/policies/amendments-to-the-provisional-constitution-of-the-federal-republic-of-somalia-chapters-1-4"
+      ],
+      "candidateText": "2026 Federal Constitution candidate; 2012 Provisional Federal Constitution and 2024-effective amendments are also referenced in official government pages",
+      "versionStatus": "hold_for_legal_review_due_to_official_version_conflict",
+      "rightsStatus": "review_required",
+      "notes": "Official pages describe a 2026 Constitution approved in March 2026 and signed on 8 March 2026, while another official Prime Minister's Office page published in June 2026 describes amendments to the 2012 Provisional Constitution with an effective date of 30 March 2024. Do not choose or publish a current text until the Gazette, promulgation instrument, effective date and relationship between these instruments are reconciled by a qualified Somali legal reviewer."
+    },
+    {
+      "isoCode": "SS",
+      "country": "South Sudan",
+      "publisher": "Ministry of Justice and Constitutional Affairs, Republic of South Sudan",
+      "officialSourceUrl": "https://mojca.gov.ss/the-transitional-constitution-of-the-repulic-of-south-sudan/",
+      "secondOfficialSourceUrl": "https://mojca.gov.ss/constitution-and-government/",
+      "candidateText": "Transitional Constitution of the Republic of South Sudan, 2011",
+      "versionStatus": "Official Ministry page located; obtain and verify the latest consolidated text and amendment schedule",
+      "rightsStatus": "review_required",
+      "notes": "Do not assume the original 2011 text is the current consolidated text. Verify transitional amendments, commencement notices and any constitutional review instruments. Commercial and AI rights remain uncleared."
+    },
+    {
+      "isoCode": "TZ",
+      "country": "Tanzania",
+      "publisher": "Office of the Attorney General / Office of the Solicitor General / Parliament of Tanzania",
+      "officialSourceUrl": "https://oagmis.oag.go.tz/public",
+      "secondOfficialSourceUrl": "https://www.parliament.go.tz/documents/constitution-of-tanzania",
+      "thirdOfficialSourceUrl": "https://elibrary.osg.go.tz/items/13d790c1-5bdd-42d8-8990-392dc3f1b5b6",
+      "candidateText": "Constitution of the United Republic of Tanzania, 1977; Parliament page lists a 6 February 2025 upload",
+      "versionStatus": "Official publisher routes located; reconcile the 2025 parliamentary document with the OAG/OSG consolidated amendment history before import",
+      "rightsStatus": "review_required",
+      "notes": "The OSG e-Library record describes an English revised edition consolidating amendments only through the 14th Amendment of 2005. Do not treat that older copy as current without reconciling the Parliament 2025 document and subsequent amendments. Zanzibar's Constitution is a separate jurisdictional instrument and should be catalogued separately rather than merged into the Union Constitution."
+    },
+    {
+      "isoCode": "UG",
+      "country": "Uganda",
+      "publisher": "Uganda Law Reform Commission",
+      "officialSourceUrl": "https://publications.ulrc.go.ug/constitution/29",
+      "secondOfficialSourceUrl": "https://statehouse.go.ug/the-constitution/",
+      "crossCheckUrl": "https://ulii.org/en/akn/ug/act/statute/1995/constitution/eng%402023-12-31",
+      "candidateText": "Constitution of the Republic of Uganda, 1995, updated version",
+      "versionStatus": "ULRC record describes an updated Constitution; its subscription access and amendment cut-off need verification",
+      "rightsStatus": "review_required",
+      "notes": "The ULRC publication record identifies the text as updated but marks access as subscription. The ULII version is useful for cross-checking only; it is not the primary official publisher. The older government-hosted PDF should not be assumed to include every amendment."
+    }
+  ]
+}

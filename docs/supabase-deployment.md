@@ -1,36 +1,27 @@
-# CARTA Supabase deployment
+# CARTA Supabase deployment and production handoff
 
-Project ref: `mvcirldxcuvcuqvlmqxv`  
-Region: `ap-south-1` (Mumbai)  
-API URL: `https://mvcirldxcuvcuqvlmqxv.supabase.co`
+Project ref: `mvcirldxcuvcuqvlmqxv` (Mumbai / `ap-south-1`)
 
-## Live deployment record
+## Frontend variables
 
-- Supabase project: ACTIVE_HEALTHY.
-- Migrations applied: `001_initial_carta_supabase_schema`, `002_policy_and_index_hardening`, `003_user_library_constraints`.
-- Public schema: 18 tables with RLS enabled.
-- Edge Function: `carta-api`, ACTIVE version 1. The deployed source is stored in `supabase/functions/carta-api/index.ts`.
+Copy `.env.example` to `.env.local`. `VITE_SUPABASE_URL`, the publishable key and `VITE_CARTA_API_URL` are browser configuration. Never set a service-role/secret key in a `VITE_` variable.
 
-## Browser configuration
+## Supabase backend
 
-Copy `.env.example` to `.env.local`. The Supabase publishable key may be used by the browser when RLS is enforced. Never expose a service-role key, database password, AI provider key or payment key through a `VITE_` variable.
+The live project has the CARTA schema applied and the `carta-api` Edge Function deployed. Its gateway JWT verification is disabled because the API manually validates signed-in users with Supabase Auth and accepts anonymous public reads; user-scoped database calls still carry the caller JWT and are evaluated by RLS. Do not remove manual auth checks or use a service-role client in this function.
 
-## API routes
+Public routes: `/health`, `/api/library`, `/api/feed`, `/api/search`, `/api/documents/:id`. Authenticated routes: `/api/library/me`, `/api/billing/status`; source administration requires `app_metadata.role = admin`. Legal chat, paid checkout, billing portal, verification and automatic ingestion intentionally return a configuration response until providers, a legal retrieval corpus and source rights are configured.
 
-Public: health, library catalogue, official feed, verified legal document search and document lookup. Authenticated: personal bookmarks, highlights, notes, saved documents, preferences and subscription-status read. Administrator source controls require `app_metadata.role = admin`.
+## First operational tasks
 
-Legal chat, checkout, billing portal, payment verification and automated feed ingestion deliberately return a not-configured response until the relevant provider adapter, secret and tests exist.
+1. Set `CARTA_ALLOWED_ORIGINS` in Edge Function secrets to the exact production web origin(s).
+2. Configure Supabase Auth site URL, redirect URLs, password policy and a production SMTP sender. Test confirmation and password reset flows.
+3. Set the first administrator role in trusted `app_metadata` using a server-side administrative operation; do not use user-editable `user_metadata`.
+4. Add signed provider credentials using Supabase Edge Function secrets, then implement and test the AI, billing and publisher adapters separately.
+5. Verify each legal document's official version, effective dates, amendments, attribution and commercial/AI reuse permission before import.
+6. Configure a reviewed scheduler; source registry rows are deliberately inactive until this work is complete.
+7. Run database security/performance advisors, RLS integration tests, Edge Function tests, dependency audit, backup/restore test and end-to-end browser tests before public launch.
 
-## Production release gates
+## Current limitations
 
-1. Set `CARTA_ALLOWED_ORIGINS` in Edge Function secrets to exact deployed frontend origins.
-2. Configure Supabase Auth Site URL, redirect URL allow-list, SMTP sender and password reset/confirmation flows.
-3. Provision the first admin role using a trusted server-side `app_metadata` operation.
-4. Import only official, current, versioned documents whose licence and intended commercial/AI reuse are approved.
-5. Implement provider-backed legal Q&A with source-grounded answers and citations, plus tested billing webhooks before enabling paid features.
-6. Add approved publisher feed adapters and a scheduler. Candidate source rows are intentionally inactive.
-7. Run real-user RLS tests, API HTTP smoke tests, dependency audit, browser E2E tests and backup/restore drills.
-
-## Current data status
-
-There are eight EAC jurisdiction records and eight official-source candidates. There are zero verified legal documents or full-text provisions. All source candidates remain inactive, `review_required` and not cleared for commercial use. This is a secure backend foundation, not yet a public production launch.
+The live database currently contains EAC jurisdiction metadata and source candidates only. It does not contain a verified constitutional text corpus. Kenya Law reuse requires written NCLR permission for the intended use. Somalia and other candidate sources need current-version reconciliation. The AI and subscription integrations are not enabled.

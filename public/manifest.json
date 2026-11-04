@@ -1,0 +1,12 @@
+{
+  "name": "CARTA — World Constitutions Library",
+  "short_name": "CARTA",
+  "description": "Every Constitution. Every Country. In Plain Language.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FFFBF2",
+  "theme_color": "#1A7F37",
+  "icons": [{"src":"/carta-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
