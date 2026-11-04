@@ -53,3 +53,17 @@ test("Browser auth does not contain privileged server secrets", () => {
   assert.ok(!auth.includes("OPENAI_API_KEY"));
   assert.ok(!auth.includes("STRIPE_SECRET_KEY"));
 });
+
+
+test("Official-text exclusion is a distinct rights basis and requires a legal opinion", () => {
+  assert.ok(api.includes('"official_text_exclusion"'));
+  assert.ok(api.includes("LEGAL_OPINION_REQUIRED"));
+  assert.ok(api.includes("legal_opinion_on_file"));
+});
+
+test("Constitution importer blocks official-text-exclusion imports without a legal opinion", async () => {
+  const importer = await readFile(new URL("../scripts/import-constitution-documents.mjs", import.meta.url), "utf8");
+  assert.ok(importer.includes("'official_text_exclusion'"));
+  assert.ok(importer.includes("doc.rightsReviewStatus !== 'legal_opinion_on_file'"));
+  assert.ok(importer.includes("row.metadata?.rightsReviewStatus !== 'legal_opinion_on_file'"));
+});
