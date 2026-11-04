@@ -1,6 +1,6 @@
 {
   "catalogue": "East African Community Partner States constitutional source candidates",
-  "checkedAt": "2026-11-04",
+  "checkedAt": "2026-11-05",
   "coverageBasis": {
     "publisher": "East African Community Secretariat",
     "url": "https://www.eac.int/overview-of-eac",
@@ -50,12 +50,15 @@
       "isoCode": "RW",
       "country": "Rwanda",
       "publisher": "Ministry of Justice / Official Gazette of the Republic of Rwanda",
-      "officialSourceUrl": "https://www.minijust.gov.rw/fileadmin/user_upload/Minijust/Publications/Laws/Constitution.pdf",
-      "secondOfficialSourceUrl": "https://www.parliament.gov.rw/fileadmin/user_upload/The_Constitution_of_the_Republic_of_Rwanda.pdf",
-      "candidateText": "Constitution of the Republic of Rwanda, revised in 2015 and amended in 2023; Official Gazette special issue of 4 August 2023",
-      "versionStatus": "Official Gazette text located; confirm any later constitutional amendments and official language hierarchy",
+      "officialSourceUrl": "https://www.rlrc.gov.rw/fileadmin/user_upload/RLRC/Laws_of_Rwanda_v2/Domestic_laws/Laws_in_force/1._Fundamental/1.1._National_Instruments/1.1.1._Constitution/1.1.1.1._Constitution_of_the_Rep._of_Rwanda_2023.pdf",
+      "secondOfficialSourceUrl": "https://www.parliament.gov.rw/fileadmin/user_upload/Parliament/STATUTORY_DOCUMENTS/The_Constitution_of_the_Republic_of_Rwanda.pdf",
+      "candidateText": "Constitution of the Republic of Rwanda (2023 revision), Official Gazette n° Special of 04/08/2023; trilingual official publication (Kinyarwanda, English, French); 176 Articles.",
+      "versionStatus": "Official Gazette text and matching Parliament-hosted copy located. RLRC identifies the Laws of Rwanda collection as updated daily and lists this Constitution under laws in force. Targeted 2024–2026 Gazette search did not locate a later constitutional amendment, but publisher confirmation and legal review of the current consolidated status remain required.",
       "rightsStatus": "review_required",
-      "notes": "The Ministry of Justice and Parliament both publish the 2023 Official Gazette text. No commercial reuse or AI processing licence has yet been established."
+      "notes": "The Constitution appears in the Rwanda Law Reform Commission's current Laws of Rwanda collection, which RLRC says is updated daily. A matching Parliament-hosted Official Gazette copy confirms the trilingual text, date and 176-Article structure. Do not rely on repealed Law No. 31/2009 for copyright status: Law No. 055/2024 repealed it and its Article 282 now contains the relevant exclusion for official legislative texts and official translations. Keep the source inactive and commercialUseAllowed=false until local counsel/publisher confirms that this exclusion covers CARTA's full-text web/mobile display, indexing, AI retrieval and offline caching, and verifies no other applicable restriction.",
+      "rightsEvidenceUrl": "https://www.wipo.int/wipolex/en/legislation/details/22672",
+      "rightsBasisCandidate": "Law N° 055/2024 of 20/06/2024, Article 282, published and effective 31/07/2024, excludes official legislative, administrative and judicial texts and official translations from copyright protection. This is a candidate statutory basis, not a final CARTA rights approval; counsel must confirm applicability to the exact official constitutional text and other relevant rights/terms.",
+      "rightsReviewStatus": "counsel_and_publisher_confirmation_pending"
     },
     {
       "isoCode": "SO",
