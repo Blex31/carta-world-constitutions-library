@@ -1,13 +1,30 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises';
-import pg from 'pg';
-
-const { Pool } = pg;
 const databaseUrl = process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL;
 if (!databaseUrl) {
-  console.error('Set DATABASE_URL_UNPOOLED (preferred) or DATABASE_URL.');
-  process.exit(1);
+  if (process.argv.includes("--require-database")) {
+    console.error("Set DATABASE_URL_UNPOOLED (preferred) or DATABASE_URL to run the live database audit.");
+    process.exit(1);
+  }
+  const [jurisdictions, sourceMap] = await Promise.all([
+    fs.readFile(new URL("../data/jurisdictions.seed.json", import.meta.url), "utf8").then(JSON.parse),
+    fs.readFile(new URL("../data/eac-source-candidates.json", import.meta.url), "utf8").then(JSON.parse),
+  ]);
+  const candidates = sourceMap.jurisdictions ?? [];
+  const report = {
+    mode: "checked-in-metadata-only",
+    seedJurisdictions: jurisdictions.length,
+    eacPartnerStateCandidates: candidates.length,
+    eacCandidatesWithRightsEvidence: candidates.filter(x => Boolean(x.rightsEvidenceUrl)).length,
+    eacCandidatesClearedForCommercialUse: candidates.filter(x => ["approved", "public_domain_verified", "open_license", "permission_granted"].includes(x.rightsStatus)).length,
+    databaseCoverage: "not_checked_without_DATABASE_URL",
+    publicationWarning: "This is a static catalogue audit, not a live database or legal-text coverage audit.",
+    generatedAt: new Date().toISOString(),
+  };
+  console.log(JSON.stringify(report, null, 2));
+  process.exit(0);
 }
+const { Pool } = await import("pg");
 const output = process.argv.includes('--csv') ? 'csv' : 'json';
 const pool = new Pool({ connectionString: databaseUrl, max: 2, connectionTimeoutMillis: 10000 });
 
