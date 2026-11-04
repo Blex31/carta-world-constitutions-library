@@ -58,7 +58,8 @@
       "notes": "The Constitution appears in the Rwanda Law Reform Commission's current Laws of Rwanda collection, which RLRC says is updated daily. A matching Parliament-hosted Official Gazette copy confirms the trilingual text, date and 176-Article structure. Do not rely on repealed Law No. 31/2009 for copyright status: Law No. 055/2024 repealed it and its Article 282 now contains the relevant exclusion for official legislative texts and official translations. Keep the source inactive and commercialUseAllowed=false until local counsel/publisher confirms that this exclusion covers CARTA's full-text web/mobile display, indexing, AI retrieval and offline caching, and verifies no other applicable restriction.",
       "rightsEvidenceUrl": "https://www.wipo.int/wipolex/en/legislation/details/22672",
       "rightsBasisCandidate": "Law N° 055/2024 of 20/06/2024, Article 282, published and effective 31/07/2024, excludes official legislative, administrative and judicial texts and official translations from copyright protection. This is a candidate statutory basis, not a final CARTA rights approval; counsel must confirm applicability to the exact official constitutional text and other relevant rights/terms.",
-      "rightsReviewStatus": "counsel_and_publisher_confirmation_pending"
+      "rightsReviewStatus": "counsel_and_publisher_confirmation_pending",
+      "languagePrecedenceRule": "Constitution Article 96(4): where a law's Official Gazette language versions conflict, the language in which that law was adopted prevails. Confirm adoption language of the 2023 constitutional revision with RLRC/counsel."
     },
     {
       "isoCode": "SO",
