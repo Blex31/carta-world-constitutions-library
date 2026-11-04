@@ -1,44 +1,73 @@
 # CARTA pre-release checklist
 
-## Neon infrastructure
-- [ ] Create/attach a dedicated CARTA Neon project in a supported region.
-- [ ] Apply `001_initial_schema.sql`, `002_source_registry.sql`, `003_seed_jurisdictions.sql`, `004_official_feed_sources.sql`, `005_official_national_sources.sql`, `006_official_daily_sources.sql`, `007_feed_poll_index.sql`, `008_chunk_section_uniqueness.sql` in order.
-- [ ] Enable Managed Neon Auth and set the frontend auth URL.
-- [ ] Deploy the `carta` Neon Function and hourly feed trigger; verify each source respects its polling interval and the UI changes daily after 06:00 local time.
-- [ ] Configure exact `APP_ORIGIN` / `APP_ORIGINS` CORS values and `CARTA_ADMIN_USER_IDS`.
-- [ ] Test expired/missing JWT rejection and cross-user isolation.
-- [ ] Configure automated backup/snapshot policy and restore test.
+## Product targets
+- [ ] Web React/Vite client deployed on HTTPS.
+- [ ] Native Flutter apps built for Android and iOS.
+- [ ] Both clients use the same Supabase Auth accounts, CARTA API and legal corpus.
+- [ ] Shared API contract and client-version compatibility tests pass.
 
-## Corpus and feed
-- [ ] Confirm jurisdiction classification; do not equate the ISO directory with a count of sovereign states.
-- [ ] Verify current official text, amendments, commencement and authoritative language for each imported jurisdiction.
-- [ ] Record commercial reuse rights and attribution for every document and translation.
-- [ ] Run the constitution importer in dry-run mode, then apply only approved source packages.
-- [ ] Confirm old versions are marked superseded and remain traceable.
-- [ ] Approve official RSS feeds before enabling them; check daily ingestion, deduplication and canonical publisher links.
-- [ ] Confirm that restricted/unclear feeds remain metadata-only or disabled.
+## Supabase infrastructure
+- [ ] Confirm production project, migration history and Edge Function deployment.
+- [ ] Configure exact `CARTA_ALLOWED_ORIGINS` for the web origin(s).
+- [ ] Configure Supabase Auth Site URL, redirect allow-list, password policy and production SMTP sender.
+- [ ] Create first administrator through trusted server-side `app_metadata`; never use user-editable `user_metadata` for permissions.
+- [ ] Verify every exposed table has appropriate RLS and grants; run Supabase security and performance advisors.
+- [ ] Configure server-side OpenAI and Stripe secrets only after their features are ready.
+- [ ] Configure backups and complete a restore drill.
 
-## Legal assistant
-- [ ] Configure a Neon AI Gateway credential (paid plan) or a server-only OpenAI-compatible key.
-- [ ] Confirm only current, effective, verified, commercially cleared official-source chunks are retrieved.
-- [ ] Test supported answers with exact citations and version/effective dates.
-- [ ] Test no-source refusal, fake citations, prompt injection inside source text, bills vs enacted law and cross-jurisdiction confusion.
-- [ ] Test urgent/legal-dispute queries receive general information only and recommend qualified legal counsel.
-- [ ] Confirm chat histories and sources are scoped to the authenticated user.
+## Legal corpus and official sources
+- [ ] Confirm jurisdiction classification and do not equate catalogue size with constitution coverage.
+- [ ] Verify official publisher, exact text, authoritative language(s), promulgation and commencement.
+- [ ] Reconcile every amendment and effective date through a stated cut-off.
+- [ ] Obtain written licence, open licence or legal public-domain determination for web/mobile display, commercial use, indexing, AI retrieval and offline downloads.
+- [ ] Store rights evidence, attribution text, permitted uses and licence scope for every source and document.
+- [ ] Compute and store the text SHA-256 checksum.
+- [ ] Have a second reviewer reconcile the extracted text and article/section hierarchy against the official source.
+- [ ] Run the importer dry-run; import only documents that pass every rights and legal-version gate.
+- [ ] Confirm current vs superseded versions and searchable chunk-to-provision citations.
+- [ ] Keep restricted or unclear sources metadata-only and inactive.
 
-## Personal library and billing
-- [ ] Test sign-up, sign-in, sign-out and session restoration.
+## AI legal assistant
+- [ ] Configure server-side OpenAI credentials.
+- [ ] Confirm retrieval selects only verified, current/effective, rights-cleared chunks.
+- [ ] Test exact citations, provision numbers, version labels and official URLs.
+- [ ] Test no-source refusal, false citations, prompt injection, amendment changes, bill-vs-law confusion and jurisdiction confusion.
+- [ ] Confirm legal-information disclaimers and escalation to qualified counsel where appropriate.
+- [ ] Confirm chat history is isolated by authenticated user.
+
+## Authentication and personal library
+- [ ] Test sign-up, confirmation, sign-in, password reset, sign-out and session restoration.
 - [ ] Save/remove bookmarks, highlights, notes and downloads as User A.
-- [ ] Sign in as User B and confirm User A's saved data and chat history are not visible.
-- [ ] Test a second device and local-first migration.
-- [ ] Confirm checkout ownership verification and no entitlement from an unverified return URL.
-- [ ] Test subscription renewal, failed payment, cancellation, duplicate webhook, portal and test/live separation.
-- [ ] Confirm active Plus hides configured ads; verify free tier ads only after approval/consent configuration.
+- [ ] Sign in as User B and confirm no access to User A's data or conversations.
+- [ ] Sync notes/bookmarks across web, Android and iOS.
+- [ ] Test local cache migration and account switching.
 
-## Legal, privacy and operations
-- [ ] Add privacy, terms, legal-information disclaimer, source attribution and correction request process.
-- [ ] Confirm local-law, data-protection, tax and subscription obligations for launch markets.
-- [ ] Conduct security review, rate-limit review and database restore test.
-- [ ] Build and visually test web/PWA on target screen sizes.
-- [ ] Configure custom domain/HTTPS, monitoring, error alerts and incident contacts.
-- [ ] If native mobile is a launch requirement, complete separate Android/iOS purchase, AdMob, offline, FCM and widget work; those binaries are not part of this React bundle.
+## Billing
+- [ ] Configure Stripe web secrets, Price IDs, webhook and return URLs.
+- [ ] Test web checkout, ownership verification, renewals, cancellation, failed payments, duplicate webhooks and portal.
+- [ ] Review current Apple and Google rules and implement compliant mobile subscriptions/purchases.
+- [ ] Test restore purchases, refunds, account switching and entitlement reconciliation.
+- [ ] Confirm free/Plus access and ad-free entitlement are enforced by the backend.
+
+## Feeds and updates
+- [ ] Approve publisher rights and host allow-lists before activating any source.
+- [ ] Test scheduler, deduplication, redirects/hostile content, timeouts and rate limits.
+- [ ] Confirm update headlines link to canonical publishers and do not copy unlicensed text.
+- [ ] Confirm the 06:00 daily rotation uses user timezone preferences.
+
+## Native mobile quality
+- [ ] Flutter Android and iOS build/release pipelines set up.
+- [ ] Offline reading retains version, checksum, source and retrieval timestamp.
+- [ ] Superseded offline copies are marked stale and never silently presented as current.
+- [ ] FCM/APNs opt-in, revocation, token rotation and timezone behaviour tested.
+- [ ] Android AppWidget and iOS WidgetKit verified with source attribution and deep links.
+- [ ] Accessibility, dynamic text size, screen readers, low-bandwidth and deep-link tests pass.
+- [ ] Test on supported physical devices and complete store privacy/content declarations.
+
+## Operations, privacy and launch
+- [ ] Add privacy policy, terms, legal-information disclaimer, attribution and correction/takedown process.
+- [ ] Review data-protection, consumer, tax and subscription obligations in launch markets.
+- [ ] Complete dependency/security review, rate-limit abuse tests and hostile feed tests.
+- [ ] Run browser E2E and native-device E2E suites.
+- [ ] Configure monitoring, error alerts, incident contacts and restore procedure.
+- [ ] Publish web app and submit Android/iOS builds only after all critical gates pass.
