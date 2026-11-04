@@ -16,7 +16,7 @@ if (!databaseUrl) {
     seedJurisdictions: jurisdictions.length,
     eacPartnerStateCandidates: candidates.length,
     eacCandidatesWithRightsEvidence: candidates.filter(x => Boolean(x.rightsEvidenceUrl)).length,
-    eacCandidatesClearedForCommercialUse: candidates.filter(x => ["approved", "public_domain_verified", "open_license", "permission_granted"].includes(x.rightsStatus)).length,
+    eacCandidatesClearedForCommercialUse: candidates.filter(x => ["approved", "public_domain_verified", "open_license", "permission_granted", "official_text_exclusion"].includes(x.rightsStatus)).length,
     databaseCoverage: "not_checked_without_DATABASE_URL",
     publicationWarning: "This is a static catalogue audit, not a live database or legal-text coverage audit.",
     generatedAt: new Date().toISOString(),
@@ -46,13 +46,13 @@ try {
           and d.document_status='verified'
           and (d.effective_from is null or d.effective_from <= current_date)
           and (d.effective_until is null or d.effective_until >= current_date)
-          and d.license_status in ('approved','public_domain_verified','open_license','permission_granted')
+          and d.license_status in ('approved','public_domain_verified','open_license','permission_granted','official_text_exclusion')
           and d.commercial_use_allowed=true
       )::int as verified_current_constitutions,
       count(distinct d.id) filter (where d.doc_type='constitution')::int as constitution_versions,
       count(distinct s.id) filter (where s.is_official=true)::int as official_sources,
       count(distinct s.id) filter (where s.is_active=true and s.feed_url is not null)::int as active_feeds,
-      count(distinct s.id) filter (where s.license_status in ('approved','public_domain_verified','open_license','permission_granted') and s.commercial_use_allowed=true)::int as commercially_cleared_sources,
+      count(distinct s.id) filter (where s.license_status in ('approved','public_domain_verified','open_license','permission_granted','official_text_exclusion') and s.commercial_use_allowed=true)::int as commercially_cleared_sources,
       coalesce(array_agg(distinct s.slug) filter (where s.id is not null), '{}') as source_slugs
     from jurisdictions j
     left join legal_documents d on d.jurisdiction_iso=j.iso_code
