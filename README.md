@@ -2,31 +2,47 @@
 
 **Every Constitution. Every Country. In Plain Language.**
 
-CARTA is a document-first library for national constitutions, regional instruments and selected international law, with plain-language explanations and source provenance.
+CARTA is a document-first legal information library. It is designed to preserve official provenance, version history and source rights while making constitutional and legal documents easier to navigate.
 
-## Project principles
+## Stack
 
-- Prefer official primary sources and preserve source/version metadata.
-- Do not present generated explanations as legal advice.
-- Show jurisdiction, document version, effective date and official source for every legal text.
-- Respect publisher licensing and re-use conditions. Do not scrape or redistribute sources without the necessary rights.
-- Apply least-privilege database access and row-level security to all exposed Supabase tables.
+- React + Vite frontend
+- Supabase Postgres, Auth and Edge Functions
+- Supabase Row Level Security for user-owned data and publication controls
+- Official publisher registry with explicit licensing and reuse metadata
 
-## Repository transfer status
+## Supabase project
 
-This repository currently contains the CARTA project overview only. The prepared 41-file working bundle remains separate and has **not yet been committed as source files**.
+Project: `CARTA-World-Constitutions-Library`  
+Project ref: `mvcirldxcuvcuqvlmqxv`  
+Region: `ap-south-1` (Mumbai)  
+API: `https://mvcirldxcuvcuqvlmqxv.supabase.co`
 
-The bundle currently targets Neon. Supabase compatibility work is required before its migrations and API functions can be deployed to Supabase.
+The live project has three migrations applied and an active `carta-api` Edge Function. See [`docs/supabase-deployment.md`](docs/supabase-deployment.md) for the deployment record, configuration and outstanding release gates.
 
-## Initial package scope
+## Local development
 
-The prepared bundle contains the React application, ingestion research, jurisdiction metadata, schema migrations, API function source, and tests. It does **not** contain a complete verified corpus of every constitution. EAC source entries are candidates pending confirmation of current versions and reuse rights.
+1. Install Node.js 22 or later.
+2. Run `npm install`.
+3. Copy `.env.example` to `.env.local` and adjust the browser-safe Supabase values as needed.
+4. Run `npm run dev`.
+5. Before release, run `npm test`, `npm run typecheck` and `npm run build`.
 
-## Useful files in the prepared bundle
+Never put a Supabase secret/service-role key, database password, AI provider key or payment secret in a `VITE_` variable. The publishable key is intended for frontend use and relies on the database RLS policies.
 
-- `docs/activation-status.md`
-- `docs/data-sources.md`
-- `docs/eac-first-batch.md`
-- `docs/constitution-ingestion.md`
+## What is deployed today
 
-No production database or legal-text corpus has been deployed from this repository yet.
+- Core tables for jurisdictions, official sources, legal documents, sections, searchable chunks, feed items, personal library, conversations and subscription status.
+- RLS policies and least-privilege API grants.
+- EAC country/source metadata for Burundi, DR Congo, Kenya, Rwanda, Somalia, South Sudan, Tanzania and Uganda.
+- `carta-api` public-read/authenticated-user/admin API routes.
+
+The database currently contains **metadata only**: eight jurisdictions, eight source candidates and zero verified legal documents. Source candidates remain inactive and rights review is required. The legal assistant, live feed polling and paid billing are intentionally disabled until the appropriate provider adapters, permissions and credentials are configured.
+
+## Legal-content rule
+
+Do not publish a document as current or reusable until its official publisher, exact version, commencement/effective dates, amendments, attribution, licence and commercial/AI reuse rights have been checked. In particular, Kenya Law/NCLR bulk extraction, commercial redistribution and AI use require written permission for the intended use.
+
+## Project history
+
+The `neon/` directory and `neon.ts` preserve the original Neon-oriented backend implementation as migration history/reference. They are **not** the live backend. Supabase is the current runtime.
