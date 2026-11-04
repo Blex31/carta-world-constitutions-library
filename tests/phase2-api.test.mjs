@@ -30,8 +30,8 @@ test("Scheduled ingestion uses a Vault-backed token and an explicit host allow-l
   assert.ok(api.includes("x-carta-cron-token"));
   assert.ok(api.includes("allowedHosts"));
   assert.ok(api.includes("redirect:\"manual\""));
-  assert.ok(api.includes("source.is_active"));
-  assert.ok(api.includes("source.commercial_use_allowed"));
+  assert.ok(api.includes('.eq("is_active",true)'));
+  assert.ok(api.includes('.eq("commercial_use_allowed",true)'));
 });
 
 test("Publisher activation remains rights-gated", () => {
