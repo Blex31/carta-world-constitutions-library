@@ -436,8 +436,11 @@ Deno.serve(async(req:Request)=>{
         const license=typeof b.licenseStatus==="string"?b.licenseStatus:cur.data.license_status;
         const commercial=typeof b.commercialUseAllowed==="boolean"?b.commercialUseAllowed:cur.data.commercial_use_allowed;
         const active=typeof b.isActive==="boolean"?b.isActive:cur.data.is_active;
-        if(license==="official_text_exclusion"&&meta.rightsReviewStatus!=="legal_opinion_on_file")
-          return fail("Official-text exclusion requires a documented legal opinion covering CARTA's intended uses.",422,"LEGAL_OPINION_REQUIRED",origin);
+        if(license==="official_text_exclusion"&&(
+          meta.rightsReviewStatus!=="legal_opinion_on_file"||
+          !/^https:\/\//.test(meta.rightsEvidenceUrl||"")||
+          (meta.rightsNotes||"").trim().length<20
+        )) return fail("Official-text exclusion requires a documented legal opinion, HTTPS evidence and substantive rights notes.",422,"LEGAL_OPINION_REQUIRED",origin);
         if(commercial&&(!LICENSES.includes(license)||!meta.rightsEvidenceUrl||(meta.rightsNotes||"").trim().length<20))
           return fail("Commercial reuse requires a recognised rights basis, HTTPS evidence and substantive rights notes.",422,"RIGHTS_EVIDENCE_REQUIRED",origin);
         if(active&&(!commercial||!cur.data.is_official||!meta.rightsEvidenceUrl))
