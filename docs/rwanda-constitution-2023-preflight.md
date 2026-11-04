@@ -11,7 +11,7 @@
 - **Official publisher/custodian:** Government of Rwanda; Official Gazette managed by the Quality Assurance and Official Gazette Directorate General, Ministry of Justice.
 - **RLRC copy:** https://www.rlrc.gov.rw/fileadmin/user_upload/RLRC/Laws_of_Rwanda_v2/Domestic_laws/Laws_in_force/1._Fundamental/1.1._National_Instruments/1.1.1._Constitution/1.1.1.1._Constitution_of_the_Rep._of_Rwanda_2023.pdf
 - **Parliament copy:** https://www.parliament.gov.rw/fileadmin/user_upload/Parliament/STATUTORY_DOCUMENTS/The_Constitution_of_the_Republic_of_Rwanda.pdf
-- **Languages shown in the Gazette:** Kinyarwanda, English and French.
+- **Languages shown in the Gazette:** Kinyarwanda, English and French. Article 8 identifies all three as official languages. Article 96(4) says that where published language versions of a law conflict, the language in which the law was adopted prevails. RLRC/counsel must confirm the adoption language for this Constitution; do not assume that every translation controls equally.
 - **Structure:** the Gazette text contains 176 articles; Article 176 provides for entry into force upon presidential promulgation and publication in the Official Gazette.
 - **RLRC current-law statement:** RLRC says its Laws of Rwanda collection contains legislation currently in force and is updated daily by adding new legislation and removing repealed legislation.
 
