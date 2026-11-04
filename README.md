@@ -2,11 +2,20 @@
 
 **Every Constitution. Every Country. In Plain Language.**
 
-CARTA is a document-first legal information library. It is designed to preserve official provenance, version history and source rights while making constitutional and legal documents easier to navigate.
+CARTA is a document-first legal information platform. It preserves official provenance, amendment history, effective dates and source rights while helping readers navigate constitutional and legal documents in plain language.
+
+## Product targets
+
+- **Web:** React + Vite single-page application (current implementation).
+- **Android and iOS:** native Flutter applications (committed product requirement; separate client implementation).
+- **Shared backend:** Supabase Postgres, Supabase Auth and the `carta-api` Edge Function. Web and mobile share one legal corpus, account system, API and citation model.
+
+The native app is not yet included in the current React/Vite source tree. See [native mobile requirements](docs/native-widget-fcm.md) and the [Phase 3 legal library and mobile plan](docs/phase-3-legal-library-and-mobile.md).
 
 ## Stack
 
-- React + Vite frontend
+- React + Vite web frontend
+- Flutter/Dart native Android and iOS clients (planned)
 - Supabase Postgres, Auth and Edge Functions
 - Supabase Row Level Security for user-owned data and publication controls
 - Official publisher registry with explicit licensing and reuse metadata
@@ -18,31 +27,35 @@ Project ref: `mvcirldxcuvcuqvlmqxv`
 Region: `ap-south-1` (Mumbai)  
 API: `https://mvcirldxcuvcuqvlmqxv.supabase.co`
 
-The live project has three migrations applied and an active `carta-api` Edge Function. See [`docs/supabase-deployment.md`](docs/supabase-deployment.md) for the deployment record, configuration and outstanding release gates.
+The live backend has migrations 001–005 and an active `carta-api` Edge Function. See [Supabase deployment and production handoff](docs/supabase-deployment.md).
 
-## Local development
+## Current legal-library status
 
-1. Install Node.js 22 or later.
-2. Run `npm install`.
-3. Copy `.env.example` to `.env.local` and adjust the browser-safe Supabase values as needed.
-4. Run `npm run dev`.
-5. Before release, run `npm test`, `npm run typecheck` and `npm run build`.
+The live database currently contains eight EAC jurisdiction metadata records and eight inactive official-source candidates. It contains **zero verified legal documents and zero searchable legal-text chunks**. No source is cleared for commercial reuse, AI retrieval or offline redistribution. The current work is to confirm exact current texts and obtain rights that cover CARTA's web, mobile, search, AI and paid product uses.
 
-Never put a Supabase secret/service-role key, database password, AI provider key or payment secret in a `VITE_` variable. The publishable key is intended for frontend use and relies on the database RLS policies.
-
-## What is deployed today
-
-- Core tables for jurisdictions, official sources, legal documents, sections, searchable chunks, feed items, personal library, conversations and subscription status.
-- RLS policies and least-privilege API grants.
-- EAC country/source metadata for Burundi, DR Congo, Kenya, Rwanda, Somalia, South Sudan, Tanzania and Uganda.
-- `carta-api` public-read/authenticated-user/admin API routes.
-
-The database currently contains **metadata only**: eight jurisdictions, eight source candidates and zero verified legal documents. Source candidates remain inactive and rights review is required. The legal assistant, live feed polling and paid billing are intentionally disabled until the appropriate provider adapters, permissions and credentials are configured.
+See [EAC first-batch source review](docs/eac-first-batch.md).
 
 ## Legal-content rule
 
-Do not publish a document as current or reusable until its official publisher, exact version, commencement/effective dates, amendments, attribution, licence and commercial/AI reuse rights have been checked. In particular, Kenya Law/NCLR bulk extraction, commercial redistribution and AI use require written permission for the intended use.
+Do not publish a document as current or reusable until its official publisher, exact version, commencement/effective dates, amendments, attribution, licence and intended reuse rights have been checked. Public access is not the same as permission to reproduce, commercially redistribute, index for AI or cache offline.
 
-## Project history
+The legal assistant must only use verified, current, rights-cleared documents and must refuse when no qualifying source passage is available.
 
-The `neon/` directory and `neon.ts` preserve the original Neon-oriented backend implementation as migration history/reference. They are **not** the live backend. Supabase is the current runtime.
+## Development
+
+1. Install Node.js 22 or later.
+2. Run `npm install`.
+3. Copy `.env.example` to `.env.local` and set browser-safe Supabase values.
+4. Run `npm run dev`.
+5. Run `npm test`, `npm run typecheck` and `npm run build` before release.
+
+Never put a Supabase secret/service-role key, database password, AI provider key or payment secret in a `VITE_*` variable. The publishable key is intended for client use with RLS and server-side authorization.
+
+The Flutter app will be added as a separate native client and must use the same Supabase Auth and CARTA API. It must never connect directly to Postgres or contain server credentials.
+
+## Project links
+
+- [GitHub repository](https://github.com/Blex31/carta-world-constitutions-library)
+- [Supabase project dashboard](https://supabase.com/dashboard/project/mvcirldxcuvcuqvlmqxv)
+- [Architecture](docs/architecture.md)
+- [Phase 3 legal library + mobile plan](docs/phase-3-legal-library-and-mobile.md)
