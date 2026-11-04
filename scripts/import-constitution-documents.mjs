@@ -13,7 +13,7 @@ const getArg = (name, fallback) => {
 const apply = args.includes('--apply');
 const inputPath = path.resolve(getArg('--input', 'data/import/constitutions.json'));
 const databaseUrl = process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL;
-const validLicense = new Set(['approved', 'public_domain_verified', 'open_license', 'permission_granted']);
+const validLicense = new Set(['approved', 'public_domain_verified', 'open_license', 'permission_granted', 'official_text_exclusion']);
 const validTypes = new Set(['constitution','constitutional_amendment','act','bill','regulation','gazette_notice','court_decision','treaty','international_instrument','official_guidance','other']);
 
 function fail(message) {
@@ -51,7 +51,10 @@ function validateDocument(doc, index) {
   if (!doc.officialUrl?.startsWith('https://')) throw new Error(`${prefix}.officialUrl must be HTTPS.`);
   if (doc.documentStatus !== 'verified') throw new Error(`${prefix} must be documentStatus "verified" to enter the published corpus.`);
   if (!validLicense.has(doc.licenseStatus) || doc.commercialUseAllowed !== true) {
-    throw new Error(`${prefix} is blocked: commercial reuse must be explicitly cleared under an approved licence or verified public-domain status.`);
+    throw new Error(`${prefix} is blocked: commercial reuse must be explicitly cleared under an approved rights basis.`);
+  }
+  if (doc.licenseStatus === 'official_text_exclusion' && doc.rightsReviewStatus !== 'legal_opinion_on_file') {
+    throw new Error(`${prefix} uses an official-text exclusion but has no documented legal opinion covering CARTA's intended uses.`);
   }
   if (!doc.rightsEvidenceUrl?.startsWith('https://') || (doc.rightsNotes || '').trim().length < 20 || /example only|replace with|placeholder/i.test(doc.rightsNotes || '')) {
     throw new Error(`${prefix} needs an HTTPS rightsEvidenceUrl and at least 20 characters of rightsNotes.`);
@@ -88,6 +91,10 @@ try {
     if (!row.metadata?.rightsEvidenceUrl || (row.metadata?.rightsNotes || '').trim().length < 20) {
       throw new Error(`${doc.sourceSlug} is missing its source-level rights evidence record.`);
     }
+    if (row.license_status === 'official_text_exclusion' &&
+        (row.metadata?.rightsReviewStatus !== 'legal_opinion_on_file' || doc.rightsReviewStatus !== 'legal_opinion_on_file')) {
+      throw new Error(`${doc.sourceSlug} uses an official-text exclusion but lacks a documented legal opinion covering CARTA's intended uses.`);
+    }
     sources.set(doc.sourceSlug, row);
     const exists = await client.query('select 1 from jurisdictions where iso_code=$1', [doc.jurisdictionIso]);
     if (!exists.rowCount) throw new Error(`Jurisdiction ${doc.jurisdictionIso} is not in the jurisdiction catalogue.`);
@@ -106,7 +113,7 @@ try {
         const fullText = doc.fullText.trim();
         const digest = hash(fullText);
         const existing = await client.query('select id from legal_documents where official_url=$1 and content_sha256=$2 limit 1', [doc.officialUrl, digest]);
-        const metadata = JSON.stringify({logicalDocumentKey:doc.logicalDocumentKey||null,attributionText:doc.attributionText||null,rightsEvidenceUrl:doc.rightsEvidenceUrl,rightsNotes:doc.rightsNotes,importedAt:new Date().toISOString(),editor:doc.editor||null});
+        const metadata = JSON.stringify({logicalDocumentKey:doc.logicalDocumentKey||null,attributionText:doc.attributionText||null,rightsEvidenceUrl:doc.rightsEvidenceUrl,rightsNotes:doc.rightsNotes,rightsReviewStatus:doc.rightsReviewStatus||null,importedAt:new Date().toISOString(),editor:doc.editor||null});
         let documentId;
         let preserveIndexedSections = false;
         if (existing.rowCount) {
