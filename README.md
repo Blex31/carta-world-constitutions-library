@@ -12,10 +12,21 @@ CARTA is a document-first library for national constitutions, regional instrumen
 - Respect publisher licensing and re-use conditions. Do not scrape or redistribute sources without the necessary rights.
 - Apply least-privilege database access and row-level security to all exposed Supabase tables.
 
-## Current activation status
+## Repository transfer status
 
-The project source is being transferred from the prepared working bundle. That bundle is currently Neon-configured; Supabase compatibility work is required before deploying migrations or functions to a Supabase project.
+This repository currently contains the CARTA project overview only. The prepared 41-file working bundle remains separate and has **not yet been committed as source files**.
 
-The initial package contains application source, ingestion research, jurisdiction metadata, schema migrations and tests. It does **not** contain a complete verified corpus of every constitution. EAC sources are candidates pending confirmation of current versions and reuse rights.
+The bundle currently targets Neon. Supabase compatibility work is required before its migrations and API functions can be deployed to Supabase.
 
-See `docs/activation-status.md` and `docs/data-sources.md` once the source tree has been committed.
+## Initial package scope
+
+The prepared bundle contains the React application, ingestion research, jurisdiction metadata, schema migrations, API function source, and tests. It does **not** contain a complete verified corpus of every constitution. EAC source entries are candidates pending confirmation of current versions and reuse rights.
+
+## Useful files in the prepared bundle
+
+- `docs/activation-status.md`
+- `docs/data-sources.md`
+- `docs/eac-first-batch.md`
+- `docs/constitution-ingestion.md`
+
+No production database or legal-text corpus has been deployed from this repository yet.
