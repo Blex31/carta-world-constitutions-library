@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 
 const api = await readFile(new URL("../supabase/functions/carta-api/index.ts", import.meta.url), "utf8");
 const auth = await readFile(new URL("../src/auth.js", import.meta.url), "utf8");
+const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
 
 test("Phase 2 exposes the frontend's legal research and billing routes", () => {
   for (const route of [
@@ -66,4 +67,43 @@ test("Constitution importer blocks official-text-exclusion imports without a leg
   assert.ok(importer.includes("'official_text_exclusion'"));
   assert.ok(importer.includes("doc.rightsReviewStatus !== 'legal_opinion_on_file'"));
   assert.ok(importer.includes("row.metadata?.rightsReviewStatus !== 'legal_opinion_on_file'"));
+});
+
+
+test("Browser account flow supports password recovery and reset completion", () => {
+  assert.ok(auth.includes("resetPasswordForEmail"));
+  assert.ok(auth.includes("updateUser({ password })"));
+  assert.ok(app.includes("PASSWORD_RECOVERY"));
+  assert.ok(app.includes("Forgot your password?"));
+  assert.ok(app.includes("Confirm new password"));
+  assert.ok(app.includes("requestPasswordReset"));
+});
+
+test("Signing out clears private shelf data from the shared browser", () => {
+  assert.ok(app.includes("localStorage.removeItem('carta-bookmarks')"));
+  assert.ok(app.includes("localStorage.removeItem('carta-highlights')"));
+  assert.ok(app.includes("localStorage.removeItem('carta-notes')"));
+  assert.ok(app.includes("localStorage.removeItem('carta-downloads')"));
+  assert.ok(app.includes("localStorage.removeItem('carta-owner-user')"));
+});
+
+test("Reconstructed Phase 2 migrations include private backend objects and grants", async () => {
+  const identity = await readFile(new URL("../supabase/migrations/20261104215041_phase_2_identity_limits_scheduler.sql", import.meta.url), "utf8");
+  const hardening = await readFile(new URL("../supabase/migrations/20261104215451_phase_2_private_rpc_hardening.sql", import.meta.url), "utf8");
+  assert.ok(identity.includes("public.billing_customers"));
+  assert.ok(identity.includes("carta_on_auth_user_created"));
+  assert.ok(identity.includes("carta_validate_ingest_token"));
+  assert.ok(identity.includes("carta-official-feed-daily"));
+  assert.ok(identity.includes("to service_role"));
+  assert.ok(hardening.includes("carta_claim_chat_slot"));
+  assert.ok(hardening.includes("Service role required"));
+  assert.ok(hardening.includes("grant execute on function public.carta_claim_chat_slot(text, integer, integer)"));
+});
+
+test("Global jurisdiction seed remains metadata-only and preserves existing EAC records", async () => {
+  const seed = await readFile(new URL("../supabase/migrations/20261105103601_seed_global_jurisdiction_catalogue.sql", import.meta.url), "utf8");
+  assert.ok(seed.includes("'metadata_only'"));
+  assert.ok(seed.includes("on conflict (iso_code) do nothing"));
+  assert.ok(seed.includes("not proof that a jurisdiction's constitution has been acquired"));
+  assert.ok(!seed.includes("'verified_current'"));
 });
