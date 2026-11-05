@@ -52,6 +52,20 @@ export async function signOut() {
   if (error) throw new Error(error.message || 'Sign out failed.');
 }
 
+export async function requestPasswordReset(email, redirectTo) {
+  const { error } = await requireSupabase().auth.resetPasswordForEmail(
+    String(email || '').trim(),
+    { redirectTo }
+  );
+  if (error) throw new Error(error.message || 'Could not send a password-reset email.');
+}
+
+export async function updatePassword(password) {
+  const { data, error } = await requireSupabase().auth.updateUser({ password });
+  if (error) throw new Error(error.message || 'Could not update your password.');
+  return data.user || null;
+}
+
 export const CARTA_API_BASE = apiBase.replace(/\/$/, '');
 
 export function apiUrl(path) {
