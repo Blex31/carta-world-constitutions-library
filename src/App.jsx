@@ -289,7 +289,25 @@ export default function App(){
       setAuthBusy(false);
     }
   }
-  async function leaveAccount(){try{await signOut();setAccount(null);setBilling({isAdFree:false,status:'free',currentPeriodEnd:null,cancelAtPeriodEnd:false});showToast('You have signed out.')}catch(error){showToast(error.message||'Sign out failed.')}}
+  async function leaveAccount(){
+    try{
+      await signOut();
+      setAccount(null);
+      setBookmarks([]);
+      setHighlights([]);
+      setNotes([]);
+      setDownloads([]);
+      localStorage.removeItem('carta-bookmarks');
+      localStorage.removeItem('carta-highlights');
+      localStorage.removeItem('carta-notes');
+      localStorage.removeItem('carta-downloads');
+      localStorage.removeItem('carta-owner-user');
+      setBilling({isAdFree:false,status:'free',currentPeriodEnd:null,cancelAtPeriodEnd:false});
+      showToast('You have signed out. Your private reading shelf has been cleared from this device.');
+    }catch(error){
+      showToast(error.message||'Sign out failed.');
+    }
+  }
   function showToast(s){setToast(s);setTimeout(()=>setToast(''),3200)}
   async function askLegalQuestion(event){event?.preventDefault();const question=chatQuestion.trim();if(question.length<5||chatBusy)return;if(!account){setAuthOpen(true);showToast('Sign in to use the legal research assistant.');return}setChatQuestion('');setChatBusy(true);setChatSources([]);const userMsg={id:crypto.randomUUID(),role:'user',content:question};const assistantId=crypto.randomUUID();setChatMessages(v=>[...v,userMsg,{id:assistantId,role:'assistant',content:'',pending:true,sources:[]}]);try{const token=await getAccessToken();if(!token)throw new Error('Sign in again to start a secure legal research session.');const response=await fetch(apiUrl('legal-chat'),{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':`Bearer ${token}`},body:JSON.stringify({question,jurisdictionIso:countryId,conversationId:chatConversationId||undefined}),credentials:'omit'});if(!response.ok){const data=await response.json().catch(()=>({}));throw new Error(data.error||`Legal assistant returned ${response.status}.`)}const reader=response.body.getReader();const decoder=new TextDecoder();let buffer='';while(true){const {value,done}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});const blocks=buffer.split(/\r?\n\r?\n/);buffer=blocks.pop()||'';for(const block of blocks){const eventLine=block.split(/\r?\n/).find(line=>line.startsWith('event:'))||'';const dataLine=block.split(/\r?\n/).find(line=>line.startsWith('data:'))||'';if(!dataLine)continue;let payload;try{payload=JSON.parse(dataLine.slice(5).trim())}catch{continue}const eventName=eventLine.slice(6).trim();if(eventName==='meta'){setChatConversationId(payload.conversationId||null);setChatSources(payload.sources||[]);setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,sources:payload.sources||[]}:m))}else if(eventName==='delta'){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:m.content+(payload.text||''),pending:false}:m))}else if(eventName==='error'){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:payload.error||'The assistant could not complete this answer.',pending:false,error:true}:m))}}}setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,pending:false}:m))}catch(error){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:error.message||'The legal assistant is unavailable.',pending:false,error:true}:m))}finally{setChatBusy(false)}}
   function newChat(){setChatConversationId(null);setChatMessages([]);setChatSources([]);setChatQuestion('')}
@@ -332,7 +350,7 @@ return <div className={'app '+(night?'night':'')}>
     <section className="modal auth-modal">
       <button className="close" onClick={()=>setAuthOpen(false)}>×</button>
       <small className="overline">YOUR CARTA ACCOUNT</small>
-      <h2>{authMode==='signup'?'Create your':authMode==='forgot'?'Reset your':authMode==='update'?'Choose a new':'Welcome back to'} <em>{authMode==='forgot'||authMode==='update'?'password.':'library.'}</em></h2>
+      <h2>{authMode==='signup'?'Create your':authMode==='forgot'?'Reset your':authMode==='update'?'Choose a new':'Welcome back to your'} <em>{authMode==='forgot'||authMode==='update'?'password.':'library.'}</em></h2>
       <p>{authMode==='forgot'
         ? 'Enter your account email and we will send a secure password-reset link.'
         : authMode==='update'
