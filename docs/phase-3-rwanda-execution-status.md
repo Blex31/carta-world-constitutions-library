@@ -40,7 +40,7 @@ These controls do not approve the Rwanda document. The source continues to be bl
 4. Run importer dry-run, then import only when legal review and rights gates pass.
 5. Verify document reading, full-text search, citations and version metadata through web and API.
 6. Start Flutter client work against the same API contract; do not fork the corpus or user library.
-7. Reconstruct and check in live migrations 004 and 005; they are applied in Supabase but currently missing as SQL files from the GitHub repository.
+7. Independently validate the reconstructed migration SQL 004 and 005 against a disposable clean installation; their files are now checked into GitHub.
 
 ## Publisher request
 
