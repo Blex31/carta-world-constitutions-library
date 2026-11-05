@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { apiFetch, apiUrl, getAccessToken, getSessionUser, SUPABASE_PUBLISHABLE_KEY, signInWithEmail, signOut, signUpWithEmail } from './auth';
+import { apiFetch, apiUrl, getAccessToken, getSessionUser, requestPasswordReset, SUPABASE_PUBLISHABLE_KEY, signInWithEmail, signOut, signUpWithEmail, supabase, updatePassword } from './auth';
 
 const fallbackDocs = [
   { id: 'ke', country: 'KE', title: 'Constitution of Kenya 2010' },
@@ -53,6 +53,8 @@ export default function App(){
   const [authMode,setAuthMode]=useState('signin');
   const [authEmail,setAuthEmail]=useState('');
   const [authPassword,setAuthPassword]=useState('');
+  const [authPasswordConfirm,setAuthPasswordConfirm]=useState('');
+  const [authNotice,setAuthNotice]=useState('');
   const [authName,setAuthName]=useState('');
   const [authBusy,setAuthBusy]=useState(false);
   const [chatQuestion,setChatQuestion]=useState('');
@@ -132,6 +134,20 @@ export default function App(){
     getSessionUser().then(user=>{if(!cancelled)setAccount(user)}).catch(()=>{});
     fetch('/ad-config.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{if(!cancelled&&data)setAdConfig({enabled:data.enabled===true,clientId:data.clientId||'',homeSlot:data.homeSlot||'',searchSlot:data.searchSlot||''})}).catch(()=>{});
     return()=>{cancelled=true};
+  },[]);
+  useEffect(()=>{
+    if(!supabase)return;
+    const {data:{subscription}}=supabase.auth.onAuthStateChange((event,session)=>{
+      setAccount(session?.user||null);
+      if(event==='PASSWORD_RECOVERY'){
+        setAuthMode('update');
+        setAuthPassword('');
+        setAuthPasswordConfirm('');
+        setAuthNotice('Choose a new password for your CARTA account.');
+        setAuthOpen(true);
+      }
+    });
+    return()=>subscription.unsubscribe();
   },[]);
   // Keep the 06:00-local daily rotation accurate even when the app stays open.
   useEffect(()=>{const timer=window.setInterval(()=>setClockTick(Date.now()),60_000);return()=>window.clearInterval(timer)},[]);
@@ -231,7 +247,48 @@ export default function App(){
   async function refreshBilling(){if(!account)return;setBillingBusy(true);try{const r=await apiFetch('billing/status',{cache:'no-store'});if(!r.ok)throw new Error('Subscription status unavailable');setBilling(await r.json())}catch{showToast('Could not refresh subscription status.')}finally{setBillingBusy(false)}}
   async function checkout(){if(!account){showToast('Sign in before upgrading to CARTA Plus.');return}const popup=window.open('about:blank','carta_checkout');setBillingBusy(true);try{const r=await apiFetch('billing/checkout',{method:'POST',body:JSON.stringify({plan:paywallPlan})});const data=await r.json();if(!r.ok||!data.url)throw new Error(data.error||'Checkout unavailable');if(popup)popup.location.href=data.url;else window.location.href=data.url}catch(e){popup?.close();showToast(e.message||'Checkout could not be started.')}finally{setBillingBusy(false)}}
   async function billingPortal(){const popup=window.open('about:blank','carta_billing');try{const r=await apiFetch('billing/portal',{method:'POST'});const data=await r.json();if(!r.ok||!data.url)throw new Error(data.error||'Billing portal unavailable');if(popup)popup.location.href=data.url;else window.location.href=data.url}catch(e){popup?.close();showToast(e.message||'Subscription management unavailable.')}}
-  async function submitAuth(event){event.preventDefault();setAuthBusy(true);try{const user=authMode==='signup'?await signUpWithEmail(authEmail,authPassword,authName):await signInWithEmail(authEmail,authPassword);setAccount(user||await getSessionUser());setAuthOpen(false);setAuthPassword('');showToast(authMode==='signup'?'Your CARTA account has been created.':'Welcome back to CARTA.')}catch(error){showToast(error.message||'Authentication failed.')}finally{setAuthBusy(false)}}
+  async function submitAuth(event){
+    event.preventDefault();
+    setAuthBusy(true);
+    try{
+      if(authMode==='forgot'){
+        await requestPasswordReset(authEmail,window.location.origin);
+        setAuthMode('signin');
+        setAuthPassword('');
+        setAuthNotice('If an account uses this email address, a password-reset link will arrive shortly.');
+        showToast('Check your inbox for a password-reset link.');
+        return;
+      }
+      if(authMode==='update'){
+        if(authPassword!==authPasswordConfirm)throw new Error('Your new passwords do not match.');
+        const user=await updatePassword(authPassword);
+        setAccount(user||await getSessionUser());
+        setAuthOpen(false);
+        setAuthMode('signin');
+        setAuthPassword('');
+        setAuthPasswordConfirm('');
+        setAuthNotice('');
+        showToast('Your CARTA password has been updated.');
+        return;
+      }
+      const mode=authMode;
+      const user=mode==='signup'
+        ? await signUpWithEmail(authEmail,authPassword,authName)
+        : await signInWithEmail(authEmail,authPassword);
+      const signedInUser=user||await getSessionUser();
+      setAccount(signedInUser);
+      setAuthOpen(false);
+      setAuthPassword('');
+      setAuthPasswordConfirm('');
+      setAuthNotice('');
+      if(mode==='signup'&&!signedInUser)showToast('Account created. Check your email to confirm your address before signing in.');
+      else showToast(mode==='signup'?'Your CARTA account has been created.':'Welcome back to CARTA.');
+    }catch(error){
+      showToast(error.message||'Authentication failed.');
+    }finally{
+      setAuthBusy(false);
+    }
+  }
   async function leaveAccount(){try{await signOut();setAccount(null);setBilling({isAdFree:false,status:'free',currentPeriodEnd:null,cancelAtPeriodEnd:false});showToast('You have signed out.')}catch(error){showToast(error.message||'Sign out failed.')}}
   function showToast(s){setToast(s);setTimeout(()=>setToast(''),3200)}
   async function askLegalQuestion(event){event?.preventDefault();const question=chatQuestion.trim();if(question.length<5||chatBusy)return;if(!account){setAuthOpen(true);showToast('Sign in to use the legal research assistant.');return}setChatQuestion('');setChatBusy(true);setChatSources([]);const userMsg={id:crypto.randomUUID(),role:'user',content:question};const assistantId=crypto.randomUUID();setChatMessages(v=>[...v,userMsg,{id:assistantId,role:'assistant',content:'',pending:true,sources:[]}]);try{const token=await getAccessToken();if(!token)throw new Error('Sign in again to start a secure legal research session.');const response=await fetch(apiUrl('legal-chat'),{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':`Bearer ${token}`},body:JSON.stringify({question,jurisdictionIso:countryId,conversationId:chatConversationId||undefined}),credentials:'omit'});if(!response.ok){const data=await response.json().catch(()=>({}));throw new Error(data.error||`Legal assistant returned ${response.status}.`)}const reader=response.body.getReader();const decoder=new TextDecoder();let buffer='';while(true){const {value,done}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});const blocks=buffer.split(/\r?\n\r?\n/);buffer=blocks.pop()||'';for(const block of blocks){const eventLine=block.split(/\r?\n/).find(line=>line.startsWith('event:'))||'';const dataLine=block.split(/\r?\n/).find(line=>line.startsWith('data:'))||'';if(!dataLine)continue;let payload;try{payload=JSON.parse(dataLine.slice(5).trim())}catch{continue}const eventName=eventLine.slice(6).trim();if(eventName==='meta'){setChatConversationId(payload.conversationId||null);setChatSources(payload.sources||[]);setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,sources:payload.sources||[]}:m))}else if(eventName==='delta'){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:m.content+(payload.text||''),pending:false}:m))}else if(eventName==='error'){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:payload.error||'The assistant could not complete this answer.',pending:false,error:true}:m))}}}setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,pending:false}:m))}catch(error){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:error.message||'The legal assistant is unavailable.',pending:false,error:true}:m))}finally{setChatBusy(false)}}
@@ -271,9 +328,34 @@ return <div className={'app '+(night?'night':'')}>
   </main></div>
   <nav className="mobile-nav">{navButtons}</nav>
   {toast&&<div className="toast">✓ {toast}<button onClick={()=>setToast('')}>×</button></div>}
-  {authOpen&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setAuthOpen(false)}><section className="modal auth-modal"><button className="close" onClick={()=>setAuthOpen(false)}>×</button><small className="overline">YOUR CARTA ACCOUNT</small><h2>{authMode==='signup'?'Create your':'Welcome back to'} <em>library.</em></h2><p>Sign in to sync your reading shelf and use the citation-based legal assistant.</p><form onSubmit={submitAuth}><label>Email address<input type="email" autoComplete="email" required value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/></label>{authMode==='signup'&&<label>Your name<input autoComplete="name" required value={authName} onChange={e=>setAuthName(e.target.value)}/></label>}<label>Password<input type="password" autoComplete={authMode==='signup'?'new-password':'current-password'} minLength={8} required value={authPassword} onChange={e=>setAuthPassword(e.target.value)}/></label><button className="primary full" disabled={authBusy}>{authBusy?'Please wait…':authMode==='signup'?'Create account':'Sign in'}</button></form><button className="textLink" onClick={()=>setAuthMode(v=>v==='signup'?'signin':'signup')}>{authMode==='signup'?'Already have an account? Sign in':'New to CARTA? Create an account'}</button></section></div>}
+  {authOpen&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setAuthOpen(false)}>
+    <section className="modal auth-modal">
+      <button className="close" onClick={()=>setAuthOpen(false)}>×</button>
+      <small className="overline">YOUR CARTA ACCOUNT</small>
+      <h2>{authMode==='signup'?'Create your':authMode==='forgot'?'Reset your':authMode==='update'?'Choose a new':'Welcome back to'} <em>{authMode==='forgot'||authMode==='update'?'password.':'library.'}</em></h2>
+      <p>{authMode==='forgot'
+        ? 'Enter your account email and we will send a secure password-reset link.'
+        : authMode==='update'
+          ? 'Choose a new password to secure your CARTA account.'
+          : 'Sign in to sync your reading shelf and use the citation-based legal assistant.'}</p>
+      {authNotice&&<p className="auth-notice" role="status">{authNotice}</p>}
+      <form onSubmit={submitAuth}>
+        {authMode!=='update'&&<label>Email address<input type="email" autoComplete="email" required value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/></label>}
+        {authMode==='signup'&&<label>Your name<input autoComplete="name" required value={authName} onChange={e=>setAuthName(e.target.value)}/></label>}
+        {authMode!=='forgot'&&<label>{authMode==='update'?'New password':'Password'}<input type="password" autoComplete={authMode==='signup'||authMode==='update'?'new-password':'current-password'} minLength={8} required value={authPassword} onChange={e=>setAuthPassword(e.target.value)}/></label>}
+        {authMode==='update'&&<label>Confirm new password<input type="password" autoComplete="new-password" minLength={8} required value={authPasswordConfirm} onChange={e=>setAuthPasswordConfirm(e.target.value)}/></label>}
+        <button className="primary full" disabled={authBusy}>{authBusy?'Please wait…':authMode==='signup'?'Create account':authMode==='forgot'?'Send reset link':authMode==='update'?'Update password':'Sign in'}</button>
+      </form>
+      {authMode==='signin'&&<>
+        <button className="textLink" onClick={()=>{setAuthMode('forgot');setAuthNotice('');setAuthPassword('')}}>Forgot your password?</button>
+        <button className="textLink" onClick={()=>{setAuthMode('signup');setAuthNotice('');setAuthPassword('')}}>New to CARTA? Create an account</button>
+      </>}
+      {authMode==='signup'&&<button className="textLink" onClick={()=>{setAuthMode('signin');setAuthNotice('');setAuthPassword('')}}>Already have an account? Sign in</button>}
+      {authMode==='forgot'&&<button className="textLink" onClick={()=>{setAuthMode('signin');setAuthNotice('');setAuthPassword('')}}>Back to sign in</button>}
+    </section>
+  </div>}
   {paywallOpen&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setPaywallOpen(false)}><section className="modal paywall-modal"><button className="close" onClick={()=>setPaywallOpen(false)}>×</button><div className="plus-mark">✧</div><small className="overline">CARTA MEMBERSHIP</small><h2>Keep your reading <em>uninterrupted.</em></h2><p>CARTA Plus is an ad-free membership that helps sustain an independent, accessible public-law library.</p>{billing.isAdFree?<div className="membership-active"><span className="active-pill">PLUS ACTIVE</span><h3>Your account is ad-free.</h3><p>{billing.cancelAtPeriodEnd?'Your subscription is set to end at the close of this billing period.':'Your membership is active.'}</p>{billing.currentPeriodEnd&&<small>Current period ends {new Date(billing.currentPeriodEnd).toLocaleDateString()}</small>}<button className="primary full" onClick={billingPortal}>Manage subscription</button></div>:<><div className="plus-benefits"><p>✓ Ad-free reading when sponsor placements are enabled</p><p>✓ Support the maintenance of the legal library</p><p>✓ Keep your personal library across devices</p></div>{account?<><div className="plan-choices"><button className={paywallPlan==='monthly'?'plan active':'plan'} onClick={()=>setPaywallPlan('monthly')}><small>MONTHLY</small><strong>$2.99 <i>/ month</i></strong><span>Flexible billing</span></button><button className={paywallPlan==='yearly'?'plan active':'plan'} onClick={()=>setPaywallPlan('yearly')}><small>ANNUAL · BEST VALUE</small><strong>$24.99 <i>/ year</i></strong><span>About $2.08 per month</span></button></div><button className="primary full" disabled={billingBusy} onClick={checkout}>{billingBusy?'Opening secure checkout…':`Continue with ${paywallPlan} plan`}</button><small className="paywall-fine">Secure checkout powered by Stripe. Manage or cancel in the billing portal.</small></>:<div className="sign-in-upgrade"><p>Sign in or create an account before subscribing so your membership is connected to your personal library.</p><button className="primary full" onClick={()=>{setPaywallOpen(false);setAuthOpen(true)}}>Sign in to continue →</button></div>}</>}<div className="paywall-disclosure"><b>Advertising</b><p>Ads are disabled in this bundle until an AdSense publisher ID and ad slot IDs are configured in public/ad-config.json. CARTA Plus suppresses configured ad placements.</p><b>Payments</b><p>Subscriptions are not available until Stripe server credentials and the webhook endpoint have been configured. Keep the paywall disabled until test checkout and subscription cancellation have been verified.</p></div></section></div>}
-  {welcome&&<div className="backdrop"><section className="modal welcome-modal"><button className="close" onClick={()=>{setWelcome(false);localStorage.setItem('carta-welcomed','1')}}>×</button><div className="mark large">C<i/></div><small className="overline">WELCOME TO CARTA</small><h2>Start with <em>your country.</em></h2><p>Your daily article will come from the main constitution of the country you choose.</p><label>SELECT YOUR COUNTRY<select value={countryId} onChange={e=>chooseCountry(e.target.value)}>{countries.map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}</select></label><button className="primary full" onClick={()=>{setWelcome(false);localStorage.setItem('carta-welcomed','1')}}>Enter the library →</button><small>You can still explore international law and other countries.</small></section></div>}
+  {welcome&&<div className="backdrop"><section className="modal welcome-modal"><button className="close" onClick={()=>{setWelcome(false);localStorage.setItem('carta-welcomed','1')}}>×</button><div className="mark large">C<i/></div><small className="overline">WELCOME TO CARTA</small><h2>Start with <em>your country.</em></h2><p>Choose a jurisdiction to explore its legal catalogue. Documents appear when official texts have been verified and cleared for publication.</p><label>SELECT YOUR COUNTRY<select value={countryId} onChange={e=>chooseCountry(e.target.value)}>{countries.map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}</select></label><button className="primary full" onClick={()=>{setWelcome(false);localStorage.setItem('carta-welcomed','1')}}>Enter the library →</button><small>You can still explore international law and other countries.</small></section></div>}
   {compare&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setCompare(false)}><section className="modal compare-modal"><button className="close" onClick={()=>setCompare(false)}>×</button><small className="overline">A WIDER PERSPECTIVE</small><h2>One idea. <em>Different constitutions.</em></h2><p>These passages address related principles; they are not necessarily legally identical.</p><div className="compare-grid">{aod&&<CompareCard country={country} article={aod}/ >}{compared.map(x=><CompareCard key={x.country.id} {...x}/>)}</div><small className="disclaimer">Educational comparison only — not legal advice.</small></section></div>}
   {noteOpen&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setNoteOpen(false)}><section className="modal note-modal"><button className="close" onClick={()=>setNoteOpen(false)}>×</button><small className="overline">PERSONAL NOTES</small><h2>Add a <em>thought.</em></h2><p>{title(active)}</p><textarea rows="5" value={noteText} onChange={e=>setNoteText(e.target.value)} placeholder="What would you like to remember?"/><div className="actions end"><button className="outline" onClick={()=>setNoteOpen(false)}>Cancel</button><button className="primary" onClick={saveNote}>Save note</button></div></section></div>}
 </div>}
