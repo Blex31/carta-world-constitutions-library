@@ -14,8 +14,8 @@ This file is the current operational snapshot. It distinguishes code and infrast
 
 - Project `mvcirldxcuvcuqvlmqxv` is `ACTIVE_HEALTHY`, region `ap-south-1`.
 - `carta-api` is ACTIVE at version 9.
-- Seven migrations are recorded as applied in the live project: 001–005 plus the two official-text-exclusion rights migrations (versions 006–007).
-- The live database has 19 public tables; RLS is enabled on all 19. Three server-only tables (`chat_rate_limits`, `payment_events`, `billing_customers`) have service-role-only policies.
+- Eight migrations are recorded as applied in the live project: 001–005 plus the two official-text-exclusion rights migrations (versions 006–007).
+- The live database has 19 public tables; RLS is enabled on all 19. Its 250 global ISO jurisdiction entries are metadata-only; no document coverage is implied. Three server-only tables (`chat_rate_limits`, `payment_events`, `billing_customers`) have service-role-only policies.
 - The active `carta-official-feed-daily` cron runs at 03:10 UTC (06:10 Africa/Nairobi).
 - The source file in GitHub and deployed Edge Function version 9 were compared and are an exact content match.
 
@@ -23,7 +23,8 @@ This file is the current operational snapshot. It distinguishes code and infrast
 
 | Data | Live count |
 |---|---:|
-| EAC jurisdictions | 8 |
+| Global jurisdiction catalogue records | 250 |
+| EAC partner states included | 8 |
 | Official-source candidates | 8 |
 | Legal documents | 0 |
 | Document sections / provisions | 0 |
@@ -48,11 +49,11 @@ The live Supabase project has applied migrations 004 and 005:
 - `20261104215041_phase_2_identity_limits_scheduler`
 - `20261104215451_phase_2_private_rpc_hardening`
 
-Their SQL files are **not yet present** in `supabase/migrations/`. The repository contains migration SQL for 001–003 and 006–007, plus the legacy Neon migration history. Reconstruct and review the missing 004/005 SQL from the live database before calling the repository a complete clean-install migration source. The gap is also recorded in `supabase/migrations/README.md`.
+Their SQL files have now been reconstructed from the live schema, function definitions, policies and migration history and committed to `supabase/migrations/`. The repository now contains migration SQL for 001–007 and the global jurisdiction seed (008), plus the legacy Neon migration history. Review the reconstructed 004/005 SQL against a disposable clean-install database before calling the repository fully reproducible. The gap is also recorded in `supabase/migrations/README.md`.
 
 ## Launch blockers
 
-1. Reconstruct and commit Supabase migration SQL 004 and 005; verify a clean install from the complete migration history.
+1. Validate the reconstructed Supabase migration SQL 004 and 005 against a clean-install database.
 2. Obtain Rwanda publisher confirmation and a Rwanda-qualified legal opinion covering web/mobile display, commercial use, search, AI retrieval and offline copies.
 3. Verify the authoritative language and amendment/currentness position; then reconcile, hash and second-review all 176 articles before an importer dry-run.
 4. Import the first legally cleared document and verify reading, search, provision citations and AI retrieval.
