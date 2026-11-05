@@ -35,9 +35,9 @@ The EAC seed currently contains eight jurisdiction metadata rows and eight candi
 ## Verification state
 
 - Database migrations 001–005 are intended for the live CARTA project; see Supabase migration history.
-- The application repository contains the full prepared application source tree.
+- The application repository contains the full prepared React/Vite web source tree. Native Flutter source is a separate outstanding deliverable.
 - The initial corpus/security test suite previously passed 11/11 tests. Phase 2 static contract tests are now added.
-- Full Vite production build/typecheck and browser E2E tests still need a dependency-enabled CI runner.
+- The latest GitHub Actions run has verified the Vite production build and TypeScript typecheck. Browser end-to-end tests against a deployed production URL remain outstanding.
 - Live HTTP smoke testing must confirm `GET /health`, authenticated legal-chat refusal (with no corpus), scheduled-ingestion response, and webhook signature failures.
 - No production frontend URL is supplied yet; configure CORS and Stripe return URLs before public release.
 
@@ -51,11 +51,11 @@ API: `https://mvcirldxcuvcuqvlmqxv.supabase.co/functions/v1/carta-api`
 
 ## Verified checks (November 5, 2026)
 
-- Supabase Edge Function deployment: version 8, active.
+- Supabase Edge Function deployment: version 9, active; the deployed source matches the checked-in `supabase/functions/carta-api/index.ts` file.
 - Live HTTP smoke tests via Supabase `pg_net`: function health **200**, public library catalogue **200**, Vault-token scheduled ingestion **200**.
 - Health response: server-side service-role key is available. AI and Stripe configuration booleans are false; these providers are not yet enabled.
 - Scheduled ingestion completed with zero eligible sources, zero records seen, zero added and zero skipped. This is expected while all source candidates are inactive and rights-review-required.
-- GitHub Actions `CARTA CI`: successful run `41921618341`. Node 22 dependency install, tests, static metadata coverage audit, JavaScript syntax check, TypeScript typecheck and Vite production build all passed.
+- GitHub Actions `CARTA CI`: latest successful run [41933893557 (run #31)](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/41933893557). Node 22 dependency install, tests, static metadata coverage audit, JavaScript syntax check, TypeScript typecheck and Vite production build all passed.
 - Frontend hosting is not configured. A build artifact exists as a successful CI job output, but there is no production domain yet.
 
 ## Remaining launch gates
