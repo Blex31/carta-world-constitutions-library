@@ -27,7 +27,7 @@ Project ref: `mvcirldxcuvcuqvlmqxv`
 Region: `ap-south-1` (Mumbai)  
 API: `https://mvcirldxcuvcuqvlmqxv.supabase.co`
 
-The live backend has migrations 001–007 and an active `carta-api` Edge Function. SQL for live migrations 004–005 still needs to be reconstructed and checked into this repository for a clean-install migration history. See [Supabase deployment and production handoff](docs/supabase-deployment.md).
+The live backend has migrations 001–008 and an active `carta-api` Edge Function. The repository includes reconstructed SQL for migrations 004–005 and the applied global jurisdiction seed migration; review the reconstructed migrations against a disposable clean install before treating the repository as fully reproducible. See [Supabase deployment and production handoff](docs/supabase-deployment.md).
 
 ## Current legal-library status
 
