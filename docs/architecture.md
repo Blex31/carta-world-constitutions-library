@@ -66,7 +66,7 @@ Stripe checkout and webhook routes are a web integration and require configured 
 
 ## Current corpus gate
 
-The live database currently contains eight EAC jurisdictions and eight inactive source candidates, but zero verified legal documents and zero searchable chunks. No legal text should be presented as a verified corpus until publisher rights, current version and authoritative language have been reviewed.
+The live database currently contains 250 jurisdiction catalogue records (including eight EAC partner states) and eight inactive EAC source candidates, but zero verified legal documents and zero searchable chunks. Catalogue records are metadata only and do not establish constitutional coverage. No legal text should be presented as a verified corpus until publisher rights, current version and authoritative language have been reviewed.
 
 See:
 - [Phase 3 legal library and mobile plan](phase-3-legal-library-and-mobile.md)
