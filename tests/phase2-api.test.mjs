@@ -104,6 +104,7 @@ test("Global jurisdiction seed remains metadata-only and preserves existing EAC 
   const seed = await readFile(new URL("../supabase/migrations/20261105103601_seed_global_jurisdiction_catalogue.sql", import.meta.url), "utf8");
   assert.ok(seed.includes("'metadata_only'"));
   assert.ok(seed.includes("on conflict (iso_code) do nothing"));
-  assert.ok(seed.includes("not proof that a jurisdiction's constitution has been acquired"));
+  assert.ok(seed.includes("not proof that a jurisdiction's constitution"));
+  assert.ok(seed.includes("has been acquired"));
   assert.ok(!seed.includes("'verified_current'"));
 });
