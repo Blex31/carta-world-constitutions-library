@@ -30,13 +30,13 @@ The Supabase Edge Function has a deployment-time health route that reports only 
 
 ## Legal data and publication gate
 
-The EAC seed currently contains eight jurisdiction metadata rows and eight candidate official sources. They remain inactive and rights-review-required. There are no verified constitutional documents or searchable text chunks in the database. In particular, public accessibility is not treated as permission for bulk extraction, commercial redistribution or AI use. Each publisher must be approved individually and each text version must be checked for amendments, effective dates and provenance.
+The EAC source seed contains eight EAC partner-state records and eight candidate official sources. The live country directory now contains 250 metadata-only global jurisdiction records; these do not represent imported constitution coverage. They remain inactive and rights-review-required. There are no verified constitutional documents or searchable text chunks in the database. In particular, public accessibility is not treated as permission for bulk extraction, commercial redistribution or AI use. Each publisher must be approved individually and each text version must be checked for amendments, effective dates and provenance.
 
 ## Verification state
 
 - Database migrations 001–005 are intended for the live CARTA project; see Supabase migration history.
 - The application repository contains the full prepared React/Vite web source tree. Native Flutter source is a separate outstanding deliverable.
-- The initial corpus/security test suite previously passed 11/11 tests. Phase 2 static contract tests are now added.
+- The current local test suite contains 19 passing Node tests. GitHub Actions run #33 also passed dependency installation, tests, coverage audit, syntax checks, TypeScript typecheck and the Vite production build.
 - The latest GitHub Actions run has verified the Vite production build and TypeScript typecheck. Browser end-to-end tests against a deployed production URL remain outstanding.
 - Live HTTP smoke testing must confirm `GET /health`, authenticated legal-chat refusal (with no corpus), scheduled-ingestion response, and webhook signature failures.
 - No production frontend URL is supplied yet; configure CORS and Stripe return URLs before public release.
