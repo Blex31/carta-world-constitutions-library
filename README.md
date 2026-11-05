@@ -31,7 +31,7 @@ The live backend has migrations 001–007 and an active `carta-api` Edge Functio
 
 ## Current legal-library status
 
-The live database currently contains eight EAC jurisdiction metadata records and eight inactive official-source candidates. It contains **zero verified legal documents and zero searchable legal-text chunks**. No source is cleared for commercial reuse, AI retrieval or offline redistribution. The current work is to confirm exact current texts and obtain rights that cover CARTA's web, mobile, search, AI and paid product uses.
+The live database contains a 250-entry global jurisdiction catalogue (including eight EAC partner states) and eight inactive EAC official-source candidates. All 250 entries are metadata-only; this is not a claim that 250 constitutions have been imported or verified. It contains **zero verified legal documents and zero searchable legal-text chunks**. No source is cleared for commercial reuse, AI retrieval or offline redistribution. The current work is to confirm exact current texts and obtain rights that cover CARTA's web, mobile, search, AI and paid product uses.
 
 See [EAC first-batch source review](docs/eac-first-batch.md).
 
