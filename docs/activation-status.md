@@ -1,48 +1,69 @@
-# CARTA activation status — 4 November 2026
+# CARTA activation status — 5 November 2026
 
-## Active infrastructure
+This file is the current operational snapshot. It distinguishes code and infrastructure that are present from launch features that still need configuration or legal approval.
 
-- Dedicated Supabase project `mvcirldxcuvcuqvlmqxv` in `ap-south-1` (Mumbai), status `ACTIVE_HEALTHY`.
-- Three database migrations applied: `001_initial_carta_supabase_schema`, `002_policy_and_index_hardening`, `003_user_library_constraints`.
-- 18 public tables have RLS enabled. Two private operational tables (`chat_rate_limits`, `payment_events`) intentionally have no client-facing RLS policies and have client grants revoked.
-- Edge Function `carta-api` is deployed and ACTIVE, version 1. It manually validates bearer tokens for private routes; user-scoped requests carry the user JWT so Postgres RLS applies.
-- GitHub repository: `Blex31/carta-world-constitutions-library` (private). It currently contains the project overview README; the full source tree still needs to be imported.
+## Verified in GitHub
 
-## Database contents
+- The complete prepared **React + Vite web source tree** is in this repository (59 tracked files, including application code, Supabase function source, migrations, data seeds, tests and project documentation).
+- Main branch commit: `00c434be4d71a68884615049f30162bd6375cafc` — "Record Rwanda Phase 3 execution and launch gates".
+- Latest GitHub Actions run: [CARTA CI #31](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/41933893557), completed successfully. Dependency installation, tests, data-coverage audit, JavaScript syntax, TypeScript typecheck and production Vite build all passed.
+- The repository includes `supabase/functions/carta-api/index.ts`; its contents match the currently deployed Supabase Edge Function version 9.
+- Rwanda Phase 3 preflight, legal-rights notes, draft publisher request, EAC source review, importer and rights-control migrations are committed.
 
-- Eight EAC jurisdictions: BI, CD, KE, RW, SO, SS, TZ, UG.
-- Eight official-source candidate records. Every source is inactive, `review_required`, and not approved for commercial reuse.
-- Zero legal documents/full-text provisions imported.
+## Live Supabase infrastructure
 
-The 250-entry ISO jurisdiction catalogue in the working package is metadata only. It must not be represented as coverage of 250 constitutions.
+- Project `mvcirldxcuvcuqvlmqxv` is `ACTIVE_HEALTHY`, region `ap-south-1`.
+- `carta-api` is ACTIVE at version 9.
+- Seven migrations are recorded as applied in the live project: 001–005 plus the two official-text-exclusion rights migrations (versions 006–007).
+- The live database has 19 public tables; RLS is enabled on all 19. Three server-only tables (`chat_rate_limits`, `payment_events`, `billing_customers`) have service-role-only policies.
+- The active `carta-official-feed-daily` cron runs at 03:10 UTC (06:10 Africa/Nairobi).
+- The source file in GitHub and deployed Edge Function version 9 were compared and are an exact content match.
 
-## API capabilities
+## Current database contents
 
-Public: health, jurisdiction/library listing, verified current document listing, verified feed listing, full-text search, document lookup.  
-Authenticated: personal bookmarks, highlights, notes, saved documents and preferences; subscription-status lookup.  
-Admin: source registry review and rights-state management, gated by trusted `app_metadata.role = admin`.
+| Data | Live count |
+|---|---:|
+| EAC jurisdictions | 8 |
+| Official-source candidates | 8 |
+| Legal documents | 0 |
+| Document sections / provisions | 0 |
+| Searchable legal chunks | 0 |
+| Feed items | 0 |
+| Ingestion runs recorded | 2 |
 
-Legal chat, checkout, billing portal, payment verification and automated ingestion return explicit not-configured responses. No fake legal answers, feed items or payment entitlements are returned.
+Both recorded ingestion runs completed with zero sources eligible, zero records seen and zero records added. This is expected while every source remains inactive and rights-review-required.
 
-## Release blockers
+## Rwanda first-document status
 
-1. Import every file of the prepared working source bundle into the private GitHub repository and verify the tree/commit.
-2. Check in reproducible Supabase migration SQL and the deployed Edge Function source alongside the legacy Neon history.
-3. Install pinned dependencies in a network-enabled environment and run the full Vite build; the current environment could run 11/11 Node tests and syntax checks, but npm registry DNS resolution failed (`EAI_AGAIN`) and `vite` is not installed, so the production build is unverified.
-4. Configure production frontend hosting and exact `CARTA_ALLOWED_ORIGINS` origins.
-5. Configure Supabase Auth Site URL, redirect allow-list, production SMTP and password reset/confirmation flows.
-6. Create the first administrator through a trusted server-side app-metadata operation; never use user-editable `user_metadata` for role checks.
-7. Obtain and record legal-content reuse permissions, verify current consolidated versions and import the first approved EAC documents. Kenya Law/NCLR requires written permission for the intended automated/commercial/AI usage.
-8. Implement and configure provider-backed legal AI (with retrieved-source citations), official-feed adapters/scheduler and payment provider/webhooks before enabling those UI features.
-9. Complete RLS integration tests with real test users, Edge Function HTTP tests, dependency audit, backup/restore test and browser end-to-end QA.
+- Candidate: Constitution of the Republic of Rwanda, Official Gazette n° Special of 04/08/2023; three official language versions and 176 articles identified.
+- The RLRC and Parliament copies are recorded in `docs/rwanda-constitution-2023-preflight.md`.
+- The publisher confirmation request is drafted in `docs/rights-requests/rwanda-constitution-permission-request.md`; it has **not** been sent.
+- The live `rwanda-minijust` source remains inactive, `review_required`, and `commercial_use_allowed=false`.
+- A WIPO Law No. 055/2024 reference URL is recorded, but no `legal_opinion_on_file` review status or substantive legal-opinion notes are recorded. Article 282 has not been treated as automatic approval.
+- No Rwanda text has been downloaded, reconciled, hashed, independently reviewed, imported or indexed.
 
-## Verification record
+## Known repository reproducibility gap
 
-- `npm test`: 11/11 passing.
-- `npm run syntaxcheck`: passed. Actual TypeScript type checking is not verified; `npm run typecheck` requires the pinned local TypeScript/dependency installation.
-- Supabase migrations 001–003: applied; migration history confirmed.
-- Supabase schema inspection: RLS enabled on all 18 public tables; counts verified as 8 jurisdictions, 8 sources, 0 legal documents.
-- Security advisor: only informational no-policy findings are the two intentionally private operational tables.
-- Edge Function inventory: `carta-api` ACTIVE, version 1.
-- `npm run build`: not verified; the local container had no `node_modules`, and package installation failed because `registry.npmjs.org` DNS resolution returned `EAI_AGAIN`.
-- External HTTP smoke test could not run in this container because the Supabase hostname could not resolve from its network. Deployment status was verified through the Supabase control plane, not a direct browser request.
+The live Supabase project has applied migrations 004 and 005:
+- `20261104215041_phase_2_identity_limits_scheduler`
+- `20261104215451_phase_2_private_rpc_hardening`
+
+Their SQL files are **not yet present** in `supabase/migrations/`. The repository contains migration SQL for 001–003 and 006–007, plus the legacy Neon migration history. Reconstruct and review the missing 004/005 SQL from the live database before calling the repository a complete clean-install migration source. The gap is also recorded in `supabase/migrations/README.md`.
+
+## Launch blockers
+
+1. Reconstruct and commit Supabase migration SQL 004 and 005; verify a clean install from the complete migration history.
+2. Obtain Rwanda publisher confirmation and a Rwanda-qualified legal opinion covering web/mobile display, commercial use, search, AI retrieval and offline copies.
+3. Verify the authoritative language and amendment/currentness position; then reconcile, hash and second-review all 176 articles before an importer dry-run.
+4. Import the first legally cleared document and verify reading, search, provision citations and AI retrieval.
+5. Deploy the React/Vite frontend to a production HTTPS host. No production frontend URL or frontend deployment workflow is currently recorded in this repository.
+6. Finish production Auth configuration (site URL, redirect allow-list, SMTP/confirmation and password-reset flow) and test user isolation.
+7. Configure and test the OpenAI and Stripe provider secrets, prices and webhooks before enabling AI answers or CARTA Plus payments. The existing routes are not evidence that those providers are active.
+8. Build the separate Flutter Android and iOS clients. Mobile is a committed product requirement, but no Flutter application source, Android project or iOS project is currently in this repository.
+9. Add a committed npm lockfile and use deterministic CI installation; the current workflow uses `npm install` and there is no lockfile in the repository.
+10. Complete browser/native end-to-end tests, dependency/security review, monitoring and backup/restore testing.
+
+## Live advisor results
+
+- Supabase Security Advisor: no current security lints.
+- Supabase Performance Advisor: one RLS initialization-plan warning on the admin read policy for `ingestion_runs`, plus unused-index notices. Review the RLS warning; reassess unused indexes after meaningful production traffic exists.
