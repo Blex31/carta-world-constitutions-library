@@ -5,7 +5,7 @@
 
 ## Current verified state
 
-- Live Supabase: 8 jurisdictions, 8 candidate sources, 0 legal documents, 0 provisions, 0 searchable chunks and 0 feed items.
+- Live Supabase: 250 global jurisdiction catalogue records (including 8 EAC partner states), 8 EAC candidate sources, 0 legal documents, 0 provisions, 0 searchable chunks and 0 feed items.
 - Rwanda candidate source slug: `rwanda-minijust`.
 - Rwanda source remains `is_active=false`, `license_status=review_required`, `commercial_use_allowed=false`.
 - Candidate text: Constitution of the Republic of Rwanda, Official Gazette n° Special of 04/08/2023; RLRC and Parliament copies identified; three official language versions; 176 articles.
