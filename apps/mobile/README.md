@@ -13,7 +13,7 @@ Supabase Flutter 2.18.3 is used with flutter_secure_storage. Supabase sessions a
 
 ## Configure
 
-The Supabase URL, publishable key and API URL are compile-time configuration. The publishable key is designed for client use with RLS; never place a service-role key, database password, OpenAI key or Stripe secret in this app.
+The CARTA Supabase URL, publishable key and API URL already have client-safe defaults matching the repository root .env.example, so the checked-in debug build connects to the CARTA project without extra flags. Override them at build/run time when using another environment:
 
     cd apps/mobile
     flutter pub get
@@ -21,6 +21,8 @@ The Supabase URL, publishable key and API URL are compile-time configuration. Th
       --dart-define=CARTA_SUPABASE_URL=https://YOUR_PROJECT.supabase.co \
       --dart-define=CARTA_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_KEY \
       --dart-define=CARTA_API_BASE_URL=https://YOUR_PROJECT.supabase.co/functions/v1/carta-api
+
+The publishable key is designed for client use with RLS. Never place a service-role key, database password, OpenAI key or Stripe secret in this app.
 
 ## Generate native platform runners
 
