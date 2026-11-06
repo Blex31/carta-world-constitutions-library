@@ -308,9 +308,13 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 isThreeLine: true,
                 onTap: () {
-                  final document = widget.store.documents
-                      .where((item) => item.id == hit.documentId)
-                      .firstOrNull;
+                  LegalDocument? document;
+                  for (final candidate in widget.store.documents) {
+                    if (candidate.id == hit.documentId) {
+                      document = candidate;
+                      break;
+                    }
+                  }
                   if (document != null) {
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
