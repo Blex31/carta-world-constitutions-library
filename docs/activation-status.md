@@ -4,9 +4,9 @@ This file is the current operational snapshot. It distinguishes code and infrast
 
 ## Verified in GitHub
 
-- The complete prepared **React + Vite web source tree** is in this repository (59 tracked files, including application code, Supabase function source, migrations, data seeds, tests and project documentation).
-- Main branch was verified at commit `98bd6e4e32d549a061da3da34f533abb38c13d14` during the 6 November backend review; the living launch checklist and status notes were committed afterward.
-- Latest verified GitHub Actions run: [CARTA CI #52](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42012925535), completed successfully. Tests, coverage audit, JavaScript syntax, TypeScript typecheck and production Vite build passed. Dependency installation, tests, data-coverage audit, JavaScript syntax, TypeScript typecheck and production Vite build all passed.
+- The complete prepared **React + Vite web source tree** is in this repository (web application code, Supabase function source, nine migration files, global data seed, tests and project documentation).
+- Main branch code review was performed at commit `98bd6e4e32d549a061da3da34f533abb38c13d14`; the launch checklist and status notes were committed afterward.
+- Latest verified GitHub Actions run: [CARTA CI #54](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42013346054), completed successfully. Tests, coverage audit, JavaScript syntax, TypeScript typecheck and production Vite build passed. Dependency installation, tests, data-coverage audit, JavaScript syntax, TypeScript typecheck and production Vite build all passed.
 - The repository includes `supabase/functions/carta-api/index.ts`; its contents match the currently deployed Supabase Edge Function version 9.
 - Rwanda Phase 3 preflight, legal-rights notes, draft publisher request, EAC source review, importer and rights-control migrations are committed.
 
@@ -14,7 +14,7 @@ This file is the current operational snapshot. It distinguishes code and infrast
 
 - Project `mvcirldxcuvcuqvlmqxv` is `ACTIVE_HEALTHY`, region `ap-south-1`.
 - `carta-api` is ACTIVE at version 9.
-- Eight migrations are recorded as applied in the live project: 001–007 plus the global jurisdiction catalogue seed (`20261105103601`).
+- Nine migrations are recorded as applied in the live project: 001–007, the global jurisdiction catalogue seed (`20261105103601`) and administrator ingestion-run RLS optimization (`20261105104522`).
 - The live database has 19 public tables; RLS is enabled on all 19. Its 250 global ISO jurisdiction entries are metadata-only; no document coverage is implied. Three server-only tables (`chat_rate_limits`, `payment_events`, `billing_customers`) have service-role-only policies.
 - The active `carta-official-feed-daily` cron runs at 03:10 UTC (06:10 Africa/Nairobi).
 - The source file in GitHub and deployed Edge Function version 9 were compared and are an exact content match.
@@ -32,9 +32,9 @@ The password-reset request and new-password update flows are implemented in the 
 | Document sections / provisions | 0 |
 | Searchable legal chunks | 0 |
 | Feed items | 0 |
-| Ingestion runs recorded | 2 |
+| Ingestion runs recorded | 3 |
 
-The three recorded ingestion runs have not populated legal updates; no publisher is eligible yet because all candidate sources remain inactive and rights-review-required. This is expected while every source remains inactive and rights-review-required.
+The three recorded ingestion runs have not populated legal updates; no publisher is eligible yet because all eight candidate sources remain inactive and rights-review-required.
 
 ## Rwanda first-document status
 
@@ -73,4 +73,4 @@ The canonical phase-by-phase release tracker is [`docs/launch-checklist.md`](lau
 ## Live advisor results
 
 - Supabase Security Advisor: no current security lints.
-- Supabase Performance Advisor: one RLS initialization-plan warning on the admin read policy for `ingestion_runs`, plus unused-index notices. The previous ingestion-run RLS performance warning has been fixed by migration 009. Only informational unused-index notices remain; reassess after meaningful production traffic exists.
+- Supabase Performance Advisor: one RLS initialization-plan warning on the admin read policy for `ingestion_runs`, plus unused-index notices. The previous ingestion-run RLS performance warning has been fixed by migration 009. The advisor now reports only informational unused-index notices (29 findings); reassess after meaningful production traffic exists.
