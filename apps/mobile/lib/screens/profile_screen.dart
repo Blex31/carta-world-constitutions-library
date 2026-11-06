@@ -53,6 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         final response = await widget.supabase.auth.signUp(
           email: _email.text.trim(),
           password: _password.text,
+          emailRedirectTo: AppConfig.authRedirectUrl,
           data: {'display_name': _name.text.trim()},
         );
         _message = response.session == null
