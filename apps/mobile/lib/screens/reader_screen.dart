@@ -77,14 +77,14 @@ class _ReaderScreenState extends State<ReaderScreen> {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 8),
-                Text('Version \${widget.document.version} · \${widget.document.year}'),
+                Text('Version ${widget.document.version} · ${widget.document.year}'),
                 const SizedBox(height: 18),
                 if (detail.provisions.isEmpty)
                   const Text('This verified document has no provisions indexed yet.'),
                 for (final provision in detail.provisions) ...[
                   const Divider(height: 32),
                   Text(
-                    '\${provision.number} · \${provision.heading}',
+                    '${provision.number} · ${provision.heading}',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 12),
@@ -108,7 +108,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 const SizedBox(height: 24),
                 if (widget.document.officialUrl.isNotEmpty)
                   SelectableText(
-                    'Official source: \${widget.document.officialUrl}',
+                    'Official source: ${widget.document.officialUrl}',
                   ),
               ],
             );
