@@ -1,5 +1,5 @@
 # CARTA Phase 3 — legal library and native mobile product
-**Decision and research snapshot: 5 November 2026**
+**Decision and research snapshot: 6 November 2026**
 
 ## Product decision
 
@@ -14,11 +14,12 @@ The Flutter app should use Supabase Auth for sign-in and a bearer session for th
 
 ## Live corpus baseline
 
-Checked directly against the live Supabase project on 5 November 2026:
+Checked directly against the live Supabase project on 6 November 2026:
 
 | Data | Count |
 |---|---:|
-| Jurisdictions | 8 |
+| Global jurisdiction catalogue records | 250 |
+| EAC partner states included | 8 |
 | Official-source candidates | 8 |
 | Legal documents | 0 |
 | Document sections/provisions | 0 |
