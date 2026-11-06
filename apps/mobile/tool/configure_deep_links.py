@@ -32,6 +32,11 @@ def configure_android() -> None:
     if main is None:
         raise SystemExit("Could not find the generated MainActivity in Android manifest.")
 
+    application = root.find("application")
+    if application is None:
+        raise SystemExit("Could not find the Android application element.")
+    application.set(f"{{{ANDROID_NS}}}label", "CARTA")
+
     already_added = any(
         data.attrib.get(ANDROID_SCHEME) == "carta"
         and data.attrib.get(ANDROID_HOST) == "auth-callback"
@@ -57,6 +62,8 @@ def configure_ios() -> None:
         raise SystemExit(f"Missing generated iOS Info.plist: {IOS_PLIST}")
     with IOS_PLIST.open("rb") as handle:
         info = plistlib.load(handle)
+    info["CFBundleDisplayName"] = "CARTA"
+    info["CFBundleName"] = "CARTA"
     url_types = info.setdefault("CFBundleURLTypes", [])
     if not any(
         "carta" in item.get("CFBundleURLSchemes", [])
