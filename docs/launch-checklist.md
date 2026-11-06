@@ -166,7 +166,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 - [x] Implement the verified document reader and provision bookmarking through the existing CARTA API.
 - [x] Implement verified legal passage search and source-aware empty states.
 - [x] Implement official updates list and authenticated legal research request.
-- [~] Implement account screen and personal-library summary; full note/highlight management UI and device-sync QA remain.
+- [~] Account screen shows personal-library counts. The reader now supports bookmarking, saving a provision as a highlight and attaching a private note; a dedicated library browse/edit/delete screen and device-sync QA remain.
 - [x] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
 - [x] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
 - [x] Latest verified CI [run #30](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42217617177), commit `9f0ba00ad64499f1c74b03af8910b5ab4c6c25e7`: Flutter analysis, widget tests, Android debug APK build and artifact upload, and unsigned iOS build all passed.
@@ -237,3 +237,5 @@ Add one entry after each development session. Record the commit/run, verified re
 
 
 | 6 Nov 2026 | [Mobile CI #30](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42217617177) / `9f0ba00` | Verified Flutter analysis, widget tests, Android debug APK build and upload, and unsigned iOS build all passed; PR #3 remains draft and unmerged | CARTA project session |
+
+| 6 Nov 2026 | `1e3503e` / [Mobile CI #32](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238228649) | Added provision-level bookmark/highlight/private-note actions in the Flutter reader using the existing authenticated library API; CI queued for this commit | CARTA project session |
