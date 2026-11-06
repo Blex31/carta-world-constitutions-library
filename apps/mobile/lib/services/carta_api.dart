@@ -170,8 +170,8 @@ class CartaApi {
       headers: await _headers(jsonBody: true),
       body: jsonEncode({
         'question': question,
-        if (jurisdictionIso case final iso?) 'jurisdictionIso': iso,
-        if (conversationId case final id?) 'conversationId': id,
+        'jurisdictionIso': ?jurisdictionIso,
+        'conversationId': ?conversationId,
       }),
     );
 
