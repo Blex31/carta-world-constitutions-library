@@ -6,7 +6,7 @@ This file is the current operational snapshot. It distinguishes code and infrast
 
 - The complete prepared **React + Vite web source tree** is in this repository (web application code, Supabase function source, nine migration files, global data seed, tests and project documentation).
 - Main branch code review was performed at commit `98bd6e4e32d549a061da3da34f533abb38c13d14`; the launch checklist and status notes were committed afterward.
-- Latest verified GitHub Actions run: [CARTA CI #54](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42013346054), completed successfully. Tests, coverage audit, JavaScript syntax, TypeScript typecheck and production Vite build passed. Dependency installation, tests, data-coverage audit, JavaScript syntax, TypeScript typecheck and production Vite build all passed.
+- Latest verified GitHub Actions run: [CARTA CI #55](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42208017731), completed successfully. Dependency installation, tests, coverage audit, JavaScript syntax, TypeScript typecheck and production Vite build all passed.
 - The repository includes `supabase/functions/carta-api/index.ts`; its contents match the currently deployed Supabase Edge Function version 9.
 - Rwanda Phase 3 preflight, legal-rights notes, draft publisher request, EAC source review, importer and rights-control migrations are committed.
 
