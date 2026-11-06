@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Generate official Flutter runners, preserving the committed CARTA Dart source.
-ROOT="$(cd "$(dirname "\${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT="$(cd "$(dirname "$BASH_SOURCE")/.." && pwd)"
 cd "$ROOT"
 
 if [[ ! -d android || ! -d ios ]]; then
