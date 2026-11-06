@@ -315,12 +315,13 @@ class _SearchPageState extends State<SearchPage> {
                       break;
                     }
                   }
-                  if (document != null) {
+                  final selectedDocument = document;
+                  if (selectedDocument != null) {
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (_) => ReaderScreen(
                           api: widget.api,
-                          document: document,
+                          document: selectedDocument,
                         ),
                       ),
                     );
