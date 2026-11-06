@@ -31,7 +31,7 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 | Scheduled job | `carta-official-feed-daily` active at 03:10 UTC / 06:10 Africa/Nairobi |
 | Migrations | 9 migration records applied in the live project; SQL files are checked in |
 | Supabase advisors | No security lints; the previous ingestion-run RLS performance warning is fixed; unused-index notices remain |
-| Native apps | No Flutter project yet; Android/iOS remain a required product deliverable |
+| Native apps | Flutter Android/iOS first slice committed on `feature/flutter-native-clients`; debug APK and unsigned iOS CI build verified on run #30 |
 | Public web launch | No production frontend URL confirmed |
 
 ---
@@ -157,7 +157,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ## Phase 7 — Native Android and iOS applications
 
-**Status:** Flutter first slice committed on branch `feature/flutter-native-clients`. Platform build checks are in progress; do not merge until CI is green.
+**Status:** Flutter first slice committed on branch `feature/flutter-native-clients`. CI run #30 passed analysis, widget tests, Android debug APK build/upload and unsigned iOS build. PR #3 remains draft and unmerged.
 
 - [x] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
 - [x] Generate and commit the Android and iOS runner projects; register the `carta://auth-callback` deep link and CARTA display name in both native projects.
@@ -169,7 +169,9 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 - [~] Implement account screen and personal-library summary; full note/highlight management UI and device-sync QA remain.
 - [x] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
 - [x] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
-- [~] Latest CI: Flutter analysis and widget tests pass; iOS unsigned build passes; Android debug APK compile is still running (run #21).
+- [x] Latest verified CI [run #30](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42217617177), commit `9f0ba00ad64499f1c74b03af8910b5ab4c6c25e7`: Flutter analysis, widget tests, Android debug APK build and artifact upload, and unsigned iOS build all passed.
+- [~] Connected debug APK is available as artifact `carta-android-debug` (artifact ID `13501829591`); this is a debug build, not a signed store release.
+- [ ] Add `carta://auth-callback` to Supabase Auth Redirect URLs and verify confirmation/password recovery on physical Android and iOS devices.
 - [ ] Configure Supabase Auth redirect allow-list with `carta://auth-callback`; test confirmation and password recovery on physical devices.
 - [ ] Build a real saved-library flow for highlights and notes and verify cross-device synchronisation.
 - [!] Implement licensed offline document storage only after the API exposes explicit per-version offline/device-copy permission; include SHA-256 validation, version identifiers and stale-document warnings.
@@ -210,7 +212,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 4. **Test real user journeys:** account creation/recovery, document reading, search, bookmarks and cross-account isolation.
 5. **Activate legal AI and official updates:** only after verified, rights-cleared documents and publishers exist.
 6. **Activate CARTA Plus:** choose pricing, configure Stripe and test the complete billing lifecycle.
-7. **Build native Flutter clients:** Android/iOS, offline reading, notifications, widgets and store billing.
+7. **Complete native Flutter clients:** configure/test auth deep links, finish saved-library UI and device sync, then implement licensed offline reading, notifications, widgets, mobile billing and store release.
 8. **Run launch sign-off:** security, backup/restore, monitoring, legal and store checks.
 
 ## Blocker explanations and solutions
@@ -232,3 +234,6 @@ Add one entry after each development session. Record the commit/run, verified re
 | YYYY-MM-DD | `commit` / CI run | What was actually tested and passed | Project session |
 
 | 6 Nov 2026 | `feature/flutter-native-clients` / [mobile CI #21](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42214335106) | Committed Flutter app, 94 native runner files, `pubspec.lock`; Flutter analyze, widget tests and unsigned iOS build passed; Android debug APK compile running | CARTA project session |
+
+
+| 6 Nov 2026 | [Mobile CI #30](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42217617177) / `9f0ba00` | Verified Flutter analysis, widget tests, Android debug APK build and upload, and unsigned iOS build all passed; PR #3 remains draft and unmerged | CARTA project session |
