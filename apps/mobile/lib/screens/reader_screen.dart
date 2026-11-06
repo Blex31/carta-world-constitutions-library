@@ -83,9 +83,20 @@ class _ReaderScreenState extends State<ReaderScreen> {
                   const Text('This verified document has no provisions indexed yet.'),
                 for (final provision in detail.provisions) ...[
                   const Divider(height: 32),
-                  Text(
-                    '${provision.number} · ${provision.heading}',
-                    style: Theme.of(context).textTheme.titleLarge,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${provision.number} · ${provision.heading}',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ),
+                      IconButton(
+                        tooltip: 'Bookmark this provision',
+                        onPressed: () => _bookmark(provision),
+                        icon: const Icon(Icons.bookmark_add_outlined),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 12),
                   SelectableText(
