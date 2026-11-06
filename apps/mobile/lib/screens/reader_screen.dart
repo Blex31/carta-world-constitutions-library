@@ -21,6 +21,27 @@ class ReaderScreen extends StatefulWidget {
 class _ReaderScreenState extends State<ReaderScreen> {
   late Future<DocumentDetail> _future;
 
+  Future<void> _bookmark(LegalProvision provision) async {
+    try {
+      await widget.api.saveLibraryAction({
+        'action': 'bookmark',
+        'documentId': widget.document.id,
+        'sectionId': provision.id,
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Provision saved to your library.')),
+        );
+      }
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.toString())),
+        );
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
