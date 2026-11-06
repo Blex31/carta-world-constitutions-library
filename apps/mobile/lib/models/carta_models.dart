@@ -183,7 +183,7 @@ class UserLibrary {
 
   static List<JsonMap> _maps(dynamic value) => value is List
       ? value
-          .whereType<Map>()
+          .whereType<Map<dynamic, dynamic>>()
           .map((item) => Map<String, dynamic>.from(item))
           .toList()
       : const [];
@@ -200,7 +200,7 @@ class DocumentDetail {
             ? Map<String, dynamic>.from(json['document'] as Map)
             : const {},
         provisions: (json['sections'] as List? ?? const [])
-            .whereType<Map>()
+            .whereType<Map<dynamic, dynamic>>()
             .map(
               (item) => LegalProvision.fromJson(
                 Map<String, dynamic>.from(item),

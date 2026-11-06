@@ -97,7 +97,7 @@ class CartaApi {
     final json = await _get('/api/library');
     return (
       countries: (json['countries'] as List? ?? const [])
-          .whereType<Map>()
+          .whereType<Map<dynamic, dynamic>>()
           .map(
             (item) => Jurisdiction.fromJson(
               Map<String, dynamic>.from(item),
@@ -105,7 +105,7 @@ class CartaApi {
           )
           .toList(),
       documents: (json['documents'] as List? ?? const [])
-          .whereType<Map>()
+          .whereType<Map<dynamic, dynamic>>()
           .map(
             (item) => LegalDocument.fromJson(
               Map<String, dynamic>.from(item),
@@ -123,7 +123,7 @@ class CartaApi {
     if (country != null && country.isNotEmpty) query['country'] = country;
     final json = await _get('/api/feed', query);
     return (json['items'] as List? ?? const [])
-        .whereType<Map>()
+        .whereType<Map<dynamic, dynamic>>()
         .map(
           (item) => DailyUpdate.fromJson(
             Map<String, dynamic>.from(item),
@@ -137,7 +137,7 @@ class CartaApi {
     if (country != null && country.isNotEmpty) query['country'] = country;
     final json = await _get('/api/search', query);
     return (json['results'] as List? ?? const [])
-        .whereType<Map>()
+        .whereType<Map<dynamic, dynamic>>()
         .map(
           (item) => SearchHit.fromJson(
             Map<String, dynamic>.from(item),
@@ -170,8 +170,8 @@ class CartaApi {
       headers: await _headers(jsonBody: true),
       body: jsonEncode({
         'question': question,
-        if (jurisdictionIso != null) 'jurisdictionIso': jurisdictionIso,
-        if (conversationId != null) 'conversationId': conversationId,
+        'jurisdictionIso': ?jurisdictionIso,
+        'conversationId': ?conversationId,
       }),
     );
 
@@ -228,7 +228,7 @@ class CartaApi {
 
   List<JsonMap> _asMaps(dynamic value) => value is List
       ? value
-          .whereType<Map>()
+          .whereType<Map<dynamic, dynamic>>()
           .map((item) => Map<String, dynamic>.from(item))
           .toList()
       : const [];

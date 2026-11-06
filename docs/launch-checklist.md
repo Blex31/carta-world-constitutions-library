@@ -31,7 +31,7 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 | Scheduled job | `carta-official-feed-daily` active at 03:10 UTC / 06:10 Africa/Nairobi |
 | Migrations | 9 migration records applied in the live project; SQL files are checked in |
 | Supabase advisors | No security lints; the previous ingestion-run RLS performance warning is fixed; unused-index notices remain |
-| Native apps | No Flutter project yet; Android/iOS remain a required product deliverable |
+| Native apps | Flutter Android/iOS first slice committed on `feature/flutter-native-clients`; debug APK and unsigned iOS CI build verified on run #30 |
 | Public web launch | No production frontend URL confirmed |
 
 ---
@@ -157,23 +157,33 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ## Phase 7 — Native Android and iOS applications
 
-**Status:** Required product scope, but not yet started in this repository.
+**Status:** Flutter first slice committed on branch `feature/flutter-native-clients`. CI run #30 passed analysis, widget tests, Android debug APK build/upload and unsigned iOS build. PR #3 remains draft and unmerged.
 
-- [ ] Create the Flutter project and commit `pubspec.yaml`, Android and iOS project files.
-- [ ] Build welcome/onboarding, account creation, sign-in and account recovery.
-- [ ] Build country catalogue, legal-document library and verified document reader.
-- [ ] Build provision search, citation navigation and legal assistant.
-- [ ] Build daily updates and publisher/source details.
-- [ ] Build account, preferences and synced bookmarks/highlights/notes.
-- [ ] Connect to the same Supabase Auth and CARTA API; do not create a second legal database or embed privileged secrets.
-- [ ] Implement licensed offline document storage with SHA-256 validation, version identifiers and stale-document warnings.
-- [ ] Implement FCM for Android and APNs-backed FCM for iOS, with opt-in/out and each user's local 06:00 schedule.
-- [ ] Implement Android AppWidget and iOS WidgetKit with verified daily content and document deep links.
-- [ ] Implement mobile subscription/restore-purchase behaviour compliant with current store requirements.
+- [x] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
+- [x] Generate and commit the Android and iOS runner projects; register the `carta://auth-callback` deep link and CARTA display name in both native projects.
+- [x] Implement email sign-up/sign-in, password reset request and password update screen.
+- [x] Implement the global jurisdiction catalogue with metadata-only empty states.
+- [x] Implement the verified document reader and provision bookmarking through the existing CARTA API.
+- [x] Implement verified legal passage search and source-aware empty states.
+- [x] Implement official updates list and authenticated legal research request.
+- [~] Account screen shows personal-library counts. The reader now supports bookmarking, saving a provision as a highlight and attaching a private note; a dedicated library browse/edit/delete screen and device-sync QA remain.
+- [x] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
+- [x] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
+- [x] Latest verified CI [run #30](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42217617177), commit `9f0ba00ad64499f1c74b03af8910b5ab4c6c25e7`: Flutter analysis, widget tests, Android debug APK build and artifact upload, and unsigned iOS build all passed.
+- [~] Connected debug APK is available as artifact `carta-android-debug` (artifact ID `13501829591`); this is a debug build, not a signed store release.
+- [ ] Add `carta://auth-callback` to Supabase Auth Redirect URLs and verify confirmation/password recovery on physical Android and iOS devices.
+- [ ] Configure Supabase Auth redirect allow-list with `carta://auth-callback`; test confirmation and password recovery on physical devices.
+- [ ] Build a real saved-library flow for highlights and notes and verify cross-device synchronisation.
+- [!] Implement licensed offline document storage only after the API exposes explicit per-version offline/device-copy permission; include SHA-256 validation, version identifiers and stale-document warnings.
+- [!] Implement FCM for Android and APNs-backed FCM for iOS after Firebase project registration, APNs key upload, device-token backend and user opt-in are configured.
+- [!] Implement Android AppWidget and iOS WidgetKit after a verified daily-item feed exists and native widget extensions are generated.
+- [!] Implement mobile subscription/restore purchase using the applicable Google Play Billing and Apple In-App Purchase flow; the existing Stripe route is web-only.
 - [ ] Test on real Android and iOS devices, including low bandwidth, accessibility, text scaling, offline mode and session expiry.
-- [ ] Prepare Play Store and App Store listings, privacy disclosures, screenshots and release builds.
+- [ ] Prepare Play Store and App Store listings, privacy disclosures, screenshots, signing keys and release builds.
 
 **Acceptance:** The same account and reading shelf work on web and mobile; licensed offline content is safe; daily notifications/widgets respect timezone and user preferences.
+
+**Why the remaining mobile items are blocked and how to clear them:** see [Blockers and solutions](blockers-and-solutions.md).
 
 ## Phase 8 — Security, legal operations and launch readiness
 
@@ -202,8 +212,12 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 4. **Test real user journeys:** account creation/recovery, document reading, search, bookmarks and cross-account isolation.
 5. **Activate legal AI and official updates:** only after verified, rights-cleared documents and publishers exist.
 6. **Activate CARTA Plus:** choose pricing, configure Stripe and test the complete billing lifecycle.
-7. **Build native Flutter clients:** Android/iOS, offline reading, notifications, widgets and store billing.
+7. **Complete native Flutter clients:** configure/test auth deep links, finish saved-library UI and device sync, then implement licensed offline reading, notifications, widgets, mobile billing and store release.
 8. **Run launch sign-off:** security, backup/restore, monitoring, legal and store checks.
+
+## Blocker explanations and solutions
+
+Every pending or blocked item has a reason, a concrete solution and a test for clearing it in [docs/blockers-and-solutions.md](blockers-and-solutions.md). Update both this checklist and that document when a blocker changes.
 
 ## Update log
 
@@ -218,3 +232,10 @@ Add one entry after each development session. Record the commit/run, verified re
 | Date | Commit / CI | Verified change | Checklist updated by |
 |---|---|---|---|
 | YYYY-MM-DD | `commit` / CI run | What was actually tested and passed | Project session |
+
+| 6 Nov 2026 | `feature/flutter-native-clients` / [mobile CI #21](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42214335106) | Committed Flutter app, 94 native runner files, `pubspec.lock`; Flutter analyze, widget tests and unsigned iOS build passed; Android debug APK compile running | CARTA project session |
+
+
+| 6 Nov 2026 | [Mobile CI #30](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42217617177) / `9f0ba00` | Verified Flutter analysis, widget tests, Android debug APK build and upload, and unsigned iOS build all passed; PR #3 remains draft and unmerged | CARTA project session |
+
+| 6 Nov 2026 | `1e3503e` / [Mobile CI #32](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238228649) | Added provision-level bookmark/highlight/private-note actions in the Flutter reader using the existing authenticated library API; CI queued for this commit | CARTA project session |

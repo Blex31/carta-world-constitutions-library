@@ -13,7 +13,7 @@ Future<void> main() async {
       url: AppConfig.supabaseUrl,
       publishableKey: AppConfig.publishableKey,
       authOptions: const FlutterAuthClientOptions(
-        asyncStorage: SecureAuthStorage(),
+        localStorage: SecureAuthStorage(),
       ),
     );
   }
