@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: carta-mobile-ci-\${{ github.ref }}
+  group: carta-mobile-ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
