@@ -3,8 +3,9 @@
 **Last verified:** 6 November 2026  
 **Repository:** https://github.com/Blex31/carta-world-constitutions-library  
 **Live backend:** Supabase project `mvcirldxcuvcuqvlmqxv`  
-**Current main commit at checklist creation:** `98bd6e4e32d549a061da3da34f533abb38c13d14`  
-**Latest verified CI:** [Run #54 — passed](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42013346054)
+**Code baseline reviewed:** `98bd6e4e32d549a061da3da34f533abb38c13d14`  
+**Checklist creation commit:** `b922334102fd3abf644be8978fbd13cdc8ee00c6`  
+**Latest verified CI at checklist creation:** [Run #55 — passed](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42208017731)
 
 This is CARTA's single running checklist. Update it after each meaningful development session. Do not mark an item complete just because code exists: complete it only after the stated acceptance test has passed.
 
@@ -210,7 +211,7 @@ Add one entry after each development session. Record the commit/run, verified re
 
 | Date | Commit / CI | Verified change | Checklist updated by |
 |---|---|---|---|
-| 6 Nov 2026 | `98bd6e4` / [CI #54](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42013346054) | Baseline audit; migration recovery, global catalogue, password recovery, sign-out cleanup and RLS policy fix recorded | CARTA project session |
+| 6 Nov 2026 | `b922334` / [CI #55](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42208017731) | Created the master checklist after verifying the backend, migration state, global catalogue, password recovery and RLS policy fix | CARTA project session |
 
 ### Entry template
 
