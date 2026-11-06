@@ -27,7 +27,7 @@ Project ref: `mvcirldxcuvcuqvlmqxv`
 Region: `ap-south-1` (Mumbai)  
 API: `https://mvcirldxcuvcuqvlmqxv.supabase.co`
 
-The live backend has migrations 001–008 and an active `carta-api` Edge Function. The repository includes reconstructed SQL for migrations 004–005 and the applied global jurisdiction seed migration; review the reconstructed migrations against a disposable clean install before treating the repository as fully reproducible. See [Supabase deployment and production handoff](docs/supabase-deployment.md).
+The live backend has migrations 001–009 and an active `carta-api` Edge Function. The repository includes reconstructed SQL for migrations 004–005 and the applied global jurisdiction seed migration; review the reconstructed migrations against a disposable clean install before treating the repository as fully reproducible. See [Supabase deployment and production handoff](docs/supabase-deployment.md).
 
 ## Current legal-library status
 
@@ -54,6 +54,8 @@ Never put a Supabase secret/service-role key, database password, AI provider key
 The Flutter app will be added as a separate native client and must use the same Supabase Auth and CARTA API. It must never connect directly to Postgres or contain server credentials.
 
 ## Project links
+
+- [Master launch checklist — live completion tracker](docs/launch-checklist.md)
 
 - [GitHub repository](https://github.com/Blex31/carta-world-constitutions-library)
 - [Supabase project dashboard](https://supabase.com/dashboard/project/mvcirldxcuvcuqvlmqxv)
