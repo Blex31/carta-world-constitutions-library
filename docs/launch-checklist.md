@@ -159,17 +159,17 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 **Status:** Flutter first slice committed on branch `feature/flutter-native-clients`. Platform build checks are in progress; do not merge until CI is green.
 
-- [~] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
-- [~] Add a runner-generation script for Android and iOS and register the `carta://auth-callback` deep link in the generated platform projects.
-- [~] Implement email sign-up/sign-in, password reset and password update screens.
-- [~] Implement the global jurisdiction catalogue with metadata-only empty states.
-- [~] Implement the verified document reader and provision bookmarking through the existing CARTA API.
-- [~] Implement verified legal passage search and source-aware empty states.
-- [~] Implement official updates list and authenticated legal research request.
-- [~] Implement account screen and personal-library summary.
-- [~] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
-- [ ] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
-- [ ] Run the complete Android/iOS CI pipeline and fix all analyzer, widget-test and build findings.
+- [x] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
+- [x] Generate and commit the Android and iOS runner projects; register the `carta://auth-callback` deep link and CARTA display name in both native projects.
+- [x] Implement email sign-up/sign-in, password reset request and password update screen.
+- [x] Implement the global jurisdiction catalogue with metadata-only empty states.
+- [x] Implement the verified document reader and provision bookmarking through the existing CARTA API.
+- [x] Implement verified legal passage search and source-aware empty states.
+- [x] Implement official updates list and authenticated legal research request.
+- [~] Implement account screen and personal-library summary; full note/highlight management UI and device-sync QA remain.
+- [x] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
+- [x] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
+- [~] Latest CI: Flutter analysis and widget tests pass; iOS unsigned build passes; Android debug APK compile is still running (run #21).
 - [ ] Configure Supabase Auth redirect allow-list with `carta://auth-callback`; test confirmation and password recovery on physical devices.
 - [ ] Build a real saved-library flow for highlights and notes and verify cross-device synchronisation.
 - [!] Implement licensed offline document storage only after the API exposes explicit per-version offline/device-copy permission; include SHA-256 validation, version identifiers and stale-document warnings.
@@ -231,4 +231,4 @@ Add one entry after each development session. Record the commit/run, verified re
 |---|---|---|---|
 | YYYY-MM-DD | `commit` / CI run | What was actually tested and passed | Project session |
 
-| 6 Nov 2026 | `feature/flutter-native-clients` / mobile CI pending | Added the first Flutter Android/iOS client slice, secure Supabase session storage, shared API integration, core screens, platform bootstrap/deep-link setup and dual-platform CI workflows | CARTA project session |
+| 6 Nov 2026 | `feature/flutter-native-clients` / [mobile CI #21](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42214335106) | Committed Flutter app, 94 native runner files, `pubspec.lock`; Flutter analyze, widget tests and unsigned iOS build passed; Android debug APK compile running | CARTA project session |
