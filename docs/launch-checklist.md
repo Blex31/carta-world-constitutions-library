@@ -157,23 +157,31 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ## Phase 7 — Native Android and iOS applications
 
-**Status:** Required product scope, but not yet started in this repository.
+**Status:** Flutter first slice committed on branch `feature/flutter-native-clients`. Platform build checks are in progress; do not merge until CI is green.
 
-- [ ] Create the Flutter project and commit `pubspec.yaml`, Android and iOS project files.
-- [ ] Build welcome/onboarding, account creation, sign-in and account recovery.
-- [ ] Build country catalogue, legal-document library and verified document reader.
-- [ ] Build provision search, citation navigation and legal assistant.
-- [ ] Build daily updates and publisher/source details.
-- [ ] Build account, preferences and synced bookmarks/highlights/notes.
-- [ ] Connect to the same Supabase Auth and CARTA API; do not create a second legal database or embed privileged secrets.
-- [ ] Implement licensed offline document storage with SHA-256 validation, version identifiers and stale-document warnings.
-- [ ] Implement FCM for Android and APNs-backed FCM for iOS, with opt-in/out and each user's local 06:00 schedule.
-- [ ] Implement Android AppWidget and iOS WidgetKit with verified daily content and document deep links.
-- [ ] Implement mobile subscription/restore-purchase behaviour compliant with current store requirements.
+- [~] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
+- [~] Add a runner-generation script for Android and iOS and register the `carta://auth-callback` deep link in the generated platform projects.
+- [~] Implement email sign-up/sign-in, password reset and password update screens.
+- [~] Implement the global jurisdiction catalogue with metadata-only empty states.
+- [~] Implement the verified document reader and provision bookmarking through the existing CARTA API.
+- [~] Implement verified legal passage search and source-aware empty states.
+- [~] Implement official updates list and authenticated legal research request.
+- [~] Implement account screen and personal-library summary.
+- [~] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
+- [ ] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
+- [ ] Run the complete Android/iOS CI pipeline and fix all analyzer, widget-test and build findings.
+- [ ] Configure Supabase Auth redirect allow-list with `carta://auth-callback`; test confirmation and password recovery on physical devices.
+- [ ] Build a real saved-library flow for highlights and notes and verify cross-device synchronisation.
+- [!] Implement licensed offline document storage only after the API exposes explicit per-version offline/device-copy permission; include SHA-256 validation, version identifiers and stale-document warnings.
+- [!] Implement FCM for Android and APNs-backed FCM for iOS after Firebase project registration, APNs key upload, device-token backend and user opt-in are configured.
+- [!] Implement Android AppWidget and iOS WidgetKit after a verified daily-item feed exists and native widget extensions are generated.
+- [!] Implement mobile subscription/restore purchase using the applicable Google Play Billing and Apple In-App Purchase flow; the existing Stripe route is web-only.
 - [ ] Test on real Android and iOS devices, including low bandwidth, accessibility, text scaling, offline mode and session expiry.
-- [ ] Prepare Play Store and App Store listings, privacy disclosures, screenshots and release builds.
+- [ ] Prepare Play Store and App Store listings, privacy disclosures, screenshots, signing keys and release builds.
 
 **Acceptance:** The same account and reading shelf work on web and mobile; licensed offline content is safe; daily notifications/widgets respect timezone and user preferences.
+
+**Why the remaining mobile items are blocked and how to clear them:** see [Blockers and solutions](blockers-and-solutions.md).
 
 ## Phase 8 — Security, legal operations and launch readiness
 
@@ -205,6 +213,10 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 7. **Build native Flutter clients:** Android/iOS, offline reading, notifications, widgets and store billing.
 8. **Run launch sign-off:** security, backup/restore, monitoring, legal and store checks.
 
+## Blocker explanations and solutions
+
+Every pending or blocked item has a reason, a concrete solution and a test for clearing it in [docs/blockers-and-solutions.md](blockers-and-solutions.md). Update both this checklist and that document when a blocker changes.
+
 ## Update log
 
 Add one entry after each development session. Record the commit/run, verified result, checklist items changed and any new blockers.
@@ -218,3 +230,5 @@ Add one entry after each development session. Record the commit/run, verified re
 | Date | Commit / CI | Verified change | Checklist updated by |
 |---|---|---|---|
 | YYYY-MM-DD | `commit` / CI run | What was actually tested and passed | Project session |
+
+| 6 Nov 2026 | `feature/flutter-native-clients` / mobile CI pending | Added the first Flutter Android/iOS client slice, secure Supabase session storage, shared API integration, core screens, platform bootstrap/deep-link setup and dual-platform CI workflows | CARTA project session |
