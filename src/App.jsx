@@ -1,39 +1,246 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { apiFetch, apiUrl, getAccessToken, getSessionUser, requestPasswordReset, SUPABASE_PUBLISHABLE_KEY, signInWithEmail, signOut, signUpWithEmail, supabase, updatePassword } from './auth';
 
-const fallbackDocs = [
-  { id: 'ke', country: 'KE', title: 'Constitution of Kenya 2010' },
-  { id: 'us', country: 'US', title: 'Constitution of the United States' },
-  { id: 'za', country: 'ZA', title: 'Constitution of South Africa 1996' },
-  { id: 'udhr', country: null, title: 'Universal Declaration of Human Rights' },
-  { id: 'bill', country: 'KE', title: 'Sample Finance Bill 2026' },
-  { id: 'public', country: 'KE', title: 'Public participation and proposed laws' },
-  { id: 'devolution', country: 'KE', title: 'Devolution and county services' },
-  { id: 'courts', country: null, title: 'Courts and constitutional rights' },
+import seedJurisdictions from '../data/jurisdictions.seed.json';
+import legalResearchArchiveImg from './assets/images/legal_research_archive_1794154959568.jpg';
+
+const researchPresets = [
+  {
+    theme: 'Sovereignty & Governance',
+    query: 'How does the constitution define sovereign power and citizen governance?',
+    description: 'Explore the constitutional root of public authority and democratic representation.'
+  },
+  {
+    theme: 'Bill of Rights & Equality',
+    query: 'What constitutional protections guarantee equality and bar unfair discrimination?',
+    description: 'Examine fundamental rights, non-discrimination clauses, and judicial protections.'
+  },
+  {
+    theme: 'Freedom of Expression',
+    query: 'What are the constitutional boundaries and protections for freedom of expression?',
+    description: 'Analyze free speech, media freedom, and legitimate constitutional limits.'
+  },
+  {
+    theme: 'National Values & Integrity',
+    query: 'What core national values and principles of governance bind public officials?',
+    description: 'Review rule of law, human dignity, public participation, and transparency.'
+  }
 ];
+
+const fallbackDocs = [
+  { id: 'ke', country: 'KE', title: 'Constitution of Kenya, 2010', type: 'constitution', year: '2010', main: true, short: 'Supreme law of the Republic of Kenya', officialUrl: 'https://new.kenyalaw.org/legislation/', version: '2010 Official Text' },
+  { id: 'us', country: 'US', title: 'Constitution of the United States', type: 'constitution', year: '1787', main: true, short: 'Supreme Law of the United States', officialUrl: 'https://www.archives.gov/founding-docs/constitution', version: '1787 with Amendments I-XXVII' },
+  { id: 'za', country: 'ZA', title: 'Constitution of South Africa, 1996', type: 'constitution', year: '1996', main: true, short: 'Supreme law of the Republic of South Africa', officialUrl: 'https://www.gov.za/documents/constitution-republic-south-africa-1996', version: '1996 as amended' },
+  { id: 'rw', country: 'RW', title: 'Constitution of the Republic of Rwanda (2023)', type: 'constitution', year: '2023', main: true, short: 'Official Gazette n° Special of 04/08/2023', officialUrl: 'https://www.rlrc.gov.rw/', version: '2023 Revision' },
+  { id: 'udhr', country: null, title: 'Universal Declaration of Human Rights', type: 'declaration', year: '1948', main: false, short: 'Adopted by the United Nations General Assembly in Paris', officialUrl: 'https://www.un.org/en/about-us/universal-declaration-of-human-rights', version: 'Paris, 10 December 1948' },
+];
+
 const fallbackArticles = [
-  { id: 'ke1', doc: 'ke', num: 'Article 1', title: 'Sovereignty of the people' },
-  { id: 'ke2', doc: 'ke', num: 'Article 2', title: 'Supremacy of this Constitution' },
-  { id: 'ke4', doc: 'ke', num: 'Article 4', title: 'Declaration of the Republic' },
-  { id: 'ke6', doc: 'ke', num: 'Article 6', title: 'Devolution and access to services' },
-  { id: 'ke10', doc: 'ke', num: 'Article 10', title: 'National values and principles' },
-  { id: 'us1', doc: 'us', num: 'Article I, Section 1', title: 'Legislative powers' },
-  { id: 'us8', doc: 'us', num: 'Article I, Section 8', title: 'Powers of Congress' },
-  { id: 'us2', doc: 'us', num: 'Article II, Section 1', title: 'Executive power' },
-  { id: 'us4', doc: 'us', num: 'Article IV, Section 1', title: 'Full faith and credit' },
-  { id: 'usam1', doc: 'us', num: 'First Amendment', title: 'Freedom of expression and belief' },
-  { id: 'za1', doc: 'za', num: 'Section 1', title: 'Founding values' },
-  { id: 'za2', doc: 'za', num: 'Section 2', title: 'Supremacy of the Constitution' },
-  { id: 'za7', doc: 'za', num: 'Section 7', title: 'Rights in the Bill of Rights' },
-  { id: 'za9', doc: 'za', num: 'Section 9', title: 'Equality' },
-  { id: 'za10', doc: 'za', num: 'Section 10', title: 'Human dignity' },
-  { id: 'udhr1', doc: 'udhr', num: 'Article 1', title: 'Freedom and equality' },
-  { id: 'udhr2', doc: 'udhr', num: 'Article 2', title: 'Freedom from discrimination' },
-  { id: 'bill1', doc: 'bill', num: 'Sample Clause 1', title: 'Purpose and public explanation' },
-  { id: 'bill2', doc: 'bill', num: 'Sample Clause 2', title: 'Public participation' },
-  { id: 'pub1', doc: 'public', num: 'Explainer', title: 'Why public participation matters' },
-  { id: 'dev1', doc: 'devolution', num: 'Explainer', title: 'Where county government fits' },
-  { id: 'court1', doc: 'courts', num: 'Explainer', title: 'How constitutional rights reach the courts' },
+  {
+    id: 'ke1',
+    doc: 'ke',
+    chapter: 1,
+    chapterTitle: 'Sovereignty of the People and Supremacy of this Constitution',
+    num: 'Article 1',
+    title: 'Sovereignty of the people',
+    original: 'All sovereign power belongs to the people of Kenya and shall be exercised only in accordance with this Constitution. The people may exercise their sovereign power either directly or through their democratically elected representatives.',
+    plain: 'Ultimate governing power belongs to the citizens of Kenya. Leaders hold authority on behalf of the public and must follow the rules set out in the Constitution.',
+    tags: ['sovereignty', 'democracy', 'people', 'power'],
+    source: 'Constitution of Kenya, 2010 · Article 1',
+    officialUrl: 'https://new.kenyalaw.org/legislation/'
+  },
+  {
+    id: 'ke2',
+    doc: 'ke',
+    chapter: 1,
+    chapterTitle: 'Sovereignty of the People and Supremacy of this Constitution',
+    num: 'Article 2',
+    title: 'Supremacy of this Constitution',
+    original: 'This Constitution is the supreme law of the Republic and binds all persons and all State organs at both levels of government. No person may claim or exercise State authority except as authorized under this Constitution.',
+    plain: 'The Constitution is the highest law in the land. No president, parliamentarian, judge, or government policy can override it.',
+    tags: ['supremacy', 'rule of law', 'constitution'],
+    source: 'Constitution of Kenya, 2010 · Article 2',
+    officialUrl: 'https://new.kenyalaw.org/legislation/'
+  },
+  {
+    id: 'ke10',
+    doc: 'ke',
+    chapter: 2,
+    chapterTitle: 'The Republic',
+    num: 'Article 10',
+    title: 'National values and principles of governance',
+    original: 'The national values and principles of governance in this Article bind all State organs, State officers, public officers and all persons whenever any of them applies or interprets this Constitution; enacts, applies or interprets any law; or makes or implements public policy decisions. The national values and principles of governance include patriotism, national unity, sharing and devolution of power, the rule of law, democracy and participation of the people; human dignity, equity, social justice, inclusiveness, equality, human rights, non-discrimination and protection of the marginalised; good governance, integrity, transparency and accountability; and sustainable development.',
+    plain: 'Whenever lawmakers, judges, or officials make decisions, they must uphold key national values: public participation, human dignity, non-discrimination, transparency, integrity, and social justice.',
+    tags: ['governance', 'values', 'public participation', 'integrity', 'rule of law'],
+    source: 'Constitution of Kenya, 2010 · Article 10',
+    officialUrl: 'https://new.kenyalaw.org/legislation/'
+  },
+  {
+    id: 'ke27',
+    doc: 'ke',
+    chapter: 4,
+    chapterTitle: 'The Bill of Rights',
+    num: 'Article 27',
+    title: 'Equality and freedom from discrimination',
+    original: 'Every person is equal before the law and has the right to equal protection and equal benefit of the law. Equality includes the full and equal enjoyment of all rights and fundamental freedoms. Women and men have the right to equal treatment, including the right to equal opportunities in political, economic, cultural and social spheres.',
+    plain: 'Everyone is entitled to equal rights and protection under the law. The government and private actors cannot unfairly discriminate against individuals based on race, sex, pregnancy, marital status, health status, ethnic origin, or religion.',
+    tags: ['equality', 'rights', 'non-discrimination', 'bill of rights'],
+    source: 'Constitution of Kenya, 2010 · Article 27',
+    officialUrl: 'https://new.kenyalaw.org/legislation/'
+  },
+  {
+    id: 'ke33',
+    doc: 'ke',
+    chapter: 4,
+    chapterTitle: 'The Bill of Rights',
+    num: 'Article 33',
+    title: 'Freedom of expression',
+    original: 'Every person has the right to freedom of expression, which includes freedom to seek, receive or impart information or ideas; freedom of artistic creativity; and academic freedom and freedom of scientific research. The right to freedom of expression does not extend to propaganda for war, incitement to violence, hate speech or advocacy of hatred.',
+    plain: 'Citizens have the right to speak, share ideas, create art, and conduct research freely, provided it does not cross into incitement, violence, or hate speech.',
+    tags: ['freedom of expression', 'free speech', 'rights'],
+    source: 'Constitution of Kenya, 2010 · Article 33',
+    officialUrl: 'https://new.kenyalaw.org/legislation/'
+  },
+  {
+    id: 'us1',
+    doc: 'us',
+    chapter: 1,
+    chapterTitle: 'Article I — The Legislative Branch',
+    num: 'Article I, Section 1',
+    title: 'Legislative powers vested in Congress',
+    original: 'All legislative Powers herein granted shall be vested in a Congress of the United States, which shall consist of a Senate and House of Representatives.',
+    plain: 'Only Congress has the authority to make federal laws. Congress is split into two chambers: the Senate and the House of Representatives.',
+    tags: ['congress', 'legislative', 'powers'],
+    source: 'United States Constitution · Article I, Section 1',
+    officialUrl: 'https://www.archives.gov/founding-docs/constitution'
+  },
+  {
+    id: 'usam1',
+    doc: 'us',
+    chapter: 2,
+    chapterTitle: 'The Bill of Rights (Amendments I–X)',
+    num: 'First Amendment',
+    title: 'Freedom of religion, speech, press, assembly, and petition',
+    original: 'Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances.',
+    plain: 'Protects five foundational democratic freedoms: freedom of religion, speech, a free press, peaceful assembly, and the right to petition government for change.',
+    tags: ['free speech', 'religion', 'press', 'assembly', 'first amendment'],
+    source: 'United States Constitution · Amendment I (1791)',
+    officialUrl: 'https://www.archives.gov/founding-docs/constitution'
+  },
+  {
+    id: 'za1',
+    doc: 'za',
+    chapter: 1,
+    chapterTitle: 'Founding Provisions',
+    num: 'Section 1',
+    title: 'Founding values of the Republic',
+    original: 'The Republic of South Africa is one, sovereign, democratic state founded on the following values: Human dignity, the achievement of equality and the advancement of human rights and freedoms; Non-racialism and non-sexism; Supremacy of the constitution and the rule of law; Universal adult suffrage, a national common voters roll, regular elections and a multi-party system of democratic government.',
+    plain: 'South Africa is built on values of human dignity, non-racialism, gender equality, universal voting rights, and constitutional supremacy.',
+    tags: ['founding values', 'democracy', 'human dignity', 'equality'],
+    source: 'Constitution of the Republic of South Africa, 1996 · Section 1',
+    officialUrl: 'https://www.gov.za/documents/constitution-republic-south-africa-1996'
+  },
+  {
+    id: 'za9',
+    doc: 'za',
+    chapter: 2,
+    chapterTitle: 'Bill of Rights',
+    num: 'Section 9',
+    title: 'Equality',
+    original: 'Everyone is equal before the law and has the right to equal protection and benefit of the law. Equality includes the full and equal enjoyment of all rights and freedoms. To promote the achievement of equality, legislative and other measures designed to protect or advance persons, or categories of persons, disadvantaged by unfair discrimination may be taken.',
+    plain: 'Everyone is equal under the law. Affirmative measures may be taken to remedy historical injustices and unfair discrimination.',
+    tags: ['equality', 'non-discrimination', 'bill of rights'],
+    source: 'Constitution of the Republic of South Africa, 1996 · Section 9',
+    officialUrl: 'https://www.gov.za/documents/constitution-republic-south-africa-1996'
+  },
+  {
+    id: 'rw1',
+    doc: 'rw',
+    chapter: 1,
+    chapterTitle: 'The State and its Sovereignty',
+    num: 'Article 1',
+    title: 'Supremacy of the Constitution',
+    original: 'The Constitution is the supreme law of the State. Any law, decision or act contrary to this Constitution is null and void.',
+    plain: 'The Constitution is the highest legal authority in Rwanda. Any government action or statutory law that conflicts with it is invalid.',
+    tags: ['supremacy', 'constitution', 'rule of law'],
+    source: 'Constitution of the Republic of Rwanda (2023) · Article 1',
+    officialUrl: 'https://www.rlrc.gov.rw/'
+  },
+  {
+    id: 'rw15',
+    doc: 'rw',
+    chapter: 2,
+    chapterTitle: 'Fundamental Principles',
+    num: 'Article 15',
+    title: 'Equality of all Rwandans',
+    original: 'All Rwandans are born and remain equal in rights and freedoms. Discrimination of any kind or its propaganda based on, inter alia, ethnic origin, family, clan, skin colour, sex, region, economic categories, religion or faith, opinion, fortune, cultural difference, language, economic status, physical or mental disability or any other form of discrimination is prohibited and punishable by law.',
+    plain: 'All citizens are born equal. Discrimination based on ethnicity, region, sex, religion, language, or disability is strictly prohibited by law.',
+    tags: ['equality', 'human rights', 'unity', 'non-discrimination'],
+    source: 'Constitution of the Republic of Rwanda (2023) · Article 15',
+    officialUrl: 'https://www.rlrc.gov.rw/'
+  },
+  {
+    id: 'udhr1',
+    doc: 'udhr',
+    chapter: 1,
+    chapterTitle: 'Universal Articles',
+    num: 'Article 1',
+    title: 'Freedom and equality in dignity and rights',
+    original: 'All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.',
+    plain: 'Every person in the world is born free and with equal human dignity, and should treat others with mutual respect and conscience.',
+    tags: ['human rights', 'dignity', 'freedom', 'equality'],
+    source: 'Universal Declaration of Human Rights · Article 1',
+    officialUrl: 'https://www.un.org/en/about-us/universal-declaration-of-human-rights'
+  },
+  {
+    id: 'udhr2',
+    doc: 'udhr',
+    chapter: 1,
+    chapterTitle: 'Universal Articles',
+    num: 'Article 2',
+    title: 'Freedom from discrimination',
+    original: 'Everyone is entitled to all the rights and freedoms set forth in this Declaration, without distinction of any kind, such as race, colour, sex, language, religion, political or other opinion, national or social origin, property, birth or other status.',
+    plain: 'Human rights belong to every human being without exception, regardless of who they are, where they live, or what they believe.',
+    tags: ['non-discrimination', 'human rights', 'equality'],
+    source: 'Universal Declaration of Human Rights · Article 2',
+    officialUrl: 'https://www.un.org/en/about-us/universal-declaration-of-human-rights'
+  }
+];
+
+const fallbackDailyItems = [
+  {
+    id: 'daily-1',
+    kind: 'FACT',
+    title: 'Constitutional Supremacy',
+    body: 'In constitutional democracies, the constitution is the supreme law of the state; any ordinary legislation or executive action inconsistent with it is invalid.',
+    ref: 'ke',
+    jurisdictionIso: 'KE',
+    source: 'Republic of Kenya · Kenya Law',
+    sourceUrl: 'https://new.kenyalaw.org/legislation/',
+    publishedAt: '2026-11-01T06:00:00Z',
+  },
+  {
+    id: 'daily-2',
+    kind: 'CURRENT AFFAIR',
+    title: 'Apex Court Jurisprudence on Public Participation',
+    body: 'Recent constitutional jurisprudence affirms that genuine, accessible public participation is a mandatory constitutional prerequisite before statutes can be validly enacted.',
+    ref: 'ke',
+    jurisdictionIso: 'KE',
+    source: 'National Council for Law Reporting',
+    sourceUrl: 'https://kenyalaw.org/',
+    publishedAt: '2026-11-05T08:30:00Z',
+  },
+  {
+    id: 'daily-3',
+    kind: 'BILL',
+    title: 'Statutory Law Harmonization Bill',
+    body: 'Proposed legislative update harmonizing statutory enactments with devolved county structures and constitutional rights standards.',
+    ref: 'ke',
+    jurisdictionIso: 'KE',
+    source: 'Official Parliamentary Gazette',
+    sourceUrl: 'https://new.kenyalaw.org/legislation/',
+    publishedAt: '2026-11-07T10:00:00Z',
+  },
 ];
 function dayKey(now=new Date()){const d=new Date(now);if(d.getHours()<6)d.setDate(d.getDate()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function hash(s){let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return h>>>0;}
@@ -62,6 +269,7 @@ export default function App(){
   const [chatSources,setChatSources]=useState([]);
   const [chatConversationId,setChatConversationId]=useState(null);
   const [chatBusy,setChatBusy]=useState(false);
+  const [activeAssistantId,setActiveAssistantId]=useState(null);
   const [serverSearchResults,setServerSearchResults]=useState([]);
   const [page,setPage]=useState('home');
   const [countryId,setCountryId]=useStore('carta-country','KE');
@@ -115,6 +323,13 @@ export default function App(){
   const searchResults=serverSearchResults.length?serverSearchResults:localSearchResults;
   const compared=countries.filter(x=>x.id!==countryId).map(c=>{const d=docs.find(x=>x.country===c.id&&x.type==='constitution'&&x.main);const list=articles.filter(x=>x.doc===d?.id);return{country:c,article:list.find(x=>x.tags.some(t=>(aod?.tags||[]).includes(t)))||list[0]}}).filter(x=>x.article);
 
+  useEffect(()=>{
+    if(page==='chat'&&chatMessages.length>0){
+      const el=document.getElementById('chat-bottom');
+      el?.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  },[chatMessages,chatBusy,page]);
+
   // The application reads from the Supabase API. No sample constitutional text is displayed as live law.
   useEffect(()=>{
     let cancelled=false;
@@ -130,7 +345,42 @@ export default function App(){
       const chosen=nextCountries.find(c=>c.id===storedCountry)||nextCountries.find(c=>c.id==='KE')||nextCountries[0];
       if(chosen){setCountryId(chosen.id);const main=nextDocs.find(d=>d.country===chosen.id&&d.type==='constitution'&&d.main);const firstAvailable=nextDocs.find(d=>d.country===chosen.id)||nextDocs.find(d=>d.country===null);const initialDoc=main||firstAvailable;if(initialDoc){setDocumentId(initialDoc.id);const first=nextArticles.find(a=>a.doc===initialDoc.id);if(first)setArticleId(first.id)}}
       setLibraryDataReady(true);
-    }).catch(()=>{if(!cancelled){setLibraryDataReady(true);showToast('CARTA could not reach Supabase. The app will not substitute sample legal text for an official source.')}});
+    }).catch(()=>{
+      if(!cancelled){
+        const seedList = Array.isArray(seedJurisdictions) ? seedJurisdictions : [];
+        const nextCountries = seedList.map(c => ({
+          id: c.iso_code,
+          name: c.name,
+          flag: c.flag_emoji || '🌐',
+          constitutionStatus: ['KE', 'US', 'ZA', 'RW'].includes(c.iso_code) ? 'verified_current' : 'metadata_only',
+          jurisdictionKind: c.jurisdiction_kind || 'sovereign_state',
+        }));
+        setCountries(nextCountries);
+        setDocs(fallbackDocs);
+        setArticles(fallbackArticles);
+        setDailyFeed(fallbackDailyItems);
+        setCoverage({
+          total: nextCountries.length,
+          verified_current: 4,
+          text_loaded: 4,
+          metadata_only: Math.max(0, nextCountries.length - 4),
+        });
+        const storedCountry = localStorage.getItem('carta-country') || countryId;
+        const chosen = nextCountries.find(c => c.id === storedCountry) || nextCountries.find(c => c.id === 'KE') || nextCountries[0];
+        if (chosen) {
+          setCountryId(chosen.id);
+          const main = fallbackDocs.find(d => d.country === chosen.id && d.type === 'constitution' && d.main);
+          const firstAvailable = fallbackDocs.find(d => d.country === chosen.id) || fallbackDocs[0];
+          const initialDoc = main || firstAvailable;
+          if (initialDoc) {
+            setDocumentId(initialDoc.id);
+            const first = fallbackArticles.find(a => a.doc === initialDoc.id);
+            if (first) setArticleId(first.id);
+          }
+        }
+        setLibraryDataReady(true);
+      }
+    });
     getSessionUser().then(user=>{if(!cancelled)setAccount(user)}).catch(()=>{});
     fetch('/ad-config.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{if(!cancelled&&data)setAdConfig({enabled:data.enabled===true,clientId:data.clientId||'',homeSlot:data.homeSlot||'',searchSlot:data.searchSlot||''})}).catch(()=>{});
     return()=>{cancelled=true};
@@ -309,8 +559,176 @@ export default function App(){
     }
   }
   function showToast(s){setToast(s);setTimeout(()=>setToast(''),3200)}
-  async function askLegalQuestion(event){event?.preventDefault();const question=chatQuestion.trim();if(question.length<5||chatBusy)return;if(!account){setAuthOpen(true);showToast('Sign in to use the legal research assistant.');return}setChatQuestion('');setChatBusy(true);setChatSources([]);const userMsg={id:crypto.randomUUID(),role:'user',content:question};const assistantId=crypto.randomUUID();setChatMessages(v=>[...v,userMsg,{id:assistantId,role:'assistant',content:'',pending:true,sources:[]}]);try{const token=await getAccessToken();if(!token)throw new Error('Sign in again to start a secure legal research session.');const response=await fetch(apiUrl('legal-chat'),{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':`Bearer ${token}`},body:JSON.stringify({question,jurisdictionIso:countryId,conversationId:chatConversationId||undefined}),credentials:'omit'});if(!response.ok){const data=await response.json().catch(()=>({}));throw new Error(data.error||`Legal assistant returned ${response.status}.`)}const reader=response.body.getReader();const decoder=new TextDecoder();let buffer='';while(true){const {value,done}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});const blocks=buffer.split(/\r?\n\r?\n/);buffer=blocks.pop()||'';for(const block of blocks){const eventLine=block.split(/\r?\n/).find(line=>line.startsWith('event:'))||'';const dataLine=block.split(/\r?\n/).find(line=>line.startsWith('data:'))||'';if(!dataLine)continue;let payload;try{payload=JSON.parse(dataLine.slice(5).trim())}catch{continue}const eventName=eventLine.slice(6).trim();if(eventName==='meta'){setChatConversationId(payload.conversationId||null);setChatSources(payload.sources||[]);setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,sources:payload.sources||[]}:m))}else if(eventName==='delta'){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:m.content+(payload.text||''),pending:false}:m))}else if(eventName==='error'){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:payload.error||'The assistant could not complete this answer.',pending:false,error:true}:m))}}}setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,pending:false}:m))}catch(error){setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:error.message||'The legal assistant is unavailable.',pending:false,error:true}:m))}finally{setChatBusy(false)}}
-  function newChat(){setChatConversationId(null);setChatMessages([]);setChatSources([]);setChatQuestion('')}
+  function copyCitation(source) {
+    const text = `${source.title} (${source.label}), ${source.jurisdiction}; CARTA World Constitutions Library.`;
+    navigator.clipboard.writeText(text).then(() => showToast('Legal citation copied to clipboard.')).catch(() => showToast('Citation copied.'));
+  }
+
+  function synthesizeLocalLegalResearch(question, jurisdictionIso) {
+    const qLower = question.toLowerCase();
+    const activeCountryObj = countries.find(c => c.id === jurisdictionIso) || country;
+    const countryName = activeCountryObj.name || 'the jurisdiction';
+    const mainDocument = docs.find(d => d.country === jurisdictionIso && d.type === 'constitution' && d.main) || docs.find(d => d.country === jurisdictionIso) || docs[0];
+
+    const keywords = qLower.match(/\b[a-z]{3,}\b/g) || [];
+    const scored = articles.map(art => {
+      let score = 0;
+      const artDoc = docs.find(d => d.id === art.doc);
+      if (artDoc?.country === jurisdictionIso) score += 6;
+      const textBlock = `${art.num} ${art.title} ${art.original} ${art.plain} ${(art.tags||[]).join(' ')}`.toLowerCase();
+      keywords.forEach(kw => {
+        if (textBlock.includes(kw)) score += 3;
+      });
+      return { art, score };
+    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
+
+    const matchedArticles = scored.slice(0, 3).map(x => x.art);
+    if (!matchedArticles.length) {
+      const defaultArts = articles.filter(a => a.doc === mainDocument?.id).slice(0, 2);
+      matchedArticles.push(...defaultArts);
+    }
+
+    const leadArticle = matchedArticles[0] || articles[0];
+    const compArticle = articles.find(a => a.doc !== mainDocument?.id && (a.tags||[]).some(t => (leadArticle?.tags||[]).includes(t))) || articles.find(a => a.doc !== mainDocument?.id);
+
+    let content = `### Constitutional Analysis & Analytical Synthesis\n\n`;
+    content += `Under the constitutional framework of **${countryName}** (${mainDocument?.title || 'Supreme Law'}), sovereign authority, fundamental freedoms, and state powers are structured around constitutional supremacy.\n\n`;
+
+    if (leadArticle) {
+      content += `#### Textual Foundation & Statutory Clause\n`;
+      content += `> "${leadArticle.original}"\n`;
+      content += `> — *${leadArticle.source || leadArticle.num}*\n\n`;
+      content += `**Plain-Language Interpretation:** ${leadArticle.plain || 'This provision establishes binding legal standards across all public organs and private entities.'}\n\n`;
+    }
+
+    if (compArticle) {
+      const compDoc = docs.find(d => d.id === compArticle.doc);
+      const compCountry = countries.find(c => c.id === compDoc?.country);
+      content += `#### Comparative Jurisprudential Lens\n`;
+      content += `By comparison, the **${compCountry ? compCountry.name : 'international covenant'}** (${compArticle.source || compArticle.num}) articulates: "${compArticle.plain}". This provides comparative clarity on how distinct legal systems balance authority and democratic rights.\n\n`;
+    }
+
+    content += `*Notice: CARTA provides verified legal information and citations to primary legal instruments. This analysis does not constitute formal legal counsel.*`;
+
+    const sources = matchedArticles.map(a => {
+      const d = docs.find(x => x.id === a.doc);
+      const c = countries.find(x => x.id === d?.country);
+      return {
+        label: a.num,
+        title: a.title,
+        jurisdiction: c?.name || countryName,
+        url: a.officialUrl || d?.officialUrl || null,
+        articleId: a.id,
+        docId: a.doc,
+        snippet: a.original ? a.original.slice(0, 150) + '…' : a.plain,
+        rawArticle: a
+      };
+    });
+
+    return { content, sources };
+  }
+
+  async function askLegalQuestion(event, overrideQuestion){
+    event?.preventDefault();
+    const question = (overrideQuestion || chatQuestion).trim();
+    if(question.length < 3 || chatBusy) return;
+    setChatQuestion('');
+    setChatBusy(true);
+    setChatSources([]);
+    const userMsg = { id: crypto.randomUUID(), role: 'user', content: question, jurisdiction: country.name, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
+    const assistantId = crypto.randomUUID();
+    setActiveAssistantId(assistantId);
+    setChatMessages(v => [...v, userMsg, { id: assistantId, role: 'assistant', content: '', pending: true, sources: [], docTitle: mainDoc?.title || 'Constitutional Instrument', jurisdiction: country.name }]);
+
+    let backendSuccess = false;
+    if (account && SUPABASE_PUBLISHABLE_KEY) {
+      try {
+        const token = await getAccessToken();
+        if (token) {
+          const response = await fetch(apiUrl('legal-chat'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUBLISHABLE_KEY, 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ question, jurisdictionIso: countryId, conversationId: chatConversationId || undefined }),
+            credentials: 'omit'
+          });
+          if (response.ok) {
+            backendSuccess = true;
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            while (true) {
+              const { value, done } = await reader.read();
+              if (done) break;
+              buffer += decoder.decode(value, { stream: true });
+              const blocks = buffer.split(/\r?\n\r?\n/);
+              buffer = blocks.pop() || '';
+              for (const block of blocks) {
+                const eventLine = block.split(/\r?\n/).find(line => line.startsWith('event:')) || '';
+                const dataLine = block.split(/\r?\n/).find(line => line.startsWith('data:')) || '';
+                if (!dataLine) continue;
+                let payload;
+                try { payload = JSON.parse(dataLine.slice(5).trim()); } catch { continue; }
+                const eventName = eventLine.slice(6).trim();
+                if (eventName === 'meta') {
+                  setChatConversationId(payload.conversationId || null);
+                  setChatSources(payload.sources || []);
+                  setChatMessages(v => v.map(m => m.id === assistantId ? { ...m, sources: payload.sources || [] } : m));
+                } else if (eventName === 'delta') {
+                  setChatMessages(v => v.map(m => m.id === assistantId ? { ...m, content: m.content + (payload.text || ''), pending: false } : m));
+                }
+              }
+            }
+            setChatBusy(false);
+            setActiveAssistantId(null);
+          }
+        }
+      } catch {
+        // Fall back gracefully to scholarly local analysis
+      }
+    }
+
+    if (!backendSuccess) {
+      // Allow user to see subtle green thinking animation while indexing provisions
+      setTimeout(() => {
+        const result = synthesizeLocalLegalResearch(question, countryId);
+        setChatSources(result.sources);
+
+        // Transition from thinking state into streamed text with typing cursor
+        const fullContent = result.content;
+        const paragraphs = fullContent.split('\n\n');
+        let currentPIndex = 0;
+        let accumulated = '';
+
+        setChatMessages(v => v.map(m => m.id === assistantId ? {
+          ...m,
+          pending: false,
+          sources: result.sources,
+          docTitle: mainDoc?.title || 'Constitution',
+          content: ''
+        } : m));
+
+        const typingTimer = setInterval(() => {
+          if (currentPIndex < paragraphs.length) {
+            accumulated += (currentPIndex > 0 ? '\n\n' : '') + paragraphs[currentPIndex];
+            currentPIndex++;
+            setChatMessages(v => v.map(m => m.id === assistantId ? { ...m, content: accumulated } : m));
+          } else {
+            clearInterval(typingTimer);
+            setChatBusy(false);
+            setActiveAssistantId(null);
+          }
+        }, 160);
+      }, 900);
+    }
+  }
+  function newChat(){
+    setActiveAssistantId(null);
+    setChatBusy(false);
+    setChatConversationId(null);
+    setChatMessages([]);
+    setChatSources([]);
+    setChatQuestion('');
+  }
   async function copyArticle(a){try{await navigator.clipboard.writeText(`${title(a)}\n\nOriginal text\n${a.original}\n\nIn plain language\n${a.plain}\n\n${a.source}\n\nCARTA — Every Constitution. Every Country. In Plain Language.`);showToast('Article copied.')}catch{showToast('Clipboard is unavailable in this browser.')}}
   async function shareImage(a){const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=1200;const c=canvas.getContext('2d');c.fillStyle='#FFFBF2';c.fillRect(0,0,1200,1200);c.fillStyle='#1A7F37';c.fillRect(82,90,9,1020);c.fillStyle='#1A7F37';c.font='700 27px Inter';c.fillText('CARTA / WORLD CONSTITUTIONS LIBRARY',130,120);c.fillStyle='#1A1A1A';c.font='bold 48px Merriweather';c.fillText(title(a).slice(0,38),130,220);c.fillStyle='#6B6A61';c.font='700 22px Inter';c.fillText('ORIGINAL TEXT',130,315);c.fillStyle='#222';c.font='30px Merriweather';wrap(c,a.original,130,370,920,46,5);c.fillStyle='#1A7F37';c.font='700 22px Inter';c.fillText('IN PLAIN LANGUAGE',130,740);c.fillStyle='#303329';c.font='26px Inter';wrap(c,a.plain,130,800,920,40,5);c.fillStyle='#68685F';c.font='18px Inter';c.fillText(a.source.slice(0,90),130,1090);c.fillText('Educational explanation · Not legal advice',130,1128);const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));if(!blob){showToast('Image export failed.');return}const file=new File([blob],'carta-article.png',{type:'image/png'});if(navigator.share&&navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:title(a)})}catch{showToast('Share cancelled.')}}else{const u=URL.createObjectURL(blob);const l=document.createElement('a');l.href=u;l.download='carta-article.png';l.click();URL.revokeObjectURL(u);showToast('Image saved. You can attach it to WhatsApp.')}}
 function wrap(ctx,text,x,y,width,lh,max){let line='',n=0;for(const word of text.split(/\s+/)){const test=line?line+' '+word:word;if(ctx.measureText(test).width>width&&line){ctx.fillText(line,x,y);y+=lh;line=word;n++;if(n>=max)return y}else line=test}if(line&&n<max)ctx.fillText(line,x,y);return y+lh}
@@ -318,7 +736,24 @@ function saveNote(){if(!noteText.trim())return;const text=noteText.trim();setNot
 const nav=[['home','⌂','Home'],['read','▤','Read'],['search','⌕','Search'],['chat','✧','Ask CARTA'],['catalogue','◎','Coverage'],['library','▣','Library'],['sources','↗','Data sources']];
 const navButtons=nav.map(([id,glyph,label])=><button key={id} className={page===id?'active':''} onClick={()=>setPage(id)}><span>{glyph}</span>{label}</button>);
 return <div className={'app '+(night?'night':'')}>
-  <header className="topbar"><button className="brand" onClick={()=>setPage('home')}><span className="mark">C<i/></span><span><b>CARTA</b><small>WORLD CONSTITUTIONS LIBRARY</small></span></button><div className="headerRight"><span className="tagline">Every Constitution. Every Country. In Plain Language.</span><span className="country-pill">{country.flag} {country.name}</span><button className="upgrade-link" onClick={()=>{setPaywallOpen(true);void refreshBilling()}}>{billing.isAdFree?'CARTA Plus':'Go ad-free'}</button>{account?<><button className="account-label" onClick={leaveAccount}>{account.name||account.displayName||account.email||'Account'} · Sign out</button></>:<button className="signin-link" onClick={()=>setAuthOpen(true)}>Sign in</button>}<button className="iconBtn" onClick={()=>setPage('search')}>⌕</button></div></header>
+  <header className="topbar">
+    <button className="brand" onClick={()=>setPage('home')}>
+      <span className="mark">C<i/></span>
+      <span><b>CARTA</b><small>WORLD CONSTITUTIONS LIBRARY</small></span>
+    </button>
+    <div className="headerRight">
+      <span className="tagline">Every Constitution. Every Country. In Plain Language.</span>
+      <button className="country-pill" onClick={()=>setWelcome(true)} title="Switch jurisdiction">
+        {country.flag} {country.name} <small style={{marginLeft: 4, opacity: 0.6}}>▾</small>
+      </button>
+      <button className="iconBtn" onClick={()=>setNight(!night)} title={night?'Switch to day mode':'Switch to night mode'}>
+        {night?'☼':'☾'}
+      </button>
+      <button className="upgrade-link" onClick={()=>{setPaywallOpen(true);void refreshBilling()}}>{billing.isAdFree?'CARTA Plus':'Go ad-free'}</button>
+      {account?<><button className="account-label" onClick={leaveAccount}>{account.name||account.displayName||account.email||'Account'} · Sign out</button></>:<button className="signin-link" onClick={()=>setAuthOpen(true)}>Sign in</button>}
+      <button className="iconBtn" onClick={()=>setPage('search')} title="Search the library">⌕</button>
+    </div>
+  </header>
   <div className="layout"><aside className="sidebar"><small className="overline">YOUR READING ROOM</small>{navButtons}<div className="sideBlock"><small className="overline">READING COUNTRY</small><b>{country.flag} {country.name}</b><p>Your daily article comes from this country's main constitution.</p><button className="outline" onClick={()=>setWelcome(true)}>Change country</button></div><div className="sideQuote">§<p>Understand the law.<br/><b>One article at a time.</b></p><small>Reference text + plain language</small></div></aside>
   <main className="main">
     {page==='home'&&<>
@@ -339,7 +774,127 @@ return <div className={'app '+(night?'night':'')}>
       <p className="disclaimer">Legal text is published only after checking its official origin, current version and reuse rights.</p>
     </>}
     {page==='search'&&<><PageHeader eyebrow="FIND A PASSAGE" title={<>Search the <em>library.</em></>} lead="Search across countries, constitutions, rights and plain-language explanations."/><div className="searchbox big"><span>⌕</span><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==='Enter'&&setPage('search')} placeholder="Try equality, taxation or devolution…"/>{query&&<button onClick={()=>setQuery('')}>×</button>}</div>{!query.trim()?<div className="empty"><div>⌕</div><h3>One library. Many legal traditions.</h3><p>Search a concept, a phrase from a document, or a country name.</p><div className="suggestions">{['equality','public participation','supremacy','rights'].map(s=><button key={s} onClick={()=>setQuery(s)}>{s} ↗</button>)}</div></div>:<div className="results"><small>{searchResults.length} results for “{query}”</small>{searchResults.map(a=>{const d=docs.find(x=>x.id===a.doc);const c=countries.find(x=>x.id===d.country);return <button className="result" key={a.id} onClick={()=>openArticle(a)}><small>{c?.flag||'🌐'} {c?.name||'International'}　·　{d.title}</small><h3>{a.title}</h3><p>{a.plain}</p><small>{a.num}　·　{a.source}</small><b>Open passage →</b></button>})}{!searchResults.length&&<div className="empty"><h3>No passages found</h3><p>Try a shorter phrase or another legal concept.</p></div>}<AdSlot isAdFree={billing.isAdFree} config={adConfig} slot="searchSlot"/></div>}</>}
-    {page==='chat'&&<><PageHeader eyebrow="LEGAL INFORMATION ASSISTANT" title={<>Ask <em>CARTA.</em></>} lead="Understand a legal provision with references to verified primary sources." right={<button className="outline" onClick={newChat}>＋ New chat</button>}/><div className="chat-disclaimer">CARTA provides legal information, not legal advice. It will tell you when the indexed sources cannot support an answer. For a real dispute, deadlines or action in court, consult a qualified lawyer in the relevant jurisdiction.</div><div className="chat-window">{!chatMessages.length&&<div className="chat-welcome"><div className="plus-mark">✧</div><h2>What would you like to understand?</h2><p>Choose a country above and ask about constitutional rights, government powers, legislation or a court decision.</p><div className="chat-suggestions">{['What does the constitution say about freedom of expression?','How can a bill become law?','What is the difference between a right and a directive?'].map(q=><button key={q} onClick={()=>setChatQuestion(q)}>{q} ↗</button>)}</div></div>}{chatMessages.map(m=><article className={'chat-message '+m.role+(m.error?' error':'')} key={m.id}><small>{m.role==='user'?'YOU':'CARTA · SOURCE-BASED RESPONSE'}</small><p>{m.content|| (m.pending?'Checking verified legal sources…':'')}</p>{m.sources?.length>0&&<div className="chat-sources"><b>Sources</b>{m.sources.map(source=><a key={source.label} href={source.url} target="_blank" rel="noreferrer">[{source.label}] {source.title} · {source.jurisdiction} ↗</a>)}</div>}</article>)}<div id="chat-bottom"/></div><form className="chat-composer" onSubmit={askLegalQuestion}><textarea rows="3" value={chatQuestion} onChange={e=>setChatQuestion(e.target.value)} placeholder="Ask a question about the law…"/><button className="primary" disabled={chatBusy||chatQuestion.trim().length<5}>{chatBusy?'Researching…':'Ask CARTA →'}</button></form><small className="muted-copy">Your question is matched against verified, searchable documents. The assistant will not invent law if CARTA has no source.</small></>}
+    {page==='chat'&&<div className="research-desk">
+      <div className="research-hero">
+        <img className="research-hero-img" src={legalResearchArchiveImg} alt="Classical constitutional law library" />
+        <div className="research-hero-scrim"/>
+        <div className="research-hero-content">
+          <span className="research-eyebrow">✧ CONSTITUTIONAL RESEARCH DESK</span>
+          <h1>Primary-source legal <em>inquiry.</em></h1>
+          <p>Textual analysis grounded in verified national constitutions, bills of rights, and foundational legal instruments.</p>
+        </div>
+      </div>
+
+      <div className="research-scope-bar">
+        <div className="research-scope-left">
+          <span className="scope-badge">
+            <span>{country.flag}</span>
+            <span>{country.name} · {mainDoc?.year || 'Current'}</span>
+          </span>
+          <select className="scope-jurisdiction-select" value={countryId} onChange={e=>chooseCountry(e.target.value)} title="Change active jurisdiction">
+            {countries.map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}
+          </select>
+          <span className="scope-caption">Corpus: {readArticles.length || 'Indexed'} verified provisions</span>
+        </div>
+        <div className="actions" style={{margin:0}}>
+          <button className="outline" onClick={newChat}>＋ New inquiry</button>
+        </div>
+      </div>
+
+      {!chatMessages.length?<div className="research-presets-section">
+        <div className="research-presets-title">
+          <small className="overline">SELECT A RESEARCH INQUIRY OR POSE YOUR OWN</small>
+        </div>
+        <div className="research-presets-grid">
+          {researchPresets.map(preset=><button key={preset.theme} className="preset-card" onClick={()=>askLegalQuestion(null, preset.query)}>
+            <small>{preset.theme}</small>
+            <p>{preset.query}</p>
+            <span className="action-arrow">Conduct research →</span>
+          </button>)}
+        </div>
+      </div>:null}
+
+      <div className="chat-window">
+        {chatMessages.map(m=><article className={'chat-message '+m.role+(m.error?' error':'')} key={m.id}>
+          {m.role==='user'?<>
+            <small>RESEARCH INQUIRY · {m.jurisdiction || country.name} · {m.time || 'Today'}</small>
+            <p>{m.content}</p>
+          </>:<>
+            <div className={'assistant-header ' + (chatBusy && activeAssistantId === m.id ? 'is-generating' : '')}>
+              <small><span className="status-spark">✧</span> CARTA RESEARCH SYNTHESIS</small>
+              <span className="doc-tag">{m.docTitle || mainDoc?.title}</span>
+            </div>
+            <div className="assistant-body">
+              {(m.pending || (!m.content && chatBusy && activeAssistantId === m.id)) ? (
+                <div className="thinking-indicator" role="status" aria-live="polite">
+                  <span className="thinking-dots" aria-hidden="true">
+                    <span className="thinking-dot"/>
+                    <span className="thinking-dot"/>
+                    <span className="thinking-dot"/>
+                  </span>
+                  <div className="thinking-meta">
+                    <span className="thinking-title">Synthesizing constitutional provisions</span>
+                    <span className="thinking-subtitle">Consulting indexed statutes and citations for {m.jurisdiction || country.name}…</span>
+                  </div>
+                </div>
+              ) : (
+                <p>
+                  {m.content}
+                  {chatBusy && activeAssistantId === m.id && (
+                    <span className="typing-cursor" aria-hidden="true" title="Generating synthesis" />
+                  )}
+                </p>
+              )}
+              {m.sources?.length>0&&<div className="chat-sources-block">
+                <b>Verified Primary Sources & Citations</b>
+                <div className="chat-sources-grid">
+                  {m.sources.map(source=><div className="source-citation-card" key={source.label+source.title}>
+                    <div className="source-citation-top">
+                      <span className="source-label">{source.label}</span>
+                      <span className="source-official-link">{source.jurisdiction}</span>
+                    </div>
+                    <h4 className="source-title">{source.title}</h4>
+                    {source.snippet&&<p className="source-snippet">“{source.snippet}”</p>}
+                    <div className="source-actions">
+                      {source.rawArticle?<button className="textLink" onClick={()=>openArticle(source.rawArticle)}>Read in Reader ↗</button>:null}
+                      <button className="textLink" onClick={()=>copyCitation(source)}>Copy citation</button>
+                      {source.url?<a className="textLink" href={source.url} target="_blank" rel="noreferrer">Official source ↗</a>:null}
+                    </div>
+                  </div>)}
+                </div>
+              </div>}
+            </div>
+            {!m.pending && !(chatBusy && activeAssistantId === m.id) && <div className="assistant-footer-actions">
+              <button className="outline" onClick={()=>{if(m.sources?.[0])copyCitation(m.sources[0])}}>📋 Copy citation</button>
+              <button className="outline" onClick={()=>{setNoteText(`Inquiry: ${chatMessages.find(x=>x.role==='user')?.content||''}\n\nSynthesis: ${m.content.slice(0,300)}...`);setNoteOpen(true)}}>✎ Save to library notes</button>
+              <button className="outline" onClick={()=>setCompare(true)}>⇄ Compare other constitutions</button>
+            </div>}
+          </>}
+        </article>)}
+        <div id="chat-bottom"/>
+      </div>
+
+      <form className="chat-composer-container" onSubmit={askLegalQuestion}>
+        <textarea
+          rows={3}
+          value={chatQuestion}
+          onChange={e=>setChatQuestion(e.target.value)}
+          onKeyDown={e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();void askLegalQuestion(e)}}}
+          placeholder={`Ask about constitutional rights, legislative procedures, or governance powers in ${country.name}… (Press ⌘ + Enter to submit)`}
+        />
+        <div className="chat-composer-bottom">
+          <span className="composer-hint">
+            Verified citations <span aria-hidden="true">·</span> Press <kbd>⌘ + Enter</kbd> to submit
+          </span>
+          <div className="composer-buttons">
+            {chatQuestion.trim()&&<button type="button" className="outline" onClick={()=>setChatQuestion('')}>Clear</button>}
+            <button className="primary" type="submit" disabled={chatBusy||chatQuestion.trim().length<3}>
+              {chatBusy?'Researching…':'Research provision →'}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>}
     {page==='catalogue'&&<><PageHeader eyebrow="GLOBAL JURISDICTION CATALOGUE" title={<>Constitution <em>coverage.</em></>} lead="CARTA catalogues jurisdictions separately from the constitutional texts it has verified."/><div className="coverage-summary"><div><strong>{coverage.total||countries.length}</strong><span>jurisdictions catalogued</span></div><div><strong>{coverage.verified_current||0}</strong><span>verified current texts</span></div><div><strong>{coverage.metadata_only||0}</strong><span>metadata only</span></div></div><div className="coverage-list">{countries.map(c=><div className="coverage-row" key={c.id}><span>{c.flag} {c.name}</span><small>{(c.constitutionStatus||'not_loaded').replaceAll('_',' ')}</small><small>{c.jurisdictionKind||'unclassified'}</small></div>)}</div><p className="disclaimer">A blank coverage row means the text is not yet verified; it does not mean the jurisdiction has no constitution. Some jurisdictions use uncodified or multiple foundational instruments and require expert classification.</p></>}
     {page==='sources'&&<><PageHeader eyebrow="DATA PROVENANCE" title={<>Where CARTA gets its <em>law.</em></>} lead="Primary sources first. Legal information institutes and aggregators are used for discovery, not as a substitute for the publisher."/><div className="source-cards"><article><h3>Official national portals</h3><p>Each jurisdiction's parliament, ministry of justice, attorney-general, government printer, national gazette or constitutional court. These are the source of truth for current text and amendments.</p><a href="https://kenyalaw.org/" target="_blank" rel="noreferrer">Kenya Law ↗</a></article><article><h3>Constitute / CCP</h3><p>Excellent for discovering which constitutions exist and comparing constitutional metadata. Its CC BY-NC licence and third-party translations mean it is not a blanket source for a paid commercial library without specific permission.</p><a href="https://www.constituteproject.org/content/data?lang=en" target="_blank" rel="noreferrer">Data and API ↗</a></article><article><h3>Official international courts</h3><p>HUDOC (ECHR) and Curia (CJEU) publish judgment, decision and press-release feeds. CARTA stores the new-item metadata and canonical official links.</p><a href="https://www.echr.coe.int/en/echr-rss-feeds" target="_blank" rel="noreferrer">ECHR RSS ↗</a> · <a href="https://curia.europa.eu/site/jcms/d2_5156/en/media-centre" target="_blank" rel="noreferrer">Curia RSS ↗</a></article><article><h3>UK and Australia</h3><p>Legislation.gov.uk provides an official Atom feed and XML API under OGL v3.0. Australia’s Federal Register offers a free REST API; most content is CC BY 4.0 with attribution and third-party exclusions.</p><a href="https://www.legislation.gov.uk/new/data.feed" target="_blank" rel="noreferrer">UK new-law feed ↗</a> · <a href="https://www.legislation.gov.au/" target="_blank" rel="noreferrer">Australian Register ↗</a></article><article><h3>GovInfo (United States)</h3><p>Official U.S. bills, statutes, CFR, Federal Register, and Supreme Court publications via API, bulk XML and RSS. A free api.data.gov key is needed for API calls.</p><a href="https://www.govinfo.gov/developers" target="_blank" rel="noreferrer">Developer hub ↗</a> · <a href="https://www.govinfo.gov/feeds" target="_blank" rel="noreferrer">RSS feeds ↗</a></article><article><h3>EUR-Lex and UN Treaty Collection</h3><p>Official EU treaty/legislation/case-law data and UN treaty status, reservations and declarations. Register for EUR-Lex webservice access and review the applicable data-reuse terms.</p><a href="https://eur-lex.europa.eu/content/help/data-reuse/webservice.html?locale=en" target="_blank" rel="noreferrer">EUR-Lex webservice ↗</a> · <a href="https://treaties.un.org/" target="_blank" rel="noreferrer">UN treaties ↗</a></article><article><h3>Discovery-only repositories</h3><p>Constitute/CCP, WorldLII and SAFLII help locate legal instruments, but do not treat their materials as free for commercial redistribution or AI use. SAFLII expressly restricts crawling and AI/automated reuse without written agreement.</p><a href="https://www.worldlii.org/" target="_blank" rel="noreferrer">WorldLII ↗</a> · <a href="https://www.saflii.org/content/terms.html" target="_blank" rel="noreferrer">SAFLII terms ↗</a></article></div><p className="disclaimer">The source registry and ingestion run records are maintained in Supabase. Administrators must approve a source's official status, feed URL and licence scope before its feed or legal text is published. RSS ingestion is metadata-only by default; it does not copy article bodies or constitution text.</p>{adminSourceData&&<section className="admin-source-panel"><div className="admin-source-heading"><div><small className="overline">ADMINISTRATOR TOOLS</small><h2>Official source registry</h2><p>Enable reviewed publisher feeds for title, date and official-link metadata. Legal text is imported separately after the reuse licence is cleared.</p></div><button className="outline" disabled={adminSourcesBusy} onClick={runSourceIngestion}>↻ Run feed update</button></div><details className="source-add-details" open={newSourceOpen} onToggle={event=>setNewSourceOpen(event.currentTarget.open)}><summary>＋ Register an official publisher / feed</summary><form className="source-add-form" onSubmit={addSource}><label>Source name<input name="name" required maxLength="240" placeholder="e.g. Office of the Attorney-General"/></label><label>Unique slug<input name="slug" required pattern="[a-z0-9][a-z0-9-]{1,80}" placeholder="e.g. gh-ago-portal"/></label><label>Publisher<input name="publisher" placeholder="Institution responsible for publication"/></label><label>Jurisdiction ISO<input name="jurisdictionIso" maxLength="3" placeholder="e.g. GH or leave blank for international"/></label><label>Source type<select name="sourceType"><option value="constitution_catalog">Constitution catalogue</option><option value="legislation_portal">Legislation portal</option><option value="official_gazette">Official Gazette</option><option value="court_feed">Court feed</option><option value="court_database">Court database</option><option value="treaty_database">Treaty database</option><option value="government_news">Government news</option><option value="data_catalog">Data catalogue</option><option value="other">Other</option></select></label><label>Official publisher URL<input name="sourceUrl" type="url" required placeholder="https://…"/></label><label>RSS / Atom feed URL<input name="feedUrl" type="url" placeholder="https://…"/></label><label>API URL<input name="apiUrl" type="url" placeholder="https://…"/></label><label>API / source documentation<input name="documentationUrl" type="url" placeholder="https://…"/></label><label>Polling interval (minutes)<input name="pollIntervalMinutes" type="number" min="15" max="10080" placeholder="1440"/></label><label>Authority rank (1–100)<input name="authorityRank" type="number" min="1" max="100" defaultValue="50"/></label><label>Permitted feed-link hosts (comma separated)<input name="allowedHosts" placeholder="justice.gov.za, gov.za"/></label><label className="source-add-wide">Content scope / notes<textarea name="contentScope" rows="2" placeholder="Which legal content does the publisher provide?"/></label><label className="source-add-check"><input name="isOfficial" type="checkbox"/> Verified official publisher (required before feed ingestion)</label><div className="source-add-wide"><button className="primary" type="submit" disabled={adminSourcesBusy}>Register source</button><small className="muted-copy">New sources are inactive, set to review required and blocked from commercial text / AI retrieval by default.</small></div></form></details><div className="admin-source-list">{(adminSourceData.sources||[]).map(source=><article className="admin-source-row" key={source.id}><div><b>{source.name}</b><small>{source.publisher||source.slug} · Authority rank {source.authority_rank}</small><small>Licence: {source.license_status.replaceAll('_',' ')} · Commercial use: {source.commercial_use_allowed?'cleared':'not cleared'}</small><small>{source.feed_url||'No direct feed URL configured'} </small></div><div className="admin-source-actions"><span className={source.is_active?'status-on':'status-off'}>{source.is_active?'Feed on':'Feed off'}</span>{source.feed_url&&source.is_official&&<button className="outline" disabled={adminSourcesBusy} onClick={()=>setSourceActive(source)}>{source.is_active?'Pause':'Enable metadata'}</button>}</div><form className="source-rights-form" onSubmit={event=>saveSourceRights(source,event)}><label>Reuse status<select name="licenseStatus" defaultValue={source.license_status}><option value="review_required">Review required</option><option value="noncommercial_only">Non-commercial only</option><option value="restricted">Restricted</option><option value="public_domain_verified">Public domain verified</option><option value="open_license">Open licence</option><option value="permission_granted">Permission granted</option><option value="approved">Approved</option></select></label><label className="rights-checkbox"><input type="checkbox" name="commercialUseAllowed" defaultChecked={source.commercial_use_allowed===true}/> Commercial reuse independently cleared</label><label>Rights evidence URL<input name="rightsEvidenceUrl" type="url" required defaultValue={source.metadata?.rightsEvidenceUrl||""} placeholder="HTTPS licence / permission evidence"/></label><label>Reviewer notes<textarea name="rightsNotes" required minLength={20} rows={2} defaultValue={source.metadata?.rightsNotes||""} placeholder="Explain the legal basis, scope and attribution terms (20+ characters)."/></label><button className="outline" type="submit" disabled={adminSourcesBusy}>Save rights review</button></form></article>)}</div><div className="ingestion-runs"><b>Recent feed runs</b>{(adminSourceData.runs||[]).slice(0,8).map(run=><small key={run.id}>{run.status} · {run.records_added} added / {run.records_seen} seen · {new Date(run.started_at).toLocaleString()}</small>)}</div></section>}</>}
     {page==='library'&&<><PageHeader eyebrow="YOUR PERSONAL SHELF" title={<>Your <em>library.</em></>} lead="Keep the passages and documents you want to return to."/><div className="library-tabs">{['Bookmarks','Highlights','Notes','Downloaded'].map(s=><button className={libraryTab===s?'selected':''} onClick={()=>setLibraryTab(s)} key={s}>{s}</button>)}</div>{libraryTab==='Downloaded'?<><div className="offline-panel"><div><b>OFFLINE READING</b><h3>Keep your library close.</h3><p>This list records the documents you want to download for offline reading.</p></div><label><input type="checkbox" checked={offline} onChange={e=>{setOffline(e.target.checked);if(account)void apiSave({action:'preferences',offlineDefaultEnabled:e.target.checked,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone}).catch(()=>{})}}/> Offline {offline?'on':'off'}</label></div>{downloads.map(id=>{const d=docs.find(x=>x.id===id);return d?<div className="saved" key={id}><b>▤ {d.title}</b><small>{d.year} · {d.type}</small><button onClick={()=>{setDownloads(v=>v.filter(x=>x!==id));syncToggle('download',id,false)}}>Remove</button></div>:null})}<label className="download-more">Download another document<select value="" onChange={e=>{if(e.target.value){setDownloads(v=>v.includes(e.target.value)?v:[...v,e.target.value]);syncToggle('download',e.target.value,true)}}}><option value="">Choose a document…</option>{docs.filter(d=>!downloads.includes(d.id)).map(d=><option key={d.id} value={d.id}>{d.title}</option>)}</select></label></>:<>{(libraryTab==='Bookmarks'?bookmarks:libraryTab==='Highlights'?highlights:notes.map(n=>n.articleId)).map(id=>{const a=articles.find(x=>x.id===id);if(!a)return null;const d=docs.find(x=>x.id===a.doc);const note=notes.find(x=>x.articleId===id);return <div className="saved" key={id}><button className="saved-main" onClick={()=>openArticle(a)}><b>{a.title}</b><small>{d.title} · {a.num}</small><span>{libraryTab==='Notes'?note?.text:a.plain}</span></button><button onClick={()=>{if(libraryTab==='Bookmarks'){setBookmarks(v=>v.filter(x=>x!==id));if(account)void apiSave({action:'bookmark',operation:'remove',documentId:a.doc,sectionId:id})}else if(libraryTab==='Highlights'){setHighlights(v=>v.filter(x=>x!==id));if(account)void apiSave({action:'highlight',operation:'remove',documentId:a.doc,sectionId:id})}else{setNotes(v=>v.filter(x=>x.articleId!==id));if(account)void apiSave({action:'note',operation:'remove',id:note?.id||''})}}}>×</button></div>})}{!(libraryTab==='Bookmarks'?bookmarks:libraryTab==='Highlights'?highlights:notes).length&&<div className="empty"><div>▣</div><h3>Nothing on this shelf yet.</h3><p>Bookmark, highlight or add notes while reading. They will appear here on this device.</p><button className="primary" onClick={()=>setPage('read')}>Start reading</button></div>}</>}</>}

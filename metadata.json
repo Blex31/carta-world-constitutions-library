@@ -1,0 +1,8 @@
+{
+  "name": "CARTA — World Constitutions Library",
+  "description": "Every Constitution. Every Country. In Plain Language.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
