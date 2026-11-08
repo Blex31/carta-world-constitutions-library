@@ -1,0 +1,2526 @@
+{
+  "title": "CARTA global jurisdiction classification crosswalk",
+  "prepared_at": "2026-11-08",
+  "source_count": 250,
+  "un_member_count": 193,
+  "non_member_observer_state_count": 2,
+  "unclassified_area_count": 55,
+  "references": {
+    "un_m49": "https://unstats.un.org/unsd/methodology/m49/overview",
+    "un_membership": "https://research.un.org/en/unmembers/intro",
+    "un_observer_states": "https://research.un.org/en/unmembers/observers",
+    "iso_3166_background": "https://www.iso.org/iso-3166-country-codes.html"
+  },
+  "methodology": [
+    "ISO alpha-2 codes are identifiers for country or area records; an ISO code is not evidence of sovereignty or UN membership.",
+    "UN M49 is used for geographic continent and sub-region assignments. The UN explicitly says these groupings are for statistical convenience and do not imply political affiliation or legal status.",
+    "UN membership is separately classified from the current UN membership list. Exactly 193 records are marked sovereign_state and is_un_member=true.",
+    "Holy See (VA) and State of Palestine (PS) are non-member observer states; they are represented as sovereign_state with is_un_member=false.",
+    "All other non-member country/area records remain jurisdiction_kind=unclassified until their precise constitutional and territorial status is reviewed. This deliberately avoids inferring sovereignty or dependency from ISO/M49 inclusion.",
+    "Kosovo (XK) and Taiwan (TW) use manual geographic placements because they are not present as separate entries in the UN M49 table used here. These placements make no political-status determination.",
+    "Western Sahara (EH), Cook Islands (CK) and Niue (NU) are flagged for special-status review; geographic placement does not settle their legal or political status.",
+    "This is directory metadata only. It does not verify a constitution, legal publisher, currentness, licence, or permission to display, index, summarise, translate or cache legal texts."
+  ],
+  "entries": [
+    {
+      "iso_code": "AD",
+      "name": "Andorra",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AE",
+      "name": "United Arab Emirates",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AF",
+      "name": "Afghanistan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AG",
+      "name": "Antigua and Barbuda",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AI",
+      "name": "Anguilla",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AL",
+      "name": "Albania",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AM",
+      "name": "Armenia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AO",
+      "name": "Angola",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AQ",
+      "name": "Antarctica",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Antarctica",
+      "region": "Antarctica",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AR",
+      "name": "Argentina",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AS",
+      "name": "American Samoa",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AT",
+      "name": "Austria",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AU",
+      "name": "Australia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Australia and New Zealand",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AW",
+      "name": "Aruba",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AX",
+      "name": "Åland Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "AZ",
+      "name": "Azerbaijan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BB",
+      "name": "Barbados",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BD",
+      "name": "Bangladesh",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BE",
+      "name": "Belgium",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BF",
+      "name": "Burkina Faso",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BG",
+      "name": "Bulgaria",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BH",
+      "name": "Bahrain",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BI",
+      "name": "Burundi",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BJ",
+      "name": "Benin",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BL",
+      "name": "Saint Barthélemy",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BM",
+      "name": "Bermuda",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "North America",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BN",
+      "name": "Brunei Darussalam",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BO",
+      "name": "Bolivia, Plurinational State of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BQ",
+      "name": "Bonaire, Sint Eustatius and Saba",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BR",
+      "name": "Brazil",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BS",
+      "name": "Bahamas",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BT",
+      "name": "Bhutan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BV",
+      "name": "Bouvet Island",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BW",
+      "name": "Botswana",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Southern Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BY",
+      "name": "Belarus",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "BZ",
+      "name": "Belize",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Central America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CA",
+      "name": "Canada",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "North America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CC",
+      "name": "Cocos (Keeling) Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Australia and New Zealand",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CD",
+      "name": "Congo, The Democratic Republic of the",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CF",
+      "name": "Central African Republic",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CG",
+      "name": "Congo",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CH",
+      "name": "Switzerland",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CI",
+      "name": "Côte d'Ivoire",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CK",
+      "name": "Cook Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "special_status_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CL",
+      "name": "Chile",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CM",
+      "name": "Cameroon",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CN",
+      "name": "China",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "East Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CO",
+      "name": "Colombia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CR",
+      "name": "Costa Rica",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Central America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CU",
+      "name": "Cuba",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CV",
+      "name": "Cabo Verde",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CW",
+      "name": "Curaçao",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CX",
+      "name": "Christmas Island",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Australia and New Zealand",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CY",
+      "name": "Cyprus",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "CZ",
+      "name": "Czechia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "DE",
+      "name": "Germany",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "DJ",
+      "name": "Djibouti",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "DK",
+      "name": "Denmark",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "DM",
+      "name": "Dominica",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "DO",
+      "name": "Dominican Republic",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "DZ",
+      "name": "Algeria",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "North Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "EC",
+      "name": "Ecuador",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "EE",
+      "name": "Estonia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "EG",
+      "name": "Egypt",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "North Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "EH",
+      "name": "Western Sahara",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Africa",
+      "region": "North Africa",
+      "classification_status": "special_status_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ER",
+      "name": "Eritrea",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ES",
+      "name": "Spain",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ET",
+      "name": "Ethiopia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "FI",
+      "name": "Finland",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "FJ",
+      "name": "Fiji",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Melanesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "FK",
+      "name": "Falkland Islands (Malvinas)",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "FM",
+      "name": "Micronesia, Federated States of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Micronesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "FO",
+      "name": "Faroe Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "FR",
+      "name": "France",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GA",
+      "name": "Gabon",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GB",
+      "name": "United Kingdom",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GD",
+      "name": "Grenada",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GE",
+      "name": "Georgia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GF",
+      "name": "French Guiana",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GG",
+      "name": "Guernsey",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GH",
+      "name": "Ghana",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GI",
+      "name": "Gibraltar",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GL",
+      "name": "Greenland",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "North America",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GM",
+      "name": "Gambia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GN",
+      "name": "Guinea",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GP",
+      "name": "Guadeloupe",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GQ",
+      "name": "Equatorial Guinea",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GR",
+      "name": "Greece",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GS",
+      "name": "South Georgia and the South Sandwich Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GT",
+      "name": "Guatemala",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Central America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GU",
+      "name": "Guam",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Micronesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GW",
+      "name": "Guinea-Bissau",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "GY",
+      "name": "Guyana",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "HK",
+      "name": "Hong Kong",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Asia",
+      "region": "East Asia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "HM",
+      "name": "Heard Island and McDonald Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Australia and New Zealand",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "HN",
+      "name": "Honduras",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Central America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "HR",
+      "name": "Croatia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "HT",
+      "name": "Haiti",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "HU",
+      "name": "Hungary",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ID",
+      "name": "Indonesia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IE",
+      "name": "Ireland",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IL",
+      "name": "Israel",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IM",
+      "name": "Isle of Man",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IN",
+      "name": "India",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IO",
+      "name": "British Indian Ocean Territory",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IQ",
+      "name": "Iraq",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IR",
+      "name": "Iran, Islamic Republic of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IS",
+      "name": "Iceland",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "IT",
+      "name": "Italy",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "JE",
+      "name": "Jersey",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "JM",
+      "name": "Jamaica",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "JO",
+      "name": "Jordan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "JP",
+      "name": "Japan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "East Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KE",
+      "name": "Kenya",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KG",
+      "name": "Kyrgyzstan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Central Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KH",
+      "name": "Cambodia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KI",
+      "name": "Kiribati",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Micronesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KM",
+      "name": "Comoros",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KN",
+      "name": "Saint Kitts and Nevis",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KP",
+      "name": "Korea, Democratic People's Republic of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "East Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KR",
+      "name": "Korea, Republic of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "East Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KW",
+      "name": "Kuwait",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KY",
+      "name": "Cayman Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "KZ",
+      "name": "Kazakhstan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Central Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LA",
+      "name": "Lao People's Democratic Republic",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LB",
+      "name": "Lebanon",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LC",
+      "name": "Saint Lucia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LI",
+      "name": "Liechtenstein",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LK",
+      "name": "Sri Lanka",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LR",
+      "name": "Liberia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LS",
+      "name": "Lesotho",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Southern Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LT",
+      "name": "Lithuania",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LU",
+      "name": "Luxembourg",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LV",
+      "name": "Latvia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "LY",
+      "name": "Libya",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "North Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MA",
+      "name": "Morocco",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "North Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MC",
+      "name": "Monaco",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MD",
+      "name": "Moldova, Republic of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ME",
+      "name": "Montenegro",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MF",
+      "name": "Saint Martin (French part)",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MG",
+      "name": "Madagascar",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MH",
+      "name": "Marshall Islands",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Micronesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MK",
+      "name": "North Macedonia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ML",
+      "name": "Mali",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MM",
+      "name": "Myanmar",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MN",
+      "name": "Mongolia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "East Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MO",
+      "name": "Macao",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Asia",
+      "region": "East Asia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MP",
+      "name": "Northern Mariana Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Micronesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MQ",
+      "name": "Martinique",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MR",
+      "name": "Mauritania",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MS",
+      "name": "Montserrat",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MT",
+      "name": "Malta",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MU",
+      "name": "Mauritius",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MV",
+      "name": "Maldives",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MW",
+      "name": "Malawi",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MX",
+      "name": "Mexico",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Central America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MY",
+      "name": "Malaysia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "MZ",
+      "name": "Mozambique",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NA",
+      "name": "Namibia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Southern Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NC",
+      "name": "New Caledonia",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Melanesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NE",
+      "name": "Niger",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NF",
+      "name": "Norfolk Island",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Australia and New Zealand",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NG",
+      "name": "Nigeria",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NI",
+      "name": "Nicaragua",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Central America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NL",
+      "name": "Netherlands",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Western Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NO",
+      "name": "Norway",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NP",
+      "name": "Nepal",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NR",
+      "name": "Nauru",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Micronesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NU",
+      "name": "Niue",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "special_status_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "NZ",
+      "name": "New Zealand",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Australia and New Zealand",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "OM",
+      "name": "Oman",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PA",
+      "name": "Panama",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Central America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PE",
+      "name": "Peru",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PF",
+      "name": "French Polynesia",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PG",
+      "name": "Papua New Guinea",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Melanesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PH",
+      "name": "Philippines",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PK",
+      "name": "Pakistan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "South Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PL",
+      "name": "Poland",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PM",
+      "name": "Saint Pierre and Miquelon",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "North America",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PN",
+      "name": "Pitcairn",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PR",
+      "name": "Puerto Rico",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PS",
+      "name": "Palestine, State of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": false,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "non_member_observer_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PT",
+      "name": "Portugal",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PW",
+      "name": "Palau",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Micronesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "PY",
+      "name": "Paraguay",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "QA",
+      "name": "Qatar",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "RE",
+      "name": "Réunion",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "RO",
+      "name": "Romania",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "RS",
+      "name": "Serbia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "RU",
+      "name": "Russian Federation",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "RW",
+      "name": "Rwanda",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SA",
+      "name": "Saudi Arabia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SB",
+      "name": "Solomon Islands",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Melanesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SC",
+      "name": "Seychelles",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SD",
+      "name": "Sudan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "North Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SE",
+      "name": "Sweden",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SG",
+      "name": "Singapore",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SH",
+      "name": "Saint Helena, Ascension and Tristan da Cunha",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SI",
+      "name": "Slovenia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SJ",
+      "name": "Svalbard and Jan Mayen",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Northern Europe",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SK",
+      "name": "Slovakia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SL",
+      "name": "Sierra Leone",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SM",
+      "name": "San Marino",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SN",
+      "name": "Senegal",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SO",
+      "name": "Somalia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SR",
+      "name": "Suriname",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SS",
+      "name": "South Sudan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ST",
+      "name": "Sao Tome and Principe",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SV",
+      "name": "El Salvador",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Central America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SX",
+      "name": "Sint Maarten (Dutch part)",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SY",
+      "name": "Syrian Arab Republic",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "SZ",
+      "name": "Eswatini",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Southern Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TC",
+      "name": "Turks and Caicos Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TD",
+      "name": "Chad",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Central Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TF",
+      "name": "French Southern Territories",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TG",
+      "name": "Togo",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "West Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TH",
+      "name": "Thailand",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TJ",
+      "name": "Tajikistan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Central Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TK",
+      "name": "Tokelau",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TL",
+      "name": "Timor-Leste",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TM",
+      "name": "Turkmenistan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Central Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TN",
+      "name": "Tunisia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "North Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TO",
+      "name": "Tonga",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TR",
+      "name": "Türkiye",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TT",
+      "name": "Trinidad and Tobago",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TV",
+      "name": "Tuvalu",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "TW",
+      "name": "Taiwan, Province of China",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Asia",
+      "region": "East Asia",
+      "classification_status": "special_status_review_required",
+      "geography_basis": "manual_geographic_placement"
+    },
+    {
+      "iso_code": "TZ",
+      "name": "Tanzania, United Republic of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "UA",
+      "name": "Ukraine",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Europe",
+      "region": "Eastern Europe",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "UG",
+      "name": "Uganda",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "UM",
+      "name": "United States Minor Outlying Islands",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Micronesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "US",
+      "name": "United States",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "North America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "UY",
+      "name": "Uruguay",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "UZ",
+      "name": "Uzbekistan",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Central Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "VA",
+      "name": "Holy See (Vatican City State)",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "non_member_observer_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "VC",
+      "name": "Saint Vincent and the Grenadines",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "VE",
+      "name": "Venezuela, Bolivarian Republic of",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Americas",
+      "region": "South America",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "VG",
+      "name": "Virgin Islands, British",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "VI",
+      "name": "Virgin Islands, U.S.",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Americas",
+      "region": "Caribbean",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "VN",
+      "name": "Viet Nam",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "Southeast Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "VU",
+      "name": "Vanuatu",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Melanesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "WF",
+      "name": "Wallis and Futuna",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "WS",
+      "name": "Samoa",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Oceania",
+      "region": "Polynesia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "XK",
+      "name": "Kosovo",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Europe",
+      "region": "Southern Europe",
+      "classification_status": "special_status_review_required",
+      "geography_basis": "manual_geographic_placement"
+    },
+    {
+      "iso_code": "YE",
+      "name": "Yemen",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Asia",
+      "region": "West Asia",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "YT",
+      "name": "Mayotte",
+      "jurisdiction_kind": "unclassified",
+      "is_un_member": false,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "non_member_area_review_required",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ZA",
+      "name": "South Africa",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "Southern Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ZM",
+      "name": "Zambia",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    },
+    {
+      "iso_code": "ZW",
+      "name": "Zimbabwe",
+      "jurisdiction_kind": "sovereign_state",
+      "is_un_member": true,
+      "continent": "Africa",
+      "region": "East Africa",
+      "classification_status": "un_member_state",
+      "geography_basis": "UN_M49"
+    }
+  ]
+}
