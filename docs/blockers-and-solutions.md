@@ -1,6 +1,6 @@
 # CARTA — blockers, reasons and practical solutions
 
-**Updated:** 6 November 2026  
+**Updated:** 8 November 2026  
 **Purpose:** Explain why a CARTA release item is pending, what evidence or dependency is missing, and the concrete action that clears it.
 
 A blocker is not automatically a code defect. Some items need engineering, some need a decision or credential, and some need third-party permission. We should not bypass a rights, payment or security gate merely to make a feature appear finished.
@@ -217,8 +217,27 @@ The initial Flutter source slice is being developed on feature/flutter-native-cl
 - legal search;
 - official update list;
 - authenticated research request;
-- account screen and personal-library summary;
+- account screen and personal-library summary;\n- dedicated My Library screen for saved documents, bookmarks, highlights and private notes, with open/remove actions (added to the Flutter branch; CI/device verification pending);
 - Android/iOS runner generation and auth callback setup;
 - Flutter analysis, widget tests and Android/iOS build workflow.
 
 This is not yet a public release. Device QA, push, widgets, offline reading, mobile billing, store signing and configuration remain separate gates.
+
+
+## 13. My Library — implementation added, verification pending
+
+**Current state**
+
+The Flutter branch now includes a dedicated My Library screen with four views: saved documents, bookmarks, highlights and private notes. Readers can open a linked verified document and remove a saved item. The screen uses the existing authenticated `GET /api/library/me` and `POST /api/library/me` actions; no schema change or production Supabase change was required.
+
+**Remaining verification**
+
+- [ ] Confirm Flutter analysis, widget tests, Android debug build and iOS unsigned build pass for the commit that adds the screen.
+- [ ] Test real Android and iOS accounts with multiple saved items and an empty library.
+- [ ] Confirm delete operations remove only the signed-in user's selected item and refresh the screen correctly.
+- [ ] Confirm bookmarks/highlights/notes are consistent after sign-out, sign-in and another device.
+- [ ] Test graceful display when a document has been withdrawn or is no longer in the verified publication set.
+
+**Clearance test**
+
+A signed-in reader can save a provision, find it in the correct My Library tab, open its document, remove the item, and see the updated state on another session without any cross-account leakage.
