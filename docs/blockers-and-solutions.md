@@ -217,7 +217,8 @@ The initial Flutter source slice is being developed on feature/flutter-native-cl
 - legal search;
 - official update list;
 - authenticated research request;
-- account screen and personal-library summary;\n- dedicated My Library screen for saved documents, bookmarks, highlights and private notes, with open/remove actions (added to the Flutter branch; CI/device verification pending);
+- account screen and personal-library summary;
+- dedicated My Library screen for saved documents, bookmarks, highlights and private notes, with open/remove actions (added to the Flutter branch; CI/device verification pending);
 - Android/iOS runner generation and auth callback setup;
 - Flutter analysis, widget tests and Android/iOS build workflow.
 
