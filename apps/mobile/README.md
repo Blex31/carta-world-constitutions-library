@@ -70,3 +70,27 @@ For iOS, run flutter build ios --no-codesign on macOS after generating the iOS r
 ## CI and test artifact
 
 GitHub Actions runs Flutter analysis, widget tests, an Android debug APK build/upload and an unsigned iOS build. The verified implementation baseline `b1655a982eb879fdcbe24846c606082594406fbd` passed Mobile CI #47: analysis, all three widget tests, Android debug APK build and artifact upload, and unsigned iOS build. The ZIP artifact is available from [Mobile CI #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289) as `carta-android-debug` (artifact ID `13614652238`). Debug APKs are for testing only; they are not signed Play Store releases.
+
+## Release builds (CI)
+
+On-demand release builds run from [.github/workflows/mobile-release.yml](../.github/workflows/mobile-release.yml). Open Actions → "CARTA Mobile Release" → Run workflow on `main`, or push a `v*` tag. The workflow uploads three artifacts (90-day retention):
+
+- `carta-android-release-apk` — release-mode APK. Without keystore secrets it is debug-signed: installable for testing (enable "Install unknown apps"), never for store distribution.
+- `carta-android-release-aab` — release AAB for the Google Play Console once the upload keystore is configured.
+- `carta-ios-unsigned-archive` — unsigned release .xcarchive. Apple requires a paid Apple Developer Program membership before any iOS device install or TestFlight upload; until then this artifact only proves the release build compiles.
+
+### Play Store signing (when ready)
+
+Generate an upload keystore once, add four repository secrets, and the same workflow signs release builds automatically:
+
+    keytool -genkeypair -v -keystore upload-keystore.jks -alias upload \
+      -keyalg RSA -keysize 2048 -validity 10000
+    base64 -w0 upload-keystore.jks   # paste the output as the ANDROID_KEYSTORE_B64 secret
+
+Secrets: `ANDROID_KEYSTORE_B64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`. Then create the app in the Google Play Console (one-time $25) and upload the signed AAB.
+
+### iOS / TestFlight (when ready)
+
+Enroll in the Apple Developer Program ($99/yr). A Mac is not required: GitHub's macOS runners can sign and upload once you add an App Store Connect API key and signing material as repository secrets; extend the iOS job with fastlane pilot (or xcrun altool) to push signed builds to TestFlight.
+
+Bump the `version:` field in `apps/mobile/pubspec.yaml` before each store submission so the Android versionCode and iOS build number advance together.
