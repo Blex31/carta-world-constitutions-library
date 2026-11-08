@@ -5,6 +5,7 @@ import '../config/app_config.dart';
 import '../models/carta_models.dart';
 import '../services/carta_api.dart';
 import '../theme/carta_theme.dart';
+import 'library_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
@@ -53,6 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         final response = await widget.supabase.auth.signUp(
           email: _email.text.trim(),
           password: _password.text,
+          emailRedirectTo: AppConfig.authRedirectUrl,
           data: {'display_name': _name.text.trim()},
         );
         _message = response.session == null
@@ -138,6 +140,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Text(
                     'Your personal library',
                     style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  OutlinedButton.icon(
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => MyLibraryScreen(api: widget.api),
+                      ),
+                    ),
+                    icon: const Icon(Icons.bookmarks_outlined),
+                    label: const Text('Open My Library'),
                   ),
                   const SizedBox(height: 8),
                   FutureBuilder<UserLibrary>(

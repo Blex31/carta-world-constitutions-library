@@ -7,15 +7,15 @@ CARTA is a document-first legal information platform. It preserves official prov
 ## Product targets
 
 - **Web:** React + Vite single-page application (current implementation).
-- **Android and iOS:** native Flutter applications (committed product requirement; separate client implementation).
+- **Android and iOS:** native Flutter clients under `apps/mobile` on [PR #3](https://github.com/Blex31/carta-world-constitutions-library/pull/3) (draft, not yet merged).
 - **Shared backend:** Supabase Postgres, Supabase Auth and the `carta-api` Edge Function. Web and mobile share one legal corpus, account system, API and citation model.
 
-The native app is not yet included in the current React/Vite source tree. See [native mobile requirements](docs/native-widget-fcm.md) and the [Phase 3 legal library and mobile plan](docs/phase-3-legal-library-and-mobile.md).
+The Flutter native clients are developed in the separate `apps/mobile` directory on the open draft PR. Web and mobile share the same Supabase project, legal corpus and API. Automated web and mobile CI passed for the PR head on 8 November 2026; store signing and physical-device acceptance remain pending. See [PR #3](https://github.com/Blex31/carta-world-constitutions-library/pull/3), the [master launch checklist](docs/launch-checklist.md), and the [African corpus launch plan](docs/africa-first-wave-corpus-plan.md).
 
 ## Stack
 
 - React + Vite web frontend
-- Flutter/Dart native Android and iOS clients (planned)
+- Flutter/Dart native Android and iOS clients (first implementation on `feature/flutter-native-clients`; PR #3 remains draft)
 - Supabase Postgres, Auth and Edge Functions
 - Supabase Row Level Security for user-owned data and publication controls
 - Official publisher registry with explicit licensing and reuse metadata

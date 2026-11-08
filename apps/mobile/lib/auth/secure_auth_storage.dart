@@ -1,19 +1,31 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// Keeps Supabase sessions and PKCE state in the platform secure store.
-class SecureAuthStorage extends AuthAsyncStorage {
+/// Stores Supabase sessions in Android encrypted storage and iOS Keychain.
+class SecureAuthStorage extends LocalStorage {
   const SecureAuthStorage();
 
   static const _storage = FlutterSecureStorage();
 
   @override
-  Future<String?> getItem(String key) => _storage.read(key: key);
+  Future<void> initialize() async {}
 
   @override
-  Future<void> setItem(String key, String value) =>
-      _storage.write(key: key, value: value);
+  Future<String?> accessToken() =>
+      _storage.read(key: supabasePersistSessionKey);
 
   @override
-  Future<void> removeItem(String key) => _storage.delete(key: key);
+  Future<bool> hasAccessToken() =>
+      _storage.containsKey(key: supabasePersistSessionKey);
+
+  @override
+  Future<void> persistSession(String persistSessionString) =>
+      _storage.write(
+        key: supabasePersistSessionKey,
+        value: persistSessionString,
+      );
+
+  @override
+  Future<void> removePersistedSession() =>
+      _storage.delete(key: supabasePersistSessionKey);
 }

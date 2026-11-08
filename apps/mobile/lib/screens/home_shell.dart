@@ -48,7 +48,7 @@ class _HomeShellState extends State<HomeShell> {
   void _openProfile() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (_) => ProfileScreen(supabase: widget.supabase),
+        builder: (_) => ProfileScreen(supabase: widget.supabase, api: _api),
       ),
     );
   }

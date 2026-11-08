@@ -38,10 +38,10 @@ class HomePage extends StatelessWidget {
                   title: 'YOUR SELECTED JURISDICTION',
                   headline: selected == null
                       ? 'Loading the global directory…'
-                      : '\${selected.flag}  \${selected.name}',
+                      : '${selected.flag}  ${selected.name}',
                   detail: documents.isEmpty
                       ? 'Catalogue entry only · no verified documents published yet'
-                      : '\${documents.length} verified documents available',
+                      : '${documents.length} verified documents available',
                   onTap: selected == null
                       ? null
                       : () => Navigator.of(context).push(
@@ -137,7 +137,7 @@ class _CataloguePageState extends State<CataloguePage> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text('\${countries.length} jurisdictions', style: Theme.of(context).textTheme.labelLarge),
+              Text('${countries.length} jurisdictions', style: Theme.of(context).textTheme.labelLarge),
               const SizedBox(height: 8),
               for (final country in countries)
                 Card(
@@ -180,7 +180,7 @@ class _CountryDocumentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final documents = store.documentsFor(country.id);
     return Scaffold(
-      appBar: AppBar(title: Text('\${country.flag} \${country.name}')),
+      appBar: AppBar(title: Text('${country.flag} ${country.name}')),
       body: documents.isEmpty
           ? const _EmptyState(
               icon: Icons.library_books_outlined,
@@ -196,7 +196,7 @@ class _CountryDocumentsScreen extends StatelessWidget {
                     child: ListTile(
                       title: Text(document.title),
                       subtitle: Text(
-                        '\${document.type} · \${document.year} · \${document.version}',
+                        '${document.type} · ${document.year} · ${document.version}',
                       ),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () => Navigator.of(context).push(
@@ -302,21 +302,26 @@ class _SearchPageState extends State<SearchPage> {
               child: ListTile(
                 title: Text(hit.heading.isEmpty ? hit.documentTitle : hit.heading),
                 subtitle: Text(
-                  '\${hit.documentTitle}\n\${hit.content}',
+                  '${hit.documentTitle}\n${hit.content}',
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
                 ),
                 isThreeLine: true,
                 onTap: () {
-                  final document = widget.store.documents
-                      .where((item) => item.id == hit.documentId)
-                      .firstOrNull;
-                  if (document != null) {
+                  LegalDocument? document;
+                  for (final candidate in widget.store.documents) {
+                    if (candidate.id == hit.documentId) {
+                      document = candidate;
+                      break;
+                    }
+                  }
+                  final selectedDocument = document;
+                  if (selectedDocument != null) {
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
                         builder: (_) => ReaderScreen(
                           api: widget.api,
-                          document: document,
+                          document: selectedDocument,
                         ),
                       ),
                     );
@@ -358,7 +363,7 @@ class UpdatesPage extends StatelessWidget {
                   child: ListTile(
                     title: Text(item.title),
                     subtitle: Text(
-                      '\${item.type} · \${item.jurisdiction}\n\${item.summary}',
+                      '${item.type} · ${item.jurisdiction}\n${item.summary}',
                     ),
                     isThreeLine: true,
                     onTap: item.sourceUrl.isEmpty

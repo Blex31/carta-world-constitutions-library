@@ -1,11 +1,11 @@
 # CARTA — Master launch checklist
 
-**Last verified:** 6 November 2026  
+**Last verified:** 8 November 2026  
 **Repository:** https://github.com/Blex31/carta-world-constitutions-library  
 **Live backend:** Supabase project `mvcirldxcuvcuqvlmqxv`  
-**Code baseline reviewed:** `98bd6e4e32d549a061da3da34f533abb38c13d14`  
+**Code baseline reviewed:** `b1655a982eb879fdcbe24846c606082594406fbd` (My Library implementation, parser test and final verified mobile build; Mobile CI #47)  
 **Checklist creation commit:** `b922334102fd3abf644be8978fbd13cdc8ee00c6`  
-**Latest verified CI at checklist creation:** [Run #55 — passed](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42208017731)
+**Latest verified CI for the My Library implementation:** [Web CI #87](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119384) and [Mobile CI #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289), both passed for code baseline `b1655a9`.
 
 This is CARTA's single running checklist. Update it after each meaningful development session. Do not mark an item complete just because code exists: complete it only after the stated acceptance test has passed.
 
@@ -23,16 +23,17 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 | Web client | React + Vite application is in GitHub; latest CI build passes |
 | Backend | Supabase project is ACTIVE_HEALTHY |
 | Database | 19 public tables; RLS enabled on all 19 |
-| Global directory | 250 jurisdiction records; metadata only |
-| Publisher candidates | 8 EAC candidates; all still inactive and rights-review-required |
+| Global directory | 250 rows; only 8 classified as sovereign states / UN members, while 242 remain unclassified; metadata only |
+| Publisher candidates | 8 EAC candidates; all inactive, rights-review-required and not commercially cleared |
 | Legal corpus | 0 legal documents, 0 sections/provisions, 0 searchable chunks |
 | Legal updates | 0 feed items; scheduled poll is active but has no eligible publisher |
 | API | `carta-api` Edge Function is active at version 9 |
 | Scheduled job | `carta-official-feed-daily` active at 03:10 UTC / 06:10 Africa/Nairobi |
 | Migrations | 9 migration records applied in the live project; SQL files are checked in |
 | Supabase advisors | No security lints; the previous ingestion-run RLS performance warning is fixed; unused-index notices remain |
-| Native apps | No Flutter project yet; Android/iOS remain a required product deliverable |
+| Native apps | Flutter Android/iOS first slice, reader actions and My Library screen on `feature/flutter-native-clients`; Android debug APK and unsigned iOS CI verified on Mobile CI #47 for code baseline `b1655a9` |
 | Public web launch | No production frontend URL confirmed |
+| Current CI | [Web CI #87](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119384) and [Mobile CI #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289) passed for code baseline `b1655a9` |
 
 ---
 
@@ -46,12 +47,15 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 - [x] Fix the Supabase RLS initialization-plan warning on the administrator ingestion-run read policy.
 - [x] Keep GitHub Actions test, coverage audit, syntax, typecheck and production Vite build passing.
 - [ ] Validate migrations 001–009 from an empty disposable Supabase project or clean local Supabase stack. This is especially important for reconstructed migrations 004 and 005.
+- [ ] Reclassify the 242 currently unclassified jurisdiction rows using a reviewed ISO-3166 / UN crosswalk; separate the 193 UN member states, two observer states, territories/dependencies and international instruments. Do not use 250 as the country denominator.
 - [ ] Add a committed npm lockfile, switch CI from `npm install` to `npm ci`, and verify a clean reproducible build.
 - [ ] Add an automated check that the deployed Edge Function and repository source do not drift.
 
 **Acceptance:** A new environment can be created from the repository migrations and seeds, all tests pass, and the deployed API source matches GitHub.
 
 ## Phase 1 — Legal source and constitution collection (critical path)
+
+**Launch target:** 15 verified African constitutional collections for the first release, with a stretch target of 25. These are targets, not current coverage claims. Use [the African corpus launch plan](africa-first-wave-corpus-plan.md) for the candidate pool, special legal holds, source research and import gates.
 
 **The legal corpus is CARTA's main launch blocker.** A country appearing in the directory does not mean its Constitution is available or verified.
 
@@ -157,23 +161,34 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ## Phase 7 — Native Android and iOS applications
 
-**Status:** Required product scope, but not yet started in this repository.
+**Status:** Flutter first slice, reader actions and My Library screen committed on branch `feature/flutter-native-clients`. Mobile CI #47 and web CI #87 passed for implementation commit `b1655a9`. PR #3 remains draft and unmerged.
 
-- [ ] Create the Flutter project and commit `pubspec.yaml`, Android and iOS project files.
-- [ ] Build welcome/onboarding, account creation, sign-in and account recovery.
-- [ ] Build country catalogue, legal-document library and verified document reader.
-- [ ] Build provision search, citation navigation and legal assistant.
-- [ ] Build daily updates and publisher/source details.
-- [ ] Build account, preferences and synced bookmarks/highlights/notes.
-- [ ] Connect to the same Supabase Auth and CARTA API; do not create a second legal database or embed privileged secrets.
-- [ ] Implement licensed offline document storage with SHA-256 validation, version identifiers and stale-document warnings.
-- [ ] Implement FCM for Android and APNs-backed FCM for iOS, with opt-in/out and each user's local 06:00 schedule.
-- [ ] Implement Android AppWidget and iOS WidgetKit with verified daily content and document deep links.
-- [ ] Implement mobile subscription/restore-purchase behaviour compliant with current store requirements.
+- [x] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
+- [x] Generate and commit the Android and iOS runner projects; register the `carta://auth-callback` deep link and CARTA display name in both native projects.
+- [x] Implement email sign-up/sign-in, password reset request and password update screen.
+- [x] Implement the global jurisdiction catalogue with metadata-only empty states.
+- [x] Implement the verified document reader and provision bookmarking through the existing CARTA API.
+- [x] Implement verified legal passage search and source-aware empty states.
+- [x] Implement official updates list and authenticated legal research request.
+- [~] Account screen shows personal-library counts and links to the new My Library screen. My Library now lists saved documents, bookmarks, highlights and private notes with open/remove actions; CI and real-device account isolation, sync and deletion checks remain.
+- [x] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
+- [x] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
+- [x] Latest verified Mobile CI [run #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289), implementation commit `b1655a982eb879fdcbe24846c606082594406fbd`: Flutter analysis, all three widget tests, Android debug APK build and upload (artifact `carta-android-debug`, ID `13614652238`), and unsigned iOS build all passed.
+- [x] Latest verified web CI [run #87](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119384), same implementation commit: tests, data-coverage audit, syntax check, type check and production frontend build all passed.
+- [~] Connected debug APK is available as artifact `carta-android-debug` (artifact ID `13501829591`); this is a debug build, not a signed store release.
+- [ ] Add `carta://auth-callback` to Supabase Auth Redirect URLs and verify confirmation/password recovery on physical Android and iOS devices.
+- [ ] Configure Supabase Auth redirect allow-list with `carta://auth-callback`; test confirmation and password recovery on physical devices.
+- [ ] Build a real saved-library flow for highlights and notes and verify cross-device synchronisation.
+- [!] Implement licensed offline document storage only after the API exposes explicit per-version offline/device-copy permission; include SHA-256 validation, version identifiers and stale-document warnings.
+- [!] Implement FCM for Android and APNs-backed FCM for iOS after Firebase project registration, APNs key upload, device-token backend and user opt-in are configured.
+- [!] Implement Android AppWidget and iOS WidgetKit after a verified daily-item feed exists and native widget extensions are generated.
+- [!] Implement mobile subscription/restore purchase using the applicable Google Play Billing and Apple In-App Purchase flow; the existing Stripe route is web-only.
 - [ ] Test on real Android and iOS devices, including low bandwidth, accessibility, text scaling, offline mode and session expiry.
-- [ ] Prepare Play Store and App Store listings, privacy disclosures, screenshots and release builds.
+- [ ] Prepare Play Store and App Store listings, privacy disclosures, screenshots, signing keys and release builds.
 
 **Acceptance:** The same account and reading shelf work on web and mobile; licensed offline content is safe; daily notifications/widgets respect timezone and user preferences.
+
+**Why the remaining mobile items are blocked and how to clear them:** see [Blockers and solutions](blockers-and-solutions.md).
 
 ## Phase 8 — Security, legal operations and launch readiness
 
@@ -202,8 +217,12 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 4. **Test real user journeys:** account creation/recovery, document reading, search, bookmarks and cross-account isolation.
 5. **Activate legal AI and official updates:** only after verified, rights-cleared documents and publishers exist.
 6. **Activate CARTA Plus:** choose pricing, configure Stripe and test the complete billing lifecycle.
-7. **Build native Flutter clients:** Android/iOS, offline reading, notifications, widgets and store billing.
+7. **Complete native Flutter clients:** configure/test auth deep links, finish saved-library UI and device sync, then implement licensed offline reading, notifications, widgets, mobile billing and store release.
 8. **Run launch sign-off:** security, backup/restore, monitoring, legal and store checks.
+
+## Blocker explanations and solutions
+
+Every pending or blocked item has a reason, a concrete solution and a test for clearing it in [docs/blockers-and-solutions.md](blockers-and-solutions.md). Update both this checklist and that document when a blocker changes.
 
 ## Update log
 
@@ -218,3 +237,10 @@ Add one entry after each development session. Record the commit/run, verified re
 | Date | Commit / CI | Verified change | Checklist updated by |
 |---|---|---|---|
 | YYYY-MM-DD | `commit` / CI run | What was actually tested and passed | Project session |
+
+| 6 Nov 2026 | `feature/flutter-native-clients` / [mobile CI #21](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42214335106) | Committed Flutter app, 94 native runner files, `pubspec.lock`; Flutter analyze, widget tests and unsigned iOS build passed; Android debug APK compile running | CARTA project session |
+
+
+| 6 Nov 2026 | [Mobile CI #30](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42217617177) / `9f0ba00` | Verified Flutter analysis, widget tests, Android debug APK build and upload, and unsigned iOS build all passed; PR #3 remains draft and unmerged | CARTA project session |
+
+| 6 Nov 2026 | `1e3503e` / [Mobile CI #32](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238228649) | Added provision-level bookmark/highlight/private-note actions in the Flutter reader using the existing authenticated library API; CI queued for this commit | CARTA project session |
