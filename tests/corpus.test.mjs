@@ -24,8 +24,18 @@ test('jurisdiction directory is unique ISO metadata, not falsely labelled as com
   assert.equal(new Set(codes).size, codes.length, 'jurisdiction codes must be unique');
   for (const item of jurisdictions) {
     assert.match(item.iso_code, /^[A-Z]{2,3}$/);
-    assert.equal(item.jurisdiction_kind, 'unclassified');
-    assert.equal(item.is_un_member, null);
+    assert.ok(['sovereign_state', 'unclassified'].includes(item.jurisdiction_kind));
+    assert.equal(typeof item.is_un_member, 'boolean');
+  }
+  const unMembers = jurisdictions.filter((item) => item.is_un_member === true);
+  assert.equal(unMembers.length, 193, 'the directory should identify all 193 UN Member States');
+  assert.ok(unMembers.every((item) => item.jurisdiction_kind === 'sovereign_state'));
+  for (const code of ['VA', 'PS']) {
+    const observer = jurisdictions.find((item) => item.iso_code === code);
+    assert.ok(observer, `observer state ${code} should be present`);
+    assert.equal(observer.jurisdiction_kind, 'sovereign_state');
+    assert.equal(observer.is_un_member, false);
+  }
   }
   assert.ok(!jurisdictions.some((item) => item.constitution_status === 'verified_current'));
 });
