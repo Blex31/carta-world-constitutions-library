@@ -45,6 +45,7 @@ This uses Flutter's official project generator and preserves the checked-in Dart
 - Official updates feed.
 - Authenticated legal research request.
 - Account and personal-library summary.
+- Dedicated My Library with Saved, Bookmarks, Highlights and Notes tabs; open linked documents, remove saved items, refresh and retain account-scoped data.
 - Shared CARTA palette and mobile navigation.
 
 ## Not enabled yet
@@ -65,3 +66,7 @@ The auth callback is carta://auth-callback. Add it to the Supabase Auth redirect
     flutter build apk --debug
 
 For iOS, run flutter build ios --no-codesign on macOS after generating the iOS runner.
+
+## CI and test artifact
+
+GitHub Actions runs Flutter analysis, widget tests, an Android debug APK build/upload and an unsigned iOS build. The verified implementation baseline `b1655a982eb879fdcbe24846c606082594406fbd` passed Mobile CI #47: analysis, all three widget tests, Android debug APK build and artifact upload, and unsigned iOS build. The ZIP artifact is available from [Mobile CI #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289) as `carta-android-debug` (artifact ID `13614652238`). Debug APKs are for testing only; they are not signed Play Store releases.
