@@ -1,251 +1,27 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { apiFetch, apiUrl, getAccessToken, getSessionUser, requestPasswordReset, SUPABASE_PUBLISHABLE_KEY, signInWithEmail, signOut, signUpWithEmail, supabase, updatePassword } from './auth';
-
 import seedJurisdictions from '../data/jurisdictions.seed.json';
 import legalResearchArchiveImg from './assets/images/legal_research_archive_1794154959568.jpg';
-
-const researchPresets = [
-  {
-    theme: 'Sovereignty & Governance',
-    query: 'How does the constitution define sovereign power and citizen governance?',
-    description: 'Explore the constitutional root of public authority and democratic representation.'
-  },
-  {
-    theme: 'Bill of Rights & Equality',
-    query: 'What constitutional protections guarantee equality and bar unfair discrimination?',
-    description: 'Examine fundamental rights, non-discrimination clauses, and judicial protections.'
-  },
-  {
-    theme: 'Freedom of Expression',
-    query: 'What are the constitutional boundaries and protections for freedom of expression?',
-    description: 'Analyze free speech, media freedom, and legitimate constitutional limits.'
-  },
-  {
-    theme: 'National Values & Integrity',
-    query: 'What core national values and principles of governance bind public officials?',
-    description: 'Review rule of law, human dignity, public participation, and transparency.'
-  }
-];
-
-const fallbackDocs = [
-  { id: 'ke', country: 'KE', title: 'Constitution of Kenya, 2010', type: 'constitution', year: '2010', main: true, short: 'Supreme law of the Republic of Kenya', officialUrl: 'https://new.kenyalaw.org/legislation/', version: '2010 Official Text' },
-  { id: 'us', country: 'US', title: 'Constitution of the United States', type: 'constitution', year: '1787', main: true, short: 'Supreme Law of the United States', officialUrl: 'https://www.archives.gov/founding-docs/constitution', version: '1787 with Amendments I-XXVII' },
-  { id: 'za', country: 'ZA', title: 'Constitution of South Africa, 1996', type: 'constitution', year: '1996', main: true, short: 'Supreme law of the Republic of South Africa', officialUrl: 'https://www.gov.za/documents/constitution-republic-south-africa-1996', version: '1996 as amended' },
-  { id: 'rw', country: 'RW', title: 'Constitution of the Republic of Rwanda (2023)', type: 'constitution', year: '2023', main: true, short: 'Official Gazette n° Special of 04/08/2023', officialUrl: 'https://www.rlrc.gov.rw/', version: '2023 Revision' },
-  { id: 'udhr', country: null, title: 'Universal Declaration of Human Rights', type: 'declaration', year: '1948', main: false, short: 'Adopted by the United Nations General Assembly in Paris', officialUrl: 'https://www.un.org/en/about-us/universal-declaration-of-human-rights', version: 'Paris, 10 December 1948' },
-];
-
-const fallbackArticles = [
-  {
-    id: 'ke1',
-    doc: 'ke',
-    chapter: 1,
-    chapterTitle: 'Sovereignty of the People and Supremacy of this Constitution',
-    num: 'Article 1',
-    title: 'Sovereignty of the people',
-    original: 'All sovereign power belongs to the people of Kenya and shall be exercised only in accordance with this Constitution. The people may exercise their sovereign power either directly or through their democratically elected representatives.',
-    plain: 'Ultimate governing power belongs to the citizens of Kenya. Leaders hold authority on behalf of the public and must follow the rules set out in the Constitution.',
-    tags: ['sovereignty', 'democracy', 'people', 'power'],
-    source: 'Constitution of Kenya, 2010 · Article 1',
-    officialUrl: 'https://new.kenyalaw.org/legislation/'
-  },
-  {
-    id: 'ke2',
-    doc: 'ke',
-    chapter: 1,
-    chapterTitle: 'Sovereignty of the People and Supremacy of this Constitution',
-    num: 'Article 2',
-    title: 'Supremacy of this Constitution',
-    original: 'This Constitution is the supreme law of the Republic and binds all persons and all State organs at both levels of government. No person may claim or exercise State authority except as authorized under this Constitution.',
-    plain: 'The Constitution is the highest law in the land. No president, parliamentarian, judge, or government policy can override it.',
-    tags: ['supremacy', 'rule of law', 'constitution'],
-    source: 'Constitution of Kenya, 2010 · Article 2',
-    officialUrl: 'https://new.kenyalaw.org/legislation/'
-  },
-  {
-    id: 'ke10',
-    doc: 'ke',
-    chapter: 2,
-    chapterTitle: 'The Republic',
-    num: 'Article 10',
-    title: 'National values and principles of governance',
-    original: 'The national values and principles of governance in this Article bind all State organs, State officers, public officers and all persons whenever any of them applies or interprets this Constitution; enacts, applies or interprets any law; or makes or implements public policy decisions. The national values and principles of governance include patriotism, national unity, sharing and devolution of power, the rule of law, democracy and participation of the people; human dignity, equity, social justice, inclusiveness, equality, human rights, non-discrimination and protection of the marginalised; good governance, integrity, transparency and accountability; and sustainable development.',
-    plain: 'Whenever lawmakers, judges, or officials make decisions, they must uphold key national values: public participation, human dignity, non-discrimination, transparency, integrity, and social justice.',
-    tags: ['governance', 'values', 'public participation', 'integrity', 'rule of law'],
-    source: 'Constitution of Kenya, 2010 · Article 10',
-    officialUrl: 'https://new.kenyalaw.org/legislation/'
-  },
-  {
-    id: 'ke27',
-    doc: 'ke',
-    chapter: 4,
-    chapterTitle: 'The Bill of Rights',
-    num: 'Article 27',
-    title: 'Equality and freedom from discrimination',
-    original: 'Every person is equal before the law and has the right to equal protection and equal benefit of the law. Equality includes the full and equal enjoyment of all rights and fundamental freedoms. Women and men have the right to equal treatment, including the right to equal opportunities in political, economic, cultural and social spheres.',
-    plain: 'Everyone is entitled to equal rights and protection under the law. The government and private actors cannot unfairly discriminate against individuals based on race, sex, pregnancy, marital status, health status, ethnic origin, or religion.',
-    tags: ['equality', 'rights', 'non-discrimination', 'bill of rights'],
-    source: 'Constitution of Kenya, 2010 · Article 27',
-    officialUrl: 'https://new.kenyalaw.org/legislation/'
-  },
-  {
-    id: 'ke33',
-    doc: 'ke',
-    chapter: 4,
-    chapterTitle: 'The Bill of Rights',
-    num: 'Article 33',
-    title: 'Freedom of expression',
-    original: 'Every person has the right to freedom of expression, which includes freedom to seek, receive or impart information or ideas; freedom of artistic creativity; and academic freedom and freedom of scientific research. The right to freedom of expression does not extend to propaganda for war, incitement to violence, hate speech or advocacy of hatred.',
-    plain: 'Citizens have the right to speak, share ideas, create art, and conduct research freely, provided it does not cross into incitement, violence, or hate speech.',
-    tags: ['freedom of expression', 'free speech', 'rights'],
-    source: 'Constitution of Kenya, 2010 · Article 33',
-    officialUrl: 'https://new.kenyalaw.org/legislation/'
-  },
-  {
-    id: 'us1',
-    doc: 'us',
-    chapter: 1,
-    chapterTitle: 'Article I — The Legislative Branch',
-    num: 'Article I, Section 1',
-    title: 'Legislative powers vested in Congress',
-    original: 'All legislative Powers herein granted shall be vested in a Congress of the United States, which shall consist of a Senate and House of Representatives.',
-    plain: 'Only Congress has the authority to make federal laws. Congress is split into two chambers: the Senate and the House of Representatives.',
-    tags: ['congress', 'legislative', 'powers'],
-    source: 'United States Constitution · Article I, Section 1',
-    officialUrl: 'https://www.archives.gov/founding-docs/constitution'
-  },
-  {
-    id: 'usam1',
-    doc: 'us',
-    chapter: 2,
-    chapterTitle: 'The Bill of Rights (Amendments I–X)',
-    num: 'First Amendment',
-    title: 'Freedom of religion, speech, press, assembly, and petition',
-    original: 'Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the right of the people peaceably to assemble, and to petition the Government for a redress of grievances.',
-    plain: 'Protects five foundational democratic freedoms: freedom of religion, speech, a free press, peaceful assembly, and the right to petition government for change.',
-    tags: ['free speech', 'religion', 'press', 'assembly', 'first amendment'],
-    source: 'United States Constitution · Amendment I (1791)',
-    officialUrl: 'https://www.archives.gov/founding-docs/constitution'
-  },
-  {
-    id: 'za1',
-    doc: 'za',
-    chapter: 1,
-    chapterTitle: 'Founding Provisions',
-    num: 'Section 1',
-    title: 'Founding values of the Republic',
-    original: 'The Republic of South Africa is one, sovereign, democratic state founded on the following values: Human dignity, the achievement of equality and the advancement of human rights and freedoms; Non-racialism and non-sexism; Supremacy of the constitution and the rule of law; Universal adult suffrage, a national common voters roll, regular elections and a multi-party system of democratic government.',
-    plain: 'South Africa is built on values of human dignity, non-racialism, gender equality, universal voting rights, and constitutional supremacy.',
-    tags: ['founding values', 'democracy', 'human dignity', 'equality'],
-    source: 'Constitution of the Republic of South Africa, 1996 · Section 1',
-    officialUrl: 'https://www.gov.za/documents/constitution-republic-south-africa-1996'
-  },
-  {
-    id: 'za9',
-    doc: 'za',
-    chapter: 2,
-    chapterTitle: 'Bill of Rights',
-    num: 'Section 9',
-    title: 'Equality',
-    original: 'Everyone is equal before the law and has the right to equal protection and benefit of the law. Equality includes the full and equal enjoyment of all rights and freedoms. To promote the achievement of equality, legislative and other measures designed to protect or advance persons, or categories of persons, disadvantaged by unfair discrimination may be taken.',
-    plain: 'Everyone is equal under the law. Affirmative measures may be taken to remedy historical injustices and unfair discrimination.',
-    tags: ['equality', 'non-discrimination', 'bill of rights'],
-    source: 'Constitution of the Republic of South Africa, 1996 · Section 9',
-    officialUrl: 'https://www.gov.za/documents/constitution-republic-south-africa-1996'
-  },
-  {
-    id: 'rw1',
-    doc: 'rw',
-    chapter: 1,
-    chapterTitle: 'The State and its Sovereignty',
-    num: 'Article 1',
-    title: 'Supremacy of the Constitution',
-    original: 'The Constitution is the supreme law of the State. Any law, decision or act contrary to this Constitution is null and void.',
-    plain: 'The Constitution is the highest legal authority in Rwanda. Any government action or statutory law that conflicts with it is invalid.',
-    tags: ['supremacy', 'constitution', 'rule of law'],
-    source: 'Constitution of the Republic of Rwanda (2023) · Article 1',
-    officialUrl: 'https://www.rlrc.gov.rw/'
-  },
-  {
-    id: 'rw15',
-    doc: 'rw',
-    chapter: 2,
-    chapterTitle: 'Fundamental Principles',
-    num: 'Article 15',
-    title: 'Equality of all Rwandans',
-    original: 'All Rwandans are born and remain equal in rights and freedoms. Discrimination of any kind or its propaganda based on, inter alia, ethnic origin, family, clan, skin colour, sex, region, economic categories, religion or faith, opinion, fortune, cultural difference, language, economic status, physical or mental disability or any other form of discrimination is prohibited and punishable by law.',
-    plain: 'All citizens are born equal. Discrimination based on ethnicity, region, sex, religion, language, or disability is strictly prohibited by law.',
-    tags: ['equality', 'human rights', 'unity', 'non-discrimination'],
-    source: 'Constitution of the Republic of Rwanda (2023) · Article 15',
-    officialUrl: 'https://www.rlrc.gov.rw/'
-  },
-  {
-    id: 'udhr1',
-    doc: 'udhr',
-    chapter: 1,
-    chapterTitle: 'Universal Articles',
-    num: 'Article 1',
-    title: 'Freedom and equality in dignity and rights',
-    original: 'All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.',
-    plain: 'Every person in the world is born free and with equal human dignity, and should treat others with mutual respect and conscience.',
-    tags: ['human rights', 'dignity', 'freedom', 'equality'],
-    source: 'Universal Declaration of Human Rights · Article 1',
-    officialUrl: 'https://www.un.org/en/about-us/universal-declaration-of-human-rights'
-  },
-  {
-    id: 'udhr2',
-    doc: 'udhr',
-    chapter: 1,
-    chapterTitle: 'Universal Articles',
-    num: 'Article 2',
-    title: 'Freedom from discrimination',
-    original: 'Everyone is entitled to all the rights and freedoms set forth in this Declaration, without distinction of any kind, such as race, colour, sex, language, religion, political or other opinion, national or social origin, property, birth or other status.',
-    plain: 'Human rights belong to every human being without exception, regardless of who they are, where they live, or what they believe.',
-    tags: ['non-discrimination', 'human rights', 'equality'],
-    source: 'Universal Declaration of Human Rights · Article 2',
-    officialUrl: 'https://www.un.org/en/about-us/universal-declaration-of-human-rights'
-  }
-];
-
-const fallbackDailyItems = [
-  {
-    id: 'daily-1',
-    kind: 'FACT',
-    title: 'Constitutional Supremacy',
-    body: 'In constitutional democracies, the constitution is the supreme law of the state; any ordinary legislation or executive action inconsistent with it is invalid.',
-    ref: 'ke',
-    jurisdictionIso: 'KE',
-    source: 'Republic of Kenya · Kenya Law',
-    sourceUrl: 'https://new.kenyalaw.org/legislation/',
-    publishedAt: '2026-11-01T06:00:00Z',
-  },
-  {
-    id: 'daily-2',
-    kind: 'CURRENT AFFAIR',
-    title: 'Apex Court Jurisprudence on Public Participation',
-    body: 'Recent constitutional jurisprudence affirms that genuine, accessible public participation is a mandatory constitutional prerequisite before statutes can be validly enacted.',
-    ref: 'ke',
-    jurisdictionIso: 'KE',
-    source: 'National Council for Law Reporting',
-    sourceUrl: 'https://kenyalaw.org/',
-    publishedAt: '2026-11-05T08:30:00Z',
-  },
-  {
-    id: 'daily-3',
-    kind: 'BILL',
-    title: 'Statutory Law Harmonization Bill',
-    body: 'Proposed legislative update harmonizing statutory enactments with devolved county structures and constitutional rights standards.',
-    ref: 'ke',
-    jurisdictionIso: 'KE',
-    source: 'Official Parliamentary Gazette',
-    sourceUrl: 'https://new.kenyalaw.org/legislation/',
-    publishedAt: '2026-11-07T10:00:00Z',
-  },
-];
-function dayKey(now=new Date()){const d=new Date(now);if(d.getHours()<6)d.setDate(d.getDate()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
-function hash(s){let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return h>>>0;}
-function useStore(key,initial){const [v,setV]=useState(()=>{try{return JSON.parse(localStorage.getItem(key))??initial}catch{return initial}});useEffect(()=>localStorage.setItem(key,JSON.stringify(v)),[key,v]);return [v,setV]}
-function title(a){return `${a.num} · ${a.title}`}
+import { fallbackDocs, fallbackArticles, fallbackDailyItems } from './lib/fallbacks';
+import { dayKey, hash } from './lib/daily';
+import { useStore } from './lib/use-store';
+import { title, wrap } from './lib/format';
+import researchPresets from './lib/research-presets';
+import PageHeader from './components/PageHeader';
+import CompareCard from './components/CompareCard';
+import AdSlot from './components/AdSlot';
+import HomePage from './pages/HomePage';
+import ReadPage from './pages/ReadPage';
+import SearchPage from './pages/SearchPage';
+import ChatPage from './pages/ChatPage';
+import CataloguePage from './pages/CataloguePage';
+import SourcesPage from './pages/SourcesPage';
+import LibraryPage from './pages/LibraryPage';
+import AuthModal from './modals/AuthModal';
+import PaywallModal from './modals/PaywallModal';
+import WelcomeModal from './modals/WelcomeModal';
+import CompareModal from './modals/CompareModal';
+import NoteModal from './modals/NoteModal';
 
 export default function App(){
   const [countries,setCountries]=useState([]);
@@ -732,10 +508,11 @@ export default function App(){
   }
   async function copyArticle(a){try{await navigator.clipboard.writeText(`${title(a)}\n\nOriginal text\n${a.original}\n\nIn plain language\n${a.plain}\n\n${a.source}\n\nCARTA — Every Constitution. Every Country. In Plain Language.`);showToast('Article copied.')}catch{showToast('Clipboard is unavailable in this browser.')}}
   async function shareImage(a){const canvas=document.createElement('canvas');canvas.width=1200;canvas.height=1200;const c=canvas.getContext('2d');c.fillStyle='#FFFBF2';c.fillRect(0,0,1200,1200);c.fillStyle='#1A7F37';c.fillRect(82,90,9,1020);c.fillStyle='#1A7F37';c.font='700 27px Inter';c.fillText('CARTA / WORLD CONSTITUTIONS LIBRARY',130,120);c.fillStyle='#1A1A1A';c.font='bold 48px Merriweather';c.fillText(title(a).slice(0,38),130,220);c.fillStyle='#6B6A61';c.font='700 22px Inter';c.fillText('ORIGINAL TEXT',130,315);c.fillStyle='#222';c.font='30px Merriweather';wrap(c,a.original,130,370,920,46,5);c.fillStyle='#1A7F37';c.font='700 22px Inter';c.fillText('IN PLAIN LANGUAGE',130,740);c.fillStyle='#303329';c.font='26px Inter';wrap(c,a.plain,130,800,920,40,5);c.fillStyle='#68685F';c.font='18px Inter';c.fillText(a.source.slice(0,90),130,1090);c.fillText('Educational explanation · Not legal advice',130,1128);const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));if(!blob){showToast('Image export failed.');return}const file=new File([blob],'carta-article.png',{type:'image/png'});if(navigator.share&&navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:title(a)})}catch{showToast('Share cancelled.')}}else{const u=URL.createObjectURL(blob);const l=document.createElement('a');l.href=u;l.download='carta-article.png';l.click();URL.revokeObjectURL(u);showToast('Image saved. You can attach it to WhatsApp.')}}
-function wrap(ctx,text,x,y,width,lh,max){let line='',n=0;for(const word of text.split(/\s+/)){const test=line?line+' '+word:word;if(ctx.measureText(test).width>width&&line){ctx.fillText(line,x,y);y+=lh;line=word;n++;if(n>=max)return y}else line=test}if(line&&n<max)ctx.fillText(line,x,y);return y+lh}
 function saveNote(){if(!noteText.trim())return;const text=noteText.trim();setNotes([{articleId:active.id,text,date:new Date().toLocaleDateString()},...notes.filter(n=>n.articleId!==active.id)]);if(account)void apiSave({action:'note',operation:'save',documentId:active.doc,sectionId:active.id,text}).catch(()=>showToast('Note saved locally; sync can be retried.'));setNoteText('');setNoteOpen(false);showToast('Note saved to your library.')}
 const nav=[['home','⌂','Home'],['read','▤','Read'],['search','⌕','Search'],['chat','✧','Ask CARTA'],['catalogue','◎','Coverage'],['library','▣','Library'],['sources','↗','Sources']];
 const navButtons=nav.map(([id,glyph,label])=><button key={id} className={page===id?'active':''} onClick={()=>{setPage(id);setMobileTocOpen(false);}}><span>{glyph}</span><small>{label}</small></button>);
+  const ctx={account,active,activeAssistantId,adConfig,addSource,adminSourceData,adminSourcesBusy,aod,apiSave,articleId,articles,askLegalQuestion,authBusy,authEmail,authMode,authName,authNotice,authOpen,authPassword,authPasswordConfirm,billing,billingBusy,billingPortal,billItems,bookmarks,chatBusy,chatConversationId,chatMessages,chatQuestion,chatSources,checkout,chooseCountry,clockTick,compare,compared,copyArticle,copyCitation,countries,country,countryId,coverage,currentItems,daily,dailyArticles,dailyCategory,dailyFeed,dailyPick,docs,documentId,downloads,eligibleFeed,font,highlights,lastFeedUpdated,leaveAccount,libraryDataReady,libraryTab,localSearchResults,mainDoc,mobileTocOpen,newChat,newSourceOpen,night,noteOpen,notes,noteText,offline,openArticle,page,paywallOpen,paywallPlan,query,readArticles,readDoc,refreshAdminSources,refreshBilling,refreshFeed,runSourceIngestion,saveSourceRights,searchResults,serverSearchResults,setAccount,setActiveAssistantId,setAdConfig,setAdminSourceData,setAdminSourcesBusy,setArticleId,setArticles,setAuthBusy,setAuthEmail,setAuthMode,setAuthName,setAuthNotice,setAuthOpen,setAuthPassword,setAuthPasswordConfirm,setBilling,setBillingBusy,setBookmarks,setChatBusy,setChatConversationId,setChatMessages,setChatQuestion,setChatSources,setClockTick,setCompare,setCountries,setCountryId,setCoverage,setDailyFeed,setDocs,setDocumentId,setDownloads,setFont,setHighlights,setLastFeedUpdated,setLibraryDataReady,setLibraryTab,setMobileTocOpen,setNewSourceOpen,setNight,setNoteOpen,setNotes,setNoteText,setOffline,setPage,setPaywallOpen,setPaywallPlan,setQuery,setServerSearchResults,setSourceActive,setToast,setWelcome,shareImage,showToast,submitAuth,syncToggle,synthesizeLocalLegalResearch,toast,today,toggle,visibleDocs,welcome};
+
 return <div className={'app '+(night?'night':'')}>
   <header className="topbar">
     <button className="brand" onClick={()=>setPage('home')}>
@@ -759,208 +536,19 @@ return <div className={'app '+(night?'night':'')}>
   </header>
   <div className="layout"><aside className="sidebar"><small className="overline">YOUR READING ROOM</small>{navButtons}<div className="sideBlock"><small className="overline">READING COUNTRY</small><b>{country.flag} {country.name}</b><p>Your daily article comes from this country's main constitution.</p><button className="outline" onClick={()=>setWelcome(true)}>Change country</button></div><div className="sideQuote">§<p>Understand the law.<br/><b>One article at a time.</b></p><small>Reference text + plain language</small></div></aside>
   <main className="main">
-    {page==='home'&&<>
-      <section className="welcome"><div><small className="overline">{new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}).toUpperCase()}</small><h1>A clearer view of <em>your rights.</em></h1><p>Read the words that shape our countries — and what they mean in everyday life.</p></div><div className="seal">§<small>PUBLIC<br/>LAW</small></div></section>
-      <section className="daily-card"><div className="daily-top"><span className="green-label">● YOUR DAILY READING</span><span className="time-label">◷ DAILY · 6 AM LOCAL</span></div>{aod?<div className="daily-content"><div className="documentMeta">{country.flag} {country.name}　·　{mainDoc?.year||'Current text'}　·　VERIFIED CONSTITUTION</div><h2>{aod.title}</h2><small className="article-num">{aod.num}</small><blockquote>{aod.original}<small>{aod.source}</small></blockquote><div className="plain"><b>✧ IN PLAIN LANGUAGE</b><p>{aod.plain||'A plain-language explanation is not yet available for this provision.'}</p></div><div className="actions"><button className="primary" onClick={()=>openArticle(aod)}>▤ Read this article　↗</button><button className="outline" onClick={()=>shareImage(aod)}>↗ Share image</button><button className="iconBtn" onClick={()=>{const enabled=!bookmarks.includes(aod.id);toggle(bookmarks,setBookmarks,aod.id);syncToggle('bookmark',aod.id,enabled)}}>{bookmarks.includes(aod.id)?'★':'☆'}</button></div></div>:<div className="empty corpus-empty"><div>§</div><h3>No constitution text has passed verification yet.</h3><p>CARTA will show a daily reading here after a primary-source text has been acquired, licence-checked and reviewed for the selected jurisdiction. It will not invent or substitute sample law.</p><button className="outline" onClick={()=>setPage('catalogue')}>View global coverage</button></div>}</section>
-      <button className="comparePrompt" onClick={()=>setCompare(true)}><span className="compareIcon">⇄</span><span><b>Would you like to compare this to other countries?</b><small>Explore how another constitution approaches this topic.</small></span><strong>→</strong></button>
-      <section className="today"><div className="sectionHead"><div><small className="overline">ONE DAILY DISCOVERY · REFRESHES AFTER 06:00 LOCAL</small><h2>Today in CARTA</h2><small className="muted-copy">{lastFeedUpdated?`Official updates checked ${lastFeedUpdated.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`:'Checking official publishers…'}</small></div><div className="feed-refresh"><small>{new Date().toLocaleDateString()}</small><button className="outline" onClick={()=>void refreshFeed(true)}>↻ Refresh</button></div></div>{daily?<article className="today-card daily-feature"><div><span className="pill">{daily.kind}</span><h3>{daily.title}</h3><p>{daily.body}</p><small>{daily.source}　·　{daily.publishedAt?new Date(daily.publishedAt).toLocaleDateString():'Constitutional text'}　·　{daily.sourceUrl?<a className="textLink" href={daily.sourceUrl} target="_blank" rel="noreferrer">Open official source ↗</a>:daily.article?<button className="textLink" onClick={()=>openArticle(daily.article)}>Read provision ↗</button>:null}</small></div><div className="today-art">§<small>{daily.kind==='FACT'?<>CONSTITUTIONAL<br/>FACT</>:<>LEGAL<br/>UPDATE</>}</small></div></article>:<div className="empty"><div>◷</div><h3>No eligible daily item yet.</h3><p>CARTA will not invent a fact or headline. A verified constitutional passage or a live item from an approved official feed will appear here once the relevant source is connected.</p><button className="outline" onClick={()=>setPage('sources')}>Explore data sources</button></div>}{eligibleFeed.length>0&&<><div className="sectionHead latest-heading"><div><small className="overline">FROM VERIFIED OFFICIAL PUBLISHERS</small><h2>Latest legal updates</h2></div><small>{eligibleFeed.length} available</small></div>{eligibleFeed.slice(0,8).map(item=><article className="today-card feed-item" key={item.id}><div><span className="pill">{item.kind}</span><h3>{item.title}</h3><p>{item.body}</p><small>{item.source}　·　{item.publishedAt?new Date(item.publishedAt).toLocaleDateString():'Date not supplied'}　·　<a className="textLink" href={item.sourceUrl} target="_blank" rel="noreferrer">Open official source ↗</a></small></div><div className="today-art">§<small>LEGAL<br/>UPDATE</small></div></article>)}</>}<p className="disclaimer">CARTA links to the publisher's original document. Feed headlines are not a substitute for reading the judgment, legislation or Gazette notice.</p></section>
-      <section className="coverage-panel"><div><small className="overline">GLOBAL CONSTITUTION COVERAGE</small><h2>{coverage.verified_current||0} verified current texts</h2><p>{coverage.total||countries.length} jurisdictions catalogued · {coverage.metadata_only||0} with metadata only. A jurisdiction is not marked complete until a current official version and its licence have been checked.</p></div><button className="outline" onClick={()=>setPage('catalogue')}>View coverage →</button></section>
-      <AdSlot isAdFree={billing.isAdFree} config={adConfig} slot="homeSlot"/>
-      <section className="home-search"><small className="overline">LOOK IT UP</small><h2>What would you like to understand?</h2><div className="searchbox"><span>⌕</span><input value={query} onChange={e=>{setQuery(e.target.value);if(e.target.value)setPage('search')}} onKeyDown={e=>e.key==='Enter'&&setPage('search')} placeholder="Search an article, right, topic or country…"/><button onClick={()=>setPage('search')}>→</button></div></section>
-    </>}
-    {page==='read'&&<>
-      <PageHeader eyebrow="THE LIBRARY" title={<>Read the <em>text.</em></>} lead="Choose a document, then move through it chapter by chapter." right={<button className="outline" onClick={()=>setNight(!night)}>{night?'☼ Day mode':'☾ Night mode'}</button>}/>
-      <div className="selectors"><label>COUNTRY<select value={countryId} onChange={e=>chooseCountry(e.target.value)}>{countries.map(c=><option value={c.id} key={c.id}>{c.flag} {c.name}</option>)}</select></label><label>DOCUMENT<select value={documentId} onChange={e=>{setDocumentId(e.target.value);setArticleId(articles.find(a=>a.doc===e.target.value)?.id||articleId)}}>{visibleDocs.map(d=><option key={d.id} value={d.id}>{d.title}</option>)}</select></label></div>
-      <div className="doc-summary"><span>▤</span><div><small className="overline">{readDoc.type.replace('_',' ').toUpperCase()} · {readDoc.year}</small><h3>{readDoc.title}</h3><p>{readArticles.length} verified provisions · {readDoc.version||'Version not supplied'}</p></div></div>
-      <div className="mobile-toc-bar">
-        <button className="mobile-toc-toggle" onClick={()=>setMobileTocOpen(!mobileTocOpen)}>
-          <span>{mobileTocOpen ? '✕ Close contents' : '☰ Table of contents'}</span>
-          <small>{active ? `${active.num}` : `${readArticles.length} provisions`} {mobileTocOpen ? '▲' : '▼'}</small>
-        </button>
-      </div>
-      <div className="reader-grid">
-        <aside className={'chapters ' + (mobileTocOpen ? 'mobile-open' : '')}>
-          <div className="chapters-top-row">
-            <b>CONTENTS</b>
-            {mobileTocOpen&&<button className="chapters-close-mobile" onClick={()=>setMobileTocOpen(false)}>✕ Close</button>}
-          </div>
-          {readArticles.length?[...new Set(readArticles.map(a=>a.chapter))].map(n=><section key={n}><h4>{String(n).padStart(2,'0')}　{readArticles.find(a=>a.chapter===n).chapterTitle}</h4>{readArticles.filter(a=>a.chapter===n).map(a=><button className={active?.id===a.id?'selected':''} key={a.id} onClick={()=>{setArticleId(a.id);setMobileTocOpen(false)}}><small>{a.num}</small>{a.title}</button>)}</section>):<p className="muted-copy">No verified text is loaded for this jurisdiction yet.</p>}
-        </aside>
-        <article className="reader">{active?<><div className="reader-tools"><small>{readDoc.title}　›　{active.num}</small><div><button onClick={()=>setNight(!night)}>{night?'☼':'☾'}</button><button onClick={()=>copyArticle(active)}>▢</button><button onClick={()=>shareImage(active)}>↗</button></div></div><div className="reader-body"><small className="article-num">{active.num}</small><h2>{active.title}</h2><small className="ref">{active.source}</small><p className={'original '+(highlights.includes(active.id)?'highlight':'')} style={{fontSize:font}}>{active.original}</p><hr/><div className="plain"><b>✧ IN PLAIN LANGUAGE</b><p>{active.plain}</p></div><div className="tags">{active.tags.map(t=><span key={t}>{t}</span>)}</div><div className="reader-controls"><label>A− <input type="range" min="16" max="27" value={font} onChange={e=>setFont(Number(e.target.value))}/> A+</label><div className="actions"><button className={bookmarks.includes(active.id)?'primary':'outline'} onClick={()=>{const enabled=!bookmarks.includes(active.id);toggle(bookmarks,setBookmarks,active.id);syncToggle('bookmark',active.id,enabled)}}>☆ Bookmark</button><button className={highlights.includes(active.id)?'primary':'outline'} onClick={()=>{const enabled=!highlights.includes(active.id);toggle(highlights,setHighlights,active.id);syncToggle('highlight',active.id,enabled)}}>✎ Highlight</button><button className="outline" onClick={()=>{setNoteText(notes.find(n=>n.articleId===active.id)?.text||'');setNoteOpen(true)}}>＋ Note</button><button className="outline" onClick={()=>{setDownloads(v=>v.includes(readDoc.id)?v:[...v,readDoc.id]);syncToggle('download',readDoc.id,true);showToast('Document added to download list.')}}>↓ Download</button></div></div></div></>:<div className="empty"><h3>No verified text to read.</h3><p>Choose a jurisdiction with an available, reviewed source document.</p></div>}</article>
-      </div>
-      <p className="disclaimer">Legal text is published only after checking its official origin, current version and reuse rights.</p>
-    </>}
-    {page==='search'&&<><PageHeader eyebrow="FIND A PASSAGE" title={<>Search the <em>library.</em></>} lead="Search across countries, constitutions, rights and plain-language explanations."/><div className="searchbox big"><span>⌕</span><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==='Enter'&&setPage('search')} placeholder="Try equality, taxation or devolution…"/>{query&&<button onClick={()=>setQuery('')}>×</button>}</div>{!query.trim()?<div className="empty"><div>⌕</div><h3>One library. Many legal traditions.</h3><p>Search a concept, a phrase from a document, or a country name.</p><div className="suggestions">{['equality','public participation','supremacy','rights'].map(s=><button key={s} onClick={()=>setQuery(s)}>{s} ↗</button>)}</div></div>:<div className="results"><small>{searchResults.length} results for “{query}”</small>{searchResults.map(a=>{const d=docs.find(x=>x.id===a.doc);const c=countries.find(x=>x.id===d.country);return <button className="result" key={a.id} onClick={()=>openArticle(a)}><small>{c?.flag||'🌐'} {c?.name||'International'}　·　{d.title}</small><h3>{a.title}</h3><p>{a.plain}</p><small>{a.num}　·　{a.source}</small><b>Open passage →</b></button>})}{!searchResults.length&&<div className="empty"><h3>No passages found</h3><p>Try a shorter phrase or another legal concept.</p></div>}<AdSlot isAdFree={billing.isAdFree} config={adConfig} slot="searchSlot"/></div>}</>}
-    {page==='chat'&&<div className="research-desk">
-      <div className="research-hero">
-        <img className="research-hero-img" src={legalResearchArchiveImg} alt="Classical constitutional law library" />
-        <div className="research-hero-scrim"/>
-        <div className="research-hero-content">
-          <span className="research-eyebrow">✧ CONSTITUTIONAL RESEARCH DESK</span>
-          <h1>Primary-source legal <em>inquiry.</em></h1>
-          <p>Textual analysis grounded in verified national constitutions, bills of rights, and foundational legal instruments.</p>
-        </div>
-      </div>
-
-      <div className="research-scope-bar">
-        <div className="research-scope-left">
-          <span className="scope-badge">
-            <span>{country.flag}</span>
-            <span>{country.name} · {mainDoc?.year || 'Current'}</span>
-          </span>
-          <select className="scope-jurisdiction-select" value={countryId} onChange={e=>chooseCountry(e.target.value)} title="Change active jurisdiction">
-            {countries.map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}
-          </select>
-          <span className="scope-caption">Corpus: {readArticles.length || 'Indexed'} verified provisions</span>
-        </div>
-        <div className="actions" style={{margin:0}}>
-          <button className="outline" onClick={newChat}>＋ New inquiry</button>
-        </div>
-      </div>
-
-      {!chatMessages.length?<div className="research-presets-section">
-        <div className="research-presets-title">
-          <small className="overline">SELECT A RESEARCH INQUIRY OR POSE YOUR OWN</small>
-        </div>
-        <div className="research-presets-grid">
-          {researchPresets.map(preset=><button key={preset.theme} className="preset-card" onClick={()=>askLegalQuestion(null, preset.query)}>
-            <small>{preset.theme}</small>
-            <p>{preset.query}</p>
-            <span className="action-arrow">Conduct research →</span>
-          </button>)}
-        </div>
-      </div>:null}
-
-      <div className="chat-window">
-        {chatMessages.map(m=><article className={'chat-message '+m.role+(m.error?' error':'')} key={m.id}>
-          {m.role==='user'?<>
-            <small>RESEARCH INQUIRY · {m.jurisdiction || country.name} · {m.time || 'Today'}</small>
-            <p>{m.content}</p>
-          </>:<>
-            <div className={'assistant-header ' + (chatBusy && activeAssistantId === m.id ? 'is-generating' : '')}>
-              <small><span className="status-spark">✧</span> CARTA RESEARCH SYNTHESIS</small>
-              <span className="doc-tag">{m.docTitle || mainDoc?.title}</span>
-            </div>
-            <div className="assistant-body">
-              {(m.pending || (!m.content && chatBusy && activeAssistantId === m.id)) ? (
-                <div className="thinking-indicator" role="status" aria-live="polite">
-                  <span className="thinking-dots" aria-hidden="true">
-                    <span className="thinking-dot"/>
-                    <span className="thinking-dot"/>
-                    <span className="thinking-dot"/>
-                  </span>
-                  <div className="thinking-meta">
-                    <span className="thinking-title">Synthesizing constitutional provisions</span>
-                    <span className="thinking-subtitle">Consulting indexed statutes and citations for {m.jurisdiction || country.name}…</span>
-                  </div>
-                </div>
-              ) : (
-                <p>
-                  {m.content}
-                  {chatBusy && activeAssistantId === m.id && (
-                    <span className="typing-cursor" aria-hidden="true" title="Generating synthesis" />
-                  )}
-                </p>
-              )}
-              {m.sources?.length>0&&<div className="chat-sources-block">
-                <b>Verified Primary Sources & Citations</b>
-                <div className="chat-sources-grid">
-                  {m.sources.map(source=><div className="source-citation-card" key={source.label+source.title}>
-                    <div className="source-citation-top">
-                      <span className="source-label">{source.label}</span>
-                      <span className="source-official-link">{source.jurisdiction}</span>
-                    </div>
-                    <h4 className="source-title">{source.title}</h4>
-                    {source.snippet&&<p className="source-snippet">“{source.snippet}”</p>}
-                    <div className="source-actions">
-                      {source.rawArticle?<button className="textLink" onClick={()=>openArticle(source.rawArticle)}>Read in Reader ↗</button>:null}
-                      <button className="textLink" onClick={()=>copyCitation(source)}>Copy citation</button>
-                      {source.url?<a className="textLink" href={source.url} target="_blank" rel="noreferrer">Official source ↗</a>:null}
-                    </div>
-                  </div>)}
-                </div>
-              </div>}
-            </div>
-            {!m.pending && !(chatBusy && activeAssistantId === m.id) && <div className="assistant-footer-actions">
-              <button className="outline" onClick={()=>{if(m.sources?.[0])copyCitation(m.sources[0])}}>📋 Copy citation</button>
-              <button className="outline" onClick={()=>{setNoteText(`Inquiry: ${chatMessages.find(x=>x.role==='user')?.content||''}\n\nSynthesis: ${m.content.slice(0,300)}...`);setNoteOpen(true)}}>✎ Save to library notes</button>
-              <button className="outline" onClick={()=>setCompare(true)}>⇄ Compare other constitutions</button>
-            </div>}
-          </>}
-        </article>)}
-        <div id="chat-bottom"/>
-      </div>
-
-      <form className="chat-composer-container" onSubmit={askLegalQuestion}>
-        <textarea
-          rows={3}
-          value={chatQuestion}
-          onChange={e=>setChatQuestion(e.target.value)}
-          onKeyDown={e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();void askLegalQuestion(e)}}}
-          placeholder={`Ask about constitutional rights, legislative procedures, or governance powers in ${country.name}… (Press ⌘ + Enter to submit)`}
-        />
-        <div className="chat-composer-bottom">
-          <span className="composer-hint">
-            Verified citations <span aria-hidden="true">·</span> Press <kbd>⌘ + Enter</kbd> to submit
-          </span>
-          <div className="composer-buttons">
-            {chatQuestion.trim()&&<button type="button" className="outline" onClick={()=>setChatQuestion('')}>Clear</button>}
-            <button className="primary" type="submit" disabled={chatBusy||chatQuestion.trim().length<3}>
-              {chatBusy?'Researching…':'Research provision →'}
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>}
-    {page==='catalogue'&&<><PageHeader eyebrow="GLOBAL JURISDICTION CATALOGUE" title={<>Constitution <em>coverage.</em></>} lead="CARTA catalogues jurisdictions separately from the constitutional texts it has verified."/><div className="coverage-summary"><div><strong>{coverage.total||countries.length}</strong><span>jurisdictions catalogued</span></div><div><strong>{coverage.verified_current||0}</strong><span>verified current texts</span></div><div><strong>{coverage.metadata_only||0}</strong><span>metadata only</span></div></div><div className="coverage-list">{countries.map(c=><div className="coverage-row" key={c.id}><span>{c.flag} {c.name}</span><small>{(c.constitutionStatus||'not_loaded').replaceAll('_',' ')}</small><small>{c.jurisdictionKind||'unclassified'}</small></div>)}</div><p className="disclaimer">A blank coverage row means the text is not yet verified; it does not mean the jurisdiction has no constitution. Some jurisdictions use uncodified or multiple foundational instruments and require expert classification.</p></>}
-    {page==='sources'&&<><PageHeader eyebrow="DATA PROVENANCE" title={<>Where CARTA gets its <em>law.</em></>} lead="Primary sources first. Legal information institutes and aggregators are used for discovery, not as a substitute for the publisher."/><div className="source-cards"><article><h3>Official national portals</h3><p>Each jurisdiction's parliament, ministry of justice, attorney-general, government printer, national gazette or constitutional court. These are the source of truth for current text and amendments.</p><a href="https://kenyalaw.org/" target="_blank" rel="noreferrer">Kenya Law ↗</a></article><article><h3>Constitute / CCP</h3><p>Excellent for discovering which constitutions exist and comparing constitutional metadata. Its CC BY-NC licence and third-party translations mean it is not a blanket source for a paid commercial library without specific permission.</p><a href="https://www.constituteproject.org/content/data?lang=en" target="_blank" rel="noreferrer">Data and API ↗</a></article><article><h3>Official international courts</h3><p>HUDOC (ECHR) and Curia (CJEU) publish judgment, decision and press-release feeds. CARTA stores the new-item metadata and canonical official links.</p><a href="https://www.echr.coe.int/en/echr-rss-feeds" target="_blank" rel="noreferrer">ECHR RSS ↗</a> · <a href="https://curia.europa.eu/site/jcms/d2_5156/en/media-centre" target="_blank" rel="noreferrer">Curia RSS ↗</a></article><article><h3>UK and Australia</h3><p>Legislation.gov.uk provides an official Atom feed and XML API under OGL v3.0. Australia’s Federal Register offers a free REST API; most content is CC BY 4.0 with attribution and third-party exclusions.</p><a href="https://www.legislation.gov.uk/new/data.feed" target="_blank" rel="noreferrer">UK new-law feed ↗</a> · <a href="https://www.legislation.gov.au/" target="_blank" rel="noreferrer">Australian Register ↗</a></article><article><h3>GovInfo (United States)</h3><p>Official U.S. bills, statutes, CFR, Federal Register, and Supreme Court publications via API, bulk XML and RSS. A free api.data.gov key is needed for API calls.</p><a href="https://www.govinfo.gov/developers" target="_blank" rel="noreferrer">Developer hub ↗</a> · <a href="https://www.govinfo.gov/feeds" target="_blank" rel="noreferrer">RSS feeds ↗</a></article><article><h3>EUR-Lex and UN Treaty Collection</h3><p>Official EU treaty/legislation/case-law data and UN treaty status, reservations and declarations. Register for EUR-Lex webservice access and review the applicable data-reuse terms.</p><a href="https://eur-lex.europa.eu/content/help/data-reuse/webservice.html?locale=en" target="_blank" rel="noreferrer">EUR-Lex webservice ↗</a> · <a href="https://treaties.un.org/" target="_blank" rel="noreferrer">UN treaties ↗</a></article><article><h3>Discovery-only repositories</h3><p>Constitute/CCP, WorldLII and SAFLII help locate legal instruments, but do not treat their materials as free for commercial redistribution or AI use. SAFLII expressly restricts crawling and AI/automated reuse without written agreement.</p><a href="https://www.worldlii.org/" target="_blank" rel="noreferrer">WorldLII ↗</a> · <a href="https://www.saflii.org/content/terms.html" target="_blank" rel="noreferrer">SAFLII terms ↗</a></article></div><p className="disclaimer">The source registry and ingestion run records are maintained in Supabase. Administrators must approve a source's official status, feed URL and licence scope before its feed or legal text is published. RSS ingestion is metadata-only by default; it does not copy article bodies or constitution text.</p>{adminSourceData&&<section className="admin-source-panel"><div className="admin-source-heading"><div><small className="overline">ADMINISTRATOR TOOLS</small><h2>Official source registry</h2><p>Enable reviewed publisher feeds for title, date and official-link metadata. Legal text is imported separately after the reuse licence is cleared.</p></div><button className="outline" disabled={adminSourcesBusy} onClick={runSourceIngestion}>↻ Run feed update</button></div><details className="source-add-details" open={newSourceOpen} onToggle={event=>setNewSourceOpen(event.currentTarget.open)}><summary>＋ Register an official publisher / feed</summary><form className="source-add-form" onSubmit={addSource}><label>Source name<input name="name" required maxLength="240" placeholder="e.g. Office of the Attorney-General"/></label><label>Unique slug<input name="slug" required pattern="[a-z0-9][a-z0-9-]{1,80}" placeholder="e.g. gh-ago-portal"/></label><label>Publisher<input name="publisher" placeholder="Institution responsible for publication"/></label><label>Jurisdiction ISO<input name="jurisdictionIso" maxLength="3" placeholder="e.g. GH or leave blank for international"/></label><label>Source type<select name="sourceType"><option value="constitution_catalog">Constitution catalogue</option><option value="legislation_portal">Legislation portal</option><option value="official_gazette">Official Gazette</option><option value="court_feed">Court feed</option><option value="court_database">Court database</option><option value="treaty_database">Treaty database</option><option value="government_news">Government news</option><option value="data_catalog">Data catalogue</option><option value="other">Other</option></select></label><label>Official publisher URL<input name="sourceUrl" type="url" required placeholder="https://…"/></label><label>RSS / Atom feed URL<input name="feedUrl" type="url" placeholder="https://…"/></label><label>API URL<input name="apiUrl" type="url" placeholder="https://…"/></label><label>API / source documentation<input name="documentationUrl" type="url" placeholder="https://…"/></label><label>Polling interval (minutes)<input name="pollIntervalMinutes" type="number" min="15" max="10080" placeholder="1440"/></label><label>Authority rank (1–100)<input name="authorityRank" type="number" min="1" max="100" defaultValue="50"/></label><label>Permitted feed-link hosts (comma separated)<input name="allowedHosts" placeholder="justice.gov.za, gov.za"/></label><label className="source-add-wide">Content scope / notes<textarea name="contentScope" rows="2" placeholder="Which legal content does the publisher provide?"/></label><label className="source-add-check"><input name="isOfficial" type="checkbox"/> Verified official publisher (required before feed ingestion)</label><div className="source-add-wide"><button className="primary" type="submit" disabled={adminSourcesBusy}>Register source</button><small className="muted-copy">New sources are inactive, set to review required and blocked from commercial text / AI retrieval by default.</small></div></form></details><div className="admin-source-list">{(adminSourceData.sources||[]).map(source=><article className="admin-source-row" key={source.id}><div><b>{source.name}</b><small>{source.publisher||source.slug} · Authority rank {source.authority_rank}</small><small>Licence: {source.license_status.replaceAll('_',' ')} · Commercial use: {source.commercial_use_allowed?'cleared':'not cleared'}</small><small>{source.feed_url||'No direct feed URL configured'} </small></div><div className="admin-source-actions"><span className={source.is_active?'status-on':'status-off'}>{source.is_active?'Feed on':'Feed off'}</span>{source.feed_url&&source.is_official&&<button className="outline" disabled={adminSourcesBusy} onClick={()=>setSourceActive(source)}>{source.is_active?'Pause':'Enable metadata'}</button>}</div><form className="source-rights-form" onSubmit={event=>saveSourceRights(source,event)}><label>Reuse status<select name="licenseStatus" defaultValue={source.license_status}><option value="review_required">Review required</option><option value="noncommercial_only">Non-commercial only</option><option value="restricted">Restricted</option><option value="public_domain_verified">Public domain verified</option><option value="open_license">Open licence</option><option value="permission_granted">Permission granted</option><option value="approved">Approved</option></select></label><label className="rights-checkbox"><input type="checkbox" name="commercialUseAllowed" defaultChecked={source.commercial_use_allowed===true}/> Commercial reuse independently cleared</label><label>Rights evidence URL<input name="rightsEvidenceUrl" type="url" required defaultValue={source.metadata?.rightsEvidenceUrl||""} placeholder="HTTPS licence / permission evidence"/></label><label>Reviewer notes<textarea name="rightsNotes" required minLength={20} rows={2} defaultValue={source.metadata?.rightsNotes||""} placeholder="Explain the legal basis, scope and attribution terms (20+ characters)."/></label><button className="outline" type="submit" disabled={adminSourcesBusy}>Save rights review</button></form></article>)}</div><div className="ingestion-runs"><b>Recent feed runs</b>{(adminSourceData.runs||[]).slice(0,8).map(run=><small key={run.id}>{run.status} · {run.records_added} added / {run.records_seen} seen · {new Date(run.started_at).toLocaleString()}</small>)}</div></section>}</>}
-    {page==='library'&&<><PageHeader eyebrow="YOUR PERSONAL SHELF" title={<>Your <em>library.</em></>} lead="Keep the passages and documents you want to return to."/><div className="library-tabs">{['Bookmarks','Highlights','Notes','Downloaded'].map(s=><button className={libraryTab===s?'selected':''} onClick={()=>setLibraryTab(s)} key={s}>{s}</button>)}</div>{libraryTab==='Downloaded'?<><div className="offline-panel"><div><b>OFFLINE READING</b><h3>Keep your library close.</h3><p>This list records the documents you want to download for offline reading.</p></div><label><input type="checkbox" checked={offline} onChange={e=>{setOffline(e.target.checked);if(account)void apiSave({action:'preferences',offlineDefaultEnabled:e.target.checked,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone}).catch(()=>{})}}/> Offline {offline?'on':'off'}</label></div>{downloads.map(id=>{const d=docs.find(x=>x.id===id);return d?<div className="saved" key={id}><b>▤ {d.title}</b><small>{d.year} · {d.type}</small><button onClick={()=>{setDownloads(v=>v.filter(x=>x!==id));syncToggle('download',id,false)}}>Remove</button></div>:null})}<label className="download-more">Download another document<select value="" onChange={e=>{if(e.target.value){setDownloads(v=>v.includes(e.target.value)?v:[...v,e.target.value]);syncToggle('download',e.target.value,true)}}}><option value="">Choose a document…</option>{docs.filter(d=>!downloads.includes(d.id)).map(d=><option key={d.id} value={d.id}>{d.title}</option>)}</select></label></>:<>{(libraryTab==='Bookmarks'?bookmarks:libraryTab==='Highlights'?highlights:notes.map(n=>n.articleId)).map(id=>{const a=articles.find(x=>x.id===id);if(!a)return null;const d=docs.find(x=>x.id===a.doc);const note=notes.find(x=>x.articleId===id);return <div className="saved" key={id}><button className="saved-main" onClick={()=>openArticle(a)}><b>{a.title}</b><small>{d.title} · {a.num}</small><span>{libraryTab==='Notes'?note?.text:a.plain}</span></button><button onClick={()=>{if(libraryTab==='Bookmarks'){setBookmarks(v=>v.filter(x=>x!==id));if(account)void apiSave({action:'bookmark',operation:'remove',documentId:a.doc,sectionId:id})}else if(libraryTab==='Highlights'){setHighlights(v=>v.filter(x=>x!==id));if(account)void apiSave({action:'highlight',operation:'remove',documentId:a.doc,sectionId:id})}else{setNotes(v=>v.filter(x=>x.articleId!==id));if(account)void apiSave({action:'note',operation:'remove',id:note?.id||''})}}}>×</button></div>})}{!(libraryTab==='Bookmarks'?bookmarks:libraryTab==='Highlights'?highlights:notes).length&&<div className="empty"><div>▣</div><h3>Nothing on this shelf yet.</h3><p>Bookmark, highlight or add notes while reading. They will appear here on this device.</p><button className="primary" onClick={()=>setPage('read')}>Start reading</button></div>}</>}</>}
+    <HomePage ctx={ctx}/>
+    <ReadPage ctx={ctx}/>
+    <SearchPage ctx={ctx}/>
+    <ChatPage ctx={ctx}/>
+    <CataloguePage ctx={ctx}/>
+    <SourcesPage ctx={ctx}/>
+    <LibraryPage ctx={ctx}/>
   </main></div>
   <nav className="mobile-nav">{navButtons}</nav>
   {toast&&<div className="toast">✓ {toast}<button onClick={()=>setToast('')}>×</button></div>}
-  {authOpen&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setAuthOpen(false)}>
-    <section className="modal auth-modal">
-      <button className="close" onClick={()=>setAuthOpen(false)}>×</button>
-      <small className="overline">YOUR CARTA ACCOUNT</small>
-      <h2>{authMode==='signup'?'Create your':authMode==='forgot'?'Reset your':authMode==='update'?'Choose a new':'Welcome back to your'} <em>{authMode==='forgot'||authMode==='update'?'password.':'library.'}</em></h2>
-      <p>{authMode==='forgot'
-        ? 'Enter your account email and we will send a secure password-reset link.'
-        : authMode==='update'
-          ? 'Choose a new password to secure your CARTA account.'
-          : 'Sign in to sync your reading shelf and use the citation-based legal assistant.'}</p>
-      {authNotice&&<p className="auth-notice" role="status">{authNotice}</p>}
-      <form onSubmit={submitAuth}>
-        {authMode!=='update'&&<label>Email address<input type="email" autoComplete="email" required value={authEmail} onChange={e=>setAuthEmail(e.target.value)}/></label>}
-        {authMode==='signup'&&<label>Your name<input autoComplete="name" required value={authName} onChange={e=>setAuthName(e.target.value)}/></label>}
-        {authMode!=='forgot'&&<label>{authMode==='update'?'New password':'Password'}<input type="password" autoComplete={authMode==='signup'||authMode==='update'?'new-password':'current-password'} minLength={8} required value={authPassword} onChange={e=>setAuthPassword(e.target.value)}/></label>}
-        {authMode==='update'&&<label>Confirm new password<input type="password" autoComplete="new-password" minLength={8} required value={authPasswordConfirm} onChange={e=>setAuthPasswordConfirm(e.target.value)}/></label>}
-        <button className="primary full" disabled={authBusy}>{authBusy?'Please wait…':authMode==='signup'?'Create account':authMode==='forgot'?'Send reset link':authMode==='update'?'Update password':'Sign in'}</button>
-      </form>
-      {authMode==='signin'&&<>
-        <button className="textLink" onClick={()=>{setAuthMode('forgot');setAuthNotice('');setAuthPassword('')}}>Forgot your password?</button>
-        <button className="textLink" onClick={()=>{setAuthMode('signup');setAuthNotice('');setAuthPassword('')}}>New to CARTA? Create an account</button>
-      </>}
-      {authMode==='signup'&&<button className="textLink" onClick={()=>{setAuthMode('signin');setAuthNotice('');setAuthPassword('')}}>Already have an account? Sign in</button>}
-      {authMode==='forgot'&&<button className="textLink" onClick={()=>{setAuthMode('signin');setAuthNotice('');setAuthPassword('')}}>Back to sign in</button>}
-    </section>
-  </div>}
-  {paywallOpen&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setPaywallOpen(false)}><section className="modal paywall-modal"><button className="close" onClick={()=>setPaywallOpen(false)}>×</button><div className="plus-mark">✧</div><small className="overline">CARTA MEMBERSHIP</small><h2>Keep your reading <em>uninterrupted.</em></h2><p>CARTA Plus is an ad-free membership that helps sustain an independent, accessible public-law library.</p>{billing.isAdFree?<div className="membership-active"><span className="active-pill">PLUS ACTIVE</span><h3>Your account is ad-free.</h3><p>{billing.cancelAtPeriodEnd?'Your subscription is set to end at the close of this billing period.':'Your membership is active.'}</p>{billing.currentPeriodEnd&&<small>Current period ends {new Date(billing.currentPeriodEnd).toLocaleDateString()}</small>}<button className="primary full" onClick={billingPortal}>Manage subscription</button></div>:<><div className="plus-benefits"><p>✓ Ad-free reading when sponsor placements are enabled</p><p>✓ Support the maintenance of the legal library</p><p>✓ Keep your personal library across devices</p></div>{account?<><div className="plan-choices"><button className={paywallPlan==='monthly'?'plan active':'plan'} onClick={()=>setPaywallPlan('monthly')}><small>MONTHLY</small><strong>$2.99 <i>/ month</i></strong><span>Flexible billing</span></button><button className={paywallPlan==='yearly'?'plan active':'plan'} onClick={()=>setPaywallPlan('yearly')}><small>ANNUAL · BEST VALUE</small><strong>$24.99 <i>/ year</i></strong><span>About $2.08 per month</span></button></div><button className="primary full" disabled={billingBusy} onClick={checkout}>{billingBusy?'Opening secure checkout…':`Continue with ${paywallPlan} plan`}</button><small className="paywall-fine">Secure checkout powered by Stripe. Manage or cancel in the billing portal.</small></>:<div className="sign-in-upgrade"><p>Sign in or create an account before subscribing so your membership is connected to your personal library.</p><button className="primary full" onClick={()=>{setPaywallOpen(false);setAuthOpen(true)}}>Sign in to continue →</button></div>}</>}<div className="paywall-disclosure"><b>Advertising</b><p>Ads are disabled in this bundle until an AdSense publisher ID and ad slot IDs are configured in public/ad-config.json. CARTA Plus suppresses configured ad placements.</p><b>Payments</b><p>Subscriptions are not available until Stripe server credentials and the webhook endpoint have been configured. Keep the paywall disabled until test checkout and subscription cancellation have been verified.</p></div></section></div>}
-  {welcome&&<div className="backdrop"><section className="modal welcome-modal"><button className="close" onClick={()=>{setWelcome(false);localStorage.setItem('carta-welcomed','1')}}>×</button><div className="mark large">C<i/></div><small className="overline">WELCOME TO CARTA</small><h2>Start with <em>your country.</em></h2><p>Choose a jurisdiction to explore its legal catalogue. Documents appear when official texts have been verified and cleared for publication.</p><label>SELECT YOUR COUNTRY<select value={countryId} onChange={e=>chooseCountry(e.target.value)}>{countries.map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}</select></label><button className="primary full" onClick={()=>{setWelcome(false);localStorage.setItem('carta-welcomed','1')}}>Enter the library →</button><small>You can still explore international law and other countries.</small></section></div>}
-  {compare&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setCompare(false)}><section className="modal compare-modal"><button className="close" onClick={()=>setCompare(false)}>×</button><small className="overline">A WIDER PERSPECTIVE</small><h2>One idea. <em>Different constitutions.</em></h2><p>These passages address related principles; they are not necessarily legally identical.</p><div className="compare-grid">{aod&&<CompareCard country={country} article={aod}/ >}{compared.map(x=><CompareCard key={x.country.id} {...x}/>)}</div><small className="disclaimer">Educational comparison only — not legal advice.</small></section></div>}
-  {noteOpen&&<div className="backdrop" onClick={e=>e.target===e.currentTarget&&setNoteOpen(false)}><section className="modal note-modal"><button className="close" onClick={()=>setNoteOpen(false)}>×</button><small className="overline">PERSONAL NOTES</small><h2>Add a <em>thought.</em></h2><p>{title(active)}</p><textarea rows="5" value={noteText} onChange={e=>setNoteText(e.target.value)} placeholder="What would you like to remember?"/><div className="actions end"><button className="outline" onClick={()=>setNoteOpen(false)}>Cancel</button><button className="primary" onClick={saveNote}>Save note</button></div></section></div>}
+  <AuthModal ctx={ctx}/>
+  <PaywallModal ctx={ctx}/>
+  <WelcomeModal ctx={ctx}/>
+  <CompareModal ctx={ctx}/>
+  <NoteModal ctx={ctx}/>
 </div>}
-function PageHeader({eyebrow,title,lead,right}){return <section className="page-header"><div><small className="overline">{eyebrow}</small><h1>{title}</h1><p>{lead}</p></div>{right}</section>}
-function CompareCard({country,article}){return <article className="compare-card"><b>{country.flag} {country.name}</b><h3>{article.title}</h3><small>{article.source}</small><blockquote>{article.original}</blockquote><p>{article.plain}</p></article>}
-
-function AdSlot({isAdFree,config,slot}){
-  const slotId=config?.[slot];
-  useEffect(()=>{
-    if(isAdFree||!config?.enabled||!/^ca-pub-\d+$/.test(config.clientId||'')||!/^\d+$/.test(slotId||''))return;
-    let script=document.querySelector('script[data-carta-ads="'+config.clientId+'"]');
-    if(!script){script=document.createElement('script');script.async=true;script.crossOrigin='anonymous';script.dataset.cartaAds=config.clientId;script.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+encodeURIComponent(config.clientId);document.head.appendChild(script)}
-    const push=()=>{try{(window.adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){console.warn('CARTA ad slot unavailable',e)}};
-    if(script.dataset.loaded==='true')push();else{const loaded=()=>{script.dataset.loaded='true';push()};script.addEventListener('load',loaded,{once:true});return()=>script.removeEventListener('load',loaded)}
-  },[isAdFree,config,slotId]);
-  if(isAdFree||!config?.enabled||!/^ca-pub-\d+$/.test(config.clientId||'')||!/^\d+$/.test(slotId||''))return null;
-  return <aside className="ad-frame" aria-label="Advertisement"><small>SPONSORED</small><ins className="adsbygoogle" style={{display:'block',minHeight:90}} data-ad-client={config.clientId} data-ad-slot={slotId} data-ad-format="auto" data-full-width-responsive="true"/></aside>;
-}
