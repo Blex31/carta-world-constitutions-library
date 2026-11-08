@@ -1,10 +1,20 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 
 const api = await readFile(new URL("../supabase/functions/carta-api/index.ts", import.meta.url), "utf8");
 const auth = await readFile(new URL("../src/auth.js", import.meta.url), "utf8");
-const app = await readFile(new URL("../src/App.jsx", import.meta.url), "utf8");
+async function readSourceTree(dir) {
+  const entries = await readdir(new URL(`../${dir}/`, import.meta.url), { withFileTypes: true });
+  const chunks = [];
+  for (const entry of entries) {
+    const path = `${dir}/${entry.name}`;
+    if (entry.isDirectory()) chunks.push(await readSourceTree(path));
+    else if (/\.(js|jsx)$/.test(entry.name)) chunks.push(await readFile(new URL(`../${path}`, import.meta.url), "utf8"));
+  }
+  return chunks.join("\n");
+}
+const app = await readSourceTree("src");
 
 test("Phase 2 exposes the frontend's legal research and billing routes", () => {
   for (const route of [
@@ -108,3 +118,4 @@ test("Global jurisdiction seed remains metadata-only and preserves existing EAC 
   assert.ok(seed.includes("has been acquired"));
   assert.ok(!seed.includes("'verified_current'"));
 });
+

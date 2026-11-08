@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
@@ -14,7 +14,17 @@ const chunkIndexMigration = await read('neon/migrations/008_chunk_section_unique
 const coverageAudit = await read('scripts/audit-coverage.mjs');
 const dailySources = await read('neon/migrations/006_official_daily_sources.sql');
 const api = await read('neon/functions/carta/index.ts');
-const app = await read('src/App.jsx');
+async function readSourceTree(dir) {
+  const entries = await readdir(new URL(`../${dir}/`, import.meta.url), { withFileTypes: true });
+  const chunks = [];
+  for (const entry of entries) {
+    const path = `${dir}/${entry.name}`;
+    if (entry.isDirectory()) chunks.push(await readSourceTree(path));
+    else if (/\.(js|jsx)$/.test(entry.name)) chunks.push(await read(path));
+  }
+  return chunks.join('\n');
+}
+const app = await readSourceTree('src');
 const importer = await read('scripts/import-constitution-documents.mjs');
 const neonConfig = await read('neon.ts');
 
@@ -138,3 +148,4 @@ test('EAC first-batch source map covers all eight partner states without grantin
   assert.match(eacMigration, /is_active=false/);
   assert.match(eacMigration, /hold publication pending reconciliation/i);
 });
+
