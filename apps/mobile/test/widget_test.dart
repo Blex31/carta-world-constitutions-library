@@ -17,8 +17,6 @@ void main() {
     expect(find.textContaining('CARTA_SUPABASE_PUBLISHABLE_KEY'), findsOneWidget);
     expect(find.textContaining('service-role key'), findsOneWidget);
   });
-}
-
 
   test('personal library parser preserves item identifiers for deletion', () {
     final library = UserLibrary.fromJson({
@@ -41,3 +39,4 @@ void main() {
     expect(library.notes.single['id'], 'note-1');
     expect(library.downloads.single['documentId'], 'document-1');
   });
+}
