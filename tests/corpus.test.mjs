@@ -36,7 +36,6 @@ test('jurisdiction directory is unique ISO metadata, not falsely labelled as com
     assert.equal(observer.jurisdiction_kind, 'sovereign_state');
     assert.equal(observer.is_un_member, false);
   }
-  }
   assert.ok(!jurisdictions.some((item) => item.constitution_status === 'verified_current'));
 });
 
