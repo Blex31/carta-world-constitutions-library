@@ -1,5 +1,6 @@
 import 'package:carta_mobile/app.dart';
 import 'package:carta_mobile/config/app_config.dart';
+import 'package:carta_mobile/models/carta_models.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -17,3 +18,26 @@ void main() {
     expect(find.textContaining('service-role key'), findsOneWidget);
   });
 }
+
+
+  test('personal library parser preserves item identifiers for deletion', () {
+    final library = UserLibrary.fromJson({
+      'bookmarks': [
+        {'id': 'bookmark-1', 'documentId': 'document-1', 'sectionId': 'section-1'},
+      ],
+      'highlights': [
+        {'id': 'highlight-1', 'documentId': 'document-1', 'sectionId': 'section-1'},
+      ],
+      'notes': [
+        {'id': 'note-1', 'documentId': 'document-1', 'sectionId': 'section-1', 'text': 'A private note'},
+      ],
+      'downloads': [
+        {'documentId': 'document-1'},
+      ],
+    });
+
+    expect(library.bookmarks.single['id'], 'bookmark-1');
+    expect(library.highlights.single['id'], 'highlight-1');
+    expect(library.notes.single['id'], 'note-1');
+    expect(library.downloads.single['documentId'], 'document-1');
+  });
