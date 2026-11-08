@@ -3,9 +3,9 @@
 **Last verified:** 8 November 2026  
 **Repository:** https://github.com/Blex31/carta-world-constitutions-library  
 **Live backend:** Supabase project `mvcirldxcuvcuqvlmqxv`  
-**Code baseline reviewed:** `c39a69bfd882d32ea1400f716d931ca9e250053e` (My Library implementation and parser test; CI run #45)  
+**Code baseline reviewed:** `b1655a982eb879fdcbe24846c606082594406fbd` (My Library implementation, parser test and final verified mobile build; Mobile CI #47)  
 **Checklist creation commit:** `b922334102fd3abf644be8978fbd13cdc8ee00c6`  
-**Latest verified CI at this review:** [Web CI #78](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283848) and [Mobile CI #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856), both passed for PR head `3ae8571`.
+**Latest verified CI for the My Library implementation:** [Web CI #87](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119384) and [Mobile CI #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289), both passed for code baseline `b1655a9`.
 
 This is CARTA's single running checklist. Update it after each meaningful development session. Do not mark an item complete just because code exists: complete it only after the stated acceptance test has passed.
 
@@ -31,9 +31,9 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 | Scheduled job | `carta-official-feed-daily` active at 03:10 UTC / 06:10 Africa/Nairobi |
 | Migrations | 9 migration records applied in the live project; SQL files are checked in |
 | Supabase advisors | No security lints; the previous ingestion-run RLS performance warning is fixed; unused-index notices remain |
-| Native apps | Flutter Android/iOS first slice on `feature/flutter-native-clients`; Android debug APK and unsigned iOS CI verified on Mobile CI #34 for current PR head |
+| Native apps | Flutter Android/iOS first slice, reader actions and My Library screen on `feature/flutter-native-clients`; Android debug APK and unsigned iOS CI verified on Mobile CI #47 for code baseline `b1655a9` |
 | Public web launch | No production frontend URL confirmed |
-| Current CI | [Web CI #78](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283848) and [Mobile CI #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856) passed for PR head `3ae8571` |
+| Current CI | [Web CI #87](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119384) and [Mobile CI #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289) passed for code baseline `b1655a9` |
 
 ---
 
@@ -161,7 +161,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ## Phase 7 — Native Android and iOS applications
 
-**Status:** Flutter first slice committed on branch `feature/flutter-native-clients`. Mobile CI #34 and web CI #78 passed for the latest verified PR head. PR #3 remains draft and unmerged.
+**Status:** Flutter first slice, reader actions and My Library screen committed on branch `feature/flutter-native-clients`. Mobile CI #47 and web CI #87 passed for implementation commit `b1655a9`. PR #3 remains draft and unmerged.
 
 - [x] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
 - [x] Generate and commit the Android and iOS runner projects; register the `carta://auth-callback` deep link and CARTA display name in both native projects.
@@ -173,8 +173,8 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 - [~] Account screen shows personal-library counts and links to the new My Library screen. My Library now lists saved documents, bookmarks, highlights and private notes with open/remove actions; CI and real-device account isolation, sync and deletion checks remain.
 - [x] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
 - [x] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
-- [x] Latest verified Mobile CI [run #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856), exact PR-head commit `3ae85716f3c140d956027d2637a441a5ab09e5f4`: Flutter analysis, widget tests, Android debug APK build and artifact upload, and unsigned iOS build all passed.
-- [x] Latest verified web CI [run #78](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283848), same PR-head commit: tests, data-coverage audit, syntax check, type check and production frontend build all passed.
+- [x] Latest verified Mobile CI [run #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289), implementation commit `b1655a982eb879fdcbe24846c606082594406fbd`: Flutter analysis, all three widget tests, Android debug APK build and upload (artifact `carta-android-debug`, ID `13614652238`), and unsigned iOS build all passed.
+- [x] Latest verified web CI [run #87](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119384), same implementation commit: tests, data-coverage audit, syntax check, type check and production frontend build all passed.
 - [~] Connected debug APK is available as artifact `carta-android-debug` (artifact ID `13501829591`); this is a debug build, not a signed store release.
 - [ ] Add `carta://auth-callback` to Supabase Auth Redirect URLs and verify confirmation/password recovery on physical Android and iOS devices.
 - [ ] Configure Supabase Auth redirect allow-list with `carta://auth-callback`; test confirmation and password recovery on physical devices.
