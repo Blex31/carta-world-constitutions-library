@@ -66,16 +66,16 @@ Before import, conduct a Gazette and parliamentary-history search through the ex
 
 | Gate | Result | Required action |
 |---|---|---|
-| Official publisher identified | <text>Pass — NCLR / Kenya Law</text> | Record the exact canonical source for the selected edition. |
-| Exact current consolidated edition | <text>Pending</text> | Obtain publisher confirmation and reconcile all amendment instruments to the selected cut-off. |
-| Official-language / language precedence | <text>Pending</text> | Confirm the authoritative publication and any language-version rule with NCLR/counsel. |
-| Commercial web/mobile display | <text>Blocked</text> | Obtain explicit NCLR licence or a verified independent rights opinion. |
-| Full-text redistribution and excerpts | <text>Blocked</text> | Obtain express permission for full text and excerpts. |
-| Search/indexing and embeddings | <text>Blocked</text> | Obtain explicit written scope for automated extraction, indexing and embeddings. |
-| AI retrieval and summaries | <text>Blocked</text> | Obtain express AI/RAG rights; no model training unless expressly licensed. |
-| Translations/plain-language derivatives | <text>Pending / blocked</text> | Confirm permission and label all derivatives as unofficial. |
-| Offline copies | <text>Blocked</text> | Obtain explicit device caching and redistribution rights. |
-| Full-text integrity and provision structure | <text>Pending</text> | Acquire only after rights route is clear; checksum, parse and second-review the full text. |
+| Official publisher identified | **Pass — NCLR / Kenya Law** | Record the exact canonical source for the selected edition. |
+| Exact current consolidated edition | **Pending** | Obtain publisher confirmation and reconcile all amendment instruments to the selected cut-off. |
+| Official-language / language precedence | **Pending** | Confirm the authoritative publication and any language-version rule with NCLR/counsel. |
+| Commercial web/mobile display | **Blocked** | Obtain explicit NCLR licence or a verified independent rights opinion. |
+| Full-text redistribution and excerpts | **Blocked** | Obtain express permission for full text and excerpts. |
+| Search/indexing and embeddings | **Blocked** | Obtain explicit written scope for automated extraction, indexing and embeddings. |
+| AI retrieval and summaries | **Blocked** | Obtain express AI/RAG rights; no model training unless expressly licensed. |
+| Translations/plain-language derivatives | **Pending / blocked** | Confirm permission and label all derivatives as unofficial. |
+| Offline copies | **Blocked** | Obtain explicit device caching and redistribution rights. |
+| Full-text integrity and provision structure | **Pending** | Acquire only after rights route is clear; checksum, parse and second-review the full text. |
 
 **Decision: HOLD.** Keep the Kenya publisher candidate inactive and its commercial-use flag false. Do not scrape Kenya Law, bulk-download its content, import the PDF, create embeddings, or expose full text/AI summaries until the required licence or independently verified rights basis is approved.
 
