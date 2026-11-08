@@ -3,7 +3,7 @@
 **Last verified:** 8 November 2026  
 **Repository:** https://github.com/Blex31/carta-world-constitutions-library  
 **Live backend:** Supabase project `mvcirldxcuvcuqvlmqxv`  
-**Code baseline reviewed:** `3ae85716f3c140d956027d2637a441a5ab09e5f4` (mobile PR head)  
+**Code baseline reviewed:** `c39a69bfd882d32ea1400f716d931ca9e250053e` (My Library implementation and parser test; CI run #45)  
 **Checklist creation commit:** `b922334102fd3abf644be8978fbd13cdc8ee00c6`  
 **Latest verified CI at this review:** [Web CI #78](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283848) and [Mobile CI #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856), both passed for PR head `3ae8571`.
 
