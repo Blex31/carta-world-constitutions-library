@@ -5,7 +5,7 @@
 **Live backend:** Supabase project `mvcirldxcuvcuqvlmqxv`  
 **Code baseline reviewed:** `3ae85716f3c140d956027d2637a441a5ab09e5f4` (mobile PR head)  
 **Checklist creation commit:** `b922334102fd3abf644be8978fbd13cdc8ee00c6`  
-**Latest verified CI at checklist creation:** [Run #55 — passed](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42208017731)
+**Latest verified CI at this review:** [Web CI #78](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283848) and [Mobile CI #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856), both passed for PR head `3ae8571`.
 
 This is CARTA's single running checklist. Update it after each meaningful development session. Do not mark an item complete just because code exists: complete it only after the stated acceptance test has passed.
 
@@ -32,7 +32,8 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 | Migrations | 9 migration records applied in the live project; SQL files are checked in |
 | Supabase advisors | No security lints; the previous ingestion-run RLS performance warning is fixed; unused-index notices remain |
 | Native apps | Flutter Android/iOS first slice on `feature/flutter-native-clients`; Android debug APK and unsigned iOS CI verified on Mobile CI #34 for current PR head |
-| Public web launch | No production frontend URL confirmed |\n| Current CI | [Web CI #78](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283848) and [Mobile CI #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856) passed for PR head `3ae8571` |
+| Public web launch | No production frontend URL confirmed |
+| Current CI | [Web CI #78](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283848) and [Mobile CI #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856) passed for PR head `3ae8571` |
 
 ---
 
@@ -45,13 +46,16 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 - [x] Seed the global 250-jurisdiction directory without marking any constitution as verified.
 - [x] Fix the Supabase RLS initialization-plan warning on the administrator ingestion-run read policy.
 - [x] Keep GitHub Actions test, coverage audit, syntax, typecheck and production Vite build passing.
-- [ ] Validate migrations 001–009 from an empty disposable Supabase project or clean local Supabase stack. This is especially important for reconstructed migrations 004 and 005.\n- [ ] Reclassify the 242 currently unclassified jurisdiction rows using a reviewed ISO-3166 / UN crosswalk; separate the 193 UN member states, two observer states, territories/dependencies and international instruments. Do not use 250 as the country denominator.
+- [ ] Validate migrations 001–009 from an empty disposable Supabase project or clean local Supabase stack. This is especially important for reconstructed migrations 004 and 005.
+- [ ] Reclassify the 242 currently unclassified jurisdiction rows using a reviewed ISO-3166 / UN crosswalk; separate the 193 UN member states, two observer states, territories/dependencies and international instruments. Do not use 250 as the country denominator.
 - [ ] Add a committed npm lockfile, switch CI from `npm install` to `npm ci`, and verify a clean reproducible build.
 - [ ] Add an automated check that the deployed Edge Function and repository source do not drift.
 
 **Acceptance:** A new environment can be created from the repository migrations and seeds, all tests pass, and the deployed API source matches GitHub.
 
-## Phase 1 — Legal source and constitution collection (critical path)\n\n**Launch target:** 15 verified African constitutional collections for the first release, with a stretch target of 25. These are targets, not current coverage claims. Use [the African corpus launch plan](africa-first-wave-corpus-plan.md) for the candidate pool, special legal holds, source research and import gates.
+## Phase 1 — Legal source and constitution collection (critical path)
+
+**Launch target:** 15 verified African constitutional collections for the first release, with a stretch target of 25. These are targets, not current coverage claims. Use [the African corpus launch plan](africa-first-wave-corpus-plan.md) for the candidate pool, special legal holds, source research and import gates.
 
 **The legal corpus is CARTA's main launch blocker.** A country appearing in the directory does not mean its Constitution is available or verified.
 
@@ -157,7 +161,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ## Phase 7 — Native Android and iOS applications
 
-**Status:** Flutter first slice committed on branch `feature/flutter-native-clients`. CI run #30 passed analysis, widget tests, Android debug APK build/upload and unsigned iOS build. PR #3 remains draft and unmerged.
+**Status:** Flutter first slice committed on branch `feature/flutter-native-clients`. Mobile CI #34 and web CI #78 passed for the latest verified PR head. PR #3 remains draft and unmerged.
 
 - [x] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
 - [x] Generate and commit the Android and iOS runner projects; register the `carta://auth-callback` deep link and CARTA display name in both native projects.
@@ -169,7 +173,8 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 - [~] Account screen shows personal-library counts. The reader supports bookmarking, full-provision highlights and private notes; a dedicated My Library browse/edit/delete screen and device-sync QA remain.
 - [x] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
 - [x] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
-- [x] Latest verified CI [run #30](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42217617177), commit `9f0ba00ad64499f1c74b03af8910b5ab4c6c25e7`: Flutter analysis, widget tests, Android debug APK build and artifact upload, and unsigned iOS build all passed.
+- [x] Latest verified Mobile CI [run #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856), exact PR-head commit `3ae85716f3c140d956027d2637a441a5ab09e5f4`: Flutter analysis, widget tests, Android debug APK build and artifact upload, and unsigned iOS build all passed.
+- [x] Latest verified web CI [run #78](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283848), same PR-head commit: tests, data-coverage audit, syntax check, type check and production frontend build all passed.
 - [~] Connected debug APK is available as artifact `carta-android-debug` (artifact ID `13501829591`); this is a debug build, not a signed store release.
 - [ ] Add `carta://auth-callback` to Supabase Auth Redirect URLs and verify confirmation/password recovery on physical Android and iOS devices.
 - [ ] Configure Supabase Auth redirect allow-list with `carta://auth-callback`; test confirmation and password recovery on physical devices.
