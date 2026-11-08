@@ -170,7 +170,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 - [x] Implement the verified document reader and provision bookmarking through the existing CARTA API.
 - [x] Implement verified legal passage search and source-aware empty states.
 - [x] Implement official updates list and authenticated legal research request.
-- [~] Account screen shows personal-library counts. The reader supports bookmarking, full-provision highlights and private notes; a dedicated My Library browse/edit/delete screen and device-sync QA remain.
+- [~] Account screen shows personal-library counts and links to the new My Library screen. My Library now lists saved documents, bookmarks, highlights and private notes with open/remove actions; CI and real-device account isolation, sync and deletion checks remain.
 - [x] Add Flutter analyze, widget-test, Android debug APK and unsigned iOS build workflows.
 - [x] Commit the resolved `apps/mobile/pubspec.lock` after CI dependency resolution.
 - [x] Latest verified Mobile CI [run #34](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42238283856), exact PR-head commit `3ae85716f3c140d956027d2637a441a5ab09e5f4`: Flutter analysis, widget tests, Android debug APK build and artifact upload, and unsigned iOS build all passed.
