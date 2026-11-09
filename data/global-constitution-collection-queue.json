@@ -9,7 +9,7 @@
     "un_member_states": 193,
     "observer_states": 2,
     "africa": 54,
-    "official_source_candidates_identified": 66,
+    "official_source_candidates_identified": 78,
     "text_acquired": 0,
     "cleared_for_commercial_use": 0
   },
@@ -507,16 +507,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Legislative and Parliamentary Affairs Division, Ministry of Law, Justice and Parliamentary Affairs / Bangladesh Laws",
+      "official_source_candidates": [
+        "https://bdlaws.minlaw.gov.bd/act-367/act-chapter-print-685.html",
+        "https://bdlaws.minlaw.gov.bd/act-367.html"
+      ],
+      "candidate_instrument": "Constitution of the People's Republic of Bangladesh, 1972, as amended, including the Seventeenth Amendment Act 2018",
+      "version_status": "The official Bangladesh Laws portal provides the Constitution text with amendment annotations, including provisions of the Seventeenth Amendment Act 2018. Post-2024 constitutional reform proposals and commission recommendations must not be treated as enacted amendments; check court judgments, the official Gazette and current political/legal status through the release date.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -526,7 +529,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the authoritative Bangla text and official English rendering, consolidate enacted amendments only, review post-2024 court orders and distinguish reform proposals from enacted law; obtain reuse rights."
     },
     {
       "iso_code": "BB",
@@ -1203,16 +1206,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "National People's Congress / State Council of the People's Republic of China",
+      "official_source_candidates": [
+        "https://english.www.gov.cn/archive/lawregulations/201911/20/content_WS5ed8856ec6d0b3f0e9499913.html",
+        "https://www.npc.gov.cn/"
+      ],
+      "candidate_instrument": "Constitution of the People's Republic of China, adopted 4 December 1982, as amended in 1988, 1993, 1999, 2004 and 2018",
+      "version_status": "The State Council's English-language publication lists five amendment packages through the 2018 constitutional amendment. This English page was last updated in 2019; obtain the current Chinese NPC/official Gazette text and confirm whether any later amendment or authoritative interpretation changes the 2026 position before treating the English copy as current.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1222,7 +1228,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Chinese NPC text and all amendment decisions, verify no post-2018 constitutional amendment, then establish separate rights for the official English translation."
     },
     {
       "iso_code": "CO",
@@ -2518,16 +2524,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Legislative Department, Ministry of Law and Justice, Government of India",
+      "official_source_candidates": [
+        "https://www.legislative.gov.in/documents/constitution-of-india",
+        "https://www.legislative.gov.in/static/uploads/2025/07/359f70a69695affb9d72f8393102bd2e.pdf"
+      ],
+      "candidate_instrument": "Constitution of India, 1950, as amended",
+      "version_status": "The Legislative Department's official document portal lists a Constitution of India edition published on 23 December 2025 and a separate collection of Constitutional Amendment Acts. Confirm the edition's exact amendment cut-off, language edition and whether any later 2026 constitutional amendment has taken effect; do not rely on a PDF filename alone.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2537,7 +2546,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official 2025 English and Hindi editions and amendment index; reconcile every amendment in the Official Gazette through the target date and determine reproduction/translation/offline rights."
     },
     {
       "iso_code": "ID",
@@ -2548,16 +2557,21 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "People's Consultative Assembly (MPR RI) Legal Documentation Network / House of Representatives (DPR RI) / State Secretariat",
+      "official_source_candidates": [
+        "https://jdih.mpr.go.id/dokumen/view?id=46",
+        "https://jdih.mpr.go.id/dokumen/view?id=496",
+        "https://peraturan.bpk.go.id/Details/101646/uud-no--?oBgGIsCmIfJ=XzzMj5csP3e",
+        "https://www.dpr.go.id/en/dokumen/jdih/undang-undang-dasar"
+      ],
+      "candidate_instrument": "1945 Constitution of the Republic of Indonesia (UUD NRI 1945), revised through four amendment rounds in 1999, 2000, 2001 and 2002",
+      "version_status": "MPR RI's legal documentation portal provides the Indonesian one-text edition and an English version; the national legal database lists the 1945 Constitution and four amendments as in force. Verify the consolidated text against all four amendment documents and check later constitutional interpretation/decisions; do not combine court interpretation with the Constitution text.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2567,7 +2581,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the original 1945 Constitution and each of the four amendment instruments from MPR/BPK, reconcile against the 2021 single-text copy, verify language and obtain commercial/AI reuse permission."
     },
     {
       "iso_code": "IR",
@@ -2761,16 +2775,20 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "National Diet of Japan / e-Gov Japan / Ministry of Justice Japanese Law Translation Database",
+      "official_source_candidates": [
+        "https://www.shugiin.go.jp/internet/itdb_kenpou.nsf/html/kenpou/en/constitution.htm",
+        "https://laws.e-gov.go.jp/law/321CONSTITUTION?occasion_date=20260105",
+        "https://www.japaneselawtranslation.go.jp/ja/laws/download/174/09/s21Ak000010101en3.0.pdf"
+      ],
+      "candidate_instrument": "Constitution of Japan, promulgated 3 November 1946 and in force 3 May 1947",
+      "version_status": "The House of Representatives Commission on the Constitution hosts the English text; e-Gov shows the Japanese original as in force. The Constitution has not been formally amended since it came into force according to the available amendment history, but verify the official Japanese text through the 2026 cut-off. The English translation is a government translation resource and must be assessed separately for reuse.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2780,7 +2798,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Japanese e-Gov text and the National Diet source; verify no amendment or authoritative correction by the target date and review rights for the English translation."
     },
     {
       "iso_code": "JO",
@@ -2944,16 +2962,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "National Law Information Center / Ministry of Government Legislation, Republic of Korea",
+      "official_source_candidates": [
+        "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=61603&urlMode=engLsInfoR&viewCls=engLsInfoR",
+        "https://www.law.go.kr/법령/대한민국헌법"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Korea, whole amendment of 29 October 1987 (Constitution No. 10), in force 25 February 1988",
+      "version_status": "The Korean original is available in the official National Law Information Center. The linked English translation explicitly states that it is reference material, has no legal or official effect and may not be the latest amended version. Use Korean text as controlling and verify amendment history through the target date; translations require separate verification and rights review.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2963,7 +2984,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the Korean official text and current amendment history from the National Law Information Center; use the English rendering only as a cross-check and establish translation rights."
     },
     {
       "iso_code": "KW",
@@ -3379,16 +3400,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Attorney General's Chambers of Malaysia, Laws of Malaysia / Federal Legislation Portal",
+      "official_source_candidates": [
+        "https://lom.agc.gov.my/federal-constitution.php",
+        "https://lom.agc.gov.my/"
+      ],
+      "candidate_instrument": "Federal Constitution of Malaysia, 1957, as amended",
+      "version_status": "The Attorney General's Chambers portal hosts the Federal Constitution and warns that online updated reprints are not the statutory reprint under the Revision of Laws Act 1968; each online reprint states its own consolidation cut-off. Obtain the latest marked reprint, reconcile all constitutional amendment Acts and confirm Bahasa Malaysia authoritative text.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3398,7 +3422,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Download the latest AGC reprint and amendment acts; confirm its stated consolidation date, language authority, currentness and reuse terms."
     },
     {
       "iso_code": "MV",
@@ -3940,16 +3964,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Nepal Law Commission / Government of Nepal",
+      "official_source_candidates": [
+        "https://lawcommission.gov.np/content/13437/",
+        "https://lawcommission.gov.np/np/?cat=634"
+      ],
+      "candidate_instrument": "Constitution of Nepal, promulgated 20 September 2015, including the Second Amendment",
+      "version_status": "The Nepal Law Commission's official Constitution page lists an English PDF labelled Constitution of Nepal (Second Amendment) and is dated 21 Bhadra 2081 (2024). Verify the exact enacted second-amendment Act, Gazette promulgation, the full amendment schedule and whether any subsequent constitutional change has taken effect.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3959,7 +3986,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Nepali text, second-amendment law and Government Gazette; verify the English translation against Nepali and review commercial/AI/offline reuse."
     },
     {
       "iso_code": "NL",
@@ -4224,16 +4251,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "National Assembly of Pakistan / Government of Pakistan",
+      "official_source_candidates": [
+        "https://na.gov.pk/en/downloads.php",
+        "https://na.gov.pk/uploads/documents/67b5658558e94_594.pdf"
+      ],
+      "candidate_instrument": "Constitution of the Islamic Republic of Pakistan, 1973, as amended through the Twenty-Seventh Amendment status to verify",
+      "version_status": "The National Assembly downloads page currently lists an English Constitution as amended up to 21 November 2025; an earlier official PDF was only amended to 21 October 2024. Confirm every amendment after 21 November 2025, including whether any later constitutional amendment Act has taken effect, and obtain the current signed/Gazette text.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -4243,7 +4273,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the latest National Assembly and Gazette edition, reconcile all amendment Acts through the release cut-off, and review copyright, official-text and commercial reuse basis."
     },
     {
       "iso_code": "PW",
@@ -4434,16 +4464,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Official Gazette of the Republic of the Philippines / Supreme Court of the Philippines",
+      "official_source_candidates": [
+        "https://officialgazette.gov.ph/constitutions/",
+        "https://lawphil.net/consti/cons1987.html"
+      ],
+      "candidate_instrument": "1987 Constitution of the Republic of the Philippines, ratified 2 February 1987 and proclaimed in force 11 February 1987",
+      "version_status": "The Official Gazette identifies the 1987 Constitution as the present Constitution and records its ratification and effectivity dates. Check for any subsequent amendment or constitutional change enacted after 1987; treat proposals and draft replacement charters separately from enacted law.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -4453,7 +4486,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the Official Gazette text and certification from the Supreme Court/Official Gazette that no later amendment has taken effect; review reuse rights for the government-published edition."
     },
     {
       "iso_code": "PL",
@@ -4993,16 +5026,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Attorney-General's Chambers, Singapore Statutes Online",
+      "official_source_candidates": [
+        "https://sso.agc.gov.sg/Act/CONS1963",
+        "https://sso.agc.gov.sg/Act/CONST"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Singapore (1963), as amended",
+      "version_status": "Singapore Statutes Online shows a current consolidated version in September 2026 and lists amendment history including Act 9 of 2025 (15 September 2026 commencement/entry in timeline) and earlier 2024/2023 Acts. Confirm the precise point-in-time version at the intended release cut-off and retain the detailed legislative timeline.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -5012,7 +5048,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the exact dated Singapore Statutes Online version and every amendment in its timeline; document terms and rights for display, paid use, search and AI retrieval."
     },
     {
       "iso_code": "SK",
@@ -5249,16 +5285,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Parliament of Sri Lanka / Presidential Secretariat / Department of Government Printing",
+      "official_source_candidates": [
+        "https://www.parliament.lk/en/constitution/main",
+        "https://www.parliament.lk/en/constitution/1978-constitution"
+      ],
+      "candidate_instrument": "Constitution of the Democratic Socialist Republic of Sri Lanka, 1978, as amended through the Twenty First Amendment",
+      "version_status": "Parliament lists the 1978 Constitution and amendment instruments through the Twenty First Amendment, with a separate Twenty Second Amendment page/link. The available integrated text is stated to incorporate amendments only through the 21st Amendment. Verify whether the 22nd Amendment is a bill/proposal or enacted law and obtain the exact Gazette texts before producing a current consolidation.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -5268,7 +5307,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official 1978 Constitution, all amendment Acts through the 21st, and the exact status of the 22nd Amendment proposal; confirm Sinhala/Tamil/English language precedence and rights."
     },
     {
       "iso_code": "SD",
