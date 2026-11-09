@@ -76,7 +76,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ### 1B. Expand the legal library
 
-- [ ] Reconcile the current versions and rights of the other seven EAC partner-state constitutions: Burundi, DR Congo, Kenya, Somalia, South Sudan, Tanzania and Uganda. Track all 193 UN Member States and two observers in [the global constitutional collection queue](global-constitution-collection-queue.json).
+- [ ] Reconcile the current versions and rights of the other seven EAC partner-state constitutions: Burundi, DR Congo, Kenya, Somalia, South Sudan, Tanzania and Uganda. The global queue covers 193 UN members and two observers; 18 African official-source leads are recorded, none rights-cleared. Track all 193 UN Member States and two observers in [the global constitutional collection queue](global-constitution-collection-queue.json).
 - [ ] Treat Zanzibar's Constitution as a separate legal instrument/jurisdictional collection where included.
 - [ ] For every document, establish official source, language edition, amendment history, effective dates, publication status, rights evidence and checksum.
 - [ ] Import each document only after the same rights and editorial gates pass.
@@ -161,7 +161,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ## Phase 7 — Native Android and iOS applications
 
-**Status:** Flutter first slice, reader actions and My Library screen committed on branch `feature/flutter-native-clients`. Mobile CI #47 and web CI #87 passed for implementation commit `b1655a9`. PR #3 remains draft and unmerged.
+**Status:** Flutter first slice, reader actions and My Library screen are merged into `main` via PR #3. Mobile CI #47 and web CI #87 passed for implementation baseline `b1655a9`. Real-device acceptance and signed store builds remain pending.
 
 - [x] Create the Flutter/Dart project under `apps/mobile` with Supabase Flutter, secure session storage, API client and shared CARTA theme.
 - [x] Generate and commit the Android and iOS runner projects; register the `carta://auth-callback` deep link and CARTA display name in both native projects.
