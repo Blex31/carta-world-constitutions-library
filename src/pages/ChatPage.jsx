@@ -23,7 +23,12 @@ export default function ChatPage({ctx}){
             <span>{country.name} · {mainDoc?.year || 'Current'}</span>
           </span>
           <select className="scope-jurisdiction-select" value={countryId} onChange={e=>chooseCountry(e.target.value)} title="Change active jurisdiction">
-            {countries.map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}
+            <optgroup label="Verified Constitutional Charters">
+              {countries.filter(c=>c.constitutionStatus==='verified_current').map(c=><option key={c.id} value={c.id}>{c.flag} {c.name} (Verified)</option>)}
+            </optgroup>
+            <optgroup label="Catalogued Jurisdictions (Metadata)">
+              {countries.filter(c=>c.constitutionStatus!=='verified_current').map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}
+            </optgroup>
           </select>
           <span className="scope-caption">Corpus: {readArticles.length || 'Indexed'} verified provisions</span>
         </div>
