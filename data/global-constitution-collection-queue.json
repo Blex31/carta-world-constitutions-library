@@ -9,7 +9,7 @@
     "un_member_states": 193,
     "observer_states": 2,
     "africa": 54,
-    "official_source_candidates_identified": 24,
+    "official_source_candidates_identified": 30,
     "text_acquired": 0,
     "cleared_for_commercial_use": 0
   },
@@ -158,16 +158,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Algerian Office of the Official Journal / Office of Legal and Constitutional Research (OCRC)",
+      "official_source_candidates": [
+        "https://www.ocrc.gov.dz/en/legal-texts"
+      ],
+      "candidate_instrument": "2020 constitutional amendment approved by referendum on 1 November 2020 and issued by Presidential Decree No. 20-442 of 30 December 2020",
+      "version_status": "An official legal-text portal identifies Decree 20-442 of 30 December 2020. Verify the complete Official Journal text, any later amendments, and Arabic/French language authority to the 2026 cut-off.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -177,7 +179,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the exact Official Journal text and subsequent constitutional amendment history; confirm source rights and controlling language with Algerian counsel."
     },
     {
       "iso_code": "AD",
@@ -888,16 +890,21 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Presidency of the Faso / Government of Burkina Faso",
+      "official_source_candidates": [
+        "https://www.presidencedufaso.bf/textes-fondamentaux/",
+        "https://www.presidencedufaso.bf/pouvoirs-constitutionnels/",
+        "https://www.presidencedufaso.bf/conseil-des-ministres-un-avant-projet-de-loi-constitutionnelle-portant-modification-de-la-devise-adopte/",
+        "https://gouvernement.gov.bf/wp-content/uploads/2026/03/PND-2026-2030__RELANCE.pdf"
+      ],
+      "candidate_instrument": "Constitution adopted 2 June 1991; Constitutional Law No. 045-2023/ALT of 30 December 2023 is reported by a 2026 government programme as a revision",
+      "version_status": "The Presidency constitutional page says its displayed text was last amended in November 2015, but a 2026 Government programme cites Constitutional Law 045-2023/ALT of 30 December 2023. The Presidency also reported a 2024 draft revision of Articles 34 and 147. The public page is stale/inconsistent; hold until all enacted 2023/2024 changes and the proposal's status are reconciled.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -907,7 +914,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the official Gazette copy of Law 045-2023/ALT and any enacted 2024 revision; distinguish adopted laws from draft bills, establish the current language framework and rights."
     },
     {
       "iso_code": "BI",
@@ -951,16 +958,21 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "National Assembly of Cabo Verde / Government of Cabo Verde",
+      "official_source_candidates": [
+        "https://www.parlamento.cv/constituicao/downloads_cr.php",
+        "https://www.parlamento.cv/Constituicao/",
+        "https://www.parlamento.cv/constituicao/historia",
+        "https://www.governo.cv/governo/constituicao/"
+      ],
+      "candidate_instrument": "Constituição da República de Cabo Verde (1992), with revisions in 1995, 1999 and Law No. 1/VII/2010",
+      "version_status": "Parliament's official history and legislation pages identify the 1992 Constitution, 1995 and 1999 revisions, and the second ordinary revision by Law 1/VII/2010. The online consolidated text expressly says it does not replace the Official Gazette. Confirm no later revision and obtain the Gazette editions.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -970,7 +982,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Reconcile the 1992 text and 1995, 1999 and 2010 revision laws against the Official Gazette; verify later changes, language precedence and digital reuse rights."
     },
     {
       "iso_code": "KH",
@@ -1011,16 +1023,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Presidency of the Republic of Cameroon / National Assembly",
+      "official_source_candidates": [
+        "https://prc.cm/en/cameroon/constitution",
+        "https://prc.cm/en/news/the-acts/laws/8241-law-no-2026-002-of-14-april-2026-to-amend-and-supplement-the-constitution-of-2-june-1972-as-amended-and-supplemented-by-law-no-96-06-of-18-january-1996-and-law-no-2008-001-of-14-april-2008"
+      ],
+      "candidate_instrument": "Constitution of 2 June 1972 as revised by Law No. 96/06 of 18 January 1996, Law No. 2008/001 of 14 April 2008 and Law No. 2026/002 of 14 April 2026",
+      "version_status": "The Presidency's constitutional page identifies the 1996 and 2008 revisions; a new official page records Law No. 2026/002 of 14 April 2026 amending and supplementing the Constitution. The older consolidation is not current without incorporating the 2026 Act.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1030,7 +1045,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the complete official 2026/002 Act and prior revisions; prepare and independently verify a consolidated text current to the cut-off, then review commercial and AI reuse rights."
     },
     {
       "iso_code": "CA",
@@ -1101,16 +1116,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Presidency of the Republic of Chad / Government Printer",
+      "official_source_candidates": [
+        "https://presidencetchad.org/decrets/",
+        "https://faolex.fao.org/en/documents/LEX-FAOC226894/constitution-de-la-republique-du-tchad-tcd-2023"
+      ],
+      "candidate_instrument": "Constitution promulgated December 2023, revised by Constitutional Law No. 001/PC/2025 of 3 October 2025",
+      "version_status": "The Presidency's decree archive lists the 2023 promulgation decree. FAOLEX identifies Constitutional Law 001/PC/2025 of 3 October 2025 as a revision. Obtain the official 2025 Gazette and verify later 2026 instruments.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1120,7 +1138,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official 2023 promulgation and 2025 revision from the Journal Officiel; reconcile commencement and amendments, then review rights."
     },
     {
       "iso_code": "CL",
@@ -1643,16 +1661,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "National Election Authority / Official Gazette of the Arab Republic of Egypt",
+      "official_source_candidates": [
+        "https://www.election.eg/digital-library-laws",
+        "https://mof.gov.eg/en/legislation/legislation"
+      ],
+      "candidate_instrument": "Constitution of the Arab Republic of Egypt, issued in 2014 and amended by referendum in 2019",
+      "version_status": "The National Election Authority and Ministry of Finance legal libraries identify the 2014 Constitution as amended in 2019. The Ministry warns its electronic texts are guidance only and the Official Gazette is the legal reference. Confirm the complete Gazette text and any later amendments.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1662,7 +1683,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the authoritative Arabic Official Gazette version and any official translation; verify the 2019 amendment and later changes and establish CARTA rights."
     },
     {
       "iso_code": "SV",
