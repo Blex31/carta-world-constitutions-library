@@ -84,3 +84,22 @@ test('all 54 African UN Member States have a source lead or explicit status find
   assert.equal(guineaBissau.instrument_form, 'transitional_or_interim_instrument');
   assert.match(guineaBissau.special_review_flag, /validity_review/);
 });
+
+test('global source discovery batch covers 12 Americas, European and Oceanian jurisdictions without rights clearance', () => {
+  const globalCodes = ['US','CA','MX','BR','AR','DE','FR','ES','IT','PT','AU','NZ'];
+  for (const code of globalCodes) {
+    const entry = queue.entries.find((item) => item.iso_code === code);
+    assert.ok(entry, code);
+    assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
+    assert.equal(entry.rights_status, 'review_required', code);
+    assert.equal(entry.commercial_use_allowed, false, code);
+    assert.equal(entry.ai_retrieval_allowed, false, code);
+    assert.equal(entry.offline_device_copy_allowed, false, code);
+    assert.equal(entry.full_text_acquired, false, code);
+    assert.equal(entry.publication_status, 'catalogue_only', code);
+    assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
+  }
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 66);
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'CA').instrument_form, 'multiple_foundational_instruments');
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'NZ').instrument_form, 'uncodified_or_unwritten');
+});
