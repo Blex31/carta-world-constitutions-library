@@ -65,8 +65,8 @@ test('non-member ISO country/area rows are not silently added to the global memb
 
 test('African first-wave source queue contains 18 candidates without clearing rights', () => {
   const leadEntries = queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified');
-  assert.equal(leadEntries.length, 18);
-  for (const code of ['BI','CD','KE','RW','UG','BW','GH','MW','NA','NG','ZA','ZM','ZW','GM','SL']) {
+  assert.equal(leadEntries.length, 24);
+  for (const code of ['BI','CD','KE','RW','UG','BW','GH','MW','NA','NG','ZA','ZM','ZW','GM','SL','AO','GA','TG','BJ','SN','MZ']) {
     const entry = queue.entries.find((item) => item.iso_code === code);
     assert.ok(entry, code);
     assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
