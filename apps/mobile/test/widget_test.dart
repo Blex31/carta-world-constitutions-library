@@ -18,6 +18,31 @@ void main() {
     expect(find.textContaining('service-role key'), findsOneWidget);
   });
 
+  test('jurisdiction parser retains membership and geographic metadata', () {
+    final member = Jurisdiction.fromJson({
+      'iso': 'KE',
+      'name': 'Kenya',
+      'flag': '🇰🇪',
+      'constitutionStatus': 'metadata_only',
+      'jurisdictionKind': 'sovereign_state',
+      'isUnMember': true,
+      'continent': 'Africa',
+      'region': 'East Africa',
+    });
+    expect(member.isUnMember, isTrue);
+    expect(member.continent, 'Africa');
+    expect(member.region, 'East Africa');
+
+    final observer = Jurisdiction.fromJson({
+      'iso': 'VA',
+      'name': 'Holy See',
+      'isUnMember': false,
+      'jurisdictionKind': 'sovereign_state',
+    });
+    expect(observer.isUnMember, isFalse);
+    expect(observer.kind, 'sovereign_state');
+  });
+
   test('personal library parser preserves item identifiers for deletion', () {
     final library = UserLibrary.fromJson({
       'bookmarks': [
