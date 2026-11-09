@@ -1,4 +1,38 @@
 #!/usr/bin/env node
+/**
+ * CARTA Constitution Import Script
+ * 
+ * Purpose: Safely imports verified constitutional documents into the CARTA database.
+ * 
+ * LEGAL GATES (MUST PASS BEFORE IMPORT):
+ * 1. Source must be official publisher (is_official = true in legal_sources)
+ * 2. Document status must be "verified"
+ * 3. License must be commercially approved (commercial_use_allowed = true)
+ * 4. Rights evidence URL must be HTTPS
+ * 5. Rights notes must be substantive (>20 chars, no placeholders)
+ * 6. For official_text_exclusion: legal_opinion_on_file required
+ * 7. All dates must be ISO format (YYYY-MM-DD)
+ * 8. Full text must be complete official text (no placeholders)
+ * 9. Sections must be non-empty array of provisions
+ * 
+ * USAGE:
+ *   # Dry run (validates but does not import)
+ *   DATABASE_URL=postgres://... node scripts/import-constitution-documents.mjs
+ *   
+ *   # Import with custom input file
+ *   DATABASE_URL=postgres://... node scripts/import-constitution-documents.mjs --input data/import/my-constitutions.json
+ *   
+ *   # Actually import (after dry run passes)
+ *   DATABASE_URL=postgres://... node scripts/import-constitution-documents.mjs --apply
+ * 
+ * ENVIRONMENT:
+ *   DATABASE_URL_UNPOOLED (preferred) or DATABASE_URL: Postgres connection string
+ * 
+ * INPUT FORMAT: See data/import/constitutions.example.json
+ * 
+ * WARNING: This script enforces strict legal compliance. It will FAIL and refuse
+ * to import any document that does not meet all commercial reuse requirements.
+ */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';

@@ -1,3 +1,29 @@
+/**
+ * CARTA Authentication Module
+ * 
+ * This module provides authentication functionality for the CARTA web application.
+ * It wraps Supabase Auth and provides helper functions for API calls.
+ * 
+ * ENVIRONMENT VARIABLES:
+ *   VITE_SUPABASE_URL          - Supabase project URL (required)
+ *   VITE_SUPABASE_PUBLISHABLE_KEY - Supabase anon key (required)
+ *   VITE_CARTA_API_URL         - CARTA API base URL (required)
+ * 
+ * USAGE:
+ *   import { signInWithEmail, signUpWithEmail, signOut, getSessionUser, apiFetch } from './auth';
+ * 
+ * SECURITY NOTES:
+ *   - SUPABASE_PUBLISHABLE_KEY is safe to expose in browser
+ *   - Service role key is NEVER used in this module (server-only)
+ *   - All API calls include the publishable key as 'apikey' header
+ *   - Authenticated calls include Bearer token
+ *   - Tokens are automatically refreshed by Supabase client
+ * 
+ * SESSION MANAGEMENT:
+ *   - Session is persisted in localStorage
+ *   - Tokens are automatically refreshed
+ *   - Session is detected from URL on page load
+ */
 import { createClient } from '@supabase/supabase-js';
 
 export const SUPABASE_URL = (import.meta.env.VITE_SUPABASE_URL || '').trim();

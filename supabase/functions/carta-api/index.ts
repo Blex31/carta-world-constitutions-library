@@ -1,3 +1,58 @@
+/**
+ * CARTA API - Edge Function
+ * 
+ * Purpose: Central API endpoint for CARTA web and mobile clients.
+ * 
+ * ROUTES:
+ * 
+ * GET    /                      - Health check
+ * GET    /health                - Health check with readiness status
+ * 
+ * GET    /api/library           - List jurisdictions and documents
+ * GET    /api/library/:id       - Get document with sections/chunks
+ * POST   /api/library/bookmark  - Manage user bookmarks
+ * POST   /api/library/highlight - Manage user highlights
+ * POST   /api/library/note      - Manage user notes
+ * 
+ * POST   /api/legal-chat        - Legal research assistant (AI-powered)
+ * 
+ * GET    /api/billing/status    - Get user subscription status
+ * POST   /api/billing/checkout  - Create Stripe checkout session
+ * GET    /api/billing/verify    - Verify checkout completion
+ * POST   /api/billing/portal    - Open Stripe customer portal
+ * POST   /api/billing/webhook   - Stripe webhook handler
+ * 
+ * GET    /api/admin/sources     - List legal sources (admin only)
+ * POST   /api/admin/sources     - Create legal source (admin only)
+ * PATCH  /api/admin/sources/:id - Update legal source (admin only)
+ * POST   /api/admin/ingest      - Trigger feed ingestion (admin/cron)
+ * 
+ * ENVIRONMENT VARIABLES:
+ *   SUPABASE_URL              - Supabase project URL
+ *   SUPABASE_ANON_KEY         - Supabase anon key (public)
+ *   SUPABASE_SERVICE_ROLE_KEY - Supabase service role key (server-only)
+ *   OPENAI_API_KEY            - OpenAI API key for legal chat
+ *   STRIPE_SECRET_KEY         - Stripe secret key for billing
+ *   STRIPE_WEBHOOK_SECRET     - Stripe webhook signing secret
+ *   STRIPE_PRICE_MONTHLY      - Monthly subscription price ID
+ *   STRIPE_PRICE_YEARLY       - Yearly subscription price ID
+ *   CARTA_SITE_URL            - Production site URL
+ *   CARTA_AI_MODEL            - AI model to use (default: gpt-4.1-mini)
+ *   CARTA_ALLOWED_ORIGINS     - Comma-separated allowed origins
+ * 
+ * SECURITY:
+ *   - All routes validate CORS origins
+ *   - Sensitive operations require authentication
+ *   - Admin operations require admin role
+ *   - Service role key never exposed to clients
+ *   - Stripe webhook validates signature
+ * 
+ * LEGAL COMPLIANCE:
+ *   - Legal chat only uses verified, current, commercially-licensed documents
+ *   - All responses cite official source URLs
+ *   - AI responses include disclaimer: "Educational information only; not legal advice."
+ *   - If no verified sources match, returns explicit message refusing to answer
+ */
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@2.119.0";
 

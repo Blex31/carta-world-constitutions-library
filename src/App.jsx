@@ -1,3 +1,53 @@
+/**
+ * CARTA Main Application Component
+ * 
+ * This is the root React component for the CARTA World Constitutions Library web app.
+ * 
+ * FEATURES:
+ * - Jurisdiction browser (195 UN member states + 2 observers)
+ * - Constitution reader with original text + plain language summaries
+ * - Daily constitutional article (one per day per jurisdiction)
+ * - Legal research chat assistant (AI-powered, verified sources only)
+ * - Full-text search across verified legal documents
+ * - Personal library: bookmarks, highlights, notes
+ * - User authentication via Supabase Auth
+ * - Subscription management (CARTA Plus)
+ * - Admin interface for source management
+ * 
+ * STATE MANAGEMENT:
+ * - Local state for UI (React useState)
+ * - Persistent state for user data (localStorage + useStore hook)
+ * - Server state from CARTA API (Supabase Edge Function)
+ * 
+ * DATA FLOW:
+ * 1. On mount: Fetch jurisdictions, documents, articles from API
+ * 2. Fallback: Use seed data if API unavailable
+ * 3. User actions: Sync with server via apiFetch calls
+ * 4. Auth state: Managed via Supabase Auth listener
+ * 
+ * COMPONENT HIERARCHY:
+ * App
+ * ├── Header (topbar)
+ * ├── Sidebar (navigation)
+ * ├── Main (page content)
+ * │   ├── HomePage
+ * │   ├── ReadPage
+ * │   ├── SearchPage
+ * │   ├── ChatPage
+ * │   ├── CataloguePage
+ * │   ├── SourcesPage
+ * │   └── LibraryPage
+ * └── Modals (Auth, Paywall, Welcome, Compare, Note, Intro)
+ * 
+ * ENVIRONMENT:
+ * - SUPABASE_PUBLISHABLE_KEY: Required for API calls
+ * - Supabase Auth: Configured in auth.js
+ * 
+ * NOTE: No constitutional text is displayed as live law until:
+ * 1. Document is verified
+ * 2. Source is official
+ * 3. Commercial reuse rights are cleared
+ */
 import React, { useEffect, useMemo, useState } from 'react';
 import { apiFetch, apiUrl, getAccessToken, getSessionUser, requestPasswordReset, SUPABASE_PUBLISHABLE_KEY, signInWithEmail, signOut, signUpWithEmail, supabase, updatePassword } from './auth';
 import seedJurisdictions from '../data/jurisdictions.seed.json';

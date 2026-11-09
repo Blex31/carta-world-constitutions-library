@@ -1,4 +1,33 @@
 #!/usr/bin/env node
+/**
+ * CARTA Global Constitution Queue Auditor
+ * 
+ * Purpose: Validates the global constitution collection queue for data integrity.
+ * 
+ * Checks:
+ * - Total entries = 195 (193 UN member states + 2 observers)
+ * - Unique ISO codes = 195
+ * - UN member states = 193
+ * - Observer states = 2
+ * - Africa research assignments = 54
+ * - Africa source status leads = 54
+ * - Source candidates identified = 115
+ * - No metadata mismatches with jurisdictions.seed.json
+ * - No pre-cleared or published records (queue is research assignments only)
+ * - No missing EAC candidate links
+ * 
+ * USAGE:
+ *   node scripts/audit-global-constitution-queue.mjs
+ * 
+ * OUTPUT: JSON report with validation results
+ * 
+ * EXIT CODES:
+ *   0 = All checks passed
+ *   1 = One or more checks failed
+ * 
+ * NOTE: This audits a RESEARCH QUEUE, not a legal-text corpus.
+ * Queue entries are research assignments, not assertions of acquired/verified texts.
+ */
 import fs from 'node:fs/promises';
 
 const [seed, queue, eac] = await Promise.all([
