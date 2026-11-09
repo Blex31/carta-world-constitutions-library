@@ -103,3 +103,24 @@ test('global source discovery batch covers 12 Americas, European and Oceanian ju
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'CA').instrument_form, 'multiple_foundational_instruments');
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'NZ').instrument_form, 'uncodified_or_unwritten');
 });
+
+test('Asian source discovery batch covers 12 jurisdictions without rights clearance', () => {
+  const asiaCodes = ['IN','JP','CN','KR','PH','SG','MY','BD','NP','LK','PK','ID'];
+  for (const code of asiaCodes) {
+    const entry = queue.entries.find((item) => item.iso_code === code);
+    assert.ok(entry, code);
+    assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
+    assert.equal(entry.rights_status, 'review_required', code);
+    assert.equal(entry.commercial_use_allowed, false, code);
+    assert.equal(entry.ai_retrieval_allowed, false, code);
+    assert.equal(entry.offline_device_copy_allowed, false, code);
+    assert.equal(entry.full_text_acquired, false, code);
+    assert.equal(entry.publication_status, 'catalogue_only', code);
+    assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
+  }
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 78);
+  assert.match(queue.entries.find((entry) => entry.iso_code === 'KR').version_status, /no legal or official effect/i);
+  assert.match(queue.entries.find((entry) => entry.iso_code === 'BD').version_status, /proposals/i);
+  assert.match(queue.entries.find((entry) => entry.iso_code === 'LK').version_status, /Twenty Second Amendment/i);
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'CN').currentness_status, 'not_verified');
+});
