@@ -44,7 +44,7 @@ const report = {
 console.log(JSON.stringify(report, null, 2));
 if (entries.length !== 195 || new Set(codes).size !== 195 ||
     memberEntries.length !== 193 || observers.length !== 2 ||
-    report.sourceCandidatesIdentified !== 18 ||
+    report.sourceCandidatesIdentified !== 24 ||
     mismatches.length || rightsRisk.length || missingSourceCandidate.length) {
   process.exitCode = 1;
 }
