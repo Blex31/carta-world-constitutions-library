@@ -47,7 +47,7 @@ The text being publicly viewable, downloadable, government-hosted or labelled â€
 - Whether complete text has actually been acquired, checksum, CARTA document identifiers and publication state.
 - A concrete next action for each country.
 
-The eight EAC candidates are carried forward as source leads only. They remain rights-review required, and no text is approved by inclusion in this queue.
+**30 official/source leads have been identified**: the eight EAC candidates plus 22 additional African leads. These are source-discovery starting points only; all remain rights-review required, and no text is approved by inclusion in this queue.
 
 ## African first-wave source leads
 
@@ -76,8 +76,14 @@ The following are source-discovery starting points recorded in the queue. A link
 | Benin | [SGG laws library](https://sgg.gouv.bj/documentheque/loi/) / [Law 2025-20](https://sgg.gouv.bj/doc/loi-2025-20/download) | Constitution 1990 as revised in 2019 and modified by Law 2025-20 of 17 December 2025; consolidate and check 2026 updates. |
 | Senegal | [Government source â€” Constitution](https://forcesarmees.gouv.sn/dossiers/lois/loi-ndeg-2001-03-du-22-janvier-2001-portant-constitution-modifiee) / [Lexenegal revision history cross-check](https://www.lexenegal.sn/code/constitution-senegal) | Official base text is old; private Lexenegal index identifies revision laws through 2024-15 (19 Dec 2024). Obtain all Gazettes and an official current consolidation. |
 | Mozambique | [Tribunal Supremo legislation catalogue](https://www.ts.gov.mz/legislacao/) | Catalogue lists the 2018 Constitution as the latest instrument; obtain Gazette edition and confirm all post-2018 amendments. |
+| Algeria | [Official OCRC legal-text portal](https://www.ocrc.gov.dz/en/legal-texts) | 2020 constitutional amendment issued by Decree 20-442; obtain the Official Journal text and verify Arabic/French authority and later changes. |
+| Cabo Verde | [National Assembly legislation register](https://www.parlamento.cv/constituicao/downloads_cr.php) / [Government Constitution page](https://www.governo.cv/governo/constituicao/) | 1992 Constitution, revised in 1995, 1999 and by Law 1/VII/2010; online consolidated text says it does not replace the Gazette. |
+| Cameroon | [Presidency Constitution page](https://prc.cm/en/cameroon/constitution) / [Law 2026/002](https://prc.cm/en/news/the-acts/laws/8241-law-no-2026-002-of-14-april-2026-to-amend-and-supplement-the-constitution-of-2-june-1972-as-amended-and-supplemented-by-law-no-96-06-of-18-january-1996-and-law-no-2008-001-of-14-april-2008) | 1972 Constitution as amended in 1996 and 2008, plus Law 2026/002 of 14 April 2026; older consolidations must incorporate the 2026 Act. |
+| Chad | [Presidency decree archive](https://presidencetchad.org/decrets/) / [FAOLEX version history](https://faolex.fao.org/en/documents/LEX-FAOC226894/constitution-de-la-republique-du-tchad-tcd-2023) | 2023 Constitution revised by Constitutional Law 001/PC/2025 of 3 October 2025; obtain the official 2025 Gazette and later changes. |
+| Egypt | [National Election Authority legal library](https://www.election.eg/digital-library-laws) / [Ministry of Finance law library](https://mof.gov.eg/en/legislation/legislation) | 2014 Constitution amended in 2019; Ministry electronic copy is guidance only and the Official Gazette is the legal reference. |
+| Burkina Faso | [Presidency constitutional texts](https://www.presidencedufaso.bf/textes-fondamentaux/) / [2026 Government programme](https://gouvernement.gov.bf/wp-content/uploads/2026/03/PND-2026-2030__RELANCE.pdf) | Presidency's displayed text says amended in 2015, while a 2026 Government programme cites Law 045-2023/ALT; a 2024 proposal also exists. Hold until enacted laws and proposal status are reconciled. |
 
-The 16 additional leads beyond the EAC group were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all first-wave jurisdictions.
+The 22 additional leads beyond the EAC group were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all first-wave jurisdictions.
 
 ## Collection rules
 
