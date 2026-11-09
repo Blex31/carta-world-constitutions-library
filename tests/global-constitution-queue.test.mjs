@@ -63,16 +63,24 @@ test('non-member ISO country/area rows are not silently added to the global memb
   assert.ok(otherAreas.every((x) => !queueCodes.has(x.iso_code)));
 });
 
-test('African source queue contains 42 identified leads without clearing rights', () => {
-  const leadEntries = queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified');
-  assert.equal(leadEntries.length, 42);
-  for (const code of ['BI','CD','KE','RW','UG','BW','GH','MW','NA','NG','ZA','ZM','ZW','GM','SL','AO','GA','TG','BJ','SN','MZ','DZ','CV','CM','TD','EG','BF','CF','CG','CI','DJ','GQ','GN','LR','LY','ML','MR','MG','MU']) {
-    const entry = queue.entries.find((item) => item.iso_code === code);
-    assert.ok(entry, code);
-    assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
-    assert.equal(entry.rights_status, 'review_required', code);
-    assert.equal(entry.commercial_use_allowed, false, code);
-    assert.equal(entry.publication_status, 'catalogue_only', code);
-    assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
+test('all 54 African UN Member States have a source lead or explicit status finding without rights clearance', () => {
+  const africanMembers = queue.entries.filter((entry) =>
+    entry.continent === 'Africa' && entry.membership_status === 'un_member_state'
+  );
+  assert.equal(africanMembers.length, 54);
+  assert.ok(africanMembers.every((entry) =>
+    entry.source_discovery_status === 'official_source_candidate_identified'
+  ));
+  for (const entry of africanMembers) {
+    assert.equal(entry.rights_status, 'review_required', entry.iso_code);
+    assert.equal(entry.commercial_use_allowed, false, entry.iso_code);
+    assert.equal(entry.publication_status, 'catalogue_only', entry.iso_code);
+    assert.equal(entry.full_text_acquired, false, entry.iso_code);
   }
+  const eritrea = queue.entries.find((entry) => entry.iso_code === 'ER');
+  assert.match(eritrea.candidate_instrument, /never entered into force/);
+  assert.equal(eritrea.currentness_status, 'not_verified');
+  const guineaBissau = queue.entries.find((entry) => entry.iso_code === 'GW');
+  assert.equal(guineaBissau.instrument_form, 'transitional_or_interim_instrument');
+  assert.match(guineaBissau.special_review_flag, /validity_review/);
 });
