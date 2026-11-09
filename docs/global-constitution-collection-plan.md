@@ -49,6 +49,30 @@ The text being publicly viewable, downloadable, government-hosted or labelled �
 
 The eight EAC candidates are carried forward as source leads only. They remain rights-review required, and no text is approved by inclusion in this queue.
 
+## African first-wave source leads
+
+The following are source-discovery starting points recorded in the queue. A link is not a rights approval or proof that the linked edition is current.
+
+| Jurisdiction | Initial official/source lead | Version/currentness note |
+|---|---|---|
+| Burundi | [Presidency](https://presidence.gov.bi/2018/07/6271-2/) / [Constitutional Court](https://courconstitutionnelle.gov.bi/textes-fondamentaux/) | 2018 Constitution located; later amendment and official-language checks remain. |
+| DR Congo | [Cour de Cassation](https://cassation.cd/textes-legaux/constitution-rdc) | Text identifies 2006 Constitution modified by Law 11/002 of 2011; later changes and Gazette history to verify. |
+| Kenya | [Kenya Law](https://kenyalaw.org/legislation/) | NCLR licensing required for CARTA commercial redistribution, bulk extraction and AI use under current terms. |
+| Rwanda | [RLRC Official Gazette text](https://www.rlrc.gov.rw/fileadmin/user_upload/RLRC/Laws_of_Rwanda_v2/Domestic_laws/Laws_in_force/1._Fundamental/1.1._National_Instruments/1.1.1._Constitution/1.1.1.1._Constitution_of_the_Rep._of_Rwanda_2023.pdf) | 2023 trilingual Gazette text located; currentness, controlling language and rights opinion pending. |
+| Uganda | [Parliament](https://www.parliament.go.ug/page/constitution) | Parliament provides Constitution and amendment acts; confirm latest complete consolidation. |
+| Botswana | [Parliament PDF](https://parliament.gov.bw/images/constitution.pdf) | Official-hosted text located; edition and all amendment instruments need reconciliation. |
+| Ghana | [Judicial Service — Constitution](https://www.judicial.gov.gh/index.php/the-constitution) / [amendments](https://www.judicial.gov.gh/index.php/ammendments-of-the-constitution) | Official text and amendment page located; complete current consolidation and rights basis remain pending. |
+| Malawi | [PPDA-hosted Fourth Revised Edition](https://ppda.mw/storage/documents/resources/THE%20CONSTITUTION%20OF%20THE%20REPUBLIC%20OF%20MALAWI.pdf) | Consolidates amendments through 31 January 2025 but states it does not replace the original Gazette text; obtain official confirmation and 2025–2026 check. |
+| Namibia | [Government-hosted Constitution PDF](https://www.gov.na/documents/146489/641903/Namibia_Constitution.pdf/d2d4c4cd-3f19-ab0b-8bdb-8d5a5da3ee79) | Compare with later consolidated reference and verify all amendment lineage to the cut-off. |
+| Nigeria | [Federal Ministry of Justice PDF](https://justice.gov.ng/wp-content/uploads/2020/09/Nigerian-Constitution.pdf) / [National Library repository record](https://nigeriareposit.nln.gov.ng/items/399df25a-52d0-4972-9365-c618cd3ddf5f) | Base text must be reconciled with all assented Fifth Alteration Acts, including the 2023 series. |
+| South Africa | [Government Constitution page](https://www.gov.za/documents/constitution/constitution-republic-south-africa-1996-04-feb-1997) / [DoJ amendments register](https://www.justice.gov.za/constitution/amendments.html) | Available consolidated online text includes only the 17th Amendment; the 18th Amendment Act 3 of 2023 must be incorporated and checked. |
+| Zambia | [Official constitutional review portal](https://www.constitution.gov.zm/) / [Act No. 13 of 2025](https://www.constitution.gov.zm/act-13-2025) | Act assented 18 December 2025; reconcile 2016 and 2025 changes into a full current version. |
+| Zimbabwe | [Parliament Constitution page](https://www.parlzim.gov.zw/constitution-of-zimbabwe/) | Parliament-hosted 2013 Constitution located; later amendment Acts and current consolidated edition remain to verify. |
+| The Gambia | [Ministry of Justice downloads](https://www.moj.gm/downloads) | Ministry lists 1997 Constitution (2002 revision) and a separate 2020 draft; do not treat the draft as enacted. |
+| Sierra Leone | [Parliament Constitution page](https://www.parliament.gov.sl/constitution-of-sierra-leone.html) | Parliament's 1991 text is a source lead, not a consolidated version; verify all later amendment Acts, including those identified through 2022. |
+
+The additional 10 leads were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all first-wave jurisdictions.
+
 ## Collection rules
 
 A country can have more than one constitutional instrument, a transitional charter, or no single codified constitution. Do not force every entry into a single “constitution.pdf” slot. Before import, determine whether the relevant collection is:
