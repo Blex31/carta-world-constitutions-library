@@ -63,10 +63,10 @@ test('non-member ISO country/area rows are not silently added to the global memb
   assert.ok(otherAreas.every((x) => !queueCodes.has(x.iso_code)));
 });
 
-test('African source queue contains 30 identified leads without clearing rights', () => {
+test('African source queue contains 42 identified leads without clearing rights', () => {
   const leadEntries = queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified');
-  assert.equal(leadEntries.length, 30);
-  for (const code of ['BI','CD','KE','RW','UG','BW','GH','MW','NA','NG','ZA','ZM','ZW','GM','SL','AO','GA','TG','BJ','SN','MZ','DZ','CV','CM','TD','EG','BF']) {
+  assert.equal(leadEntries.length, 42);
+  for (const code of ['BI','CD','KE','RW','UG','BW','GH','MW','NA','NG','ZA','ZM','ZW','GM','SL','AO','GA','TG','BJ','SN','MZ','DZ','CV','CM','TD','EG','BF','CF','CG','CI','DJ','GQ','GN','LR','LY','ML','MR','MG','MU']) {
     const entry = queue.entries.find((item) => item.iso_code === code);
     assert.ok(entry, code);
     assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
