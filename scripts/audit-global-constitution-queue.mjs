@@ -52,7 +52,7 @@ if (entries.length !== 195 || new Set(codes).size !== 195 ||
     memberEntries.length !== 193 || observers.length !== 2 ||
     report.africaResearchAssignments !== 54 ||
     report.africaSourceStatusLeads !== 54 ||
-    report.sourceCandidatesIdentified !== 66 ||
+    report.sourceCandidatesIdentified !== 78 ||
     mismatches.length || rightsRisk.length || missingSourceCandidate.length) {
   process.exitCode = 1;
 }
