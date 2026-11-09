@@ -196,7 +196,7 @@ Deno.serve(async(req:Request)=>{
   try{
     if(path==="/api/library"&&req.method==="GET"){
       const [c,d,f,v]=await Promise.all([
-        db.from("jurisdictions").select("iso_code,name,flag_emoji,jurisdiction_kind,constitution_status").eq("is_active",true).order("name").limit(300),
+        db.from("jurisdictions").select("iso_code,name,flag_emoji,jurisdiction_kind,is_un_member,continent,region,constitution_status").eq("is_active",true).order("name").limit(300),
         db.from("legal_documents").select("id,jurisdiction_iso,title,short_title,doc_type,adopted_at,published_at,is_current,language_code,official_url,version_label,document_status,license_status,commercial_use_allowed,legal_sources!inner(name,is_official,license_status,commercial_use_allowed)")
           .eq("is_current",true).eq("document_status","verified").eq("commercial_use_allowed",true).in("license_status",LICENSES)
           .eq("legal_sources.is_official",true).eq("legal_sources.commercial_use_allowed",true).in("legal_sources.license_status",LICENSES).order("jurisdiction_iso").limit(1200),
@@ -218,7 +218,7 @@ Deno.serve(async(req:Request)=>{
       const coverage=(v.data??[]).reduce((a:any,x:any)=>({total:a.total+1,verified_current:a.verified_current+(x.constitution_status==="verified_current"?1:0),
         text_loaded:a.text_loaded+(x.constitution_status==="text_loaded"?1:0),metadata_only:a.metadata_only+(x.constitution_status==="metadata_only"?1:0)}),
         {total:0,verified_current:0,text_loaded:0,metadata_only:0});
-      return json({countries:(c.data??[]).map((x:any)=>({id:x.iso_code,iso:x.iso_code,name:x.name,flag:x.flag_emoji,jurisdictionKind:x.jurisdiction_kind,constitutionStatus:x.constitution_status})),
+      return json({countries:(c.data??[]).map((x:any)=>({id:x.iso_code,iso:x.iso_code,name:x.name,flag:x.flag_emoji,jurisdictionKind:x.jurisdiction_kind,isUnMember:x.is_un_member,continent:x.continent,region:x.region,constitutionStatus:x.constitution_status})),
         documents:docs.map((x:any)=>({...x,countryId:x.jurisdiction_iso,country_id:x.jurisdiction_iso,type:x.doc_type,year:(x.adopted_at||x.published_at||"").slice(0,4),
           main:x.doc_type==="constitution"&&x.is_current,shortDescription:x.short_title||"Official legal text"})),chapters,articles,dailyItems:daily,coverage,
         feedNotice:"CARTA publishes legal text only after current-version, authority and reuse checks."},200,origin);
