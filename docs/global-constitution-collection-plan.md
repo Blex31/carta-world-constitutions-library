@@ -23,6 +23,8 @@ The live Supabase jurisdiction directory now has 250 rows, correctly classified 
 The 250 directory records are not 250 sovereign states and are not a claim of constitutional-text coverage. The global collection target is represented by 195 research assignments. The other 55 area records remain separate until their constitutional and territorial status is individually assessed.
 
 ## Important rights finding
+The [PollsAfrica constitutional-source inventory](https://pollsafrica.com/constitutions), checked on 10 October 2026, is a useful Africa-wide discovery index: it lists 54 countries and reports PDF links for 47, including 27 links to official publishers and 20 copies hosted by PollsAfrica where the source allows hosting. PollsAfrica's inventory metadata is published under CC BY 4.0, and its open JSON file index is at https://pollsafrica.com/data/json/index.json. This metadata licence does **not** license the underlying constitution texts. Each linked edition still needs independent primary-source, version/currentness and CARTA-specific rights checks.
+
 
 CARTA is planned as a commercial product with free and paid access, web/mobile reading, search, AI retrieval/summaries and potentially offline copies. Therefore every exact constitutional edition needs a rights basis that covers the actual intended uses.
 
