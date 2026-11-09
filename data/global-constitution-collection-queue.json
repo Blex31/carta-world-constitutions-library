@@ -9,7 +9,7 @@
     "un_member_states": 193,
     "observer_states": 2,
     "africa": 54,
-    "official_source_candidates_identified": 84,
+    "official_source_candidates_identified": 90,
     "text_acquired": 0,
     "cleared_for_commercial_use": 0
   },
@@ -2627,16 +2627,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Council of Representatives of Iraq / Presidency of the Republic",
+      "official_source_candidates": [
+        "https://iq.parliament.iq/en/the-constitution/",
+        "https://peacemaker.un.org/en/documents/constitution-iraq-current"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Iraq, approved 15 October 2005",
+      "version_status": "The Iraqi Council of Representatives hosts the constitutional text and an official download. The constitution was approved by referendum on 15 October 2005, replacing the transitional Law of Administration for the State. Article 142 envisaged amendments; verify whether any later constitutional amendments were enacted and reconcile constitutional court interpretations separately.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2646,7 +2649,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the Parliament's full Arabic text and any official English edition; verify whether proposed Article 142 amendments or subsequent law altered the text and obtain rights clearance."
     },
     {
       "iso_code": "IE",
@@ -2687,16 +2690,20 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Knesset of Israel / National Legislation Database of the Ministry of Justice",
+      "official_source_candidates": [
+        "https://main.knesset.gov.il/EN/activity/Pages/BasicLawsAndConstitution.aspx",
+        "https://main.knesset.gov.il/en/activity/pages/basiclaws.aspx",
+        "https://main.knesset.gov.il/EN/activity/documents/BasicLawsPDF/BasicLawTheKnesset.pdf"
+      ],
+      "candidate_instrument": "Israel's constitutional framework comprising Basic Laws of the State; no single codified constitution",
+      "version_status": "The Knesset explicitly states that Israel does not have a single constitution and that its Basic Laws have constitutional status. The Knesset Basic Laws page lists multiple foundational laws, including Basic-Law: Torah Study passed 13 July 2026. The supplied Basic-Law: The Knesset English PDF is unofficial and only incorporates amendments through 24 January 2023; use the current Hebrew legislation database as authoritative.",
       "special_review_flag": null,
-      "instrument_form": "not_assessed",
+      "instrument_form": "uncodified_or_unwritten",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2706,7 +2713,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Build a structured collection of each current Basic Law from the National Legislation Database, record amendment histories individually and keep case-law/constitutional principles separate; verify translation and reuse rights."
     },
     {
       "iso_code": "IT",
@@ -2814,16 +2821,21 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Ministry of Finance / Ministry of Justice / Constitutional Court of the Hashemite Kingdom of Jordan",
+      "official_source_candidates": [
+        "https://mof.gov.jo/EN/List/The___Jordanian_Constitution",
+        "https://www.moj.gov.jo/EN/List/Jordanian_Constitution",
+        "https://www.cco.gov.jo/En/Pages/Jordanian_Constitution",
+        "https://www.refworld.org/legal/legislation/natlegbod/1952/14923"
+      ],
+      "candidate_instrument": "Constitution of the Hashemite Kingdom of Jordan of 1952, as amended through 2022",
+      "version_status": "Jordan's official Ministry of Finance and Constitutional Court list a 2022 Arabic Constitution edition. The 2022 amendments were published in Official Gazette No. 5770 on 31 January 2022; no up-to-date English version was identified in the source checked. Verify if any later amendment after 2022 has entered into force.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2833,7 +2845,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Arabic 2022 text and Official Gazette amendment law; verify currentness after 2022 and the authoritative language position, then secure permission for any translation."
     },
     {
       "iso_code": "KZ",
@@ -3000,16 +3012,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Ministry of State for National Assembly Affairs / National Assembly of Kuwait",
+      "official_source_candidates": [
+        "https://mona.gov.kw/en/ourconstitution.aspx",
+        "https://e.gov.kw/sites/kgoenglish/Pages/Visitors/AboutKuwait/GoverningBodyTheGovernment.aspx"
+      ],
+      "candidate_instrument": "Constitution of the State of Kuwait, approved and promulgated in 1962",
+      "version_status": "The official Ministry of State for National Assembly Affairs publishes the 183-article Constitution and its publication/enforcement clauses. Verify the Official Gazette publication and whether any constitutional amendments have entered into force since 1962; distinguish ordinary legislation and political proposals from constitutional amendments.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3019,7 +3034,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Arabic Constitution and Gazette record, confirm any formal amendment history/current status, and determine reuse rights for the government English version."
     },
     {
       "iso_code": "KG",
@@ -3120,16 +3135,20 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Ministry of Justice / Parliament of Lebanon / Presidency of the Republic",
+      "official_source_candidates": [
+        "https://justice.gov.lb/index.php/law-details/1/1",
+        "https://lp.gov.lb/backoffice/uploads/files/Lebanese%20%20Constitution-%20En.pdf",
+        "https://presidency.gov.lb/lebanon-system/3"
+      ],
+      "candidate_instrument": "Constitution of Lebanon, promulgated 23 May 1926, as amended, including Constitutional Law of 21 September 1990 (Taif Accord)",
+      "version_status": "The Justice Ministry publishes the Constitution in Arabic, English and French; Parliament hosts an English copy. The 1990 constitutional amendment incorporated the Taif Accord and changed the preamble and institutional framework. Verify every subsequent constitutional law and the authoritative Arabic text; the English Parliament document is not itself proof of currentness or reuse permission.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3139,7 +3158,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the official Gazette text and amendment history through the latest constitutional law; reconcile versions across Arabic/English/French and obtain digital reuse rights."
     },
     {
       "iso_code": "LS",
@@ -4226,16 +4245,18 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Ministry of Justice and Legal Affairs / Official Gazette of the Sultanate of Oman",
+      "official_source_candidates": [
+        "https://qanoon.om/p/2021/l2021006/"
+      ],
+      "candidate_instrument": "Basic Statute of the State, Royal Decree No. 6/2021, amended through Royal Decree No. 79/2026",
+      "version_status": "The official Oman legal publication record for Royal Decree 6/2021 now identifies it as amended through Royal Decree 79/2026. It repealed the 1996 and 2011 Basic Statutes. Obtain the 2026 amending decree and integrated Official Gazette text; ensure the edition includes every amendment and commencement provision.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -4245,7 +4266,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the complete Arabic Basic Statute and Decree 79/2026 from the Official Gazette; verify all amended articles, commencement and reuse rights for English translations."
     },
     {
       "iso_code": "PK",
