@@ -121,7 +121,27 @@ class _ReaderScreenState extends State<ReaderScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Read document')),
+        appBar: AppBar(
+          title: const Text('Read document'),
+          actions: [
+            IconButton(
+              tooltip: 'Save document to My Library',
+              icon: const Icon(Icons.bookmark_add_outlined),
+              onPressed: () async {
+                try {
+                  await widget.api.saveLibraryAction({
+                    'action': 'download',
+                    'operation': 'save',
+                    'documentId': widget.document.id,
+                  });
+                  _showMessage('Document saved to My Library.');
+                } catch (error) {
+                  _showMessage(error.toString());
+                }
+              },
+            ),
+          ],
+        ),
         body: FutureBuilder<DocumentDetail>(
           future: _future,
           builder: (context, snapshot) {

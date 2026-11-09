@@ -4,42 +4,50 @@
 
 CARTA is a document-first legal information platform. It preserves official provenance, amendment history, effective dates and source rights while helping readers navigate constitutional and legal documents in plain language.
 
-## Product targets
+## Product
 
-- **Web:** React + Vite single-page application (current implementation).
-- **Android and iOS:** native Flutter clients under `apps/mobile` on [PR #3](https://github.com/Blex31/carta-world-constitutions-library/pull/3) (draft, not yet merged).
-- **Shared backend:** Supabase Postgres, Supabase Auth and the `carta-api` Edge Function. Web and mobile share one legal corpus, account system, API and citation model.
+- **Web:** React + Vite.
+- **Android and iOS:** Flutter native clients under `apps/mobile`.
+- **Shared backend:** Supabase Postgres, Supabase Auth and the `carta-api` Edge Function.
+- **Personal library:** saved documents, bookmarks, highlights and private notes.
+- **Legal research:** retrieval restricted to verified, current, official and rights-cleared legal passages.
+- **Publisher updates:** source-scoped feed ingestion, with publisher approval and rights checks.
 
-The Flutter native clients are developed in the separate `apps/mobile` directory on the open draft PR. Web and mobile share the same Supabase project, legal corpus and API. Automated web and mobile CI passed for the PR head on 8 November 2026; store signing and physical-device acceptance remain pending. See [PR #3](https://github.com/Blex31/carta-world-constitutions-library/pull/3), the [master launch checklist](docs/launch-checklist.md), and the [African corpus launch plan](docs/africa-first-wave-corpus-plan.md).
+The first Flutter client and the initial web/mobile foundation have been merged into `main`. Build checks are automated through GitHub Actions. Physical-device acceptance, store signing and public web deployment remain release tasks.
 
-## Stack
+## Current directory and corpus status — 9 November 2026
 
-- React + Vite web frontend
-- Flutter/Dart native Android and iOS clients (first implementation on `feature/flutter-native-clients`; PR #3 remains draft)
-- Supabase Postgres, Auth and Edge Functions
-- Supabase Row Level Security for user-owned data and publication controls
-- Official publisher registry with explicit licensing and reuse metadata
+The live Supabase directory contains 250 country/area records:
 
-## Supabase project
+| Classification | Live count |
+|---|---:|
+| UN Member States | 193 |
+| UN non-member observer states | 2 |
+| Other country/area records awaiting precise status review | 55 |
+| Geographic metadata gaps | 0 |
 
-Project: `CARTA-World-Constitutions-Library`  
-Project ref: `mvcirldxcuvcuqvlmqxv`  
-Region: `ap-south-1` (Mumbai)  
-API: `https://mvcirldxcuvcuqvlmqxv.supabase.co`
+The legal corpus is still empty: **0 verified legal documents, 0 provisions/sections and 0 searchable chunks**. The research queue now has source/status leads for all 54 African UN Member States; these are discovery tasks, not a claim of 54 current or approved constitutional texts. Eritrea is flagged because the 1997 text has not entered into force. All source leads remain rights-review-required; zero texts are cleared for commercial reuse.
 
-The live backend has migrations 001–009 and an active `carta-api` Edge Function. The repository includes reconstructed SQL for migrations 004–005 and the applied global jurisdiction seed migration; review the reconstructed migrations against a disposable clean install before treating the repository as fully reproducible. See [Supabase deployment and production handoff](docs/supabase-deployment.md).
+The [global constitutional collection queue](data/global-constitution-collection-queue.json) tracks 195 assignments (193 members + two observers). Source/status discovery currently covers all 54 African UN Member States plus 12 initial leads in the Americas, Europe and Oceania 12 in Asia and 12 in the Middle East/Gulf (90 total). The queue records official source leads, version status, rights evidence, currentness and publication state. Its entries are research tasks, not published coverage.
 
-## Current legal-library status
-
-The live database contains a 250-entry global jurisdiction catalogue (including eight EAC partner states) and eight inactive EAC official-source candidates. All 250 entries are metadata-only; this is not a claim that 250 constitutions have been imported or verified. It contains **zero verified legal documents and zero searchable legal-text chunks**. No source is cleared for commercial reuse, AI retrieval or offline redistribution. The current work is to confirm exact current texts and obtain rights that cover CARTA's web, mobile, search, AI and paid product uses.
-
-See [EAC first-batch source review](docs/eac-first-batch.md).
+See the [global collection plan](docs/global-constitution-collection-plan.md), [African corpus plan](docs/africa-first-wave-corpus-plan.md), and [EAC source review](docs/eac-first-batch.md).
 
 ## Legal-content rule
 
-Do not publish a document as current or reusable until its official publisher, exact version, commencement/effective dates, amendments, attribution, licence and intended reuse rights have been checked. Public access is not the same as permission to reproduce, commercially redistribute, index for AI or cache offline.
+Do not publish a legal document as current or reusable until its official publisher, exact edition, commencement/effective dates, amendments, language precedence, attribution and intended reuse rights have been checked.
 
-The legal assistant must only use verified, current, rights-cleared documents and must refuse when no qualifying source passage is available.
+CARTA's rights review must separately cover free/paid web and mobile display, reproduction/redistribution, search/indexing/snippets, AI retrieval/embeddings/summaries, translations/derivatives and offline/device copies. Public access or an official government URL is not, by itself, permission for these uses.
+
+The importer in `scripts/import-constitution-documents.mjs` enforces the source, version, complete-text and commercial-rights gates. Dry-run first; import only after the legal and second-review sign-offs. The legal assistant must refuse to invent an answer when no qualifying passage is available.
+
+## Repository and backend
+
+Project: `CARTA-World-Constitutions-Library`  
+Supabase project ref: `mvcirldxcuvcuqvlmqxv`  
+Region: `ap-south-1` (Mumbai)  
+API: `https://mvcirldxcuvcuqvlmqxv.supabase.co`
+
+The live `carta-api` Edge Function is active. The repository contains the Supabase migrations and Flutter/web clients. The global jurisdiction classification migration is applied to live Supabase. Reconstructed historical migrations 004/005 still need validation in a disposable clean environment before claiming a fully reproducible fresh install.
 
 ## Development
 
@@ -47,17 +55,15 @@ The legal assistant must only use verified, current, rights-cleared documents an
 2. Run `npm install`.
 3. Copy `.env.example` to `.env.local` and set browser-safe Supabase values.
 4. Run `npm run dev`.
-5. Run `npm test`, `npm run typecheck` and `npm run build` before release.
+5. Run `npm test`, `npm run audit:global-queue`, `npm run typecheck`, `npm run syntaxcheck` and `npm run build`.
 
-Never put a Supabase secret/service-role key, database password, AI provider key or payment secret in a `VITE_*` variable. The publishable key is intended for client use with RLS and server-side authorization.
-
-The Flutter app will be added as a separate native client and must use the same Supabase Auth and CARTA API. It must never connect directly to Postgres or contain server credentials.
+Never place a Supabase service-role key, database password, AI provider key, payment secret or other backend credential in a browser variable, mobile binary or GitHub source file. Use Supabase Edge Function secrets for backend credentials.
 
 ## Project links
 
-- [Master launch checklist — live completion tracker](docs/launch-checklist.md)
-
 - [GitHub repository](https://github.com/Blex31/carta-world-constitutions-library)
 - [Supabase project dashboard](https://supabase.com/dashboard/project/mvcirldxcuvcuqvlmqxv)
+- [Master launch checklist](docs/launch-checklist.md)
+- [Global constitution collection plan](docs/global-constitution-collection-plan.md)
 - [Architecture](docs/architecture.md)
-- [Phase 3 legal library + mobile plan](docs/phase-3-legal-library-and-mobile.md)
+- [Supabase deployment handoff](docs/supabase-deployment.md)

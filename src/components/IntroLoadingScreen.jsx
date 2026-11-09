@@ -7,7 +7,7 @@ export default function IntroLoadingScreen({ onComplete, autoDismissMs = 3800 })
 
   const phases = [
     'Unsealing the constitutional archive…',
-    'Verifying sovereign charters across 18 nations…',
+    'Checking the live, approved constitutional catalogue…',
     'Indexing bills of rights and plain-language provisions…',
     'Archive ready. Entering reading chamber…'
   ];

@@ -23,12 +23,7 @@ export default function ChatPage({ctx}){
             <span>{country.name} · {mainDoc?.year || 'Current'}</span>
           </span>
           <select className="scope-jurisdiction-select" value={countryId} onChange={e=>chooseCountry(e.target.value)} title="Change active jurisdiction">
-            <optgroup label="Verified Constitutional Charters">
-              {countries.filter(c=>c.constitutionStatus==='verified_current').map(c=><option key={c.id} value={c.id}>{c.flag} {c.name} (Verified)</option>)}
-            </optgroup>
-            <optgroup label="Catalogued Jurisdictions (Metadata)">
-              {countries.filter(c=>c.constitutionStatus!=='verified_current').map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}
-            </optgroup>
+            {countries.map(c=><option key={c.id} value={c.id}>{c.flag} {c.name}</option>)}
           </select>
           <span className="scope-caption">Corpus: {readArticles.length || 'Indexed'} verified provisions</span>
         </div>
@@ -37,12 +32,14 @@ export default function ChatPage({ctx}){
         </div>
       </div>
 
+      {!readArticles.length&&<div className="empty corpus-empty"><div>§</div><h3>No approved constitutional text is available for {country.name} yet.</h3><p>CARTA's research assistant is disabled for this jurisdiction until an official text has been verified, rights-cleared and indexed. It will not generate answers from sample material or unsupported general knowledge.</p></div>}
+
       {!chatMessages.length?<div className="research-presets-section">
         <div className="research-presets-title">
           <small className="overline">SELECT A RESEARCH INQUIRY OR POSE YOUR OWN</small>
         </div>
         <div className="research-presets-grid">
-          {researchPresets.map(preset=><button key={preset.theme} className="preset-card" onClick={()=>askLegalQuestion(null, preset.query)}>
+          {researchPresets.map(preset=><button key={preset.theme} className="preset-card" disabled={!readArticles.length} onClick={()=>askLegalQuestion(null, preset.query)}>
             <small>{preset.theme}</small>
             <p>{preset.query}</p>
             <span className="action-arrow">Conduct research →</span>
@@ -116,7 +113,7 @@ export default function ChatPage({ctx}){
           value={chatQuestion}
           onChange={e=>setChatQuestion(e.target.value)}
           onKeyDown={e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();void askLegalQuestion(e)}}}
-          placeholder={`Ask about constitutional rights, legislative procedures, or governance powers in ${country.name}… (Press ⌘ + Enter to submit)`}
+          placeholder={readArticles.length?`Ask about constitutional rights, legislative procedures, or governance powers in ${country.name}… (Press ⌘ + Enter to submit)`:'Research will be available when this jurisdiction has an approved legal text.'}
         />
         <div className="chat-composer-bottom">
           <span className="composer-hint">
@@ -124,7 +121,7 @@ export default function ChatPage({ctx}){
           </span>
           <div className="composer-buttons">
             {chatQuestion.trim()&&<button type="button" className="outline" onClick={()=>setChatQuestion('')}>Clear</button>}
-            <button className="primary" type="submit" disabled={chatBusy||chatQuestion.trim().length<3}>
+            <button className="primary" type="submit" disabled={chatBusy||chatQuestion.trim().length<3||!readArticles.length}>
               {chatBusy?'Researching…':'Research provision →'}
             </button>
           </div>
