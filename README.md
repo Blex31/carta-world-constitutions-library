@@ -26,7 +26,7 @@ The live Supabase directory contains 250 country/area records:
 | Other country/area records awaiting precise status review | 55 |
 | Geographic metadata gaps | 0 |
 
-The legal corpus is still empty: **0 verified legal documents, 0 provisions/sections and 0 searchable chunks**. Eight East African official-source candidates are registered, but all remain inactive and rights-review-required. There are no sources cleared for commercial reuse.
+The legal corpus is still empty: **0 verified legal documents, 0 provisions/sections and 0 searchable chunks**. The research queue now has source/status leads for all 54 African UN Member States; these are discovery tasks, not a claim of 54 current or approved constitutional texts. Eritrea is flagged because the 1997 text has not entered into force. All source leads remain rights-review-required; zero texts are cleared for commercial reuse.
 
 The [global constitutional collection queue](data/global-constitution-collection-queue.json) tracks 195 assignments (193 members + two observers). Africa's 54 UN Member States are the first research wave. The queue records official source leads, version status, rights evidence, currentness and publication state. Its entries are research tasks, not published coverage.
 
