@@ -9,7 +9,7 @@
     "un_member_states": 193,
     "observer_states": 2,
     "africa": 54,
-    "official_source_candidates_identified": 30,
+    "official_source_candidates_identified": 42,
     "text_acquired": 0,
     "cleared_for_commercial_use": 0
   },
@@ -1093,16 +1093,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Embassy of the Central African Republic in France / Government of the Central African Republic",
+      "official_source_candidates": [
+        "https://paris.diplomatie.gouv.cf/textes-officiels"
+      ],
+      "candidate_instrument": "Constitution of the Central African Republic adopted in 2023",
+      "version_status": "The official Embassy's texts page hosts a French-language 2023 Constitution PDF. Verify the national Official Journal, promulgation/commencement, complete text and any subsequent constitutional changes before importing.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1112,7 +1114,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the official Gazette and promulgation instrument, confirm the current status and rights for the precise PDF and language edition."
     },
     {
       "iso_code": "TD",
@@ -1276,16 +1278,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Presidency of the Republic of the Congo",
+      "official_source_candidates": [
+        "https://presidence.cg/la-constitution/"
+      ],
+      "candidate_instrument": "Constitution of the Republic of the Congo adopted by referendum 25 October 2015",
+      "version_status": "The official Presidency page publishes the Constitution dated 25 October 2015. Confirm the official Gazette edition, any subsequent revisions or transitional instruments and the current 2026 status.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1295,7 +1299,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official 2015 Gazette publication and verify all later constitutional amendments, commencement and commercial reuse rights."
     },
     {
       "iso_code": "CD",
@@ -1368,16 +1372,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Presidency of the Republic of Côte d'Ivoire",
+      "official_source_candidates": [
+        "https://www.presidence.ci/en/ivory-coast/the-constitution/",
+        "https://www.presidence.ci/wp-content/uploads/2025/06/Constitution-livret-ok.pdf"
+      ],
+      "candidate_instrument": "Constitution of the Third Republic, 2016, as amended",
+      "version_status": "The Presidency publishes the 2016 Constitution and a 2025-hosted PDF. Reconcile the 2020 constitutional revision law and any later instruments to confirm whether the PDF is a full consolidated version current to the intended cut-off.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1387,7 +1394,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the 2016 Official Journal text and all amendments including the 2020 revision; compare against the official Presidency PDF and seek a rights determination."
     },
     {
       "iso_code": "HR",
@@ -1548,16 +1555,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Constitutional Council of Djibouti",
+      "official_source_candidates": [
+        "https://www.conseil-constitutionnel.dj/la-constitution/",
+        "https://primature.gouv.dj/attributions-des-ministeres/"
+      ],
+      "candidate_instrument": "Constitution of 15 September 1992, revised in 2006, 2008 and 2010",
+      "version_status": "The Constitutional Council's official page identifies three constitutional revisions (2006, 2008 and 2010). Confirm the complete Gazette texts, whether any later amendment exists and that the current version includes all three revisions.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1567,7 +1577,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the Constitutional Council's exact text and the three constitutional revision laws from the Official Journal; verify no later changes and document rights."
     },
     {
       "iso_code": "DM",
@@ -1731,16 +1741,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Ministry of Public Function and Administrative Reform / Government of Equatorial Guinea",
+      "official_source_candidates": [
+        "https://minfuncionpublica.gob.gq/regulacion/constitucion/",
+        "https://extranet.who.int/cpcd/health-legislation/constitution-9"
+      ],
+      "candidate_instrument": "Fundamental Law of Equatorial Guinea; new text promulgated 16 February 2012, based on the 1995 Constitution",
+      "version_status": "The responsible Ministry states that the current text was promulgated on 16 February 2012 based on the 1995 Constitution, following a 2011 referendum. Confirm the Official Gazette and any later amendments or constitutional instruments; the WHO copy is a cross-check, not the authoritative publisher.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1750,7 +1763,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the exact 2012 Official Gazette text and subsequent amendment history, confirm the controlling language and obtain a jurisdiction-specific reuse opinion."
     },
     {
       "iso_code": "ER",
@@ -2221,16 +2234,20 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Secrétariat Général du Gouvernement de Guinée / Journal Officiel de la République de Guinée",
+      "official_source_candidates": [
+        "https://www.sgg.gov.gn/document/downloadfile/546",
+        "https://journal-officiel.sgg.gov.gn",
+        "https://gouvernement.gov.gn/modernisation-de-ladministration-publique-le-gouvernement-guineen-met-en-ligne-le-journal-officiel-de-la-republique/"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Guinea (Fifth Republic), adopted by referendum 21 September 2025 and promulgated by Decree D/2025/176/PRG/CNRD/SGG on 26 September 2025",
+      "version_status": "The official SGG PDF contains the Constitution and promulgation decree, and the Government announced the digital Official Journal platform in June 2025. Verify the complete Gazette issue and any subsequent 2026 constitutional amendment or implementing instrument.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2240,7 +2257,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the SGG official PDF and matching Special Official Journal issue, compare all 199 articles, confirm currentness and obtain the rights basis."
     },
     {
       "iso_code": "GW",
@@ -3094,16 +3111,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Judiciary of Liberia / Senate of Liberia",
+      "official_source_candidates": [
+        "https://judiciary.gov.lr/constitution-of-liberia-2/",
+        "https://senate.gov.lr/legislation-and-records/"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Liberia (1986), as amended",
+      "version_status": "Liberia's Judiciary hosts the 1986 Constitution and the Senate legislative records catalogue lists the same instrument. Cross-check amendments and any 2011 amendments against the Official Gazette; the currently hosted full text may be the base edition.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3113,7 +3133,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the Gazette base text and every constitutional amendment Act; confirm the consolidated text and commercial/AI rights with the official publisher."
     },
     {
       "iso_code": "LY",
@@ -3124,16 +3144,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
-      "special_review_flag": null,
-      "instrument_form": "not_assessed",
+      "official_publisher_candidate": "Supreme Judicial Council of Libya (official judiciary portal)",
+      "official_source_candidates": [
+        "https://www.sjc.gov.ly/Laws/Details/f4f161ce-405e-470a-b3a3-c0f90f5911ba",
+        "https://security-legislation.ly/latest-laws/constitutional-declaration-of-2011-consolidated/"
+      ],
+      "candidate_instrument": "Constitutional Declaration of 3 August 2011, as amended — interim constitutional framework",
+      "version_status": "The Supreme Judicial Council's official portal lists the 2011 Constitutional Declaration as applicable and records an update date of 9 November 2026. This is an interim constitutional framework, not a permanent Constitution. Keep it specially flagged and obtain specialist Libyan legal review of competing constitutional arrangements and current legal effect.",
+      "special_review_flag": "interim_constitutional_framework_and_competing_authority_review",
+      "instrument_form": "transitional_or_interim_instrument",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3143,7 +3166,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the original Official Gazette and all amendment instruments, then get a qualified Libyan legal opinion on current applicability, authority and reuse rights."
     },
     {
       "iso_code": "LI",
@@ -3244,16 +3267,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
-      "special_review_flag": null,
+      "official_publisher_candidate": "National Assembly of Madagascar / Government of Madagascar",
+      "official_source_candidates": [
+        "https://www.parlement.mg/fr/textes/constitution-de-la-iveme-republique/"
+      ],
+      "candidate_instrument": "Constitution de la IVème République, Parliament record CT-2010; record submitted 18 May 2026 with status 'Promulgation'",
+      "version_status": "The National Assembly's current record identifies a Fourth Republic constitutional text deposited on 18 May 2026 and marks its status as 'Promulgation'. Do not assume its operative date or replace the 2010 Constitution until the promulgation act, Official Journal publication, commencement and transition clauses have been confirmed.",
+      "special_review_flag": "2026_constitution_promulgation_and_commencement_review",
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3263,7 +3288,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the signed promulgation decree, Official Journal publication and transitional provisions from the Government Printer; get Malagasy legal review before assigning a current instrument."
     },
     {
       "iso_code": "MW",
@@ -3367,16 +3392,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Journal Officiel de la République du Mali / Government of Mali",
+      "official_source_candidates": [
+        "https://extranet.who.int/cpcd/sites/default/files/public_file_repository/MLI_Mali_Constitution_2023.pdf"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Mali promulgated by Decree No. 2023-0401/PT-RM of 22 July 2023",
+      "version_status": "The located Journal Officiel copy includes the promulgation decree and 2023 Constitution adopted by referendum. Confirm the official Gazette issue, subsequent amendments/transition instruments and current status through the 2026 cut-off; WHO hosting is a discovery copy and not an independent reuse licence.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3386,7 +3413,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the original official Journal Officiel issue and all later constitutional laws; verify completeness, currentness and reuse permission."
     },
     {
       "iso_code": "MT",
@@ -3457,16 +3484,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Conseil Constitutionnel / Secrétariat Général du Gouvernement de Mauritanie",
+      "official_source_candidates": [
+        "https://conseil-constitutionnel.mr/fr/?p=1162",
+        "https://dgat.interieur.gov.mr/textes-juridiques"
+      ],
+      "candidate_instrument": "Constitution of the Islamic Republic of Mauritania, Ordinance No. 91-022 of 20 July 1991, revised in 2006, 2012 and 2017",
+      "version_status": "The Constitutional Council page identifies the 1991 Constitution and revisions of 12 July 2006, 20 March 2012 and 15 August 2017. The Government's DGAT legal texts portal also lists a consolidated French PDF and the revision laws. Confirm whether the 2024 decree or any later instruments change constitutional provisions.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3476,7 +3506,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the Conseil Constitutionnel/SGG consolidated text plus all official revision laws; confirm whether any 2024–2026 amendment applies and secure reuse rights."
     },
     {
       "iso_code": "MU",
@@ -3487,16 +3517,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Government of Mauritius / National Assembly",
+      "official_source_candidates": [
+        "https://www.govmu.org/EN/infoservices/govadministration/Pages/constitution.aspx",
+        "https://www.refworld.org/legal/legislation/natlegbod/1968/18626"
+      ],
+      "candidate_instrument": "Constitution of Mauritius, 12 March 1968; official government copy consolidated to 2016, with a 2025 amendment affecting section 7(2)",
+      "version_status": "The Government website's Constitution copy is last updated March 2016. A 2025 amendment reportedly repealed section 7(2). Acquire the exact amendment Act and verify whether further changes were made before creating a current consolidation; Refworld is a cross-check only.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3506,7 +3539,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain official Government Printer text and the 2025 amendment Act, reconcile all sections and confirm digital reuse rights."
     },
     {
       "iso_code": "MX",
