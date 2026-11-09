@@ -62,3 +62,17 @@ test('non-member ISO country/area rows are not silently added to the global memb
   assert.equal(otherAreas.length, 55);
   assert.ok(otherAreas.every((x) => !queueCodes.has(x.iso_code)));
 });
+
+test('African first-wave source queue contains 18 candidates without clearing rights', () => {
+  const leadEntries = queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified');
+  assert.equal(leadEntries.length, 18);
+  for (const code of ['BI','CD','KE','RW','UG','BW','GH','MW','NA','NG','ZA','ZM','ZW','GM','SL']) {
+    const entry = queue.entries.find((item) => item.iso_code === code);
+    assert.ok(entry, code);
+    assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
+    assert.equal(entry.rights_status, 'review_required', code);
+    assert.equal(entry.commercial_use_allowed, false, code);
+    assert.equal(entry.publication_status, 'catalogue_only', code);
+    assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
+  }
+});
