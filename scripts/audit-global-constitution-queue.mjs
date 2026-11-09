@@ -29,13 +29,19 @@ const rightsRisk = entries.filter((entry) =>
 const missingSourceCandidate = eac.jurisdictions.filter((item) =>
   !entries.find((entry) => entry.iso_code === item.isoCode)?.official_source_candidates.includes(item.officialSourceUrl)
 );
+const africaSourceStatusLeads = entries.filter((entry) =>
+  entry.continent === 'Africa' &&
+  entry.membership_status === 'un_member_state' &&
+  entry.source_discovery_status === 'official_source_candidate_identified'
+).length;
 const report = {
   queueEntries: entries.length,
   uniqueCodes: new Set(codes).size,
   unMemberStates: memberEntries.length,
   observerStates: observers.length,
   sourceCandidatesIdentified: entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length,
-  africaResearchAssignments: entries.filter((entry) => entry.continent === 'Africa').length,
+  africaResearchAssignments: entries.filter((entry) => entry.continent === 'Africa' && entry.membership_status === 'un_member_state').length,
+  africaSourceStatusLeads,
   metadataMismatches: mismatches.length,
   preClearedOrPublishedRecords: rightsRisk.length,
   eacCandidateLinksMissing: missingSourceCandidate.length,
@@ -44,7 +50,9 @@ const report = {
 console.log(JSON.stringify(report, null, 2));
 if (entries.length !== 195 || new Set(codes).size !== 195 ||
     memberEntries.length !== 193 || observers.length !== 2 ||
-    report.sourceCandidatesIdentified !== 54 ||
+    report.africaResearchAssignments !== 54 ||
+    report.africaSourceStatusLeads !== 54 ||
+    report.sourceCandidatesIdentified !== 66 ||
     mismatches.length || rightsRisk.length || missingSourceCandidate.length) {
   process.exitCode = 1;
 }
