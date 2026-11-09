@@ -194,6 +194,21 @@ Research national gazettes, official legislation databases and constitutional co
 
 Prioritise authoritative-language and translation rules, special administrative and federal arrangements, interim constitutional instruments and source-specific rights.
 
+### Batch 4 — Middle East and Gulf
+
+**Initial source/status discovery batch added: six assignments on 9 November 2026.** The global queue now holds 84 source/status leads. This tranche includes codified, multi-instrument and transitional constitutional frameworks. It does not constitute legal clearance.
+
+| Jurisdiction | Official publisher/source lead | Version/status caution |
+|---|---|---|
+| United Arab Emirates | [UAE Government Portal — Constitution](https://u.ae/en/about-the-uae/the-constitution-of-the-uae) | Permanent Constitution adopted July 1996; verify the Arabic text and all Article 144 amendment instruments. |
+| Qatar | [Council of Ministers — Permanent Constitution](https://www.cm.gov.qa/en/Pages/Constitution.aspx) / [2024 amendments](https://www.cm.gov.qa/en/Pages/Constitutional-Amendments.aspx) | Permanent Constitution promulgated 8 June 2004; 2024 referendum amendments ratified 6 November 2024 changed a number of articles and repealed others. Obtain the exact Gazette and consolidated Arabic version. |
+| Syria | [People's Assembly — 2025 Constitutional Declaration](https://syrianassembly.com/documents/constitutional-declaration-2025) | Temporary declaration signed 13 March 2025 establishes a five-year transition ending with a permanent Constitution and elections; specialist status/currentness review required. |
+| Iran | [UN Peacemaker — Constitution of Iran](https://peacemaker.un.org/en/documents/constitution-islamic-republic-iran-current) | 1979 Constitution amended in 1989 according to the UN collection; acquire the official Persian original and verify the current formal amendment history. |
+| Bahrain | [Legislation and Legal Opinion Commission](https://www.lloc.gov.bh/en/Legislation/id/Constitution) / [National Institution for Human Rights](https://www.nihr.org.bh/EN/HumanRights/NationalLegal.aspx) | Constitution issued 14 February 2002; official LLOC lists three amendments. Obtain all amendment Acts and current Arabic text. |
+| Saudi Arabia | [Bureau of Experts — Basic Law of Governance](https://laws.boe.gov.sa/Files/Download/?attId=ed4842e1-9543-40b9-973b-ada200d4ed10) | Royal Order A/90 of 2 March 1992 is a Basic Law within a wider framework where Qur'an and Sunna are described as the constitution; do not present the Basic Law as the entire constitutional framework. |
+
+For each entry, the queue separates the legal instrument from any wider constitutional framework and records the required specialist verification. In particular, Syria's declaration is transitional and Saudi Arabia's system is not a single written constitution.
+
 ### Batch 4 — observer states and special jurisdictions
 Maintain separate treatment of the Holy See and State of Palestine as UN observer states, and review the 55 other directory areas and separately catalogued constitutional instruments such as Zanzibar's Constitution.
 
