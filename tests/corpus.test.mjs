@@ -49,6 +49,24 @@ test('jurisdiction directory is unique ISO metadata, not falsely labelled as com
   assert.ok(!jurisdictions.some((item) => item.constitution_status === 'verified_current'));
 });
 
+const fallbackText = await read('src/lib/fallbacks.js');
+const appEntry = await read('src/App.jsx');
+const liveApi = await read('supabase/functions/carta-api/index.ts');
+
+test('web app has no bundled constitutional sample texts or synthetic legal-answer fallback', () => {
+  assert.match(fallbackText, /fallbackDocs = \[\]/);
+  assert.match(fallbackText, /fallbackArticles = \[\]/);
+  assert.match(fallbackText, /fallbackDailyItems = \[\]/);
+  assert.doesNotMatch(appEntry, /synthesizeLocalLegalResearch|fallbackDocs|fallbackArticles|fallbackDailyItems/);
+  assert.match(appEntry, /No verified legal passage was available/);
+  assert.match(appEntry, /Sign in to use CARTA legal research/);
+});
+
+test('live directory API exposes UN membership and geography to the clients', () => {
+  assert.match(liveApi, /select\("iso_code,name,flag_emoji,jurisdiction_kind,is_un_member,continent,region,constitution_status"\)/);
+  assert.match(liveApi, /isUnMember:x\.is_un_member,continent:x\.continent,region:x\.region/);
+});
+
 test('legal corpus schema captures provenance, exact versions, effective dates, and reuse flags', () => {
   for (const field of ['source_id', 'official_url', 'version_label', 'effective_from', 'effective_until', 'content_sha256', 'license_status', 'commercial_use_allowed', 'is_current']) {
     assert.ok(schema.includes(field), `schema should include ${field}`);
