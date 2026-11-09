@@ -3317,3 +3317,122 @@ input[type="checkbox"] {
   }
 }
 
+
+/* Minimal Intro Loading Screen Overrides */
+.intro-screen-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFBF2;
+  color: #1A7F37;
+}
+
+.intro-screen-overlay.intro-exiting {
+  opacity: 0;
+  transform: scale(1.02);
+  filter: blur(6px);
+  pointer-events: none;
+  transition: all 0.55s ease;
+}
+
+.intro-backdrop-texture,
+.intro-ambient-glow,
+.intro-archival-frame,
+.corner-ornament,
+.intro-topbar,
+.intro-seal-badge,
+.intro-seal-glyph,
+.intro-seal-label,
+.intro-eyebrow,
+.intro-filigree-line,
+.intro-eyebrow-text,
+.intro-quote-container,
+.intro-quote-mark,
+.intro-attribution,
+.intro-attribution-author,
+.intro-attribution-sub,
+.intro-footer,
+.intro-status-row,
+.intro-status-text,
+.intro-status-pulse,
+.intro-progress-percent,
+.intro-skip-btn,
+.intro-skip-arrow {
+  display: none !important;
+}
+
+.intro-chamber {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-width: 500px;
+  padding: 40px;
+  text-align: center;
+}
+
+.intro-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.intro-monogram {
+  font-size: 48px;
+  font-weight: 700;
+  color: #1A7F37;
+}
+
+.intro-brand-title {
+  color: #1A7F37;
+}
+
+.intro-quote-text {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #1A7F37;
+  margin: 0;
+  padding: 0;
+}
+
+.intro-progress-container {
+  width: 200px;
+  height: 4px;
+}
+
+.intro-progress-track {
+  width: 100%;
+  height: 100%;
+  background: #E5E7EB;
+  border-radius: 2px;
+}
+
+.intro-progress-bar {
+  height: 100%;
+  background: #1A7F37;
+  border-radius: 2px;
+  transition: width 0.1s ease;
+}
+
+.intro-enter-btn {
+  padding: 12px 24px;
+  background: #1A7F37;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.intro-enter-btn:hover {
+  background: #0F5F27;
+}
+
+.intro-enter-arrow {
+  display: none;
+}
