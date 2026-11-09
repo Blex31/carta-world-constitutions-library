@@ -150,7 +150,27 @@ A rights approval for one language or one edition does not automatically approve
 - Track non-codified or transitional constitutional arrangements correctly.
 - Keep Somalia, South Sudan, Tanzania/Zanzibar and other conflicting-version cases on specialist review until reconciled.
 
-### Batch 2 — Europe and the Americas
+### Batch 2 — Europe, the Americas and Oceania
+
+**Initial source-discovery batch added: 12 assignments on 9 November 2026.** The global queue now has 66 source/status leads: 54 for Africa and 12 for this initial non-African tranche. These entries remain catalogue-only and rights-review-required.
+
+| Jurisdiction | Official publisher/source lead | Version and acquisition caution |
+|---|---|---|
+| United States | [National Archives Constitution transcription](https://www.archives.gov/founding-docs/constitution-transcript) / [Congress Constitution Annotated](https://constitution.congress.gov/constitution/) | Build from the 1787 parchment transcription plus all 27 ratified amendments; keep the transcription's original spelling and annotations separate. |
+| Canada | [Department of Justice — Constitution Acts 1867 to 1982](https://laws-lois.justice.gc.ca/eng/Const/FullText.html) | Not a single standalone codified text. Catalogue Constitution Acts 1867/1982 and other constitutional enactments as separate instruments; use both official language versions and check amendments. |
+| Mexico | [Chamber of Deputies constitutional PDF](https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf) / [Supreme Court Constitution history](https://www.scjn.gob.mx/constitucion-politica-de-los-estados-unidos-mexicanos) | Chamber PDF reports DOF reform 3 March 2026; SCJN current text records have later dates in June/September 2026. Reconcile every DOF decree and the official full consolidation before treating one file as current. |
+| Brazil | [Chamber of Deputies — Constitution 1988](https://www2.camara.leg.br/atividade-legislativa/legislacao/constituicao1988) / [Senate promulgation record for EC 141/2026](https://www25.senado.leg.br/pt_BR/web/atividade/materias/-/materia/174386) | Main text updated through Constitutional Amendment No. 141/2026 promulgated 16 October 2026; the Chamber separately lists ADCT through EC 139/2026, so reconcile transitional provisions. |
+| Argentina | [Argentina.gob.ar — Law 24,430 official publication](https://www.argentina.gob.ar/normativa/nacional/804/texto) | Official publication reproduces the 1853 Constitution with reforms through 1994; verify whether any later amendment exists and retain reform-law provenance. |
+| Germany | [Federal Ministry of Justice — Basic Law](https://www.gesetze-im-internet.de/gg/) / [official English translation](https://www.gesetze-im-internet.de/englisch_gg/) | English translation states it includes amendments through 22 March 2025 and warns German text may be newer; confirm full current German text before using translation. |
+| France | [Légifrance — Constitution of 4 October 1958](https://www.legifrance.gouv.fr/loda/texte_lc/LEGITEXT000006071194/) | Article 34 was amended by Law 2024-200 of 8 March 2024; verify complete text and all Journal officiel amendments to the 2026 cut-off. |
+| Spain | [BOE consolidated Constitution](https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229&p=20260520&tn=6) | BOE consolidation updated 20 May 2026 but expressly has no legal value; for legal verification consult the original and each official BOE amendment, including 2024 Article 49. |
+| Italy | [Senate 2026 current Constitution publication](https://www.senato.it/relazioni-con-i-cittadini/pubblicazioni-del-senato/indice-per-anno/2026) | Senate edition includes Constitutional Law No. 1 of 26 September 2023 amending Article 33; check for later constitutional laws and verify the Gazzetta Ufficiale. |
+| Portugal | [Assembly of the Republic — Constitution](https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx) / [VII Revision (2005) PDF](https://www.parlamento.pt/Legislacao/Documents/constpt2005.pdf) | Available PDF is the 2005 VII Revision; verify no subsequent revision and reconcile all Diário da República revision laws. |
+| Australia | [Federal Register — Commonwealth of Australia Constitution Act](https://www.legislation.gov.au/C2004Q00685/latest) | Act is in force; latest compilation listed as 29 July 1977, with a document rectification registered 13 May 2026. Verify the corrected official file; keep explanatory publications separate from legal text. |
+| New Zealand | [New Zealand Legislation — Constitution Act 1986](https://www.legislation.govt.nz/act/public/1986/114/en/latest/) | Constitutional framework is uncodified. The Act is current to 4 September 2026, including 2026 Amendment Act No. 45 and Emergency Management Act No. 53 changes; catalogue the Bill of Rights Act 1990, Electoral Act 1993 and other constitutional materials separately. |
+
+These 12 entries do not represent a single consolidated “complete constitution” for every jurisdiction. Canada and New Zealand have multi-source constitutional arrangements; Spain's online consolidated text is informational rather than legally authoritative; and some English translations lag behind the official-language text.
+
 Research national gazettes, official legislation databases and constitutional court/parliament publishers. Explicitly handle systems such as the United Kingdom and New Zealand that may require multiple foundational instruments rather than one codified text.
 
 ### Batch 3 — Asia and Oceania
