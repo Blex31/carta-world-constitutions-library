@@ -173,7 +173,25 @@ These 12 entries do not represent a single consolidated “complete constitution
 
 Research national gazettes, official legislation databases and constitutional court/parliament publishers. Explicitly handle systems such as the United Kingdom and New Zealand that may require multiple foundational instruments rather than one codified text.
 
-### Batch 3 — Asia and Oceania
+### Batch 3 — Asia
+
+**Initial source-discovery batch added: 12 assignments on 9 November 2026.** The global queue now has 78 source/status leads: 54 Africa, 12 Americas/Europe/Oceania and 12 Asia. These are research assignments, not a claim of 78 current constitutional editions or 78 legally reusable documents.
+
+| Jurisdiction | Official publisher/source lead | Version and acquisition caution |
+|---|---|---|
+| India | [Legislative Department — Constitution documents](https://www.legislative.gov.in/documents/constitution-of-india) | Official portal lists a Constitution of India edition published 23 December 2025 and separate amendment Acts. Confirm the exact edition's amendment cut-off and Hindi/English language status. |
+| Japan | [National Diet Commission on the Constitution](https://www.shugiin.go.jp/internet/itdb_kenpou.nsf/html/kenpou/en/constitution.htm) / [e-Gov Japanese original](https://laws.e-gov.go.jp/law/321CONSTITUTION?occasion_date=20260105) | Constitution promulgated 3 November 1946 and in force 3 May 1947; verify the official Japanese text and formal amendment history through the cut-off. |
+| China | [State Council English Constitution page](https://english.www.gov.cn/archive/lawregulations/201911/20/content_WS5ed8856ec6d0b3f0e9499913.html) / [NPC portal](https://www.npc.gov.cn/) | English page lists amendment packages through 2018 and was updated in 2019. Obtain the current authoritative Chinese text and check all later NPC amendments/interpretations. |
+| South Korea | [National Law Information Center — English reference](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=61603&urlMode=engLsInfoR&viewCls=engLsInfoR) / [Korean text](https://www.law.go.kr/법령/대한민국헌법) | Current Constitution is the whole amendment of 29 October 1987. The English translation expressly says it has no legal/official effect and may not be current; Korean original controls. |
+| Philippines | [Official Gazette — Constitutions](https://officialgazette.gov.ph/constitutions/) | Official Gazette identifies the 1987 Constitution, ratified 2 February and proclaimed in force 11 February 1987; verify no later amendment and retain any proposed charters as proposals only. |
+| Singapore | [Attorney-General's Chambers — Singapore Statutes Online](https://sso.agc.gov.sg/Act/CONS1963) | Live statutory version is dated September 2026; amendment timeline includes Act 9 of 2025 and earlier 2024/2023 Acts. Fix an exact point-in-time version for release. |
+| Malaysia | [Attorney General's Chambers — Federal Constitution](https://lom.agc.gov.my/federal-constitution.php) | AGC warns online updated reprints are not the statutory reprint made under the Revision of Laws Act; each version carries its own cut-off. Verify latest reprint, amendment schedule and Bahasa Malaysia authority. |
+| Bangladesh | [Bangladesh Laws — Constitution](https://bdlaws.minlaw.gov.bd/act-367/act-chapter-print-685.html) | 1972 Constitution with amendment annotations including the 17th Amendment Act 2018; post-2024 reform proposals and recommendations must not be treated as enacted amendments. |
+| Nepal | [Nepal Law Commission — Constitution](https://lawcommission.gov.np/content/13437/) | Law Commission lists an English Constitution of Nepal edition labelled Second Amendment, dated 21 Bhadra 2081 (2024); confirm the exact Gazette amendment law and authoritative Nepali text. |
+| Sri Lanka | [Parliament of Sri Lanka — Constitution](https://www.parliament.lk/en/constitution/main) | Parliament provides a text incorporating amendments through the 21st Amendment and separately lists the 22nd Amendment. Verify whether the latter is a proposal or enacted law before inclusion. |
+| Pakistan | [National Assembly downloads](https://na.gov.pk/en/downloads.php) | National Assembly page lists an English Constitution amended up to 21 November 2025; confirm any post-November 2025 amendment and obtain the latest Gazette text. |
+| Indonesia | [MPR RI Legal Documentation Network](https://jdih.mpr.go.id/dokumen/view?id=46) / [English version](https://jdih.mpr.go.id/dokumen/view?id=496) / [BPK legal database](https://peraturan.bpk.go.id/Details/101646/uud-no--?oBgGIsCmIfJ=XzzMj5csP3e) | 1945 Constitution amended in four rounds in 1999, 2000, 2001 and 2002; reconcile the official one-text edition against all four amendment instruments and keep judicial interpretations separate. |
+
 Prioritise authoritative-language and translation rules, special administrative and federal arrangements, interim constitutional instruments and source-specific rights.
 
 ### Batch 4 — observer states and special jurisdictions
