@@ -9,7 +9,7 @@
     "un_member_states": 193,
     "observer_states": 2,
     "africa": 54,
-    "official_source_candidates_identified": 18,
+    "official_source_candidates_identified": 24,
     "text_acquired": 0,
     "cleared_for_commercial_use": 0
   },
@@ -218,16 +218,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "National Assembly of Angola",
+      "official_source_candidates": [
+        "https://bi-digital.parlamento.ao/items/885395b6-825d-4605-89f7-2d44f9bdc039",
+        "https://angola.org/en/angola/constituicao"
+      ],
+      "candidate_instrument": "Constituição da República de Angola, 2010 (Republicação nos termos do artigo 4.º da Lei n.º 18/21, de 16 de Agosto)",
+      "version_status": "The National Assembly's digital library identifies an official 2010 republication under Constitutional Revision Law 18/21 of 16 August 2021. The repository item has an item-specific licence agreement; currentness and later amendment status must be checked and that licence reviewed before any reuse.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -237,7 +240,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the exact PDF and accompanying item-specific licence from the National Assembly repository, verify whether it covers CARTA's intended use, and reconcile later constitutional amendments."
     },
     {
       "iso_code": "AG",
@@ -638,16 +641,21 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Secrétariat général du Gouvernement du Bénin",
+      "official_source_candidates": [
+        "https://sgg.gouv.bj/documentheque/loi/",
+        "https://sgg.gouv.bj/doc/loi-2025-20/download",
+        "https://sgg.gouv.bj/upload/files/documentheque/0750869001535025835.pdf",
+        "https://sgg.gouv.bj/pdf/web/viewer.html?file=%2Fdoc%2Fdecret-2020-442%2Fread"
+      ],
+      "candidate_instrument": "Loi n° 90-32 du 11 décembre 1990 portant Constitution, révisée par la loi n° 2019-40 du 7 novembre 2019 et modifiée/complétée par la loi n° 2025-20 du 17 décembre 2025",
+      "version_status": "The official SGG document library lists the original 1990 Constitution and Law 2025-20; the latter modifies and supplements the Constitution as revised by Law 2019-40. The full consolidated text must incorporate both revisions and be checked against the official Gazette and any 2026 constitutional changes.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -657,7 +665,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Download the official 2025-20 amendment and exact base text; build a provision-by-provision consolidation of 1990 + 2019-40 + 2025-20, then confirm any later 2026 change and rights."
     },
     {
       "iso_code": "BT",
@@ -1935,16 +1943,20 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Journal Officiel de la République Gabonaise",
+      "official_source_candidates": [
+        "https://journal-officiel.ga/21489-002-r-2024-/",
+        "https://journal-officiel.ga/21491-0458-pr/",
+        "https://journal-officiel.ga/constitution"
+      ],
+      "candidate_instrument": "Loi référendaire n° 002-R/2024 du 19 décembre 2024 portant Constitution de la République Gabonaise; promulgation by Décret n° 0458/PR du 19 décembre 2024",
+      "version_status": "The official Journal Officiel N°47 bis of 19 December 2024 publishes the new constitution adopted by referendum and the promulgation decree. The same portal also retains the 1991 Constitution's historical amendment list. Verify commencement, transition arrangements and any later amendments or authoritative consolidation before publication.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1954,7 +1966,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the complete official Gazette issue and promulgation decree, reconcile the legal transition and post-2024 status with Gabonese counsel, and document rights for the exact Gazette text."
     },
     {
       "iso_code": "GM",
@@ -3687,16 +3699,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Tribunal Supremo de Moçambique",
+      "official_source_candidates": [
+        "https://www.ts.gov.mz/legislacao/"
+      ],
+      "candidate_instrument": "Constituição da República de Moçambique de 2018",
+      "version_status": "The Supreme Court's official legislation catalogue lists the 2018 Constitution alongside the 2004, 1990 and 1975 texts. The 2018 text is the current-instrument candidate, but obtain the exact official Gazette edition and confirm any post-2018 amendment or constitutional review before declaring it current.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3706,7 +3720,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the complete official 2018 Gazette text and amendment history from the Government Printer/Boletim da República; verify currentness and reuse rights."
     },
     {
       "iso_code": "MM",
@@ -4718,16 +4732,20 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Ministry of the Armed Forces / Government of Senegal (official government source lead); independent consolidation cross-check: Lexenegal",
+      "official_source_candidates": [
+        "https://forcesarmees.gouv.sn/dossiers/lois/loi-ndeg-2001-03-du-22-janvier-2001-portant-constitution-modifiee",
+        "https://sigif.gouv.sn/app/uploads/2016/12/constition-senegal.pdf",
+        "https://www.lexenegal.sn/code/constitution-senegal"
+      ],
+      "candidate_instrument": "Loi n° 2001-03 du 22 janvier 2001 portant Constitution, as amended",
+      "version_status": "An official government-hosted source leads to the 2001 Constitution and an older copy; Lexenegal's non-government consolidation lists constitutional revision laws through Loi n° 2024-15 du 19 décembre 2024. That private consolidation is for cross-check only. Obtain each official amendment Gazette text, with special attention to the 2018, 2019, 2021, 2023 and 2024 revisions.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -4737,7 +4755,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain official Gazette copies of all constitutional revision laws through 2024-15, reconcile them against the government-hosted base text, and request a current official consolidation and commercial reuse position."
     },
     {
       "iso_code": "RS",
@@ -5397,16 +5415,20 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Journal Officiel de la République Togolaise / Cour constitutionnelle du Togo",
+      "official_source_candidates": [
+        "https://jo.gouv.tg/node/15758",
+        "https://courconstitutionnelle.tg/download/loi-n-2024-005-du-06-05-2024-portant-constitution-de-la-republique-togolaise/",
+        "https://archive.presidence.gouv.tg/2024/05/06/promulgation-de-la-loi-portant-revision-de-la-constitution-togolaise/"
+      ],
+      "candidate_instrument": "Loi n° 2024-005 du 6 mai 2024 portant Constitution de la République Togolaise",
+      "version_status": "The official Gazette and Constitutional Court host the 2024-005 text. The Constitutional Court page separately lists decisions ES-00325 of 24 February 2025 and C-001/25 of 24 March 2025. Review these decisions, commencement and later amendments together before declaring the constitution current.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -5416,7 +5438,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Gazette text and related 2025 Constitutional Court decisions; verify the operative constitutional framework and exact source reuse rights."
     },
     {
       "iso_code": "TO",
