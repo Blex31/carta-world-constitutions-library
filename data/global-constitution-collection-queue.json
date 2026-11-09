@@ -9,7 +9,7 @@
     "un_member_states": 193,
     "observer_states": 2,
     "africa": 54,
-    "official_source_candidates_identified": 8,
+    "official_source_candidates_identified": 18,
     "text_acquired": 0,
     "cleared_for_commercial_use": 0
   },
@@ -758,16 +758,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Parliament of Botswana / Government Printer",
+      "official_source_candidates": [
+        "https://parliament.gov.bw/images/constitution.pdf"
+      ],
+      "candidate_instrument": "Constitution of Botswana (1966; current consolidation to be confirmed)",
+      "version_status": "Parliament-hosted Constitution PDF located. Confirm the edition date, all post-independence amendment instruments and the current official consolidated text before treating it as current.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -777,7 +779,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the latest official consolidated text from Parliament or the Government Printer; reconcile every constitutional amendment and obtain a documented rights basis."
     },
     {
       "iso_code": "BR",
@@ -1963,16 +1965,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Ministry of Justice, The Gambia / Government Printer",
+      "official_source_candidates": [
+        "https://www.moj.gm/downloads"
+      ],
+      "candidate_instrument": "Constitution of The Gambia, 1997 (government download page lists a 2002 revision)",
+      "version_status": "Ministry of Justice download page lists the 1997 Constitution (2002 revision) and also a 2020 draft Constitution from the review process. The draft is not to be treated as enacted; verify the current legal status and amendments to the 1997 Constitution.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -1982,7 +1986,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Confirm whether any post-2002 amendment or replacement was enacted; obtain the authoritative current Gazette text and document rights."
     },
     {
       "iso_code": "GE",
@@ -2053,16 +2057,20 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Judicial Service of Ghana / Government Printer",
+      "official_source_candidates": [
+        "https://www.judicial.gov.gh/index.php/the-constitution",
+        "https://www.judicial.gov.gh/index.php/ammendments-of-the-constitution",
+        "https://osp.gov.gh/media/Resources/Ghana_Constitution.pdf"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Ghana, 1992",
+      "version_status": "Judicial Service hosts the constitutional text and an amendments page. An Office of the Special Prosecutor-hosted copy labels itself amended to 1996; later amendment and referendum history must be checked to the 2026 cut-off.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2072,7 +2080,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the current official consolidated text and every Gazette amendment, confirm language/version status and request a CARTA-compatible reuse basis."
     },
     {
       "iso_code": "GR",
@@ -3226,16 +3234,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Government Printer / Ministry of Justice and Constitutional Affairs; PPDA-hosted consolidation is a cross-check",
+      "official_source_candidates": [
+        "https://ppda.mw/storage/documents/resources/THE%20CONSTITUTION%20OF%20THE%20REPUBLIC%20OF%20MALAWI.pdf",
+        "https://malawilii.org/akn/mw/act/1994/20/eng%402020-11-03"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Malawi, Act 20 of 1994; Fourth Revised Edition consolidated through 31 January 2025",
+      "version_status": "A government-agency-hosted Fourth Revised Edition states that it consolidates amendments through 31 January 2025 and is authoritative as a consolidation but does not replace the official Gazette text. Reconcile the 2025 consolidation with subsequent Gazette amendments and confirm the source/publisher role.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3245,7 +3256,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Gazette text and Law Revision Office confirmation of the consolidation cut-off; verify 2025–2026 amendments and rights in the exact edition."
     },
     {
       "iso_code": "MY",
@@ -3736,16 +3747,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Government of Namibia / Government Printer",
+      "official_source_candidates": [
+        "https://www.gov.na/documents/146489/641903/Namibia_Constitution.pdf/d2d4c4cd-3f19-ab0b-8bdb-8d5a5da3ee79",
+        "https://namiblii.org/akn/na/act/1990/constitution/eng%402014-10-13"
+      ],
+      "candidate_instrument": "Constitution of the Republic of Namibia, 1990",
+      "version_status": "A Namibia government-hosted PDF and a NamibLII consolidated English version are located. NamibLII records a 13 October 2014 version and says its amendments are included; verify the complete amendment lineage and whether the government-hosted copy matches the current official text.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3755,7 +3769,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Request the latest Government Printer / Ministry of Justice consolidated edition and compare it with the 2014 revised text and all subsequent amendment acts."
     },
     {
       "iso_code": "NR",
@@ -3946,16 +3960,21 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Federal Ministry of Justice / Federal Government Printer; National Library of Nigeria repository",
+      "official_source_candidates": [
+        "https://justice.gov.ng/wp-content/uploads/2020/09/Nigerian-Constitution.pdf",
+        "https://nigeriareposit.nln.gov.ng/items/399df25a-52d0-4972-9365-c618cd3ddf5f",
+        "https://www.placng.org/i/wp-content/uploads/2023/05/Constitution-of-the-Federal-Republic-of-Nigeria-1999-Fifth-Alteration-No.-10-Act-2023.pdf",
+        "https://placng.org/i/constitution-resources/"
+      ],
+      "candidate_instrument": "Constitution of the Federal Republic of Nigeria, 1999, as amended",
+      "version_status": "Federal Ministry of Justice-hosted 1999 PDF and National Library of Nigeria repository record located. Multiple Fifth Alteration Acts were assented to in 2023; the located base PDF must not be treated as a complete current consolidated text until each enacted amendment is reconciled.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -3965,7 +3984,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the Federal Government Printer's current consolidated edition or build a verified version from the official 1999 Gazette plus every assented Fifth Alteration Act and subsequent amendment."
     },
     {
       "iso_code": "MK",
@@ -4789,16 +4808,19 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Parliament of Sierra Leone / Government Printer",
+      "official_source_candidates": [
+        "https://www.parliament.gov.sl/constitution-of-sierra-leone.html",
+        "https://www.refworld.org/legal/legislation/natlegbod/1992/17496"
+      ],
+      "candidate_instrument": "Constitution of Sierra Leone, 1991 (Act No. 6 of 1991), as amended",
+      "version_status": "Parliament hosts the 1991 Constitution, but the official page is not a proven consolidated current edition. Refworld lists amendment instruments through 2022 as a discovery cross-check; verify all amendments against the Gazette and current official sources.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -4808,7 +4830,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the current official text plus all amendment Acts, confirm commencement and consolidate with a second legal reviewer."
     },
     {
       "iso_code": "SG",
@@ -4973,16 +4995,22 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Department of Justice and Constitutional Development / Parliament of South Africa / Government Printer",
+      "official_source_candidates": [
+        "https://www.gov.za/documents/constitution/constitution-republic-south-africa-1996-04-feb-1997",
+        "https://www.justice.gov.za/constitution/pdf.html",
+        "https://www.justice.gov.za/constitution/amendments.html",
+        "https://www.gov.za/documents/constitution-amendments",
+        "https://parliament.gov.za/constitutional-amendments"
+      ],
+      "candidate_instrument": "Constitution of the Republic of South Africa, 1996, including the Constitution Eighteenth Amendment Act 3 of 2023",
+      "version_status": "Official government and parliamentary pages identify the 1996 Constitution and the Eighteenth Amendment Act 3 of 2023. The available consolidated web text is expressly stated to include only the Seventeenth Amendment; a current consolidation incorporating the Eighteenth Amendment must be assembled and second-checked.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -4992,7 +5020,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the official Act 3 of 2023 and all amendment Acts, verify the operative consolidated text and language edition, and request a written rights determination for digital reuse."
     },
     {
       "iso_code": "SS",
@@ -5913,16 +5941,22 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Government of Zambia / National Assembly / Government Printer",
+      "official_source_candidates": [
+        "https://www.constitution.gov.zm/",
+        "https://www.constitution.gov.zm/act-13-2025",
+        "https://www.constitution.gov.zm/files/Acts_No_13_of_2025_Constitution_of_Zambia.pdf",
+        "https://pbo.parliament.gov.zm/node/12760",
+        "https://zambialii.org/akn/zm/act/1991/1/eng%402025-12-18"
+      ],
+      "candidate_instrument": "Constitution of Zambia, 1991, as amended by Act No. 13 of 2025",
+      "version_status": "Official Government/Parliament sources confirm Constitution of Zambia (Amendment) Act No. 13 of 2025, assented to 18 December 2025. A ZambiaLII consolidation at 18 December 2025 is a cross-check only; confirm full incorporation of the 2016 and 2025 amendment acts and any later changes.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -5932,7 +5966,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the current consolidated Government Printer text; compare every article changed by the 2016 and 2025 Acts and confirm commencement, rights and authoritative version."
     },
     {
       "iso_code": "ZW",
@@ -5943,16 +5977,18 @@
       "continent": "Africa",
       "membership_status": "un_member_state",
       "collection_priority": "africa_first_wave",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Parliament of Zimbabwe / Government Printer",
+      "official_source_candidates": [
+        "https://www.parlzim.gov.zw/constitution-of-zimbabwe/"
+      ],
+      "candidate_instrument": "Constitution of Zimbabwe, 2013",
+      "version_status": "Parliament-hosted PDF of the 2013 Constitution located. It is a base-text source lead; currentness requires review of later constitutional amendment Acts and official Gazette notices.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -5962,7 +5998,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the current consolidated Constitution and every subsequent amendment Act from Parliament or the Government Printer; verify commencement and rights."
     }
   ]
 }
