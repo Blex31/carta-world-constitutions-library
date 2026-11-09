@@ -86,6 +86,13 @@
       "name": "Laws.Africa content licensing",
       "url": "https://laws.africa/platform/content/",
       "use": "Potential commercial supplier for participating African jurisdictions; obtain a written country/package/use licence and confirm scope/pricing."
+    },
+    {
+      "name": "PollsAfrica constitutional-source inventory",
+      "url": "https://pollsafrica.com/constitutions",
+      "metadata_license": "CC BY 4.0",
+      "dataset_index": "https://pollsafrica.com/data/json/index.json",
+      "use": "Discovery only: its 54-country metadata, adoption/amendment dates and official-source links may be reused with attribution. Its CC BY 4.0 metadata licence does not license the underlying constitution texts. The inventory states that 47 of 54 records have PDFs, 27 hosted on the official publisher site and 20 hosted by PollsAfrica where the source allows reuse. Confirm every exact underlying document, version and CARTA reuse scope independently."
     }
   ],
   "entries": [
