@@ -20,6 +20,7 @@ import AuthModal from './modals/AuthModal';
 import PaywallModal from './modals/PaywallModal';
 import WelcomeModal from './modals/WelcomeModal';
 import CompareModal from './modals/CompareModal';
+import IntroLoadingScreen from './components/IntroLoadingScreen';
 import NoteModal from './modals/NoteModal';
 
 export default function App(){
@@ -64,6 +65,7 @@ export default function App(){
   const [noteText,setNoteText]=useState('');
   const [mobileTocOpen,setMobileTocOpen]=useState(false);
   const [welcome,setWelcome]=useState(()=>!localStorage.getItem('carta-welcomed'));
+  const [showIntro,setShowIntro]=useState(true);
   const [toast,setToast]=useState('');
   const [paywallOpen,setPaywallOpen]=useState(false);
   const [paywallPlan,setPaywallPlan]=useState('yearly');
@@ -424,7 +426,7 @@ export default function App(){
 function saveNote(){if(!noteText.trim())return;const text=noteText.trim();setNotes([{articleId:active.id,text,date:new Date().toLocaleDateString()},...notes.filter(n=>n.articleId!==active.id)]);if(account)void apiSave({action:'note',operation:'save',documentId:active.doc,sectionId:active.id,text}).catch(()=>showToast('Note saved locally; sync can be retried.'));setNoteText('');setNoteOpen(false);showToast('Note saved to your library.')}
 const nav=[['home','⌂','Home'],['read','▤','Read'],['search','⌕','Search'],['chat','✧','Ask CARTA'],['catalogue','◎','Coverage'],['library','▣','Library'],['sources','↗','Sources']];
 const navButtons=nav.map(([id,glyph,label])=><button key={id} className={page===id?'active':''} onClick={()=>{setPage(id);setMobileTocOpen(false);}}><span>{glyph}</span><small>{label}</small></button>);
-  const ctx={account,active,activeAssistantId,adConfig,addSource,adminSourceData,adminSourcesBusy,aod,apiSave,articleId,articles,askLegalQuestion,authBusy,authEmail,authMode,authName,authNotice,authOpen,authPassword,authPasswordConfirm,billing,billingBusy,billingPortal,billItems,bookmarks,chatBusy,chatConversationId,chatMessages,chatQuestion,chatSources,checkout,chooseCountry,clockTick,compare,compared,copyArticle,copyCitation,countries,country,countryId,coverage,currentItems,daily,dailyArticles,dailyCategory,dailyFeed,dailyPick,docs,documentId,downloads,eligibleFeed,font,highlights,lastFeedUpdated,leaveAccount,libraryDataReady,libraryError,libraryTab,localSearchResults,mainDoc,mobileTocOpen,newChat,newSourceOpen,night,noteOpen,notes,noteText,offline,openArticle,page,paywallOpen,paywallPlan,query,readArticles,readDoc,refreshAdminSources,refreshBilling,refreshFeed,runSourceIngestion,saveNote,saveSourceRights,searchResults,serverSearchResults,setAccount,setActiveAssistantId,setAdConfig,setAdminSourceData,setAdminSourcesBusy,setArticleId,setArticles,setAuthBusy,setAuthEmail,setAuthMode,setAuthName,setAuthNotice,setAuthOpen,setAuthPassword,setAuthPasswordConfirm,setBilling,setBillingBusy,setBookmarks,setChatBusy,setChatConversationId,setChatMessages,setChatQuestion,setChatSources,setClockTick,setCompare,setCountries,setCountryId,setCoverage,setDailyFeed,setDocs,setDocumentId,setDownloads,setFont,setHighlights,setLastFeedUpdated,setLibraryDataReady,setLibraryError,setLibraryTab,setMobileTocOpen,setNewSourceOpen,setNight,setNoteOpen,setNotes,setNoteText,setOffline,setPage,setPaywallOpen,setPaywallPlan,setQuery,setServerSearchResults,setSourceActive,setToast,setWelcome,shareImage,showToast,submitAuth,syncToggle,toast,today,toggle,visibleDocs,welcome};
+  const ctx={account,active,activeAssistantId,adConfig,addSource,adminSourceData,adminSourcesBusy,aod,apiSave,articleId,articles,askLegalQuestion,authBusy,authEmail,authMode,authName,authNotice,authOpen,authPassword,authPasswordConfirm,billing,billingBusy,billingPortal,billItems,bookmarks,chatBusy,chatConversationId,chatMessages,chatQuestion,chatSources,checkout,chooseCountry,clockTick,compare,compared,copyArticle,copyCitation,countries,country,countryId,coverage,currentItems,daily,dailyArticles,dailyCategory,dailyFeed,dailyPick,docs,documentId,downloads,eligibleFeed,font,highlights,lastFeedUpdated,leaveAccount,libraryDataReady,libraryError,libraryTab,localSearchResults,mainDoc,mobileTocOpen,newChat,newSourceOpen,night,noteOpen,notes,noteText,offline,openArticle,page,paywallOpen,paywallPlan,query,readArticles,readDoc,refreshAdminSources,refreshBilling,refreshFeed,runSourceIngestion,saveNote,saveSourceRights,searchResults,serverSearchResults,setAccount,setActiveAssistantId,setAdConfig,setAdminSourceData,setAdminSourcesBusy,setArticleId,setArticles,setAuthBusy,setAuthEmail,setAuthMode,setAuthName,setAuthNotice,setAuthOpen,setAuthPassword,setAuthPasswordConfirm,setBilling,setBillingBusy,setBookmarks,setChatBusy,setChatConversationId,setChatMessages,setChatQuestion,setChatSources,setClockTick,setCompare,setCountries,setCountryId,setCoverage,setDailyFeed,setDocs,setDocumentId,setDownloads,setFont,setHighlights,setLastFeedUpdated,setLibraryDataReady,setLibraryError,setLibraryTab,setMobileTocOpen,setNewSourceOpen,setNight,setNoteOpen,setNotes,setNoteText,setOffline,setPage,setPaywallOpen,setPaywallPlan,setQuery,setServerSearchResults,setSourceActive,setToast,setWelcome,setShowIntro,showIntro,shareImage,showToast,submitAuth,syncToggle,toast,today,toggle,visibleDocs,welcome};
 
 return <div className={'app '+(night?'night':'')}>
   <header className="topbar">
@@ -433,7 +435,7 @@ return <div className={'app '+(night?'night':'')}>
       <span><b>CARTA</b><small>WORLD CONSTITUTIONS LIBRARY</small></span>
     </button>
     <div className="headerRight">
-      <span className="tagline">Every Constitution. Every Country. In Plain Language.</span>
+      <span className="tagline" onClick={()=>setShowIntro(true)} style={{cursor:"pointer"}} title="View CARTA introduction">Every Constitution. Every Country. In Plain Language.</span>
       <button className="country-pill" onClick={()=>setWelcome(true)} title="Switch jurisdiction">
         <span className="country-flag">{country.flag}</span>
         <span className="country-name">{country.name}</span>
@@ -447,16 +449,16 @@ return <div className={'app '+(night?'night':'')}>
       <button className="iconBtn" onClick={()=>setPage('search')} title="Search the library">⌕</button>
     </div>
   </header>
-  <div className="layout"><aside className="sidebar"><small className="overline">YOUR READING ROOM</small>{navButtons}<div className="sideBlock"><small className="overline">READING COUNTRY</small><b>{country.flag} {country.name}</b><p>Your daily article comes from this country's main constitution.</p><button className="outline" onClick={()=>setWelcome(true)}>Change country</button></div><div className="sideQuote">§<p>Understand the law.<br/><b>One article at a time.</b></p><small>Reference text + plain language</small></div></aside>
+  <div className="layout"><aside className="sidebar"><small className="overline">YOUR READING ROOM</small>{navButtons}<div className="sideBlock"><small className="overline">READING COUNTRY</small><b>{country.flag} {country.name}</b><p>Your daily article comes from this country's main constitution.</p><button className="outline" onClick={()=>setWelcome(true)}>Change country</button></div><div className="sideQuote">§<p>Understand the law.<br/><b>One article at a time.</b></p><small>Reference text + plain language</small><button className="textLink" style={{fontSize:"11.5px",marginTop:"6px",display:"inline-block"}} onClick={()=>setShowIntro(true)}>CARTA introduction ↗</button></div></aside>
   <main className="main">
     {libraryError&&<div className="empty" role="status"><h3>Live library unavailable</h3><p>{libraryError}</p></div>}
-    <HomePage ctx={ctx}/>
-    <ReadPage ctx={ctx}/>
-    <SearchPage ctx={ctx}/>
-    <ChatPage ctx={ctx}/>
-    <CataloguePage ctx={ctx}/>
-    <SourcesPage ctx={ctx}/>
-    <LibraryPage ctx={ctx}/>
+    {page==='home'&&<HomePage ctx={ctx}/>}
+    {page==='read'&&<ReadPage ctx={ctx}/>}
+    {page==='search'&&<SearchPage ctx={ctx}/>}
+    {page==='chat'&&<ChatPage ctx={ctx}/>}
+    {page==='catalogue'&&<CataloguePage ctx={ctx}/>}
+    {page==='sources'&&<SourcesPage ctx={ctx}/>}
+    {page==='library'&&<LibraryPage ctx={ctx}/>} 
   </main></div>
   <nav className="mobile-nav">{navButtons}</nav>
   {toast&&<div className="toast">✓ {toast}<button onClick={()=>setToast('')}>×</button></div>}
@@ -465,4 +467,5 @@ return <div className={'app '+(night?'night':'')}>
   <WelcomeModal ctx={ctx}/>
   <CompareModal ctx={ctx}/>
   <NoteModal ctx={ctx}/>
+  {showIntro&&<IntroLoadingScreen onComplete={()=>setShowIntro(false)}/>}
 </div>}
