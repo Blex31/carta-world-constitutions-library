@@ -1,0 +1,128 @@
+# Global constitutional collection plan
+
+**Prepared:** 9 November 2026  
+**Product:** CARTA — World Constitutions Library  
+**Collection target:** 193 UN Member States + two UN non-member observer states, with separately curated constitutional instruments for territories and special jurisdictions.
+
+## Current verified baseline
+
+The live Supabase jurisdiction directory now has 250 rows, correctly classified by the merged UN/M49 crosswalk:
+
+| Live directory measure | Current value |
+|---|---:|
+| Total country/area directory records | 250 |
+| UN Member States | 193 |
+| UN non-member observer states | 2 |
+| Other country/area records awaiting precise status review | 55 |
+| Geographic gaps | 0 |
+| Verified legal documents | 0 |
+| Document sections/provisions | 0 |
+| Searchable legal chunks | 0 |
+| Approved commercial-use sources | 0 |
+
+The 250 directory records are not 250 sovereign states and are not a claim of constitutional-text coverage. The global collection target is represented by 195 research assignments. The other 55 area records remain separate until their constitutional and territorial status is individually assessed.
+
+## Important rights finding
+
+CARTA is planned as a commercial product with free and paid access, web/mobile reading, search, AI retrieval/summaries and potentially offline copies. Therefore every exact constitutional edition needs a rights basis that covers the actual intended uses.
+
+The following well-known research collections can help identify a constitution, version or source lead, but they are **not** general commercial republication licences:
+
+- [Constitute / Comparative Constitutions Project terms](https://www.constituteproject.org/content/terms): its current terms say content and software are for informational use and expressly prohibit commercial use.
+- [WIPO Lex terms](https://www.wipo.int/en/web/wipolex/terms-of-use): reproduction of IP legal texts and translations is allowed for academic, research and non-commercial purposes; source/third-party terms may add restrictions.
+- [Kenya Law terms](https://kenyalaw.org/terms-of-use/): raw NCLR material is offered under CC BY-NC 4.0; commercial redistribution, automated bulk extraction and AI/ML training require an explicit NCLR licensing agreement.
+- [Laws.Africa commercial content licensing](https://laws.africa/platform/content/): a potential commercial integration route for participating African countries. Its packages distinguish indexing/retrieval from displaying law in the customer's product; obtain an order covering the exact countries, formats and use.
+
+The text being publicly viewable, downloadable, government-hosted or labelled “official” is not alone enough to establish all CARTA reuse rights. Where a national statute excludes official legislative texts from copyright, record the specific law and obtain jurisdiction-qualified legal confirmation that the exact constitution and CARTA's intended uses are covered.
+
+## What the queue records
+
+`data/global-constitution-collection-queue.json` is the controlled research manifest for 195 assignments. It tracks:
+
+- ISO code, display name, geographic region and UN membership/observer status.
+- Research priority (Africa first, then remaining regions).
+- Whether an official publisher/source lead has been identified.
+- Candidate source URLs and a candidate instrument/version where an existing research record provides one.
+- Instrument form, exact currentness, rights status, commercial/AI/translation/offline permissions.
+- Whether complete text has actually been acquired, checksum, CARTA document identifiers and publication state.
+- A concrete next action for each country.
+
+The eight EAC candidates are carried forward as source leads only. They remain rights-review required, and no text is approved by inclusion in this queue.
+
+## Collection rules
+
+A country can have more than one constitutional instrument, a transitional charter, or no single codified constitution. Do not force every entry into a single “constitution.pdf” slot. Before import, determine whether the relevant collection is:
+
+1. One written constitution.
+2. Several foundational constitutional instruments.
+3. An uncodified/unwritten constitutional system.
+4. A transitional or interim instrument (clearly labelled as such).
+5. A special status requiring specialist review.
+
+For a no-single-written-constitution system, CARTA should show that legal position and link the verified foundational sources rather than inventing a consolidated constitution.
+
+## Release gate — every text, language edition and version
+
+No text becomes publicly available until all applicable checks are complete:
+
+1. **Identity:** exact jurisdiction, title, instrument type, language, source publisher and canonical HTTPS URL.
+2. **Authority:** official publisher or a fully evidenced legal basis for another source.
+3. **Currentness:** promulgation/publication, commencement, amendments, repeal, replacement, court orders and cut-off date checked.
+4. **Language:** identify the official versions and which controls in a conflict. Never assume an English translation is authoritative.
+5. **Completeness:** compare every article/section, schedule and annex against the official publication; document missing pages and OCR/manual corrections.
+6. **Rights:** written permission, open licence, verified public-domain status or jurisdiction-qualified official-text legal opinion; specify web/mobile display, free/paid use, reproduction, redistribution, indexing/search/snippets, AI retrieval/embeddings/summaries, translations/derivatives and offline/device caching separately.
+7. **Attribution/update:** publisher attribution, canonical link, version label, update cadence, correction and takedown obligations recorded.
+8. **Integrity:** SHA-256 checksum, import record and source snapshot retained.
+9. **Second review:** a second legal/editorial reviewer signs off the exact text and rights scope.
+10. **Technical QA:** importer dry run, provision structure, full-text search, reader navigation, citations, account-safe My Library and mobile/web rendering verified.
+
+A rights approval for one language or one edition does not automatically approve another translation, later edition, publisher compilation, annotations or graphics.
+
+## Delivery batches
+
+### Batch 1 — Africa (54 UN Member States)
+Prioritise Africa because CARTA's first source work and user context are already concentrated here. The existing first-wave launch plan identifies 15 research priorities, but the target is to research all 54. Import the first documents that clear the full release gate; do not lower the rights or version standard to hit a number.
+
+- Carry forward the eight EAC source candidates with their existing review flags.
+- Research the remaining African member states using official gazettes, national parliaments, justice ministries, attorney-general portals and government printers.
+- Track non-codified or transitional constitutional arrangements correctly.
+- Keep Somalia, South Sudan, Tanzania/Zanzibar and other conflicting-version cases on specialist review until reconciled.
+
+### Batch 2 — Europe and the Americas
+Research national gazettes, official legislation databases and constitutional court/parliament publishers. Explicitly handle systems such as the United Kingdom and New Zealand that may require multiple foundational instruments rather than one codified text.
+
+### Batch 3 — Asia and Oceania
+Prioritise authoritative-language and translation rules, special administrative and federal arrangements, interim constitutional instruments and source-specific rights.
+
+### Batch 4 — observer states and special jurisdictions
+Maintain separate treatment of the Holy See and State of Palestine as UN observer states, and review the 55 other directory areas and separately catalogued constitutional instruments such as Zanzibar's Constitution.
+
+## Technical path
+
+1. Use the 195-entry manifest as the master acquisition queue.
+2. Add or activate a publisher record only after authority and rights metadata are documented. All new publishers must start inactive and blocked.
+3. Acquire the exact permitted source text through official downloads, written publisher delivery or licensed provider API. Do not scrape restricted aggregators.
+4. Run `npm run import:constitutions -- --input <file>` in dry-run mode first. The importer requires a complete exact text, official HTTPS source, verified document status, accepted rights basis, commercial-use approval, rights evidence and provision structure.
+5. Import only with the explicit `--apply` flag after legal and second-review sign-off.
+6. Verify the live document, all sections/chunks, checksums, search, citations, web reader and Flutter reader.
+7. Update the manifest's publication state only after verification.
+
+The live database remains empty until these gates have been satisfied. This is deliberate.
+
+## Current first-document work
+
+- **Rwanda (RW):** primary first-corpus candidate; 2023 Gazette text located, but RLRC currentness/language confirmation and Rwanda-qualified legal opinion remain pending. The request is drafted at [Rwanda publisher request](rights-requests/rwanda-constitution-permission-request.md); it has not been sent.
+- **Kenya (KE):** current official publisher route located; standard Kenya Law terms are not enough for CARTA's commercial/AI uses. NCLR licensing request drafted at [Kenya licensing request](rights-requests/kenya-nclr-licensing-request.md); it has not been sent.
+- **Other EAC partners:** official source leads are recorded in [EAC first-batch source review](eac-first-batch.md). None is cleared for publication.
+
+## Sources
+
+- [UN Member States](https://www.un.org/about-us/member-states) — current membership list.
+- [UN observer states](https://research.un.org/en/unmembers/observers) — observer-state status.
+- [UN M49](https://unstats.un.org/unsd/methodology/m49/overview) — neutral geographic grouping.
+- [Constitute terms](https://www.constituteproject.org/content/terms) and [CCP research datasets](https://comparativeconstitutionsproject.org/download-data/) — research/discovery only; commercial-use restriction applies.
+- [WIPO Lex terms](https://www.wipo.int/en/web/wipolex/terms-of-use) — non-commercial reproduction permission and third-party source restrictions.
+- [Laws.Africa commercial licensing](https://laws.africa/platform/content/) — potential commercial provider to evaluate.
+- [WIPO copyright FAQ](https://www.wipo.int/en/web/copyright/faq-copyright) — public availability online does not automatically make a work public domain.
+
+**Coverage statement rule:** the home screen and store listing must report only the number of legally verified, currently effective, rights-cleared documents that are actually published. The 195 queue entries represent research scope, not current coverage.
