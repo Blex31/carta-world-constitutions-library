@@ -49,7 +49,7 @@ The text being publicly viewable, downloadable, government-hosted or labelled �
 - Whether complete text has actually been acquired, checksum, CARTA document identifiers and publication state.
 - A concrete next action for each country.
 
-**30 official/source leads have been identified**: the eight EAC candidates plus 22 additional African leads. These are source-discovery starting points only; all remain rights-review required, and no text is approved by inclusion in this queue.
+**42 official/source leads have been identified**: the eight EAC candidates plus 22 additional African leads. These are source-discovery starting points only; all remain rights-review required, and no text is approved by inclusion in this queue.
 
 ## African first-wave source leads
 
@@ -84,8 +84,20 @@ The following are source-discovery starting points recorded in the queue. A link
 | Chad | [Presidency decree archive](https://presidencetchad.org/decrets/) / [FAOLEX version history](https://faolex.fao.org/en/documents/LEX-FAOC226894/constitution-de-la-republique-du-tchad-tcd-2023) | 2023 Constitution revised by Constitutional Law 001/PC/2025 of 3 October 2025; obtain the official 2025 Gazette and later changes. |
 | Egypt | [National Election Authority legal library](https://www.election.eg/digital-library-laws) / [Ministry of Finance law library](https://mof.gov.eg/en/legislation/legislation) | 2014 Constitution amended in 2019; Ministry electronic copy is guidance only and the Official Gazette is the legal reference. |
 | Burkina Faso | [Presidency constitutional texts](https://www.presidencedufaso.bf/textes-fondamentaux/) / [2026 Government programme](https://gouvernement.gov.bf/wp-content/uploads/2026/03/PND-2026-2030__RELANCE.pdf) | Presidency's displayed text says amended in 2015, while a 2026 Government programme cites Law 045-2023/ALT; a 2024 proposal also exists. Hold until enacted laws and proposal status are reconciled. |
+| Central African Republic | [Embassy of the Central African Republic — official texts](https://paris.diplomatie.gouv.cf/textes-officiels) | Embassy hosts the French-language 2023 Constitution; reconcile with the Gazette and verify post-2023 changes. |
+| Republic of the Congo | [Presidency of the Republic](https://presidence.cg/la-constitution/) | Official Presidency page publishes the Constitution dated 25 October 2015; check later amendments and currentness. |
+| Côte d’Ivoire | [Presidency — Constitution](https://www.presidence.ci/en/ivory-coast/the-constitution/) | Official page hosts the 2016 Constitution and a 2025 PDF; reconcile the 2020 revision and subsequent changes. |
+| Djibouti | [Constitutional Council](https://www.conseil-constitutionnel.dj/la-constitution/) | Official Council records the 1992 Constitution and revisions in 2006, 2008 and 2010. |
+| Equatorial Guinea | [Ministry of Public Function](https://minfuncionpublica.gob.gq/regulacion/constitucion/) | Ministry identifies the new Fundamental Law promulgated 16 February 2012; verify later amendments and reuse basis. |
+| Guinea | [Government Secretariat General — 2025 Constitution PDF](https://www.sgg.gov.gn/document/downloadfile/546) / [Official Journal platform](https://journal-officiel.sgg.gov.gn) | Fifth Republic Constitution adopted 21 September 2025 and promulgated by Decree D/2025/176 on 26 September 2025; verify any subsequent 2026 changes. |
+| Liberia | [Judiciary Constitution page](https://judiciary.gov.lr/constitution-of-liberia-2/) / [Senate legislation records](https://senate.gov.lr/legislation-and-records/) | Official publishers host the 1986 Constitution; reconcile amendments, including the 2011 changes, against the Gazette. |
+| Libya | [Supreme Judicial Council — Constitutional Declaration](https://www.sjc.gov.ly/Laws/Details/f4f161ce-405e-470a-b3a3-c0f90f5911ba) | Judiciary portal lists the amended 2011 Constitutional Declaration as applicable; this is an interim framework and requires specialist review, not a permanent constitution label. |
+| Mali | [Journal Officiel copy of 2023 Constitution](https://extranet.who.int/cpcd/sites/default/files/public_file_repository/MLI_Mali_Constitution_2023.pdf) | Copy includes Decree 2023-0401/PT-RM of 22 July 2023; acquire the original Gazette and check later transition/constitutional instruments. |
+| Mauritania | [Constitutional Council](https://conseil-constitutionnel.mr/fr/?p=1162) / [Government legal texts portal](https://dgat.interieur.gov.mr/textes-juridiques) | 1991 Constitution, revised in 2006, 2012 and 2017; government portal also lists a consolidated French PDF. Check later changes. |
+| Madagascar | [National Assembly — IVème République Constitution record](https://www.parlement.mg/fr/textes/constitution-de-la-iveme-republique/) | Parliament record shows a 2026 Fourth Republic constitution deposited 18 May 2026 with status “Promulgation”; obtain signed decree, Gazette publication and commencement before treating it as operative. |
+| Mauritius | [Government Constitution page](https://www.govmu.org/EN/infoservices/govadministration/Pages/constitution.aspx) / [2025 amendment discovery record](https://www.refworld.org/legal/legislation/natlegbod/1968/18626) | Government consolidation is only to March 2016; a 2025 amendment reportedly repealed section 7(2). Obtain the official amendment Act and consolidate. |
 
-The 22 additional leads beyond the EAC group were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all first-wave jurisdictions.
+The 34 additional leads beyond the EAC group were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all first-wave jurisdictions.
 
 ## Collection rules
 
