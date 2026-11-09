@@ -1,6 +1,6 @@
 # CARTA — Master launch checklist
 
-**Last verified:** 8 November 2026  
+**Last verified:** 9 November 2026  
 **Repository:** https://github.com/Blex31/carta-world-constitutions-library  
 **Live backend:** Supabase project `mvcirldxcuvcuqvlmqxv`  
 **Code baseline reviewed:** `b1655a982eb879fdcbe24846c606082594406fbd` (My Library implementation, parser test and final verified mobile build; Mobile CI #47)  
@@ -23,15 +23,15 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 | Web client | React + Vite application is in GitHub; latest CI build passes |
 | Backend | Supabase project is ACTIVE_HEALTHY |
 | Database | 19 public tables; RLS enabled on all 19 |
-| Global directory | 250 rows; only 8 classified as sovereign states / UN members, while 242 remain unclassified; metadata only |
+| Global directory | 250 rows: 193 UN Member States, 2 non-member observer states, 55 other country/area records awaiting precise status review; 0 geographic gaps |
 | Publisher candidates | 8 EAC candidates; all inactive, rights-review-required and not commercially cleared |
 | Legal corpus | 0 legal documents, 0 sections/provisions, 0 searchable chunks |
 | Legal updates | 0 feed items; scheduled poll is active but has no eligible publisher |
 | API | `carta-api` Edge Function is active at version 9 |
 | Scheduled job | `carta-official-feed-daily` active at 03:10 UTC / 06:10 Africa/Nairobi |
-| Migrations | 9 migration records applied in the live project; SQL files are checked in |
+| Migrations | 10 migration records applied in the live project, including the global jurisdiction classification; SQL files are checked in |
 | Supabase advisors | No security lints; the previous ingestion-run RLS performance warning is fixed; unused-index notices remain |
-| Native apps | Flutter Android/iOS first slice, reader actions and My Library screen on `feature/flutter-native-clients`; Android debug APK and unsigned iOS CI verified on Mobile CI #47 for code baseline `b1655a9` |
+| Native apps | Flutter Android/iOS first slice, reader actions and My Library merged into `main`; Android debug APK and unsigned iOS build verified in CI; real-device acceptance and signed store builds remain pending |
 | Public web launch | No production frontend URL confirmed |
 | Current CI | [Web CI #87](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119384) and [Mobile CI #47](https://github.com/Blex31/carta-world-constitutions-library/actions/runs/42474119289) passed for code baseline `b1655a9` |
 
@@ -47,7 +47,7 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 - [x] Fix the Supabase RLS initialization-plan warning on the administrator ingestion-run read policy.
 - [x] Keep GitHub Actions test, coverage audit, syntax, typecheck and production Vite build passing.
 - [ ] Validate migrations 001–009 from an empty disposable Supabase project or clean local Supabase stack. This is especially important for reconstructed migrations 004 and 005.
-- [ ] Reclassify the 242 currently unclassified jurisdiction rows using a reviewed ISO-3166 / UN crosswalk; separate the 193 UN member states, two observer states, territories/dependencies and international instruments. Do not use 250 as the country denominator.
+- [x] Classify the directory using the merged ISO/UN/M49 crosswalk: 193 UN Member States, two observer states, and 55 other country/area records retained for status review. Migration applied and live totals/geography verified on 9 November 2026. Do not use 250 as the country denominator.
 - [ ] Add a committed npm lockfile, switch CI from `npm install` to `npm ci`, and verify a clean reproducible build.
 - [ ] Add an automated check that the deployed Edge Function and repository source do not drift.
 
@@ -55,7 +55,7 @@ This is CARTA's single running checklist. Update it after each meaningful develo
 
 ## Phase 1 — Legal source and constitution collection (critical path)
 
-**Launch target:** 15 verified African constitutional collections for the first release, with a stretch target of 25. These are targets, not current coverage claims. Use [the African corpus launch plan](africa-first-wave-corpus-plan.md) for the candidate pool, special legal holds, source research and import gates.
+**Launch target:** 15 verified African constitutional collections for the first release, with a stretch target of 25. These are targets, not current coverage claims. Use [the African corpus launch plan](africa-first-wave-corpus-plan.md) for the first 15 research priorities and special legal holds, and [the global collection plan](global-constitution-collection-plan.md) plus [195-entry queue](../data/global-constitution-collection-queue.json) for the full world collection.
 
 **The legal corpus is CARTA's main launch blocker.** A country appearing in the directory does not mean its Constitution is available or verified.
 
@@ -76,7 +76,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ### 1B. Expand the legal library
 
-- [ ] Reconcile the current versions and rights of the other seven EAC partner-state constitutions: Burundi, DR Congo, Kenya, Somalia, South Sudan, Tanzania and Uganda.
+- [ ] Reconcile the current versions and rights of the other seven EAC partner-state constitutions: Burundi, DR Congo, Kenya, Somalia, South Sudan, Tanzania and Uganda. Track all 193 UN Member States and two observers in [the global constitutional collection queue](global-constitution-collection-queue.json).
 - [ ] Treat Zanzibar's Constitution as a separate legal instrument/jurisdictional collection where included.
 - [ ] For every document, establish official source, language edition, amendment history, effective dates, publication status, rights evidence and checksum.
 - [ ] Import each document only after the same rights and editorial gates pass.
