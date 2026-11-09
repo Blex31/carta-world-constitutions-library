@@ -70,8 +70,14 @@ The following are source-discovery starting points recorded in the queue. A link
 | Zimbabwe | [Parliament Constitution page](https://www.parlzim.gov.zw/constitution-of-zimbabwe/) | Parliament-hosted 2013 Constitution located; later amendment Acts and current consolidated edition remain to verify. |
 | The Gambia | [Ministry of Justice downloads](https://www.moj.gm/downloads) | Ministry lists 1997 Constitution (2002 revision) and a separate 2020 draft; do not treat the draft as enacted. |
 | Sierra Leone | [Parliament Constitution page](https://www.parliament.gov.sl/constitution-of-sierra-leone.html) | Parliament's 1991 text is a source lead, not a consolidated version; verify all later amendment Acts, including those identified through 2022. |
+| Angola | [National Assembly digital library](https://bi-digital.parlamento.ao/items/885395b6-825d-4605-89f7-2d44f9bdc039) | 2010 republication under Law 18/21 (16 August 2021); item-specific repository licence must be reviewed; later amendments to check. |
+| Gabon | [Official Gazette — 2024 Constitution](https://journal-officiel.ga/21489-002-r-2024-/) / [promulgation decree](https://journal-officiel.ga/21491-0458-pr/) | New Constitution adopted by referendum and promulgated 19 December 2024; verify transition, commencement and post-2024 status. |
+| Togo | [Official Gazette](https://jo.gouv.tg/node/15758) / [Constitutional Court copy](https://courconstitutionnelle.tg/download/loi-n-2024-005-du-06-05-2024-portant-constitution-de-la-republique-togolaise/) | Law 2024-005 of 6 May 2024; reconcile Constitutional Court decisions ES-00325 (24 Feb 2025) and C-001/25 (24 Mar 2025). |
+| Benin | [SGG laws library](https://sgg.gouv.bj/documentheque/loi/) / [Law 2025-20](https://sgg.gouv.bj/doc/loi-2025-20/download) | Constitution 1990 as revised in 2019 and modified by Law 2025-20 of 17 December 2025; consolidate and check 2026 updates. |
+| Senegal | [Government source — Constitution](https://forcesarmees.gouv.sn/dossiers/lois/loi-ndeg-2001-03-du-22-janvier-2001-portant-constitution-modifiee) / [Lexenegal revision history cross-check](https://www.lexenegal.sn/code/constitution-senegal) | Official base text is old; private Lexenegal index identifies revision laws through 2024-15 (19 Dec 2024). Obtain all Gazettes and an official current consolidation. |
+| Mozambique | [Tribunal Supremo legislation catalogue](https://www.ts.gov.mz/legislacao/) | Catalogue lists the 2018 Constitution as the latest instrument; obtain Gazette edition and confirm all post-2018 amendments. |
 
-The additional 10 leads were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all first-wave jurisdictions.
+The 16 additional leads beyond the EAC group were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all first-wave jurisdictions.
 
 ## Collection rules
 
