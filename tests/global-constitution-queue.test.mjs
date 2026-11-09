@@ -99,7 +99,7 @@ test('global source discovery batch covers 12 Americas, European and Oceanian ju
     assert.equal(entry.publication_status, 'catalogue_only', code);
     assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
   }
-  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 66);
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 102);
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'CA').instrument_form, 'multiple_foundational_instruments');
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'NZ').instrument_form, 'uncodified_or_unwritten');
 });
@@ -118,7 +118,7 @@ test('Asian source discovery batch covers 12 jurisdictions without rights cleara
     assert.equal(entry.publication_status, 'catalogue_only', code);
     assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
   }
-  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 78);
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 102);
   assert.match(queue.entries.find((entry) => entry.iso_code === 'KR').version_status, /no legal or official effect/i);
   assert.match(queue.entries.find((entry) => entry.iso_code === 'BD').version_status, /proposals/i);
   assert.match(queue.entries.find((entry) => entry.iso_code === 'LK').version_status, /Twenty Second Amendment/i);
@@ -139,7 +139,7 @@ test('Middle East source discovery batch records six systems without rights clea
     assert.equal(entry.publication_status, 'catalogue_only', code);
     assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
   }
-  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 84);
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 102);
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'SY').instrument_form, 'transitional_or_interim_instrument');
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'SA').instrument_form, 'uncodified_or_unwritten');
   assert.match(queue.entries.find((entry) => entry.iso_code === 'QA').version_status, /2024 amendments/i);
@@ -159,7 +159,32 @@ test('additional Middle East records retain official source, currentness and ins
     assert.equal(entry.publication_status, 'catalogue_only', code);
     assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
   }
-  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 90);
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 102);
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'IL').instrument_form, 'uncodified_or_unwritten');
   assert.match(queue.entries.find((entry) => entry.iso_code === 'OM').candidate_instrument, /79\/2026/);
+});
+
+test('European source discovery batch covers 12 jurisdictions without rights clearance', () => {
+  const europeCodes = ['GB','IE','NL','NO','AT','FI','SE','PL','BE','UA','CH','CZ'];
+  for (const code of europeCodes) {
+    const entry = queue.entries.find((item) => item.iso_code === code);
+    assert.ok(entry, code);
+    assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
+    assert.equal(entry.rights_status, 'review_required', code);
+    assert.equal(entry.commercial_use_allowed, false, code);
+    assert.equal(entry.ai_retrieval_allowed, false, code);
+    assert.equal(entry.offline_device_copy_allowed, false, code);
+    assert.equal(entry.full_text_acquired, false, code);
+    assert.equal(entry.publication_status, 'catalogue_only', code);
+    assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
+  }
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 102);
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'GB').instrument_form, 'uncodified_or_unwritten');
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'NL').instrument_form, 'multiple_foundational_instruments');
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'AT').instrument_form, 'multiple_foundational_instruments');
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'SE').instrument_form, 'multiple_foundational_instruments');
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'CZ').instrument_form, 'multiple_foundational_instruments');
+  assert.match(queue.entries.find((entry) => entry.iso_code === 'FI').version_status, /817\/2018/);
+  assert.match(queue.entries.find((entry) => entry.iso_code === 'SE').version_status, /second decision/i);
+  assert.match(queue.entries.find((entry) => entry.iso_code === 'UA').rights_evidence_url, /t216/);
 });
