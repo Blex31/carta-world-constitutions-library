@@ -50,16 +50,16 @@ test('jurisdiction directory is unique ISO metadata, not falsely labelled as com
 });
 
 const fallbackText = await read('src/lib/fallbacks.js');
+const appEntry = await read('src/App.jsx');
 const liveApi = await read('supabase/functions/carta-api/index.ts');
 
 test('web app has no bundled constitutional sample texts or synthetic legal-answer fallback', () => {
   assert.match(fallbackText, /fallbackDocs = \[\]/);
   assert.match(fallbackText, /fallbackArticles = \[\]/);
   assert.match(fallbackText, /fallbackDailyItems = \[\]/);
-  assert.doesNotMatch(app, /synthesizeLocalLegalResearch/);
-  assert.doesNotMatch(app, /fallbackDocs|fallbackArticles|fallbackDailyItems/);
-  assert.match(app, /No verified legal passage was available/);
-  assert.match(app, /Sign in to use CARTA legal research/);
+  assert.doesNotMatch(appEntry, /synthesizeLocalLegalResearch|fallbackDocs|fallbackArticles|fallbackDailyItems/);
+  assert.match(appEntry, /No verified legal passage was available/);
+  assert.match(appEntry, /Sign in to use CARTA legal research/);
 });
 
 test('live directory API exposes UN membership and geography to the clients', () => {
