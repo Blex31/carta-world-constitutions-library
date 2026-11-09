@@ -137,14 +137,25 @@ class _CataloguePageState extends State<CataloguePage> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text('${countries.length} jurisdictions', style: Theme.of(context).textTheme.labelLarge),
+              Text(
+                '${countries.length} directory records · ${widget.store.countries.where((country) => country.isUnMember).length} UN Member States · ${widget.store.countries.where((country) => const ['VA', 'PS'].contains(country.id) && !country.isUnMember).length} observer states',
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
               const SizedBox(height: 8),
               for (final country in countries)
                 Card(
                   child: ListTile(
                     leading: Text(country.flag, style: const TextStyle(fontSize: 25)),
                     title: Text(country.name),
-                    subtitle: Text(_statusLabel(country.status)),
+                    subtitle: Text([
+                      country.isUnMember
+                          ? 'UN Member State'
+                          : (const ['VA', 'PS'].contains(country.id)
+                              ? 'UN observer state'
+                              : 'Country / area record'),
+                      if (country.region.isNotEmpty) country.region,
+                      _statusLabel(country.status),
+                    ].join(' · ')),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {
                       widget.store.selectCountry(country.id);
