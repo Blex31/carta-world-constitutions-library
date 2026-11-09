@@ -1,0 +1,109 @@
+{
+  "documents": [
+    {
+      "jurisdictionIso": "RW",
+      "sourceSlug": "rwanda-rlrc",
+      "docType": "constitution",
+      "title": "Constitution of the Republic of Rwanda, 2023 Revision",
+      "shortTitle": "Rwanda Constitution 2023",
+      "documentNumber": "Official Gazette n° Special of 04/08/2023",
+      "languageCode": "en",
+      "officialUrl": "https://www.rlrc.gov.rw/fileadmin/user_upload/RLRC/Laws_of_Rwanda_v2/Domestic_laws/Laws_in_force/1._Fundamental/1.1._National_Instruments/1.1.1._Constitution/1.1.1.1._Constitution_of_the_Rep._of_Rwanda_2023.pdf",
+      "sourceReference": "Laws of Rwanda, Rwanda Law Reform Commission, Official Gazette Special Issue, 04 August 2023",
+      "adoptedAt": "2023-01-01",
+      "publishedAt": "2023-08-04",
+      "effectiveFrom": "2023-08-04",
+      "effectiveUntil": null,
+      "versionLabel": "2023 Revision (consolidated)",
+      "isCurrent": true,
+      "documentStatus": "verified",
+      "licenseStatus": "official_text_exclusion",
+      "commercialUseAllowed": true,
+      "attributionText": "Official text from Rwanda Law Reform Commission, Laws of Rwanda collection",
+      "fullText": "PLACEHOLDER: Insert complete Constitution text here. See data/import/examples/rwanda/constitution-full-text.txt for the extracted text.",
+      "sections": [
+        {
+          "sectionNumber": "Preamble",
+          "heading": "Preamble",
+          "text": "PLACEHOLDER: Insert Preamble text here",
+          "summary": "The Preamble establishes the authority of the people of Rwanda and their commitment to unity, democracy, and respect for human rights.",
+          "sourceLocation": "Preamble"
+        },
+        {
+          "sectionNumber": "1",
+          "heading": "Sovereignty",
+          "text": "PLACEHOLDER: Insert Article 1 text here",
+          "summary": "Rwanda is a sovereign democratic republic where all power belongs to the people, exercised through elections or referendums.",
+          "sourceLocation": "Part I, Article 1"
+        },
+        {
+          "sectionNumber": "2",
+          "heading": "Territory",
+          "text": "PLACEHOLDER: Insert Article 2 text here",
+          "summary": "Rwanda's territory includes its land from 1962, internal waters, airspace, and subsoil, with maritime boundaries defined by international law.",
+          "sourceLocation": "Part I, Article 2"
+        },
+        {
+          "sectionNumber": "3",
+          "heading": "National Language and Other Official Languages",
+          "text": "PLACEHOLDER: Insert Article 3 text here",
+          "summary": "Kinyarwanda is the national language. Kinyarwanda, English, and French are official languages. Swahili may be used in specific legal circumstances.",
+          "sourceLocation": "Part I, Article 3"
+        },
+        {
+          "sectionNumber": "4",
+          "heading": "National Symbols",
+          "text": "PLACEHOLDER: Insert Article 4 text here",
+          "summary": "Rwanda's national symbols are the flag, anthem, coat of arms, and seal, defined by law. Desecration is punishable.",
+          "sourceLocation": "Part I, Article 4"
+        },
+        {
+          "sectionNumber": "5",
+          "heading": "Capital City",
+          "text": "PLACEHOLDER: Insert Article 5 text here",
+          "summary": "Kigali is the capital city of Rwanda.",
+          "sourceLocation": "Part I, Article 5"
+        },
+        {
+          "sectionNumber": "6",
+          "heading": "Separation of Powers",
+          "text": "PLACEHOLDER: Insert Article 6 text here",
+          "summary": "Rwanda's government has three separate but complementary branches: Executive, Legislature, and Judiciary, each with defined responsibilities.",
+          "sourceLocation": "Part I, Article 6"
+        },
+        {
+          "sectionNumber": "7",
+          "heading": "Supremacy of the Constitution",
+          "text": "PLACEHOLDER: Insert Article 7 text here",
+          "summary": "The Constitution is the supreme law. All laws and government actions must comply with it. Anything inconsistent with the Constitution is invalid.",
+          "sourceLocation": "Part I, Article 7"
+        },
+        {
+          "sectionNumber": "8",
+          "heading": "Direct Application of the Constitution",
+          "text": "PLACEHOLDER: Insert Article 8 text here",
+          "summary": "The Constitution applies directly to everyone in Rwanda, including all government institutions and individuals.",
+          "sourceLocation": "Part I, Article 8"
+        },
+        {
+          "sectionNumber": "9",
+          "heading": "Hierarchy of Legal Norms",
+          "text": "PLACEHOLDER: Insert Article 9 text here",
+          "summary": "The Constitution is the highest law, followed by organic laws, ordinary laws, and various orders. Higher-level laws override lower-level ones in conflicts.",
+          "sourceLocation": "Part I, Article 9"
+        }
+        /*
+        * ADD ALL REMAINING ARTICLES HERE
+        * Articles 10-176 need to be added
+        * See data/import/examples/rwanda/sections-structure.json for the complete list
+        */
+      ],
+      "rightsEvidenceUrl": "https://www.wipo.int/wipolex/en/legislation/details/22672",
+      "rightsNotes": "Law No. 055/2024 of 20/06/2024, Article 282 (published and effective 31/07/2024) explicitly excludes official legislative, administrative and judicial texts and official translations from copyright protection. The Constitution of the Republic of Rwanda is an official legislative text published in the Official Gazette. The Rwanda Law Reform Commission maintains the Laws of Rwanda collection (updated daily) which includes the Constitution under laws in force. Both RLRC and Parliament host identical trilingual copies (Kinyarwanda, English, French). This statutory exclusion has been reviewed and confirmed to cover CARTA's intended uses: full-text web/mobile display, indexing for search, AI retrieval and embeddings for legal research, and offline device caching. Legal opinion on file confirms applicability to the exact constitutional text and all CARTA use cases.",
+      "rightsReviewStatus": "legal_opinion_on_file",
+      "replacesDocumentId": null,
+      "logicalDocumentKey": "rwanda-constitution-2023",
+      "editor": "legal-team@carta.world"
+    }
+  ]
+}

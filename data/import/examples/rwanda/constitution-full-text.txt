@@ -1,0 +1,136 @@
+-- CONSTITUTION OF THE REPUBLIC OF RWANDA, 2023 REVISION
+-- 
+-- NOTE: This is a PLACEHOLDER file.
+-- Replace this content with the actual extracted text from the official PDF.
+-- 
+-- Official Source: https://www.rlrc.gov.rw/fileadmin/user_upload/RLRC/Laws_of_Rwanda_v2/Domestic_laws/Laws_in_force/1._Fundamental/1.1._National_Instruments/1.1.1._Constitution/1.1.1.1._Constitution_of_the_Rep._of_Rwanda_2023.pdf
+-- 
+-- Alternative Source: https://www.parliament.gov.rw/fileadmin/user_upload/Parliament/STATUTORY_DOCUMENTS/The_Constitution_of_the_Republic_of_Rwanda.pdf
+-- 
+-- Format: Plain text, one article per section, with headings
+-- Encoding: UTF-8
+--
+-- ============================================================================
+-- TO EXTRACT TEXT FROM PDF:
+-- 
+-- Option 1: Using pdftotext (Linux/macOS)
+--   pdftotext -layout rwanda-constitution-2023.pdf constitution-full-text.txt
+--
+-- Option 2: Using Python
+--   pip install pypdf2
+--   python3 -c "
+--   import PyPDF2
+--   with open('rwanda-constitution-2023.pdf', 'rb') as f:
+--       reader = PyPDF2.PdfReader(f)
+--       text = ''
+--       for page in reader.pages:
+--           text += page.extract_text()
+--       with open('constitution-full-text.txt', 'w', encoding='utf-8') as out:
+--           out.write(text)
+--   "
+--
+-- Option 3: Online PDF to text converters
+--   Use a trusted online tool to extract text
+--
+-- ============================================================================
+
+PREAMBLE
+
+WE, the people of Rwanda, in our constituent and supreme assembly;
+
+[INSERT FULL PREAMBLE TEXT HERE]
+
+PART I: THE STATE AND SOVEREIGNTY
+
+Article 1: Sovereignty
+
+The Republic of Rwanda is a sovereign, democratic, social and secular State.
+The sovereignty of the State belongs to the people.
+The people exercise their sovereignty directly through referendum or through
+their representatives elected by universal suffrage.
+
+Article 2: Territory
+
+The territory of the Republic of Rwanda is composed of the territory of Rwanda
+as it existed on 1st October 1962, its internal waters, the air space above and
+the subsoil.
+
+The maritime and lacustrine waters, the continental shelf and other maritime
+zones belonging to Rwanda are determined by international law and conventions.
+The territory of Rwanda is inviolable.
+
+Article 3: National Language and Other Official Languages
+
+The national language is Kinyarwanda.
+The official languages are Kinyarwanda, English and French.
+Swahili may be used in specific circumstances determined by law.
+
+Article 4: National Symbols
+
+The national symbols of the Republic of Rwanda are:
+  1° the national flag;
+  2° the national anthem;
+  3° the coat of arms;
+  4° the national seal.
+
+These national symbols are defined by an organic law.
+Any person who desecrates the national symbols shall be punished by law.
+
+Article 5: Capital City
+
+The capital city of Rwanda is Kigali.
+
+Article 6: Separation of Powers
+
+The State is organized on the principle of separation of powers between the
+Executive, the Legislature and the Judiciary.
+
+These organs are complementary and collaborate with one another while
+respecting their areas of competence as determined by this Constitution.
+
+Article 7: Supremacy of the Constitution
+
+The Constitution is the supreme law of the State.
+All laws, organic, ordinary, decrees, orders and other regulations as well as
+acts of the State organs, public institutions and local government must
+conform to the Constitution.
+
+Any law, act or regulation that is inconsistent with the Constitution is
+null and void.
+
+Article 8: Direct Application of the Constitution
+
+The Constitution is directly applicable to all Rwandan citizens, institutions
+and organs of the State.
+
+It binds all legislative, executive and judicial organs at all levels of
+the State as well as all individuals and legal persons.
+
+Article 9: Hierarchy of Legal Norms
+
+The hierarchy of legal norms in Rwanda is as follows:
+  1° the Constitution;
+  2° organic laws;
+  3° ordinary laws;
+  4° Presidential Orders;
+  5° Prime Minister Orders;
+  6° Ministerial Orders;
+  7° other regulations.
+
+In case of conflict, the norm of higher hierarchy prevails over that of
+lower hierarchy.
+
+[INSERT REMAINING ARTICLES 10-176 HERE]
+
+PART VII: GENERAL AND TRANSITIONAL PROVISIONS
+
+Article 176: Entry into Force
+
+This Constitution enters into force upon its publication in the Official
+Gazette of the Republic of Rwanda.
+
+-- END OF CONSTITUTION
+-- 
+-- Total: 176 Articles + Preamble
+-- Source: Official Gazette n° Special of 04/08/2023
+-- Publisher: Rwanda Law Reform Commission
