@@ -49,7 +49,7 @@ The text being publicly viewable, downloadable, government-hosted or labelled �
 - Whether complete text has actually been acquired, checksum, CARTA document identifiers and publication state.
 - A concrete next action for each country.
 
-**54 African constitutional source/status leads have been identified**: the eight EAC candidates plus 22 additional African leads. These are source-discovery starting points only; all remain rights-review required, and no text is approved by inclusion in this queue.
+**54 African constitutional source/status leads have been identified**: the eight EAC candidates plus 46 further African source/status leads. These are source-discovery starting points only; all remain rights-review required, and no text is approved by inclusion in this queue.
 
 ## African first-wave source leads
 
@@ -109,7 +109,7 @@ The following are source-discovery starting points recorded in the queue. A link
 | Madagascar | [National Assembly — IVème République Constitution record](https://www.parlement.mg/fr/textes/constitution-de-la-iveme-republique/) | Parliament record shows a 2026 Fourth Republic constitution deposited 18 May 2026 with status “Promulgation”; obtain signed decree, Gazette publication and commencement before treating it as operative. |
 | Mauritius | [Government Constitution page](https://www.govmu.org/EN/infoservices/govadministration/Pages/constitution.aspx) / [2025 amendment discovery record](https://www.refworld.org/legal/legislation/natlegbod/1968/18626) | Government consolidation is only to March 2016; a 2025 amendment reportedly repealed section 7(2). Obtain the official amendment Act and consolidate. |
 
-The 46 source/status leads beyond the original EAC group were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all first-wave jurisdictions.
+The 46 additional African source/status leads beyond the original EAC group were recorded on 9 November 2026. The legal/currentness and reuse review remains incomplete for all African jurisdictions. Eritrea is not represented as having a current Constitution; Guinea-Bissau, Niger, Libya and Sudan retain specialist transition/status holds.
 
 ## Collection rules
 
@@ -143,10 +143,10 @@ A rights approval for one language or one edition does not automatically approve
 ## Delivery batches
 
 ### Batch 1 — Africa (54 UN Member States)
-Prioritise Africa because CARTA's first source work and user context are already concentrated here. The existing first-wave launch plan identifies 15 research priorities, but the target is to research all 54. Import the first documents that clear the full release gate; do not lower the rights or version standard to hit a number.
+**Source/status discovery complete for all 54 assignments (9 November 2026).** The queue now contains 54 African source/status leads: 53 constitutional instrument source leads and one special status finding for Eritrea, whose 1997 ratified text has not entered into force according to the latest UN and UK government reporting reviewed. This is not 54 verified current constitutions. All 54 remain rights-review-required; zero full texts have been acquired and zero are cleared for CARTA publication. The original 15-country first-wave research priorities are a prioritisation subset, not a separate total. Import only documents that pass the full legal and technical release gate.
 
 - Carry forward the eight EAC source candidates with their existing review flags.
-- Research the remaining African member states using official gazettes, national parliaments, justice ministries, attorney-general portals and government printers.
+- All 54 African member-state entries now have an official source lead or a documented constitutional-status finding; the queue preserves the lead URL and the next verification task for each.
 - Track non-codified or transitional constitutional arrangements correctly.
 - Keep Somalia, South Sudan, Tanzania/Zanzibar and other conflicting-version cases on specialist review until reconciled.
 
