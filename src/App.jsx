@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { apiFetch, apiUrl, getAccessToken, getSessionUser, requestPasswordReset, SUPABASE_PUBLISHABLE_KEY, signInWithEmail, signOut, signUpWithEmail, supabase, updatePassword } from './auth';
 import seedJurisdictions from '../data/jurisdictions.seed.json';
 import legalResearchArchiveImg from './assets/images/legal_research_archive_1794154959568.jpg';
-import { fallbackDocs, fallbackArticles, fallbackDailyItems } from './lib/fallbacks';
 import { dayKey, hash } from './lib/daily';
 import { useStore } from './lib/use-store';
 import { title, wrap } from './lib/format';
@@ -72,6 +71,7 @@ export default function App(){
   const [billingBusy,setBillingBusy]=useState(false);
   const [adConfig,setAdConfig]=useState({enabled:false,clientId:'',homeSlot:'',searchSlot:''});
   const [libraryDataReady,setLibraryDataReady]=useState(false);
+  const [libraryError,setLibraryError]=useState('');
   const [adminSourceData,setAdminSourceData]=useState(null);
   const [adminSourcesBusy,setAdminSourcesBusy]=useState(false);
   const [newSourceOpen,setNewSourceOpen]=useState(false);
@@ -112,49 +112,45 @@ export default function App(){
     let cancelled=false;
     apiFetch('library').then(async r=>{if(!r.ok)throw new Error('CARTA API unavailable');return r.json()}).then(data=>{
       if(cancelled)return;
-      const nextCountries=(data.countries||[]).map(c=>({id:c.iso||c.id,name:c.name,flag:c.flag||'🌐',constitutionStatus:c.constitutionStatus||'not_loaded',jurisdictionKind:c.jurisdictionKind||'unclassified'}));
+      const nextCountries=(data.countries||[]).map(c=>({id:c.iso||c.id,name:c.name,flag:c.flag||'🌐',constitutionStatus:c.constitutionStatus||'not_loaded',jurisdictionKind:c.jurisdictionKind||'unclassified',isUnMember:c.isUnMember===true,continent:c.continent||'',region:c.region||''}));
       const nextDocs=(data.documents||[]).map(d=>({id:d.id,country:d.countryId||d.country_id||null,title:d.title,type:d.type,year:d.year,main:d.main,short:d.shortDescription||d.short_title||'',officialUrl:d.official_url,version:d.version_label,documentStatus:d.document_status,licenseStatus:d.license_status,commercialUseAllowed:d.commercial_use_allowed}));
       const chapterMap=new Map((data.chapters||[]).map(ch=>[ch.id,ch]));
       const nextArticles=(data.articles||[]).map(a=>{const ch=chapterMap.get(a.chapterId);return{id:a.id,doc:a.documentId,chapter:ch?.number||1,chapterTitle:ch?.title||'Document provisions',num:a.articleNumber,title:a.title,original:a.originalText||a.original||'',plain:a.simplifiedText||a.plain_language_summary||'',tags:a.tags||[],source:a.sourceReference||a.source||'',officialUrl:a.officialUrl||''}});
       const nextDaily=(data.dailyItems||[]).map(item=>({id:item.id,kind:item.type==='BILL'?'BILL':'CURRENT AFFAIR',title:item.title,body:item.body||'Open the official publisher for the update.',ref:item.ref,jurisdictionIso:item.jurisdictionIso||null,source:item.tag,sourceUrl:item.sourceUrl,publishedAt:item.publishedAt}));
-      setCountries(nextCountries);setDocs(nextDocs);setArticles(nextArticles);setDailyFeed(nextDaily);setCoverage(data.coverage||{total:nextCountries.length,verified_current:0,text_loaded:0,metadata_only:0});
+      setCountries(nextCountries);setDocs(nextDocs);setArticles(nextArticles);setDailyFeed(nextDaily);setCoverage(data.coverage||{total:nextCountries.length,verified_current:0,text_loaded:0,metadata_only:nextCountries.length});setLibraryError('');
       const storedCountry=localStorage.getItem('carta-country')||countryId;
       const chosen=nextCountries.find(c=>c.id===storedCountry)||nextCountries.find(c=>c.id==='KE')||nextCountries[0];
       if(chosen){setCountryId(chosen.id);const main=nextDocs.find(d=>d.country===chosen.id&&d.type==='constitution'&&d.main);const firstAvailable=nextDocs.find(d=>d.country===chosen.id)||nextDocs.find(d=>d.country===null);const initialDoc=main||firstAvailable;if(initialDoc){setDocumentId(initialDoc.id);const first=nextArticles.find(a=>a.doc===initialDoc.id);if(first)setArticleId(first.id)}}
       setLibraryDataReady(true);
-    }).catch(()=>{
+    }).catch(error=>{
       if(!cancelled){
         const seedList = Array.isArray(seedJurisdictions) ? seedJurisdictions : [];
         const nextCountries = seedList.map(c => ({
           id: c.iso_code,
           name: c.name,
           flag: c.flag_emoji || '🌐',
-          constitutionStatus: ['KE', 'US', 'ZA', 'RW'].includes(c.iso_code) ? 'verified_current' : 'metadata_only',
-          jurisdictionKind: c.jurisdiction_kind || 'sovereign_state',
+          constitutionStatus: 'metadata_only',
+          jurisdictionKind: c.jurisdiction_kind || 'unclassified',
+          isUnMember: c.is_un_member === true,
+          continent: c.continent || '',
+          region: c.region || '',
         }));
         setCountries(nextCountries);
-        setDocs(fallbackDocs);
-        setArticles(fallbackArticles);
-        setDailyFeed(fallbackDailyItems);
+        setDocs([]);
+        setArticles([]);
+        setDailyFeed([]);
         setCoverage({
           total: nextCountries.length,
-          verified_current: 4,
-          text_loaded: 4,
-          metadata_only: Math.max(0, nextCountries.length - 4),
+          verified_current: 0,
+          text_loaded: 0,
+          metadata_only: nextCountries.length,
         });
+        setLibraryError('CARTA could not reach its live library. The country directory is available, but no constitutional texts are loaded from local sample data.');
         const storedCountry = localStorage.getItem('carta-country') || countryId;
         const chosen = nextCountries.find(c => c.id === storedCountry) || nextCountries.find(c => c.id === 'KE') || nextCountries[0];
-        if (chosen) {
-          setCountryId(chosen.id);
-          const main = fallbackDocs.find(d => d.country === chosen.id && d.type === 'constitution' && d.main);
-          const firstAvailable = fallbackDocs.find(d => d.country === chosen.id) || fallbackDocs[0];
-          const initialDoc = main || firstAvailable;
-          if (initialDoc) {
-            setDocumentId(initialDoc.id);
-            const first = fallbackArticles.find(a => a.doc === initialDoc.id);
-            if (first) setArticleId(first.id);
-          }
-        }
+        if (chosen) setCountryId(chosen.id);
+        setDocumentId('');
+        setArticleId('');
         setLibraryDataReady(true);
       }
     });
@@ -219,8 +215,8 @@ export default function App(){
       const localNotes=canMigrate?JSON.parse(localStorage.getItem('carta-notes')||'[]'):[];
       const localDownloads=canMigrate?JSON.parse(localStorage.getItem('carta-downloads')||'[]'):[];
       const merge=(a,b)=>Array.from(new Set([...a,...b]));
-      const resolveArticleId=id=>{if(articles.some(a=>a.id===id))return id;const old=fallbackArticles.find(a=>a.id===id);if(!old)return null;return articles.find(a=>a.num===old.num&&a.title===old.title)?.id||null};
-      const resolveDocumentId=id=>{if(docs.some(d=>d.id===id))return id;const old=fallbackDocs.find(d=>d.id===id);return old?docs.find(d=>d.title===old.title)?.id||null:null};
+      const resolveArticleId=id=>articles.some(a=>a.id===id)?id:null;
+      const resolveDocumentId=id=>docs.some(d=>d.id===id)?id:null;
       const migratedBookmarks=localBookmarks.map(resolveArticleId).filter(Boolean).filter(id=>articles.some(a=>a.id===id));
       const migratedHighlights=localHighlights.map(resolveArticleId).filter(Boolean).filter(id=>articles.some(a=>a.id===id));
       const migratedNotes=localNotes.map(n=>({...n,articleId:resolveArticleId(n.articleId)})).filter(n=>n.articleId&&articles.some(a=>a.id===n.articleId));
@@ -230,8 +226,7 @@ export default function App(){
       const noteMap=new Map(serverNotes.map(n=>[n.articleId,n]));
       migratedNotes.forEach(n=>noteMap.set(n.articleId,n));
       setNotes([...noteMap.values()]);
-      const selectedMain=docs.find(d=>d.country===countryId&&d.main)?.id;
-      setDownloads(merge(serverDownloads,merge(migratedDownloads,selectedMain?[selectedMain]:[])));
+      setDownloads(merge(serverDownloads,migratedDownloads));
       localStorage.setItem('carta-owner-user',String(account.id));
       setOffline(data.profile?.offline_default_enabled!==false);
       const preferred=countries.find(c=>c.id===data.profile?.preferred_jurisdiction_iso);
@@ -241,13 +236,11 @@ export default function App(){
       migratedHighlights.filter(sectionId=>!serverHighlights.includes(sectionId)).forEach(sectionId=>{const article=articles.find(a=>a.id===sectionId);if(article)pending.push(apiSave({action:'highlight',operation:'save',documentId:article.doc,sectionId,selectedText:article.original}))});
       migratedNotes.filter(n=>!serverNotes.some(s=>s.articleId===n.articleId)).forEach(n=>{const article=articles.find(a=>a.id===n.articleId);if(article)pending.push(apiSave({action:'note',operation:'save',documentId:article.doc,sectionId:article.id,text:n.text}))});
       migratedDownloads.filter(documentId=>!serverDownloads.includes(documentId)).forEach(documentId=>pending.push(apiSave({action:'download',operation:'save',documentId})));
-      if(selectedMain&&!serverDownloads.includes(selectedMain))pending.push(apiSave({action:'download',operation:'save',documentId:selectedMain}));
       void Promise.allSettled(pending);
     }).catch(()=>{});
     apiFetch('billing/status',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{if(!cancelled&&data)setBilling(data)}).catch(()=>{});
     return()=>{cancelled=true};
   },[account,libraryDataReady]);
-  useEffect(()=>{if(!mainDoc?.id)return;setDownloads(v=>v.includes(mainDoc.id)?v:[...v,mainDoc.id]);if(account)void apiSave({action:'download',operation:'save',documentId:mainDoc.id}).catch(()=>{})},[mainDoc?.id,account]);
   useEffect(()=>{
     const verify=async(sessionId)=>{try{const r=await apiFetch('billing/verify?checkoutSessionId='+encodeURIComponent(sessionId),{cache:'no-store'});const data=await r.json();if(!r.ok)throw new Error(data.error||'Verification pending');setBilling(v=>({...v,isAdFree:!!data.isAdFree,status:data.status||v.status}));showToast(data.isAdFree?'CARTA Plus is active. Your account is ad-free.':'Checkout received. Membership is being activated.')}catch{showToast('Checkout verification is still pending. Refresh your membership status shortly.')}};
     const message=e=>{if(e.origin!==window.location.origin||e.data?.type!=='PAYMENTS_RETURN')return;if(e.data.checkoutSessionId)void verify(e.data.checkoutSessionId)};
@@ -341,161 +334,81 @@ export default function App(){
     navigator.clipboard.writeText(text).then(() => showToast('Legal citation copied to clipboard.')).catch(() => showToast('Citation copied.'));
   }
 
-  function synthesizeLocalLegalResearch(question, jurisdictionIso) {
-    const qLower = question.toLowerCase();
-    const activeCountryObj = countries.find(c => c.id === jurisdictionIso) || country;
-    const countryName = activeCountryObj.name || 'the jurisdiction';
-    const mainDocument = docs.find(d => d.country === jurisdictionIso && d.type === 'constitution' && d.main) || docs.find(d => d.country === jurisdictionIso) || docs[0];
-
-    const keywords = qLower.match(/\b[a-z]{3,}\b/g) || [];
-    const scored = articles.map(art => {
-      let score = 0;
-      const artDoc = docs.find(d => d.id === art.doc);
-      if (artDoc?.country === jurisdictionIso) score += 6;
-      const textBlock = `${art.num} ${art.title} ${art.original} ${art.plain} ${(art.tags||[]).join(' ')}`.toLowerCase();
-      keywords.forEach(kw => {
-        if (textBlock.includes(kw)) score += 3;
-      });
-      return { art, score };
-    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
-
-    const matchedArticles = scored.slice(0, 3).map(x => x.art);
-    if (!matchedArticles.length) {
-      const defaultArts = articles.filter(a => a.doc === mainDocument?.id).slice(0, 2);
-      matchedArticles.push(...defaultArts);
-    }
-
-    const leadArticle = matchedArticles[0] || articles[0];
-    const compArticle = articles.find(a => a.doc !== mainDocument?.id && (a.tags||[]).some(t => (leadArticle?.tags||[]).includes(t))) || articles.find(a => a.doc !== mainDocument?.id);
-
-    let content = `### Constitutional Analysis & Analytical Synthesis\n\n`;
-    content += `Under the constitutional framework of **${countryName}** (${mainDocument?.title || 'Supreme Law'}), sovereign authority, fundamental freedoms, and state powers are structured around constitutional supremacy.\n\n`;
-
-    if (leadArticle) {
-      content += `#### Textual Foundation & Statutory Clause\n`;
-      content += `> "${leadArticle.original}"\n`;
-      content += `> — *${leadArticle.source || leadArticle.num}*\n\n`;
-      content += `**Plain-Language Interpretation:** ${leadArticle.plain || 'This provision establishes binding legal standards across all public organs and private entities.'}\n\n`;
-    }
-
-    if (compArticle) {
-      const compDoc = docs.find(d => d.id === compArticle.doc);
-      const compCountry = countries.find(c => c.id === compDoc?.country);
-      content += `#### Comparative Jurisprudential Lens\n`;
-      content += `By comparison, the **${compCountry ? compCountry.name : 'international covenant'}** (${compArticle.source || compArticle.num}) articulates: "${compArticle.plain}". This provides comparative clarity on how distinct legal systems balance authority and democratic rights.\n\n`;
-    }
-
-    content += `*Notice: CARTA provides verified legal information and citations to primary legal instruments. This analysis does not constitute formal legal counsel.*`;
-
-    const sources = matchedArticles.map(a => {
-      const d = docs.find(x => x.id === a.doc);
-      const c = countries.find(x => x.id === d?.country);
-      return {
-        label: a.num,
-        title: a.title,
-        jurisdiction: c?.name || countryName,
-        url: a.officialUrl || d?.officialUrl || null,
-        articleId: a.id,
-        docId: a.doc,
-        snippet: a.original ? a.original.slice(0, 150) + '…' : a.plain,
-        rawArticle: a
-      };
-    });
-
-    return { content, sources };
-  }
-
   async function askLegalQuestion(event, overrideQuestion){
     event?.preventDefault();
-    const question = (overrideQuestion || chatQuestion).trim();
-    if(question.length < 3 || chatBusy) return;
+    const question=(overrideQuestion||chatQuestion).trim();
+    if(question.length<3||chatBusy)return;
     setChatQuestion('');
     setChatBusy(true);
     setChatSources([]);
-    const userMsg = { id: crypto.randomUUID(), role: 'user', content: question, jurisdiction: country.name, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
-    const assistantId = crypto.randomUUID();
+    const userMsg={id:crypto.randomUUID(),role:'user',content:question,jurisdiction:country.name,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})};
+    const assistantId=crypto.randomUUID();
     setActiveAssistantId(assistantId);
-    setChatMessages(v => [...v, userMsg, { id: assistantId, role: 'assistant', content: '', pending: true, sources: [], docTitle: mainDoc?.title || 'Constitutional Instrument', jurisdiction: country.name }]);
+    const setFailure=message=>{
+      setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:message,pending:false,error:true,sources:[]}:m));
+      setChatSources([]);
+      setChatBusy(false);
+      setActiveAssistantId(null);
+    };
+    setChatMessages(v=>[...v,userMsg,{id:assistantId,role:'assistant',content:'',pending:true,sources:[],docTitle:mainDoc?.title||'Verified legal corpus',jurisdiction:country.name}]);
 
-    let backendSuccess = false;
-    if (account && SUPABASE_PUBLISHABLE_KEY) {
-      try {
-        const token = await getAccessToken();
-        if (token) {
-          const response = await fetch(apiUrl('legal-chat'), {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUBLISHABLE_KEY, 'Authorization': `Bearer ${token}` },
-            body: JSON.stringify({ question, jurisdictionIso: countryId, conversationId: chatConversationId || undefined }),
-            credentials: 'omit'
-          });
-          if (response.ok) {
-            backendSuccess = true;
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            let buffer = '';
-            while (true) {
-              const { value, done } = await reader.read();
-              if (done) break;
-              buffer += decoder.decode(value, { stream: true });
-              const blocks = buffer.split(/\r?\n\r?\n/);
-              buffer = blocks.pop() || '';
-              for (const block of blocks) {
-                const eventLine = block.split(/\r?\n/).find(line => line.startsWith('event:')) || '';
-                const dataLine = block.split(/\r?\n/).find(line => line.startsWith('data:')) || '';
-                if (!dataLine) continue;
-                let payload;
-                try { payload = JSON.parse(dataLine.slice(5).trim()); } catch { continue; }
-                const eventName = eventLine.slice(6).trim();
-                if (eventName === 'meta') {
-                  setChatConversationId(payload.conversationId || null);
-                  setChatSources(payload.sources || []);
-                  setChatMessages(v => v.map(m => m.id === assistantId ? { ...m, sources: payload.sources || [] } : m));
-                } else if (eventName === 'delta') {
-                  setChatMessages(v => v.map(m => m.id === assistantId ? { ...m, content: m.content + (payload.text || ''), pending: false } : m));
-                }
-              }
-            }
-            setChatBusy(false);
-            setActiveAssistantId(null);
-          }
-        }
-      } catch {
-        // Fall back gracefully to scholarly local analysis
-      }
+    if(!account||!SUPABASE_PUBLISHABLE_KEY){
+      setFailure('Sign in to use CARTA legal research. CARTA answers only from verified, rights-cleared legal provisions and will not substitute sample text or general model knowledge.');
+      return;
     }
 
-    if (!backendSuccess) {
-      // Allow user to see subtle green thinking animation while indexing provisions
-      setTimeout(() => {
-        const result = synthesizeLocalLegalResearch(question, countryId);
-        setChatSources(result.sources);
-
-        // Transition from thinking state into streamed text with typing cursor
-        const fullContent = result.content;
-        const paragraphs = fullContent.split('\n\n');
-        let currentPIndex = 0;
-        let accumulated = '';
-
-        setChatMessages(v => v.map(m => m.id === assistantId ? {
-          ...m,
-          pending: false,
-          sources: result.sources,
-          docTitle: mainDoc?.title || 'Constitution',
-          content: ''
-        } : m));
-
-        const typingTimer = setInterval(() => {
-          if (currentPIndex < paragraphs.length) {
-            accumulated += (currentPIndex > 0 ? '\n\n' : '') + paragraphs[currentPIndex];
-            currentPIndex++;
-            setChatMessages(v => v.map(m => m.id === assistantId ? { ...m, content: accumulated } : m));
-          } else {
-            clearInterval(typingTimer);
-            setChatBusy(false);
-            setActiveAssistantId(null);
-          }
-        }, 160);
-      }, 900);
+    try{
+      const token=await getAccessToken();
+      if(!token)throw new Error('Your session has expired. Sign in again and retry.');
+      const response=await fetch(apiUrl('legal-chat'),{
+        method:'POST',
+        headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':`Bearer ${token}`},
+        body:JSON.stringify({question,jurisdictionIso:countryId,conversationId:chatConversationId||undefined}),
+        credentials:'omit'
+      });
+      if(!response.ok){
+        let detail='';
+        try{const payload=await response.json();detail=payload.error||payload.message||''}catch{}
+        throw new Error(detail||'The verified legal research service is unavailable or no approved source text is available for this question.');
+      }
+      if(!response.body)throw new Error('The legal research service returned no response stream.');
+      const reader=response.body.getReader();
+      const decoder=new TextDecoder();
+      let buffer='';
+      let receivedText=false;
+      const processBlock=block=>{
+        const eventLine=block.split(/\r?\n/).find(line=>line.startsWith('event:'))||'';
+        const dataLine=block.split(/\r?\n/).find(line=>line.startsWith('data:'))||'';
+        if(!dataLine)return;
+        let payload;
+        try{payload=JSON.parse(dataLine.slice(5).trim())}catch{return}
+        const eventName=eventLine.slice(6).trim();
+        if(eventName==='meta'){
+          setChatConversationId(payload.conversationId||null);
+          setChatSources(payload.sources||[]);
+          setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,sources:payload.sources||[]}:m));
+        }else if(eventName==='delta'&&typeof payload.text==='string'&&payload.text){
+          receivedText=true;
+          setChatMessages(v=>v.map(m=>m.id===assistantId?{...m,content:m.content+payload.text,pending:false}:m));
+        }else if(eventName==='error'){
+          throw new Error(payload.error||'The verified research service could not answer this question.');
+        }
+      };
+      while(true){
+        const {value,done}=await reader.read();
+        if(done)break;
+        buffer+=decoder.decode(value,{stream:true});
+        const blocks=buffer.split(/\r?\n\r?\n/);
+        buffer=blocks.pop()||'';
+        for(const block of blocks)processBlock(block);
+      }
+      buffer+=decoder.decode();
+      if(buffer.trim())processBlock(buffer);
+      if(!receivedText)throw new Error('No verified legal passage was available. CARTA has not generated an answer.');
+      setChatBusy(false);
+      setActiveAssistantId(null);
+    }catch(error){
+      setFailure(error.message||'Legal research is temporarily unavailable. Try again after the verified source service is restored.');
     }
   }
   function newChat(){
@@ -511,7 +424,7 @@ export default function App(){
 function saveNote(){if(!noteText.trim())return;const text=noteText.trim();setNotes([{articleId:active.id,text,date:new Date().toLocaleDateString()},...notes.filter(n=>n.articleId!==active.id)]);if(account)void apiSave({action:'note',operation:'save',documentId:active.doc,sectionId:active.id,text}).catch(()=>showToast('Note saved locally; sync can be retried.'));setNoteText('');setNoteOpen(false);showToast('Note saved to your library.')}
 const nav=[['home','⌂','Home'],['read','▤','Read'],['search','⌕','Search'],['chat','✧','Ask CARTA'],['catalogue','◎','Coverage'],['library','▣','Library'],['sources','↗','Sources']];
 const navButtons=nav.map(([id,glyph,label])=><button key={id} className={page===id?'active':''} onClick={()=>{setPage(id);setMobileTocOpen(false);}}><span>{glyph}</span><small>{label}</small></button>);
-  const ctx={account,active,activeAssistantId,adConfig,addSource,adminSourceData,adminSourcesBusy,aod,apiSave,articleId,articles,askLegalQuestion,authBusy,authEmail,authMode,authName,authNotice,authOpen,authPassword,authPasswordConfirm,billing,billingBusy,billingPortal,billItems,bookmarks,chatBusy,chatConversationId,chatMessages,chatQuestion,chatSources,checkout,chooseCountry,clockTick,compare,compared,copyArticle,copyCitation,countries,country,countryId,coverage,currentItems,daily,dailyArticles,dailyCategory,dailyFeed,dailyPick,docs,documentId,downloads,eligibleFeed,font,highlights,lastFeedUpdated,leaveAccount,libraryDataReady,libraryTab,localSearchResults,mainDoc,mobileTocOpen,newChat,newSourceOpen,night,noteOpen,notes,noteText,offline,openArticle,page,paywallOpen,paywallPlan,query,readArticles,readDoc,refreshAdminSources,refreshBilling,refreshFeed,runSourceIngestion,saveNote,saveSourceRights,searchResults,serverSearchResults,setAccount,setActiveAssistantId,setAdConfig,setAdminSourceData,setAdminSourcesBusy,setArticleId,setArticles,setAuthBusy,setAuthEmail,setAuthMode,setAuthName,setAuthNotice,setAuthOpen,setAuthPassword,setAuthPasswordConfirm,setBilling,setBillingBusy,setBookmarks,setChatBusy,setChatConversationId,setChatMessages,setChatQuestion,setChatSources,setClockTick,setCompare,setCountries,setCountryId,setCoverage,setDailyFeed,setDocs,setDocumentId,setDownloads,setFont,setHighlights,setLastFeedUpdated,setLibraryDataReady,setLibraryTab,setMobileTocOpen,setNewSourceOpen,setNight,setNoteOpen,setNotes,setNoteText,setOffline,setPage,setPaywallOpen,setPaywallPlan,setQuery,setServerSearchResults,setSourceActive,setToast,setWelcome,shareImage,showToast,submitAuth,syncToggle,synthesizeLocalLegalResearch,toast,today,toggle,visibleDocs,welcome};
+  const ctx={account,active,activeAssistantId,adConfig,addSource,adminSourceData,adminSourcesBusy,aod,apiSave,articleId,articles,askLegalQuestion,authBusy,authEmail,authMode,authName,authNotice,authOpen,authPassword,authPasswordConfirm,billing,billingBusy,billingPortal,billItems,bookmarks,chatBusy,chatConversationId,chatMessages,chatQuestion,chatSources,checkout,chooseCountry,clockTick,compare,compared,copyArticle,copyCitation,countries,country,countryId,coverage,currentItems,daily,dailyArticles,dailyCategory,dailyFeed,dailyPick,docs,documentId,downloads,eligibleFeed,font,highlights,lastFeedUpdated,leaveAccount,libraryDataReady,libraryError,libraryTab,localSearchResults,mainDoc,mobileTocOpen,newChat,newSourceOpen,night,noteOpen,notes,noteText,offline,openArticle,page,paywallOpen,paywallPlan,query,readArticles,readDoc,refreshAdminSources,refreshBilling,refreshFeed,runSourceIngestion,saveNote,saveSourceRights,searchResults,serverSearchResults,setAccount,setActiveAssistantId,setAdConfig,setAdminSourceData,setAdminSourcesBusy,setArticleId,setArticles,setAuthBusy,setAuthEmail,setAuthMode,setAuthName,setAuthNotice,setAuthOpen,setAuthPassword,setAuthPasswordConfirm,setBilling,setBillingBusy,setBookmarks,setChatBusy,setChatConversationId,setChatMessages,setChatQuestion,setChatSources,setClockTick,setCompare,setCountries,setCountryId,setCoverage,setDailyFeed,setDocs,setDocumentId,setDownloads,setFont,setHighlights,setLastFeedUpdated,setLibraryDataReady,setLibraryError,setLibraryTab,setMobileTocOpen,setNewSourceOpen,setNight,setNoteOpen,setNotes,setNoteText,setOffline,setPage,setPaywallOpen,setPaywallPlan,setQuery,setServerSearchResults,setSourceActive,setToast,setWelcome,shareImage,showToast,submitAuth,syncToggle,toast,today,toggle,visibleDocs,welcome};
 
 return <div className={'app '+(night?'night':'')}>
   <header className="topbar">
@@ -536,6 +449,7 @@ return <div className={'app '+(night?'night':'')}>
   </header>
   <div className="layout"><aside className="sidebar"><small className="overline">YOUR READING ROOM</small>{navButtons}<div className="sideBlock"><small className="overline">READING COUNTRY</small><b>{country.flag} {country.name}</b><p>Your daily article comes from this country's main constitution.</p><button className="outline" onClick={()=>setWelcome(true)}>Change country</button></div><div className="sideQuote">§<p>Understand the law.<br/><b>One article at a time.</b></p><small>Reference text + plain language</small></div></aside>
   <main className="main">
+    {libraryError&&<div className="empty" role="status"><h3>Live library unavailable</h3><p>{libraryError}</p></div>}
     <HomePage ctx={ctx}/>
     <ReadPage ctx={ctx}/>
     <SearchPage ctx={ctx}/>
