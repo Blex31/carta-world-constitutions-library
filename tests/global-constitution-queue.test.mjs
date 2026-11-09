@@ -144,3 +144,22 @@ test('Middle East source discovery batch records six systems without rights clea
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'SA').instrument_form, 'uncodified_or_unwritten');
   assert.match(queue.entries.find((entry) => entry.iso_code === 'QA').version_status, /2024 amendments/i);
 });
+
+test('additional Middle East records retain official source, currentness and instrument-form cautions', () => {
+  const middleEastCodes = ['JO','IQ','LB','KW','OM','IL'];
+  for (const code of middleEastCodes) {
+    const entry = queue.entries.find((item) => item.iso_code === code);
+    assert.ok(entry, code);
+    assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
+    assert.equal(entry.rights_status, 'review_required', code);
+    assert.equal(entry.commercial_use_allowed, false, code);
+    assert.equal(entry.ai_retrieval_allowed, false, code);
+    assert.equal(entry.offline_device_copy_allowed, false, code);
+    assert.equal(entry.full_text_acquired, false, code);
+    assert.equal(entry.publication_status, 'catalogue_only', code);
+    assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
+  }
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 90);
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'IL').instrument_form, 'uncodified_or_unwritten');
+  assert.match(queue.entries.find((entry) => entry.iso_code === 'OM').candidate_instrument, /79\/2026/);
+});
