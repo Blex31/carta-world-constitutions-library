@@ -76,7 +76,7 @@ Rights clearance must explicitly cover each intended activity: web and mobile di
 
 ### 1B. Expand the legal library
 
-- [ ] Reconcile the current versions and rights of the other seven EAC partner-state constitutions: Burundi, DR Congo, Kenya, Somalia, South Sudan, Tanzania and Uganda. The global queue covers 193 UN members and two observers; 54 African source/status leads, 12 Americas/Europe/Oceania leads and 12 Asian leads and six Middle East/Gulf leads are recorded; none is rights-cleared. Track all 193 UN Member States and two observers in [the global constitutional collection queue](global-constitution-collection-queue.json).
+- [ ] Reconcile the current versions and rights of the other seven EAC partner-state constitutions: Burundi, DR Congo, Kenya, Somalia, South Sudan, Tanzania and Uganda. The global queue covers 193 UN members and two observers; 54 African source/status leads, 12 Americas/Europe/Oceania leads and 12 Asian leads and 12 Middle East/Gulf leads are recorded; none is rights-cleared. Track all 193 UN Member States and two observers in [the global constitutional collection queue](global-constitution-collection-queue.json).
 - [ ] Treat Zanzibar's Constitution as a separate legal instrument/jurisdictional collection where included.
 - [ ] For every document, establish official source, language edition, amendment history, effective dates, publication status, rights evidence and checksum.
 - [ ] Import each document only after the same rights and editorial gates pass.
