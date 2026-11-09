@@ -13,7 +13,8 @@
     "test": "node --test",
     "audit:coverage": "node scripts/audit-coverage.mjs",
     "syntaxcheck": "node --check src/auth.js && node --check scripts/audit-coverage.mjs && node --check scripts/import-constitution-documents.mjs",
-    "audit:coverage:database": "node scripts/audit-coverage.mjs --require-database"
+    "audit:coverage:database": "node scripts/audit-coverage.mjs --require-database",
+    "audit:global-queue": "node scripts/audit-global-constitution-queue.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.119.0",
