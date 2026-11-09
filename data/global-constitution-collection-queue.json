@@ -9,7 +9,7 @@
     "un_member_states": 193,
     "observer_states": 2,
     "africa": 54,
-    "official_source_candidates_identified": 78,
+    "official_source_candidates_identified": 84,
     "text_acquired": 0,
     "cleared_for_commercial_use": 0
   },
@@ -477,16 +477,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Legislation and Legal Opinion Commission, Kingdom of Bahrain",
+      "official_source_candidates": [
+        "https://www.lloc.gov.bh/en/Legislation/id/Constitution",
+        "https://www.nihr.org.bh/EN/HumanRights/NationalLegal.aspx"
+      ],
+      "candidate_instrument": "Constitution of the Kingdom of Bahrain, issued 14 February 2002, as amended",
+      "version_status": "The official Legislation and Legal Opinion Commission record lists the 2002 Constitution and says it has three amendments; Bahrain's National Institution for Human Rights separately lists the 2012 constitutional amendment. Obtain all three official amending laws and verify the current full Arabic text.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -496,7 +499,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Arabic Constitution and all three amendment instruments from the LLOC/Official Gazette; reconcile the official English version and obtain a commercial-use rights determination."
     },
     {
       "iso_code": "BD",
@@ -2592,16 +2595,18 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Islamic Republic of Iran / Parliament / Official Gazette; UN Peacemaker source copy for discovery",
+      "official_source_candidates": [
+        "https://peacemaker.un.org/en/documents/constitution-islamic-republic-iran-current"
+      ],
+      "candidate_instrument": "Constitution of the Islamic Republic of Iran, adopted by referendum in October 1979 and revised in July 1989",
+      "version_status": "The UN Peacemaker collection describes the Constitution as adopted in 1979 and amended once, in July 1989. Acquire the Persian original from the official Iranian publisher and verify any post-1989 amendment or formal authoritative interpretation through the cut-off; the UN-hosted English text is a discovery/cross-check copy, not proof of reuse rights.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -2611,7 +2616,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Obtain the official Persian text and amendment law from the Iranian Official Gazette; verify language precedence and currentness, then determine rights for any translation."
     },
     {
       "iso_code": "IQ",
@@ -4560,16 +4565,20 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Council of Ministers / Amiri Diwan of the State of Qatar",
+      "official_source_candidates": [
+        "https://www.cm.gov.qa/en/Pages/Constitution.aspx",
+        "https://www.cm.gov.qa/en/Pages/Constitutional-Amendments.aspx",
+        "https://diwan.gov.qa/about-qatar/constitution?sc_lang=en"
+      ],
+      "candidate_instrument": "Permanent Constitution of the State of Qatar, promulgated 8 June 2004, amended by referendum in November 2024",
+      "version_status": "The official Council of Ministers states the 2024 amendments were ratified on 6 November 2024 after a referendum on 5 November, with changes to Articles 1, 7, 13, 74, 77, 80, 81, 83, 86, 103, 104, 114, 117 and 150, new Article 75 bis and 125 paragraph, and repeal of Articles 78, 79 and 82. Obtain the Gazette and exact consolidated Arabic text.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -4579,7 +4588,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the amended Arabic Constitution and Official Gazette amendment text; verify commencement and language precedence, then review commercial/AI reuse rights."
     },
     {
       "iso_code": "RO",
@@ -4867,16 +4876,18 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Bureau of Experts at the Council of Ministers, Kingdom of Saudi Arabia",
+      "official_source_candidates": [
+        "https://laws.boe.gov.sa/Files/Download/?attId=ed4842e1-9543-40b9-973b-ada200d4ed10"
+      ],
+      "candidate_instrument": "Basic Law of Governance, Royal Order No. A/90 of 2 March 1992, within a constitutional framework in which the Qur'an and Sunna are the constitution",
+      "version_status": "The official Bureau of Experts provides an English translation of the Basic Law of Governance, Royal Order A/90 dated 2 March 1992. Saudi Arabia does not have a single written Constitution equivalent to most states; the Basic Law should be catalogued with the Qur'an and Sunna as distinct constitutional sources and must not be described as the full constitution.",
       "special_review_flag": null,
-      "instrument_form": "not_assessed",
+      "instrument_form": "uncodified_or_unwritten",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -4886,7 +4897,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Arabic Basic Law and government-published constitutional materials; have Saudi-qualified counsel confirm current status, the role of the Qur'an and Sunna, and rights for any translations or derivative explanations."
     },
     {
       "iso_code": "SN",
@@ -5442,16 +5453,20 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
-      "special_review_flag": null,
-      "instrument_form": "not_assessed",
+      "official_publisher_candidate": "Presidency of the Syrian Arab Republic / People's Assembly of Syria",
+      "official_source_candidates": [
+        "https://syrianassembly.com/documents/constitutional-declaration-2025",
+        "https://www.refworld.org/legal/legislation/natlegbod/2025/ar/150231",
+        "https://www.refworld.org/sites/default/files/2026-06/sryia_constituional_declaration.pdf"
+      ],
+      "candidate_instrument": "Constitutional Declaration of the Syrian Arab Republic, signed 13 March 2025; temporary constitutional framework for a five-year transition",
+      "version_status": "The People's Assembly record describes a temporary Constitutional Declaration signed 13 March 2025, containing 53 articles and establishing a five-year transition ending with a permanent constitution and elections. Verify Official Gazette publication, entry into force, any amendments, and the status of transitional institutions. This is not a permanent Constitution.",
+      "special_review_flag": "2025_transitional_constitutional_declaration_and_authority_review",
+      "instrument_form": "transitional_or_interim_instrument",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -5461,7 +5476,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the signed Arabic document and Official Gazette issue; have Syria-qualified counsel verify entry into force, amendments, legal authority and current transition status before inclusion."
     },
     {
       "iso_code": "TJ",
@@ -5875,16 +5890,19 @@
       "continent": "Asia",
       "membership_status": "un_member_state",
       "collection_priority": "global_wave_two",
-      "source_discovery_status": "not_researched",
+      "source_discovery_status": "official_source_candidate_identified",
       "source_slug_candidate": null,
-      "official_publisher_candidate": null,
-      "official_source_candidates": [],
-      "candidate_instrument": null,
-      "version_status": "not_researched",
+      "official_publisher_candidate": "Federal Supreme Council / UAE Government Portal",
+      "official_source_candidates": [
+        "https://u.ae/en/about-the-uae/the-constitution-of-the-uae",
+        "https://u.ae/about-the-uae"
+      ],
+      "candidate_instrument": "Constitution of the United Arab Emirates, adopted provisionally in 1971 and made permanent in July 1996",
+      "version_status": "The official UAE government portal says the provisional Constitution was made permanent in July 1996 and contains 152 articles. Verify the official Arabic text and any amendments under Article 144, and obtain the original Federal Gazette publications for each change.",
       "special_review_flag": null,
       "instrument_form": "not_assessed",
       "currentness_status": "not_verified",
-      "rights_status": "not_reviewed",
+      "rights_status": "review_required",
       "rights_evidence_url": null,
       "commercial_use_allowed": false,
       "ai_retrieval_allowed": false,
@@ -5894,7 +5912,7 @@
       "content_sha256": null,
       "document_ids": [],
       "publication_status": "catalogue_only",
-      "next_action": "Identify the official constitutional publisher and exact current constitutional instrument; then review reuse rights before acquiring the text."
+      "next_action": "Acquire the official Arabic Constitution and all amendment instruments from the Federal Gazette; verify currentness and whether official English translations may be reproduced and used commercially."
     },
     {
       "iso_code": "GB",
