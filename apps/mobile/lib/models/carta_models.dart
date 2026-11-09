@@ -10,6 +10,9 @@ class Jurisdiction {
     required this.flag,
     required this.status,
     this.kind = 'unclassified',
+    this.isUnMember = false,
+    this.continent = '',
+    this.region = '',
   });
 
   final String id;
@@ -17,6 +20,9 @@ class Jurisdiction {
   final String flag;
   final String status;
   final String kind;
+  final bool isUnMember;
+  final String continent;
+  final String region;
 
   factory Jurisdiction.fromJson(JsonMap json) => Jurisdiction(
         id: readString(json['iso'] ?? json['id']),
@@ -24,6 +30,9 @@ class Jurisdiction {
         flag: readString(json['flag'], '🌐'),
         status: readString(json['constitutionStatus'], 'metadata_only'),
         kind: readString(json['jurisdictionKind'], 'unclassified'),
+        isUnMember: json['isUnMember'] == true,
+        continent: readString(json['continent']),
+        region: readString(json['region']),
       );
 }
 
