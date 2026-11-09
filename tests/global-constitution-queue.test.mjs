@@ -124,3 +124,23 @@ test('Asian source discovery batch covers 12 jurisdictions without rights cleara
   assert.match(queue.entries.find((entry) => entry.iso_code === 'LK').version_status, /Twenty Second Amendment/i);
   assert.equal(queue.entries.find((entry) => entry.iso_code === 'CN').currentness_status, 'not_verified');
 });
+
+test('Middle East source discovery batch records six systems without rights clearance', () => {
+  const middleEastCodes = ['AE','QA','SY','IR','BH','SA'];
+  for (const code of middleEastCodes) {
+    const entry = queue.entries.find((item) => item.iso_code === code);
+    assert.ok(entry, code);
+    assert.equal(entry.source_discovery_status, 'official_source_candidate_identified', code);
+    assert.equal(entry.rights_status, 'review_required', code);
+    assert.equal(entry.commercial_use_allowed, false, code);
+    assert.equal(entry.ai_retrieval_allowed, false, code);
+    assert.equal(entry.offline_device_copy_allowed, false, code);
+    assert.equal(entry.full_text_acquired, false, code);
+    assert.equal(entry.publication_status, 'catalogue_only', code);
+    assert.ok(entry.official_source_candidates.some((url) => url.startsWith('https://')), code);
+  }
+  assert.equal(queue.entries.filter((entry) => entry.source_discovery_status === 'official_source_candidate_identified').length, 84);
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'SY').instrument_form, 'transitional_or_interim_instrument');
+  assert.equal(queue.entries.find((entry) => entry.iso_code === 'SA').instrument_form, 'uncodified_or_unwritten');
+  assert.match(queue.entries.find((entry) => entry.iso_code === 'QA').version_status, /2024 amendments/i);
+});
