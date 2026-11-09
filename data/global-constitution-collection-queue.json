@@ -5907,7 +5907,7 @@
       "candidate_instrument": "Constitution of the United States (1787), with 27 ratified amendments",
       "version_status": "NARA provides the transcription of the parchment Constitution and links subsequent amendments; the first ten amendments are separately published as the Bill of Rights. Build the complete text from the official constitutional text plus each ratified amendment, confirm the full set through the current cut-off and preserve original spelling/annotations as separate metadata.",
       "special_review_flag": null,
-      "instrument_form": "not_assessed",
+      "instrument_form": "single_written_constitution",
       "currentness_status": "not_verified",
       "rights_status": "review_required",
       "rights_evidence_url": null,
