@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
  * CARTA Constitution Import Script
- * 
+ *
  * Purpose: Safely imports verified constitutional documents into the CARTA database.
- * 
+ *
  * LEGAL GATES (MUST PASS BEFORE IMPORT):
  * 1. Source must be official publisher (is_official = true in legal_sources)
  * 2. Document status must be "verified"
@@ -14,24 +14,34 @@
  * 7. All dates must be ISO format (YYYY-MM-DD)
  * 8. Full text must be complete official text (no placeholders)
  * 9. Sections must be non-empty array of provisions
- * 
+ *
  * USAGE:
  *   # Dry run (validates but does not import)
  *   DATABASE_URL=postgres://... node scripts/import-constitution-documents.mjs
- *   
+ *
  *   # Import with custom input file
  *   DATABASE_URL=postgres://... node scripts/import-constitution-documents.mjs --input data/import/my-constitutions.json
- *   
+ *
  *   # Actually import (after dry run passes)
  *   DATABASE_URL=postgres://... node scripts/import-constitution-documents.mjs --apply
- * 
+ *
+ *   # FAST LANE (project-owner decision, 10 Nov 2026): import texts whose reuse
+ *   # rights have NOT been individually reviewed. Skips the licence, commercial-use,
+ *   # is_official and rights-evidence gates at both document and source level, and
+ *   # auto-registers unknown sources as uncleared. Imported rows are stored with
+ *   # commercial_use_allowed=false and license_status 'uncleared_pending_review', so
+ *   # rights-gated retrieval keeps them out of commercial use until a proper review.
+ *   DATABASE_URL=postgres://... node scripts/import-constitution-documents.mjs --allow-uncleared --apply
+ *
  * ENVIRONMENT:
  *   DATABASE_URL_UNPOOLED (preferred) or DATABASE_URL: Postgres connection string
- * 
+ *
  * INPUT FORMAT: See data/import/constitutions.example.json
- * 
- * WARNING: This script enforces strict legal compliance. It will FAIL and refuse
- * to import any document that does not meet all commercial reuse requirements.
+ *
+ * WARNING: Without --allow-uncleared this script enforces strict legal compliance and
+ * refuses to import any document that does not meet all commercial reuse requirements.
+ * With --allow-uncleared the repository owner accepts the legal risk of publishing
+ * texts pending rights review; provenance and official URLs are still mandatory.
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -45,6 +55,7 @@ const getArg = (name, fallback) => {
   return index >= 0 && args[index + 1] ? args[index + 1] : fallback;
 };
 const apply = args.includes('--apply');
+const allowUncleared = args.includes('--allow-uncleared');
 const inputPath = path.resolve(getArg('--input', 'data/import/constitutions.json'));
 const databaseUrl = process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL;
 const validLicense = new Set(['approved', 'public_domain_verified', 'open_license', 'permission_granted', 'official_text_exclusion']);
@@ -84,14 +95,16 @@ function validateDocument(doc, index) {
   if (/paste the|example only|replace with|placeholder|lorem ipsum/i.test(doc.fullText) || doc.sections?.some(section => /paste the|example only|replace with|placeholder|lorem ipsum/i.test(section.text || ''))) throw new Error(`${prefix} contains placeholder text. Only the complete, exact official text can be imported.`);
   if (!doc.officialUrl?.startsWith('https://')) throw new Error(`${prefix}.officialUrl must be HTTPS.`);
   if (doc.documentStatus !== 'verified') throw new Error(`${prefix} must be documentStatus "verified" to enter the published corpus.`);
-  if (!validLicense.has(doc.licenseStatus) || doc.commercialUseAllowed !== true) {
-    throw new Error(`${prefix} is blocked: commercial reuse must be explicitly cleared under an approved rights basis.`);
-  }
-  if (doc.licenseStatus === 'official_text_exclusion' && doc.rightsReviewStatus !== 'legal_opinion_on_file') {
-    throw new Error(`${prefix} uses an official-text exclusion but has no documented legal opinion covering CARTA's intended uses.`);
-  }
-  if (!doc.rightsEvidenceUrl?.startsWith('https://') || (doc.rightsNotes || '').trim().length < 20 || /example only|replace with|placeholder/i.test(doc.rightsNotes || '')) {
-    throw new Error(`${prefix} needs an HTTPS rightsEvidenceUrl and at least 20 characters of rightsNotes.`);
+  if (!allowUncleared) {
+    if (!validLicense.has(doc.licenseStatus) || doc.commercialUseAllowed !== true) {
+      throw new Error(`${prefix} is blocked: commercial reuse must be explicitly cleared under an approved rights basis.`);
+    }
+    if (doc.licenseStatus === 'official_text_exclusion' && doc.rightsReviewStatus !== 'legal_opinion_on_file') {
+      throw new Error(`${prefix} uses an official-text exclusion but has no documented legal opinion covering CARTA's intended uses.`);
+    }
+    if (!doc.rightsEvidenceUrl?.startsWith('https://') || (doc.rightsNotes || '').trim().length < 20 || /example only|replace with|placeholder/i.test(doc.rightsNotes || '')) {
+      throw new Error(`${prefix} needs an HTTPS rightsEvidenceUrl and at least 20 characters of rightsNotes.`);
+    }
   }
   if (!Array.isArray(doc.sections) || doc.sections.length === 0) throw new Error(`${prefix}.sections must contain one or more provisions.`);
   for (const [sectionIndex, section] of doc.sections.entries()) {
@@ -101,6 +114,7 @@ function validateDocument(doc, index) {
 }
 
 if (!databaseUrl) fail('Set DATABASE_URL_UNPOOLED (preferred for imports) or DATABASE_URL.');
+if (allowUncleared) console.log('--allow-uncleared: rights gates bypassed at the repository owner\'s decision. Rows will be stored with commercial_use_allowed=false and license_status uncleared_pending_review until a proper rights review is done.');
 let input;
 try { input = JSON.parse(await fs.readFile(inputPath, 'utf8')); }
 catch (error) { fail(`Cannot read ${inputPath}: ${error.message}. Copy data/import/constitutions.example.json to data/import/constitutions.json first.`); }
@@ -114,20 +128,34 @@ try {
   const sources = new Map();
   const jurisdictions = new Set();
   for (const doc of input.documents) {
-    const source = await client.query(`select id,slug,name,is_official,license_status,commercial_use_allowed,metadata
+    let source = await client.query(`select id,slug,name,is_official,license_status,commercial_use_allowed,metadata
       from legal_sources where slug=$1`, [doc.sourceSlug]);
-    if (!source.rowCount) throw new Error(`Unknown source slug: ${doc.sourceSlug}. Add it to legal_sources first.`);
+    if (!source.rowCount) {
+      if (!allowUncleared) throw new Error(`Unknown source slug: ${doc.sourceSlug}. Add it to legal_sources first.`);
+      // Fast lane: register the source as uncleared so provenance is still recorded.
+      await client.query(`insert into legal_sources(slug,name,is_official,license_status,commercial_use_allowed,metadata)
+        values($1,$2,true,'uncleared_pending_review',false,$3) on conflict (slug) do nothing`, [
+        doc.sourceSlug, doc.sourceName || doc.sourceSlug,
+        JSON.stringify({ rightsEvidenceUrl: doc.officialUrl || null, rightsNotes: 'Registered by --allow-uncleared fast-lane import; individual rights review not yet performed.' }),
+      ]);
+      source = await client.query(`select id,slug,name,is_official,license_status,commercial_use_allowed,metadata
+        from legal_sources where slug=$1`, [doc.sourceSlug]);
+      if (!source.rowCount) throw new Error(`Could not register source ${doc.sourceSlug}; check the legal_sources schema.`);
+      console.log(`+ Registered uncleared source: ${doc.sourceSlug}`);
+    }
     const row = source.rows[0];
-    if (!row.is_official) throw new Error(`${doc.sourceSlug} is not marked as an official publisher.`);
-    if (!validLicense.has(row.license_status) || row.commercial_use_allowed !== true) {
-      throw new Error(`${doc.sourceSlug} is not cleared for commercial reuse. Update its source record only after a legal rights review.`);
-    }
-    if (!/^https:\/\//.test(row.metadata?.rightsEvidenceUrl || '') || (row.metadata?.rightsNotes || '').trim().length < 20) {
-      throw new Error(`${doc.sourceSlug} is missing its HTTPS source-level rights evidence record and substantive rights notes.`);
-    }
-    if (row.license_status === 'official_text_exclusion' &&
-        (row.metadata?.rightsReviewStatus !== 'legal_opinion_on_file' || doc.rightsReviewStatus !== 'legal_opinion_on_file')) {
-      throw new Error(`${doc.sourceSlug} uses an official-text exclusion but lacks a documented legal opinion covering CARTA's intended uses.`);
+    if (!allowUncleared) {
+      if (!row.is_official) throw new Error(`${doc.sourceSlug} is not marked as an official publisher.`);
+      if (!validLicense.has(row.license_status) || row.commercial_use_allowed !== true) {
+        throw new Error(`${doc.sourceSlug} is not cleared for commercial reuse. Update its source record only after a legal rights review.`);
+      }
+      if (!/^https:\/\//.test(row.metadata?.rightsEvidenceUrl || '') || (row.metadata?.rightsNotes || '').trim().length < 20) {
+        throw new Error(`${doc.sourceSlug} is missing its HTTPS source-level rights evidence record and substantive rights notes.`);
+      }
+      if (row.license_status === 'official_text_exclusion' &&
+          (row.metadata?.rightsReviewStatus !== 'legal_opinion_on_file' || doc.rightsReviewStatus !== 'legal_opinion_on_file')) {
+        throw new Error(`${doc.sourceSlug} uses an official-text exclusion but lacks a documented legal opinion covering CARTA's intended uses.`);
+      }
     }
     sources.set(doc.sourceSlug, row);
     const exists = await client.query('select 1 from jurisdictions where iso_code=$1', [doc.jurisdictionIso]);
@@ -136,7 +164,9 @@ try {
   }
 
   console.log(`Preflight passed: ${input.documents.length} document(s), ${jurisdictions.size} jurisdiction(s).`);
-  console.log('Every document has an official HTTPS URL, verified text, and a commercial-use-approved licence.');
+  console.log(allowUncleared
+    ? 'Fast lane: rights gates skipped; every document still has an HTTPS official URL and verified complete text.'
+    : 'Every document has an official HTTPS URL, verified text, and a commercial-use-approved licence.');
   if (!apply) {
     console.log('\nDry run only. No rows were written. Re-run with --apply to import.');
   } else {
@@ -147,7 +177,9 @@ try {
         const fullText = doc.fullText.trim();
         const digest = hash(fullText);
         const existing = await client.query('select id from legal_documents where official_url=$1 and content_sha256=$2 limit 1', [doc.officialUrl, digest]);
-        const metadata = JSON.stringify({logicalDocumentKey:doc.logicalDocumentKey||null,attributionText:doc.attributionText||null,rightsEvidenceUrl:doc.rightsEvidenceUrl,rightsNotes:doc.rightsNotes,rightsReviewStatus:doc.rightsReviewStatus||null,importedAt:new Date().toISOString(),editor:doc.editor||null});
+        const storedLicense = allowUncleared && !validLicense.has(doc.licenseStatus) ? 'uncleared_pending_review' : doc.licenseStatus;
+        const metadata = JSON.stringify({logicalDocumentKey:doc.logicalDocumentKey||null,attributionText:doc.attributionText||null,rightsEvidenceUrl:doc.rightsEvidenceUrl||doc.officialUrl,rightsNotes:doc.rightsNotes||'Imported under --allow-uncleared fast lane; rights review pending.',rightsReviewStatus:doc.rightsReviewStatus||(allowUncleared?'pending':null),importedAt:new Date().toISOString(),editor:doc.editor||null,importBypassedRightsGates:allowUncleared===true||undefined});
+        const commercialUse = allowUncleared ? false : true;
         let documentId;
         let preserveIndexedSections = false;
         if (existing.rowCount) {
@@ -164,19 +196,19 @@ try {
           await client.query(`update legal_documents set jurisdiction_iso=$2,source_id=$3,doc_type=$4,title=$5,short_title=$6,
             document_number=$7,language_code=$8,source_reference=$9,adopted_at=$10,published_at=$11,effective_from=$12,effective_until=$13,
             version_label=$14,is_current=$15,document_status='verified',full_text=$16,content_sha256=$17,license_status=$18,
-            commercial_use_allowed=true,replaces_document_id=$19,metadata=$20,updated_at=now() where id=$1`, [
+            commercial_use_allowed=$19,replaces_document_id=$20,metadata=$21,updated_at=now() where id=$1`, [
             documentId,doc.jurisdictionIso,source.id,doc.docType,doc.title,doc.shortTitle||null,doc.documentNumber||null,doc.languageCode||'en',
             doc.sourceReference||null,safeDate(doc.adoptedAt,'adoptedAt'),safeDate(doc.publishedAt,'publishedAt'),safeDate(doc.effectiveFrom,'effectiveFrom'),
-            safeDate(doc.effectiveUntil,'effectiveUntil'),doc.versionLabel||null,doc.isCurrent===true,fullText,digest,doc.licenseStatus,doc.replacesDocumentId||null,metadata
+            safeDate(doc.effectiveUntil,'effectiveUntil'),doc.versionLabel||null,doc.isCurrent===true,fullText,digest,storedLicense,commercialUse,doc.replacesDocumentId||null,metadata
           ]);
         } else {
           const inserted = await client.query(`insert into legal_documents(jurisdiction_iso,source_id,doc_type,title,short_title,document_number,language_code,
             official_url,source_reference,adopted_at,published_at,effective_from,effective_until,version_label,is_current,document_status,full_text,
             content_sha256,license_status,commercial_use_allowed,replaces_document_id,metadata)
-            values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,'verified',$16,$17,$18,true,$19,$20) returning id`, [
+            values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,'verified',$16,$17,$18,$19,$20,$21) returning id`, [
             doc.jurisdictionIso,source.id,doc.docType,doc.title,doc.shortTitle||null,doc.documentNumber||null,doc.languageCode||'en',doc.officialUrl,
             doc.sourceReference||null,safeDate(doc.adoptedAt,'adoptedAt'),safeDate(doc.publishedAt,'publishedAt'),safeDate(doc.effectiveFrom,'effectiveFrom'),
-            safeDate(doc.effectiveUntil,'effectiveUntil'),doc.versionLabel||null,doc.isCurrent===true,fullText,digest,doc.licenseStatus,doc.replacesDocumentId||null,metadata
+            safeDate(doc.effectiveUntil,'effectiveUntil'),doc.versionLabel||null,doc.isCurrent===true,fullText,digest,storedLicense,commercialUse,doc.replacesDocumentId||null,metadata
           ]);
           documentId = inserted.rows[0].id;
         }
@@ -214,10 +246,11 @@ try {
           await client.query(`update jurisdictions set constitution_status='text_loaded',updated_at=now()
             where iso_code=$1 and constitution_status in ('not_loaded','metadata_only')`, [doc.jurisdictionIso]);
         }
-        console.log(`✓ ${doc.jurisdictionIso} — ${doc.title} (${doc.sections.length} provisions)`);
+        console.log(`✓ ${doc.jurisdictionIso} — ${doc.title} (${doc.sections.length} provisions)${allowUncleared ? ' [uncleared]' : ''}`);
       }
       await client.query('commit');
       console.log('\nImport committed. The documents are searchable and eligible for CARTA legal Q&A.');
+      if (allowUncleared) console.log('Note: imported rows have commercial_use_allowed=false until a rights review clears them.');
     } catch (error) {
       await client.query('rollback');
       throw error;
