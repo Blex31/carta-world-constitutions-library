@@ -92,3 +92,19 @@ Before import, conduct a Gazette and parliamentary-history search through the ex
 - [Parliament — Senate committee report, 14 May 2026](https://www.parliament.go.ke/sites/default/files/2026-05/Thurdsay%2C%2014th%20May%2C%202026%20at%202.30%20p.m..pdf) — status context for the 2025 and 2026 amendment proposals.
 
 **No legal advice is provided by this preflight.** The approval decision must be signed by CARTA's legal reviewer and recorded against the exact document version and rights evidence before the importer is run.
+
+## 6. Addendum — 11 November 2026 recheck
+
+**Currentness recheck (cut-off 11 November 2026):**
+
+- [Senate Bills Digest — Constitution of Kenya (Amendment) Bill, Senate Bills No. 7 of 2026](https://www.parliament.go.ke/sites/default/files/2026-04/Bills%20Digest%20-Constitution%20of%20Kenya%20%28Amendment%29%20Bill%20%28Senate%20Bills%20No.%207%20of%202026%29.pdf) confirms the Bill amends Articles 99(2) and 193(2) (with Elections Act Cap. 7 ss. 24–25) to bar recent county governors from Senate/county-assembly contests.
+- [Parliament public-participation notice, 28 April 2026](https://www.parliament.go.ke/node/25689) and the Senate first reading confirm the process stage. The 29 May 2026 Senate tracker records it as passed by the Senate (12 May 2026) and referred to the National Assembly.
+- **No National Assembly passage, presidential assent, Gazette publication or commencement notice for Senate Bills No. 7 of 2026 — or for the 2025 amendment Bills — was located as at 11 November 2026.** No enacted amendment to the Constitution of Kenya, 2010 has therefore been verified. The 2010 instrument remains the baseline; the amendment-control workflow in section 3 still applies before any import cut-off is declared.
+
+**Statutory exclusion lead — independent rights basis:**
+
+- The [Copyright Act (Cap. 130)](https://copyright.go.ke/sites/default/files/downloads/CopyrightAct12of2001.pdf) defines "literary work" so that it **"does not include a written law or a judicial decision"** (see also the [Kenya Law consolidated text](https://new.kenyalaw.org/akn/ke/act/2001/12/eng@2002-01-11/source) and [WIPO Lex record](https://www.wipo.int/wipolex/en/legislation/details/15989)).
+- On its face this means the Constitution of Kenya, 2010 — as written law — is not a copyright-protected "literary work" under Kenyan statute. This is the strongest candidate for the "independently verified public-domain basis" this preflight required, because it rests on the statute itself rather than a repository label.
+- **This does not, by itself, clear the import.** It must be confirmed by CARTA's legal reviewer (statutory interpretation, any NCLR database/sui-generis or publisher-rights claims, and the interaction with Kenya Law's contract terms, which can bind access to their service without making the text copyright-protected). The NCLR licence route in section 2 remains the alternative. Until either route is signed off, the source stays inactive and `commercial_use_allowed=false`.
+
+**Import skeleton:** a metadata-complete import file with the document specifics (title, dates, source, attribution, section structure placeholder) is at `data/import/kenya-constitution-2010.json`. It is deliberately left with an empty `fullText`, `isCurrent=false`, `licenseStatus="review_required"` and `commercialUseAllowed=false` so that acquisition can drop in the verified text only after the rights and currentness gates pass.

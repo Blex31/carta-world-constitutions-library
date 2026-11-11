@@ -1,0 +1,29 @@
+{
+  "documents": [
+    {
+      "jurisdictionIso": "KE",
+      "sourceSlug": "kenya-law",
+      "docType": "constitution",
+      "title": "Constitution of Kenya, 2010",
+      "shortTitle": "Constitution of Kenya",
+      "documentNumber": "",
+      "languageCode": "en",
+      "officialUrl": "https://kenyalaw.org/legislation/",
+      "sourceReference": "Constitution of Kenya, 2010; promulgated 27 August 2010; published by the National Council for Law Reporting (Kenya Law) with the authority of the Attorney-General under section 34, Constitution of Kenya Review Act, 2008. Corroborating: https://parliament.go.ke/sites/default/files/2025-04/The_Constitution_of_Kenya_2010.pdf",
+      "adoptedAt": "2010-08-04",
+      "publishedAt": "2010-08-27",
+      "effectiveFrom": "2010-08-27",
+      "effectiveUntil": null,
+      "versionLabel": "2010 (consolidation cut-off pending verification)",
+      "isCurrent": false,
+      "documentStatus": "draft",
+      "licenseStatus": "review_required",
+      "commercialUseAllowed": false,
+      "attributionText": "Constitution of Kenya, 2010. Published by the National Council for Law Reporting with the authority of the Attorney-General.",
+      "fullText": "",
+      "sections": [],
+      "rightsEvidenceUrl": "https://kenyalaw.org/terms-of-use/",
+      "rightsNotes": "HOLD per docs/country-research/kenya-constitution-2010-preflight.md (decision 8 Nov 2026; addendum 11 Nov 2026). Two candidate rights routes: (1) express NCLR commercial/AI licence (template: docs/rights-requests/kenya-nclr-licensing-request.md); (2) statutory exclusion — Copyright Act Cap 130 defines literary work to exclude a written law or judicial decision; requires legal-reviewer sign-off. Currentness: no enacted amendment verified as at 11 Nov 2026 (Senate Bills No. 7 of 2026 and 2025 Bills not traced to assent/Gazette). Do not import until both gates are signed off; then acquire the current consolidated NCLR text, verify against Gazette and amendment instruments, populate fullText and sections, and dry-run the importer."
+    }
+  ]
+}
