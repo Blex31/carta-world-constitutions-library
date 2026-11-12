@@ -1,0 +1,38 @@
+
+
+/* --- Intro quote fade-in (Declaration of Independence) --- */
+@keyframes introQuoteFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.intro-quote-fade {
+  animation: introQuoteFadeIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.intro-quote-text {
+  font-size: clamp(17px, 2.4vw, 21px);
+  line-height: 1.65;
+  font-weight: 400;
+  max-width: 460px;
+}
+
+.intro-quote-cite {
+  display: block;
+  margin-top: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8E8B82;
+}

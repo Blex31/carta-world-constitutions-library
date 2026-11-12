@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+const INTRO_QUOTE =
+  '“We hold these truths to be self-evident, that all men are created equal, ' +
+  'that they are endowed by their Creator with certain unalienable Rights, ' +
+  'that among these are Life, Liberty and the pursuit of Happiness.”';
+
 export default function IntroLoadingScreen({ onComplete, autoDismissMs = 3800 }) {
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
@@ -52,8 +57,9 @@ export default function IntroLoadingScreen({ onComplete, autoDismissMs = 3800 })
           <span className="intro-brand-title">CARTA</span>
         </div>
 
-        <blockquote className="intro-quote-text">
-          Every Constitution. Every Country. In Plain Language.
+        <blockquote className="intro-quote-text intro-quote-fade">
+          {INTRO_QUOTE}
+          <cite className="intro-quote-cite">— Declaration of Independence, 1776</cite>
         </blockquote>
 
         <div className="intro-progress-container">
