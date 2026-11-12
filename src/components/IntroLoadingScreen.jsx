@@ -53,8 +53,13 @@ export default function IntroLoadingScreen({ onComplete, autoDismissMs = 3800 })
         </div>
 
         <blockquote className="intro-quote-text">
-          Every Constitution. Every Country. In Plain Language.
+          “We hold these truths to be self-evident, that all men are created equal,
+          that they are endowed by their Creator with certain unalienable Rights,
+          that among these are Life, Liberty and the pursuit of Happiness.”
         </blockquote>
+        <cite className="intro-quote-attribution">
+          The Declaration of Independence · 1776
+        </cite>
 
         <div className="intro-progress-container">
           <div className="intro-progress-track">
