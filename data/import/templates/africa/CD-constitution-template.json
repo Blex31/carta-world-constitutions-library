@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "jurisdictionIso": "CD",
+      "sourceSlug": "cd-official",
+      "docType": "constitution",
+      "title": "Constitution of Congo, The Democratic Republic of the, TBD",
+      "shortTitle": "Congo, The Democratic Republic of the Constitution",
+      "documentNumber": null,
+      "languageCode": "en",
+      "officialUrl": "",
+      "sourceReference": "Official Publisher",
+      "adoptedAt": null,
+      "publishedAt": null,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "versionLabel": null,
+      "isCurrent": true,
+      "documentStatus": "draft",
+      "licenseStatus": "review_required",
+      "commercialUseAllowed": false,
+      "attributionText": "Official text from official source",
+      "fullText": "PLACEHOLDER: Insert complete Constitution text here.\n\nDownload from: \n\nVerify: This must be the complete, exact official text with no placeholders.",
+      "sections": [
+        {
+          "sectionNumber": "Preamble",
+          "heading": "Preamble",
+          "text": "PLACEHOLDER: Insert Preamble text here",
+          "summary": "The Preamble establishes the founding principles and authority of the Constitution.",
+          "sourceLocation": "Preamble"
+        },
+        {
+          "sectionNumber": "1",
+          "heading": "Sovereignty",
+          "text": "PLACEHOLDER: Insert Article 1 text here",
+          "summary": "Defines the sovereignty of the State.",
+          "sourceLocation": "Article 1"
+        }
+      ],
+      "rightsEvidenceUrl": "",
+      "rightsNotes": "The Court of Cassation page identifies the 2011 revision. Confirm against the official Journal Officiel and any later constitutional amendments before marking current.",
+      "rightsReviewStatus": null,
+      "replacesDocumentId": null,
+      "logicalDocumentKey": "cd-constitution",
+      "editor": "legal-team@carta.world"
+    }
+  ]
+}

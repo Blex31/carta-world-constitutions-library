@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "jurisdictionIso": "SS",
+      "sourceSlug": "ss-official",
+      "docType": "constitution",
+      "title": "Constitution of South Sudan, TBD",
+      "shortTitle": "South Sudan Constitution",
+      "documentNumber": null,
+      "languageCode": "en",
+      "officialUrl": "",
+      "sourceReference": "Official Publisher",
+      "adoptedAt": null,
+      "publishedAt": null,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "versionLabel": null,
+      "isCurrent": true,
+      "documentStatus": "draft",
+      "licenseStatus": "review_required",
+      "commercialUseAllowed": false,
+      "attributionText": "Official text from official source",
+      "fullText": "PLACEHOLDER: Insert complete Constitution text here.\n\nDownload from: \n\nVerify: This must be the complete, exact official text with no placeholders.",
+      "sections": [
+        {
+          "sectionNumber": "Preamble",
+          "heading": "Preamble",
+          "text": "PLACEHOLDER: Insert Preamble text here",
+          "summary": "The Preamble establishes the founding principles and authority of the Constitution.",
+          "sourceLocation": "Preamble"
+        },
+        {
+          "sectionNumber": "1",
+          "heading": "Sovereignty",
+          "text": "PLACEHOLDER: Insert Article 1 text here",
+          "summary": "Defines the sovereignty of the State.",
+          "sourceLocation": "Article 1"
+        }
+      ],
+      "rightsEvidenceUrl": "",
+      "rightsNotes": "Do not assume the original 2011 text is the current consolidated text. Verify transitional amendments, commencement notices and any constitutional review instruments. Commercial and AI rights remain uncleared.",
+      "rightsReviewStatus": null,
+      "replacesDocumentId": null,
+      "logicalDocumentKey": "ss-constitution",
+      "editor": "legal-team@carta.world"
+    }
+  ]
+}

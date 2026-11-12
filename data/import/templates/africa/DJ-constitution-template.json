@@ -1,0 +1,48 @@
+{
+  "documents": [
+    {
+      "jurisdictionIso": "DJ",
+      "sourceSlug": "dj-official",
+      "docType": "constitution",
+      "title": "Constitution of Djibouti, TBD",
+      "shortTitle": "Djibouti Constitution",
+      "documentNumber": null,
+      "languageCode": "en",
+      "officialUrl": "",
+      "sourceReference": "Official Publisher",
+      "adoptedAt": null,
+      "publishedAt": null,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "versionLabel": null,
+      "isCurrent": true,
+      "documentStatus": "draft",
+      "licenseStatus": "review_required",
+      "commercialUseAllowed": false,
+      "attributionText": "Official text from official source",
+      "fullText": "PLACEHOLDER: Insert complete Constitution text here.\n\nDownload from: \n\nVerify: This must be the complete, exact official text with no placeholders.",
+      "sections": [
+        {
+          "sectionNumber": "Preamble",
+          "heading": "Preamble",
+          "text": "PLACEHOLDER: Insert Preamble text here",
+          "summary": "The Preamble establishes the founding principles and authority of the Constitution.",
+          "sourceLocation": "Preamble"
+        },
+        {
+          "sectionNumber": "1",
+          "heading": "Sovereignty",
+          "text": "PLACEHOLDER: Insert Article 1 text here",
+          "summary": "Defines the sovereignty of the State.",
+          "sourceLocation": "Article 1"
+        }
+      ],
+      "rightsEvidenceUrl": "",
+      "rightsNotes": "Official constitutional text from official government source. Rights review required before commercial use. Verify official publisher, exact edition, commencement/effective dates, amendments, language precedence, attribution and intended reuse rights.",
+      "rightsReviewStatus": null,
+      "replacesDocumentId": null,
+      "logicalDocumentKey": "dj-constitution",
+      "editor": "legal-team@carta.world"
+    }
+  ]
+}

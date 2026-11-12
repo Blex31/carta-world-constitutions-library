@@ -1,0 +1,384 @@
+{
+  "total": 54,
+  "generatedAt": "2026-11-12T19:51:57.002Z",
+  "countries": [
+    {
+      "iso": "DZ",
+      "country": "Algeria",
+      "instrument": "2020 constitutional amendment approved by referendum on 1 November 2020 and issued by Presidential D",
+      "templateFile": "DZ-constitution-template.json",
+      "sourceFile": "DZ-source-registration.sql"
+    },
+    {
+      "iso": "AO",
+      "country": "Angola",
+      "instrument": "Constituição da República de Angola, 2010 (Republicação nos termos do artigo 4.º da Lei n.º 18/21, d",
+      "templateFile": "AO-constitution-template.json",
+      "sourceFile": "AO-source-registration.sql"
+    },
+    {
+      "iso": "BJ",
+      "country": "Benin",
+      "instrument": "Loi n° 90-32 du 11 décembre 1990 portant Constitution, révisée par la loi n° 2019-40 du 7 novembre 2",
+      "templateFile": "BJ-constitution-template.json",
+      "sourceFile": "BJ-source-registration.sql"
+    },
+    {
+      "iso": "BW",
+      "country": "Botswana",
+      "instrument": "Constitution of Botswana (1966; current consolidation to be confirmed)",
+      "templateFile": "BW-constitution-template.json",
+      "sourceFile": "BW-source-registration.sql"
+    },
+    {
+      "iso": "BF",
+      "country": "Burkina Faso",
+      "instrument": "Constitution adopted 2 June 1991; Constitutional Law No. 045-2023/ALT of 30 December 2023 is reporte",
+      "templateFile": "BF-constitution-template.json",
+      "sourceFile": "BF-source-registration.sql"
+    },
+    {
+      "iso": "BI",
+      "country": "Burundi",
+      "instrument": "Constitution de la République du Burundi, promulgated 7 June 2018",
+      "templateFile": "BI-constitution-template.json",
+      "sourceFile": "BI-source-registration.sql"
+    },
+    {
+      "iso": "CV",
+      "country": "Cabo Verde",
+      "instrument": "Constituição da República de Cabo Verde (1992), with revisions in 1995, 1999 and Law No. 1/VII/2010",
+      "templateFile": "CV-constitution-template.json",
+      "sourceFile": "CV-source-registration.sql"
+    },
+    {
+      "iso": "CM",
+      "country": "Cameroon",
+      "instrument": "Constitution of 2 June 1972 as revised by Law No. 96/06 of 18 January 1996, Law No. 2008/001 of 14 A",
+      "templateFile": "CM-constitution-template.json",
+      "sourceFile": "CM-source-registration.sql"
+    },
+    {
+      "iso": "CF",
+      "country": "Central African Republic",
+      "instrument": "Constitution of the Central African Republic adopted in 2023",
+      "templateFile": "CF-constitution-template.json",
+      "sourceFile": "CF-source-registration.sql"
+    },
+    {
+      "iso": "TD",
+      "country": "Chad",
+      "instrument": "Constitution promulgated December 2023, revised by Constitutional Law No. 001/PC/2025 of 3 October 2",
+      "templateFile": "TD-constitution-template.json",
+      "sourceFile": "TD-source-registration.sql"
+    },
+    {
+      "iso": "KM",
+      "country": "Comoros",
+      "instrument": "Constitution of the Union of the Comoros (2001), revised by referendum on 30 July 2018",
+      "templateFile": "KM-constitution-template.json",
+      "sourceFile": "KM-source-registration.sql"
+    },
+    {
+      "iso": "CG",
+      "country": "Congo",
+      "instrument": "Constitution of the Republic of the Congo adopted by referendum 25 October 2015",
+      "templateFile": "CG-constitution-template.json",
+      "sourceFile": "CG-source-registration.sql"
+    },
+    {
+      "iso": "CD",
+      "country": "Congo, The Democratic Republic of the",
+      "instrument": "Constitution of 18 February 2006, modified by Law No. 11/002 of 20 January 2011",
+      "templateFile": "CD-constitution-template.json",
+      "sourceFile": "CD-source-registration.sql"
+    },
+    {
+      "iso": "CI",
+      "country": "Côte d'Ivoire",
+      "instrument": "Constitution of the Third Republic, 2016, as amended",
+      "templateFile": "CI-constitution-template.json",
+      "sourceFile": "CI-source-registration.sql"
+    },
+    {
+      "iso": "DJ",
+      "country": "Djibouti",
+      "instrument": "Constitution of 15 September 1992, revised in 2006, 2008 and 2010",
+      "templateFile": "DJ-constitution-template.json",
+      "sourceFile": "DJ-source-registration.sql"
+    },
+    {
+      "iso": "EG",
+      "country": "Egypt",
+      "instrument": "Constitution of the Arab Republic of Egypt, issued in 2014 and amended by referendum in 2019",
+      "templateFile": "EG-constitution-template.json",
+      "sourceFile": "EG-source-registration.sql"
+    },
+    {
+      "iso": "GQ",
+      "country": "Equatorial Guinea",
+      "instrument": "Fundamental Law of Equatorial Guinea; new text promulgated 16 February 2012, based on the 1995 Const",
+      "templateFile": "GQ-constitution-template.json",
+      "sourceFile": "GQ-source-registration.sql"
+    },
+    {
+      "iso": "ER",
+      "country": "Eritrea",
+      "instrument": "Constitution of Eritrea ratified on 23 May 1997 — historical instrument that has not entered into fo",
+      "templateFile": "ER-constitution-template.json",
+      "sourceFile": "ER-source-registration.sql"
+    },
+    {
+      "iso": "SZ",
+      "country": "Eswatini",
+      "instrument": "Constitution of the Kingdom of Swaziland Act No. 001 of 2005 (now Kingdom of Eswatini)",
+      "templateFile": "SZ-constitution-template.json",
+      "sourceFile": "SZ-source-registration.sql"
+    },
+    {
+      "iso": "ET",
+      "country": "Ethiopia",
+      "instrument": "Constitution of the Federal Democratic Republic of Ethiopia, Proclamation No. 1/1995 (official-langu",
+      "templateFile": "ET-constitution-template.json",
+      "sourceFile": "ET-source-registration.sql"
+    },
+    {
+      "iso": "GA",
+      "country": "Gabon",
+      "instrument": "Loi référendaire n° 002-R/2024 du 19 décembre 2024 portant Constitution de la République Gabonaise; ",
+      "templateFile": "GA-constitution-template.json",
+      "sourceFile": "GA-source-registration.sql"
+    },
+    {
+      "iso": "GM",
+      "country": "Gambia",
+      "instrument": "Constitution of The Gambia, 1997 (government download page lists a 2002 revision)",
+      "templateFile": "GM-constitution-template.json",
+      "sourceFile": "GM-source-registration.sql"
+    },
+    {
+      "iso": "GH",
+      "country": "Ghana",
+      "instrument": "Constitution of the Republic of Ghana, 1992",
+      "templateFile": "GH-constitution-template.json",
+      "sourceFile": "GH-source-registration.sql"
+    },
+    {
+      "iso": "GN",
+      "country": "Guinea",
+      "instrument": "Constitution of the Republic of Guinea (Fifth Republic), adopted by referendum 21 September 2025 and",
+      "templateFile": "GN-constitution-template.json",
+      "sourceFile": "GN-source-registration.sql"
+    },
+    {
+      "iso": "GW",
+      "country": "Guinea-Bissau",
+      "instrument": "Constitutional Law No. 05/2026, adopted 13 January 2026, promulgated 6 February 2026 and reported ef",
+      "templateFile": "GW-constitution-template.json",
+      "sourceFile": "GW-source-registration.sql"
+    },
+    {
+      "iso": "KE",
+      "country": "Kenya",
+      "instrument": "Constitution of Kenya, 2010",
+      "templateFile": "KE-constitution-template.json",
+      "sourceFile": "KE-source-registration.sql"
+    },
+    {
+      "iso": "LS",
+      "country": "Lesotho",
+      "instrument": "Constitution of Lesotho, 1993, including the Tenth Amendment Act 2022",
+      "templateFile": "LS-constitution-template.json",
+      "sourceFile": "LS-source-registration.sql"
+    },
+    {
+      "iso": "LR",
+      "country": "Liberia",
+      "instrument": "Constitution of the Republic of Liberia (1986), as amended",
+      "templateFile": "LR-constitution-template.json",
+      "sourceFile": "LR-source-registration.sql"
+    },
+    {
+      "iso": "LY",
+      "country": "Libya",
+      "instrument": "Constitutional Declaration of 3 August 2011, as amended — interim constitutional framework",
+      "templateFile": "LY-constitution-template.json",
+      "sourceFile": "LY-source-registration.sql"
+    },
+    {
+      "iso": "MG",
+      "country": "Madagascar",
+      "instrument": "Constitution de la IVème République, Parliament record CT-2010; record submitted 18 May 2026 with st",
+      "templateFile": "MG-constitution-template.json",
+      "sourceFile": "MG-source-registration.sql"
+    },
+    {
+      "iso": "MW",
+      "country": "Malawi",
+      "instrument": "Constitution of the Republic of Malawi, Act 20 of 1994; Fourth Revised Edition consolidated through ",
+      "templateFile": "MW-constitution-template.json",
+      "sourceFile": "MW-source-registration.sql"
+    },
+    {
+      "iso": "ML",
+      "country": "Mali",
+      "instrument": "Constitution of the Republic of Mali promulgated by Decree No. 2023-0401/PT-RM of 22 July 2023",
+      "templateFile": "ML-constitution-template.json",
+      "sourceFile": "ML-source-registration.sql"
+    },
+    {
+      "iso": "MR",
+      "country": "Mauritania",
+      "instrument": "Constitution of the Islamic Republic of Mauritania, Ordinance No. 91-022 of 20 July 1991, revised in",
+      "templateFile": "MR-constitution-template.json",
+      "sourceFile": "MR-source-registration.sql"
+    },
+    {
+      "iso": "MU",
+      "country": "Mauritius",
+      "instrument": "Constitution of Mauritius, 12 March 1968; official government copy consolidated to 2016, with a 2025",
+      "templateFile": "MU-constitution-template.json",
+      "sourceFile": "MU-source-registration.sql"
+    },
+    {
+      "iso": "MA",
+      "country": "Morocco",
+      "instrument": "Constitution of the Kingdom of Morocco, promulgated by Dahir No. 1-11-91 on 29 July 2011, published ",
+      "templateFile": "MA-constitution-template.json",
+      "sourceFile": "MA-source-registration.sql"
+    },
+    {
+      "iso": "MZ",
+      "country": "Mozambique",
+      "instrument": "Constituição da República de Moçambique de 2018",
+      "templateFile": "MZ-constitution-template.json",
+      "sourceFile": "MZ-source-registration.sql"
+    },
+    {
+      "iso": "NA",
+      "country": "Namibia",
+      "instrument": "Constitution of the Republic of Namibia, 1990",
+      "templateFile": "NA-constitution-template.json",
+      "sourceFile": "NA-source-registration.sql"
+    },
+    {
+      "iso": "NE",
+      "country": "Niger",
+      "instrument": "Charte de la Refondation, promulgated 26 March 2025, currently described by the Government as having",
+      "templateFile": "NE-constitution-template.json",
+      "sourceFile": "NE-source-registration.sql"
+    },
+    {
+      "iso": "NG",
+      "country": "Nigeria",
+      "instrument": "Constitution of the Federal Republic of Nigeria, 1999, as amended",
+      "templateFile": "NG-constitution-template.json",
+      "sourceFile": "NG-source-registration.sql"
+    },
+    {
+      "iso": "RW",
+      "country": "Rwanda",
+      "instrument": "Constitution of the Republic of Rwanda (2023 revision), Official Gazette n° Special of 04/08/2023; t",
+      "templateFile": "RW-constitution-template.json",
+      "sourceFile": "RW-source-registration.sql"
+    },
+    {
+      "iso": "ST",
+      "country": "Sao Tome and Principe",
+      "instrument": "Constitution of the Democratic Republic of São Tomé and Príncipe, Law No. 1/2003 of 29 January 2003,",
+      "templateFile": "ST-constitution-template.json",
+      "sourceFile": "ST-source-registration.sql"
+    },
+    {
+      "iso": "SN",
+      "country": "Senegal",
+      "instrument": "Loi n° 2001-03 du 22 janvier 2001 portant Constitution, as amended",
+      "templateFile": "SN-constitution-template.json",
+      "sourceFile": "SN-source-registration.sql"
+    },
+    {
+      "iso": "SC",
+      "country": "Seychelles",
+      "instrument": "Constitution of the Third Republic of Seychelles, 1993, including amendments through 2020",
+      "templateFile": "SC-constitution-template.json",
+      "sourceFile": "SC-source-registration.sql"
+    },
+    {
+      "iso": "SL",
+      "country": "Sierra Leone",
+      "instrument": "Constitution of Sierra Leone, 1991 (Act No. 6 of 1991), as amended",
+      "templateFile": "SL-constitution-template.json",
+      "sourceFile": "SL-source-registration.sql"
+    },
+    {
+      "iso": "SO",
+      "country": "Somalia",
+      "instrument": "2026 Federal Constitution candidate; 2012 Provisional Federal Constitution and 2024-effective amendm",
+      "templateFile": "SO-constitution-template.json",
+      "sourceFile": "SO-source-registration.sql"
+    },
+    {
+      "iso": "ZA",
+      "country": "South Africa",
+      "instrument": "Constitution of the Republic of South Africa, 1996, including the Constitution Eighteenth Amendment ",
+      "templateFile": "ZA-constitution-template.json",
+      "sourceFile": "ZA-source-registration.sql"
+    },
+    {
+      "iso": "SS",
+      "country": "South Sudan",
+      "instrument": "Transitional Constitution of the Republic of South Sudan, 2011",
+      "templateFile": "SS-constitution-template.json",
+      "sourceFile": "SS-source-registration.sql"
+    },
+    {
+      "iso": "SD",
+      "country": "Sudan",
+      "instrument": "Transitional Constitutional Document of 17 August 2019, amended in 2025; competing parallel 2025 con",
+      "templateFile": "SD-constitution-template.json",
+      "sourceFile": "SD-source-registration.sql"
+    },
+    {
+      "iso": "TZ",
+      "country": "Tanzania, United Republic of",
+      "instrument": "Constitution of the United Republic of Tanzania, 1977; Parliament page lists a 6 February 2025 uploa",
+      "templateFile": "TZ-constitution-template.json",
+      "sourceFile": "TZ-source-registration.sql"
+    },
+    {
+      "iso": "TG",
+      "country": "Togo",
+      "instrument": "Loi n° 2024-005 du 6 mai 2024 portant Constitution de la République Togolaise",
+      "templateFile": "TG-constitution-template.json",
+      "sourceFile": "TG-source-registration.sql"
+    },
+    {
+      "iso": "TN",
+      "country": "Tunisia",
+      "instrument": "Constitution of the Republic of Tunisia dated 25 July 2022, promulgated by Presidential Decree No. 2",
+      "templateFile": "TN-constitution-template.json",
+      "sourceFile": "TN-source-registration.sql"
+    },
+    {
+      "iso": "UG",
+      "country": "Uganda",
+      "instrument": "Constitution of the Republic of Uganda, 1995, updated version",
+      "templateFile": "UG-constitution-template.json",
+      "sourceFile": "UG-source-registration.sql"
+    },
+    {
+      "iso": "ZM",
+      "country": "Zambia",
+      "instrument": "Constitution of Zambia, 1991, as amended by Act No. 13 of 2025",
+      "templateFile": "ZM-constitution-template.json",
+      "sourceFile": "ZM-source-registration.sql"
+    },
+    {
+      "iso": "ZW",
+      "country": "Zimbabwe",
+      "instrument": "Constitution of Zimbabwe, 2013",
+      "templateFile": "ZW-constitution-template.json",
+      "sourceFile": "ZW-source-registration.sql"
+    }
+  ]
+}
