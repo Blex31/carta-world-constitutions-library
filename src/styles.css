@@ -3436,3 +3436,73 @@ input[type="checkbox"] {
 .intro-enter-arrow {
   display: none;
 }
+
+
+/* --- Declaration quote: readable, responsive, and softly revealed --- */
+.intro-chamber {
+  max-width: 900px;
+  padding: 40px clamp(20px, 5vw, 64px);
+}
+
+.intro-quote-text {
+  max-width: 760px;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: clamp(1.1rem, 2.25vw, 1.65rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0;
+  color: #234B32;
+  text-wrap: pretty;
+  animation: cartaQuoteFadeIn 1.5s cubic-bezier(0.2, 0.65, 0.3, 1) 0.2s both;
+}
+
+.intro-quote-attribution {
+  display: block;
+  margin-top: -20px;
+  color: #7A6B45;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  animation: cartaQuoteFadeIn 1.5s cubic-bezier(0.2, 0.65, 0.3, 1) 0.55s both;
+}
+
+@keyframes cartaQuoteFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .intro-chamber {
+    gap: 28px;
+    padding: 28px 24px;
+  }
+
+  .intro-quote-text {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    line-height: 1.65;
+  }
+
+  .intro-quote-attribution {
+    margin-top: -12px;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-quote-text,
+  .intro-quote-attribution {
+    animation: none;
+  }
+}
